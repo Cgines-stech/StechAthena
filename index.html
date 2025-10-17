@@ -1,0 +1,35 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academic Data Viewer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Academic Data Viewer</h1>
+    <p class="muted">Temporary index to browse Departments, Programs, and Courses.</p>
+  </header>
+
+  <label for="tableSelect">Choose a table:</label>
+  <select id="tableSelect">
+    <option value="departments">Departments</option>
+    <option value="programs">Programs</option>
+    <option value="courses">Courses</option>
+  </select>
+
+  <button id="showBtn">Show Table</button>
+
+  <div id="tableContainer"></div>
+
+  <!-- Load data first -->
+  <script src="data/departments.js"></script>
+  <script src="data/programs.js"></script>
+  <script src="data/courses.js"></script>
+
+  <!-- Then main logic -->
+  <script src="main.js"></script>
+</body>
+</html>
