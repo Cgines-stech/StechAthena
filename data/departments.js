@@ -1,6 +1,6 @@
 /* departments.js */
 const DEPARTMENTS = [
-  { id: 1, name: 'General Education', VP: 'Dr. Harper', Lead Faculty: 'Dorthy White' },
-  { id: 2, name: 'Information Technology', chair: 'Jordan Lee' },
-  { id: 3, name: 'Health Sciences', chair: 'Sam Patel' }
+  { id: 1, Program: 'General Education', VP: 'Dr. Harper', 'Lead Faculty': 'Dorthy White' },
+  { id: 2, Program: 'Information Technology', VP: 'Jordan Lee' },
+  { id: 3, Program: 'Health Sciences', VP: 'Sam Patel' }
 ];
