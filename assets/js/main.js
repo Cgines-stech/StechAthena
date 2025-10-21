@@ -18,7 +18,7 @@ const safeJoin = (arr = [], sep = "") => arr.filter(Boolean).join(sep);
 const deptById = Object.fromEntries(DEPARTMENTS.map(d => [d.id, d]));
 const app = document.getElementById("app");
 
-/* ---------- UI: controls (program + course selects) ---------- */
+/* ---------- UI: controls ---------- */
 const controls = el("div", "card");
 controls.innerHTML = `
   <h2>Select a Program & Course</h2>
@@ -39,24 +39,19 @@ controls.innerHTML = `
 app.appendChild(controls);
 
 const programSelect = controls.querySelector("#programSelect");
-const courseSelect = controls.querySelector("#courseSelect");
-const helperNote = controls.querySelector("#helperNote");
+const courseSelect  = controls.querySelector("#courseSelect");
+const helperNote    = controls.querySelector("#helperNote");
 
-/* ---------- Registry: course loaders by program ---------- */
-/* 
-   Add programs here as you wire them up.
-   Each entry returns a list of { label, path } where path points to the course module.
-*/
+/* ---------- Course registry ---------- */
 const COURSE_REGISTRY = {
   "Advanced Emergency Medical Technician": async () => ([
-    { label: "TEEM 1202 — AEMT Foundations", path: "../../data/programs/Advanced Emergency Medical Technician/TEEM 1202.js" },
+    { label: "TEEM 1202 — AEMT Foundations",      path: "../../data/programs/Advanced Emergency Medical Technician/TEEM 1202.js" },
     { label: "TEEM 1904 — AEMT Clinical Practice", path: "../../data/programs/Advanced Emergency Medical Technician/TEEM 1904.js" },
   ]),
-  // "Automation Technology": async () => ([ ...add course files here... ]),
-  // "Automotive Technology": async () => ([ ... ])
+  // Add more programs here...
 };
 
-/* ---------- Populate program select ---------- */
+/* ---------- Populate programs ---------- */
 function populatePrograms() {
   programSelect.innerHTML = `<option value="">Select a program…</option>`;
   PROGRAMS.forEach(p => {
@@ -68,7 +63,7 @@ function populatePrograms() {
 }
 populatePrograms();
 
-/* ---------- Respond to program selection ---------- */
+/* ---------- Program change ---------- */
 programSelect.addEventListener("change", async () => {
   const programName = programSelect.value;
   clearDetails();
@@ -87,7 +82,7 @@ programSelect.addEventListener("change", async () => {
   const loader = COURSE_REGISTRY[programName];
   if (!loader) {
     courseSelect.innerHTML = `<option value="">Courses not wired yet for this program</option>`;
-    helperNote.textContent = "Tip: Add this program’s courses to COURSE_REGISTRY in main.js.";
+    helperNote.textContent = "Tip: add this program’s courses to COURSE_REGISTRY.";
     return;
   }
 
@@ -96,35 +91,51 @@ programSelect.addEventListener("change", async () => {
     courseSelect.innerHTML = `<option value="">Select a course…</option>`;
     courses.forEach(c => {
       const opt = el("option", "", c.label);
-      opt.value = c.path;
+      // encode path to be URL-safe (spaces, etc.)
+      opt.value = encodeURI(c.path);
       courseSelect.appendChild(opt);
     });
     courseSelect.disabled = false;
     helperNote.textContent = "Choose a course to see details, schedule, and estimated costs.";
   } catch (e) {
-    console.error(e);
+    console.error("Failed to load course list:", e);
     courseSelect.innerHTML = `<option value="">Failed to load courses</option>`;
     helperNote.textContent = "There was a problem loading courses.";
   }
 });
 
-/* ---------- Respond to course selection (dynamic import) ---------- */
+/* ---------- Course change (dynamic import) ---------- */
 courseSelect.addEventListener("change", async () => {
   const path = courseSelect.value;
   clearDetails();
   if (!path) return;
 
   try {
-    const mod = await import(path);
-    const data = mod?.default;
-    const course = Array.isArray(data) ? data[0] : data; // your course files export an array with one course
+    // Some bundlers need the comment to avoid pre-bundling; harmless in plain ESM
+    const mod = await import(/* @vite-ignore */ path);
+    console.log("Imported module:", mod);
+
+    // Accept multiple export shapes
+    const candidates = [
+      mod?.default,
+      mod?.course,
+      mod?.courses,
+      mod?.advancedEmergencyMedicalTechnician,
+    ];
+    const data = candidates.find(Boolean);
+
+    // If it's an array, use first entry; if it's an object, use it directly
+    const course = Array.isArray(data) ? data[0] : data;
+
     if (!course) {
+      console.warn("Module loaded but no course object found. Export was:", Object.keys(mod || {}));
       renderNotice("Couldn’t read course data from the selected file.");
       return;
     }
+
     renderCourseDetail(course);
   } catch (e) {
-    console.error(e);
+    console.error("Dynamic import failed:", e);
     renderNotice("There was a problem loading that course file.");
   }
 });
@@ -214,4 +225,4 @@ function renderCourseDetail(course) {
 }
 
 /* ---------- Initial helper note ---------- */
-helperNote.textContent = "Pick a program to load its courses. Only AEMT is wired up here; we can add others next.";
+helperNote.textContent = "Pick a program, then a course. Only AEMT is wired up here for now.";
