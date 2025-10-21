@@ -4,7 +4,7 @@
 import gradeScale from "../../gradescale.js";
 import { courseTotals, sum, money } from "../../utils/helpers.js";
 
-const advancedEmergencyMedicalTechnician = [
+const TEEM1202 = [
   {
     id: 10001,
     programId: 1,
@@ -543,3 +543,5 @@ const advancedEmergencyMedicalTechnician = [
     ]
   }
 ]
+
+export default TEEM1202;
