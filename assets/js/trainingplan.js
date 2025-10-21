@@ -123,6 +123,7 @@ function renderItemRows3(tbodyEl, items) {
 }
 
 
+
 /* ---------- Main: program selection ---------- */
 programSelect.addEventListener("change", async () => {
   clearTables();
@@ -260,36 +261,7 @@ programSelect.addEventListener("change", async () => {
   /* ---------- Other tables: include Course # | Title | Price ---------- */
   booksSection.hidden = false;
   booksBody.innerHTML = ""; // ensure clean
-  // Add a header row for clarity (only needed if your HTML <thead> is fixed to 2 cols)
-  // If you want a 3-col header, change the HTML thead too. For now we just render rows.
-// replace renderItemRows3 with this:
-function renderItemRows3(tbodyEl, items) {
-  if (!items.length) {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td class="muted" colspan="3">No data provided</td>`;
-    tbodyEl.appendChild(tr);
-    return 0;
-  }
-  let total = 0;
-  items.forEach(it => {
-    total += it.price || 0;
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${it.courseNumber || "-"}</td>
-      <td>${it.title || "-"}</td>
-      <td style="text-align:right;">${money(it.price || 0)}</td>
-    `;
-    tbodyEl.appendChild(tr);
-  });
-  const trTotal = document.createElement("tr");
-  trTotal.innerHTML = `
-    <td colspan="2" style="text-align:right; font-weight:600;">Subtotal</td>
-    <td style="text-align:right; font-weight:600;">${money(total)}</td>
-  `;
-  tbodyEl.appendChild(trTotal);
-  return total;
-}
-
+  renderItemRows3(booksBody, itemsBooks);
 
   toolsSection.hidden = false;
   toolsBody.innerHTML = "";
