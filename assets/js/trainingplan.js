@@ -28,8 +28,10 @@ const toolsBody    = document.getElementById("toolsBody");
 const certsSection = document.getElementById("certsSection");
 const certsBody    = document.getElementById("certsBody");
 
-const otherSection = document.getElementById("otherSection");
-const otherBody    = document.getElementById("otherBody");
+/*
+    const otherSection = document.getElementById("otherSection");
+    const otherBody    = document.getElementById("otherBody");
+*/
 
 /* ---------- UI population ---------- */
 function populatePrograms() {
@@ -56,7 +58,7 @@ function clearTables() {
   booksBody.innerHTML = "";
   toolsBody.innerHTML = "";
   certsBody.innerHTML = "";
-  otherBody.innerHTML = "";
+  /* otherBody.innerHTML = ""; */
 
   [summarySection, booksSection, toolsSection, certsSection, otherSection]
     .forEach(sec => sec.hidden = true);
@@ -176,20 +178,30 @@ programSelect.addEventListener("change", async () => {
       <th>Book Cost</th>
       <th>Tool Cost</th>
       <th>Cert Cost</th>
-      <th>Other</th>
       <th>Total</th>
     </tr>
   `;
 
-  let totalCredits = 0,
-      totalClock   = 0,
-      totalTuition = 0,
-      totalFee     = 0,
-      totalBooks   = 0,
-      totalTools   = 0,
-      totalCerts   = 0,
-      totalOther   = 0,
-      totalGrand   = 0;
+  // Add fixed graduation fee (always $25)
+const gradFee = 25;
+let gradFeeRow = document.createElement("tr");
+gradFeeRow.innerHTML = `
+  <td colspan="4" style="text-align:left; font-weight:600;">Graduation Fee</td>
+  <td>${money(gradFee)}</td>
+  <td colspan="5"></td>
+  <td><strong>${money(gradFee)}</strong></td>
+`;
+summaryBody.appendChild(gradFeeRow);
+
+// Initialize total with grad fee
+let totalCredits = 0,
+    totalClock   = 0,
+    totalTuition = 0,
+    totalFee     = 0,
+    totalBooks   = 0,
+    totalTools   = 0,
+    totalCerts   = 0,
+    totalGrand   = gradFee; // start with grad fee included
 
   // Also collect items for the other four tables and keep course number
   const itemsBooks = [];
@@ -201,7 +213,7 @@ programSelect.addEventListener("change", async () => {
     const books = sum(course.courseBooks);
     const tools = sum(course.courseTools);
     const certs = sum(course.courseCertifications);
-    const other = sum(course.otherAssociatedCosts);
+    /* const other = sum(course.otherAssociatedCosts); */
 
     const tuition = course.courseTuition || 0;
     const fee = course.courseFee || 0;
@@ -214,7 +226,6 @@ programSelect.addEventListener("change", async () => {
     totalBooks   += books;
     totalTools   += tools;
     totalCerts   += certs;
-    totalOther   += other;
     totalGrand   += rowTotal;
 
     // collect detailed items w/ course number
@@ -253,7 +264,6 @@ programSelect.addEventListener("change", async () => {
     <td>${money(totalBooks)}</td>
     <td>${money(totalTools)}</td>
     <td>${money(totalCerts)}</td>
-    <td>${money(totalOther)}</td>
     <td>${money(totalGrand)}</td>
   `;
   summaryBody.appendChild(totalRow);
