@@ -1,3 +1,4 @@
+// trainingplan.js
 import { PROGRAMS } from "../../data/programs.js";
 import { money, sum } from "../../data/utils/helpers.js";
 
@@ -63,18 +64,35 @@ function clearTables() {
 
 /** Normalize item arrays and keep associated courseNumber */
 function normalizeItemsWithCourse(arr = [], courseNumber = "") {
+  const parsePriceFromString = (s) => {
+    const m = String(s).match(/([0-9]+(?:\.[0-9]{1,2})?)/);
+    return m ? Number(m[1]) : 0;
+  };
+
   return (arr || [])
     .map(x => {
       if (x == null) return null;
-      if (typeof x === "string") return { courseNumber, title: x, price: 0 };
-      const title = x.title ?? x.name ?? "";
-      const price = Number(x.price ?? 0) || 0;
+
+      // If already a number, treat as price with generic title
+      if (typeof x === "number") return { courseNumber, title: "", price: x };
+
+      // If a simple string: try to split title/price
+      if (typeof x === "string") {
+        return { courseNumber, title: x.trim(), price: parsePriceFromString(x) };
+      }
+
+      // Object: try common field names
+      const title = x.title ?? x.name ?? x.book ?? x.item ?? x.description ?? "";
+      const rawPrice = x.price ?? x.cost ?? x.amount ?? x.value ?? 0;
+      const price = Number(rawPrice) || 0;
+
+      // If totally empty, drop it
       if (!title && price === 0) return null;
+
       return { courseNumber, title, price };
     })
     .filter(Boolean);
 }
-
 
 /** 3-col renderer: Course # | Title | Price */
 function renderItemRows3(tbodyEl, items) {
@@ -103,6 +121,7 @@ function renderItemRows3(tbodyEl, items) {
   tbodyEl.appendChild(trTotal);
   return total;
 }
+
 
 /* ---------- Main: program selection ---------- */
 programSelect.addEventListener("change", async () => {
