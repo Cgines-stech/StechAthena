@@ -5,60 +5,12 @@
   <meta charset="utf-8" />
   <title>Stech Athena</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { font-family: system-ui, Arial, sans-serif; margin: 2rem; }
-    .card { border: 1px solid #ddd; border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
-    h1 { margin-top: 0; }
-    .muted { color: #666; font-size: 0.95rem; }
-    ul { margin: 0.25rem 0 0.5rem 1.2rem; }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
   <h1>Programs</h1>
   <div id="app" class="stack"></div>
 
-  <script type="module">
-    import gradeScale from "./data/gradescale.js";
-    import { DEPARTMENTS } from "./data/departments.js";
-    import { PROGRAMS } from "./data/programs.js";
-    import AEMT from "./data/programs/Advanced Emergency Medical Technician/program.js";
-
-    // Simple lookup maps
-    const deptById = Object.fromEntries(DEPARTMENTS.map(d => [d.id, d]));
-    const app = document.getElementById("app");
-
-    // Render programs
-    PROGRAMS.forEach(p => {
-      const dept = deptById[p.department_id]?.Program || "Unknown Dept";
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <h2>${p.name}</h2>
-        <div class="muted">${dept}</div>
-        <ul>
-          ${p.CIP ? `<li><strong>CIP:</strong> ${p.CIP}</li>` : ""}
-          ${p.credential ? `<li><strong>Credential:</strong> ${p.credential}</li>` : ""}
-          ${p.program_credit_hours ? `<li><strong>Credit Hours:</strong> ${p.program_credit_hours}</li>` : ""}
-        </ul>
-      `;
-      app.appendChild(card);
-    });
-
-    // Example: show some AEMT program details and Grade Scale
-    const detail = document.createElement("div");
-    detail.className = "card";
-    const aemt = Array.isArray(AEMT) ? AEMT[0] : null;
-    detail.innerHTML = `
-      <h2>Advanced Emergency Medical Technician (Details)</h2>
-      ${aemt?.programDescription ? `<p>${aemt.programDescription}</p>` : ""}
-      ${Array.isArray(gradeScale) ? `
-        <h3>${gradeScale[0].title}</h3>
-        <p>${gradeScale[0].description}</p>
-        <ul>
-          ${gradeScale[0].scale.map(s => `<li>${s.letter}: ${s.range}</li>`).join("")}
-        </ul>` : ""}
-    `;
-    app.appendChild(detail);
-  </script>
+  <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
