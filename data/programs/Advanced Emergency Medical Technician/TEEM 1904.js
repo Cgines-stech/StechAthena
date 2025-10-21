@@ -34,21 +34,19 @@ const TEEM1904 = [
     ],
 
     courseBooks: [
-      {
- 
-      }
+      {}
     ],
     
     courseTools: [
-      ""
+      {}
     ],
 
     courseCertifications: [
-      
+      {}
     ],
 
     otherAssociatedCosts: [
-      
+      {}
     ],
 
     courseClassroomHours: [
