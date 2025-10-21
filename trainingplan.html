@@ -22,7 +22,7 @@
   <main id="content" class="page-card card">
     <h2 id="programTitle" class="program-title">Program</h2>
 
-    <!-- Summary (First table: course rows + totals) -->
+    <!-- Summary (First table: course rows + totals; NO "Other" column) -->
     <section id="summarySection" class="subsection" hidden>
       <table class="data-table dense">
         <thead id="summaryHead">
@@ -43,7 +43,7 @@
       </table>
     </section>
 
-    <!-- 2×2 grid for item tables inside the same card -->
+    <!-- Item tables (Books / Tools / Certs / Other) -->
     <div class="item-grid">
       <section id="booksSection" class="subsection" hidden>
         <h3>Books</h3>
@@ -84,6 +84,20 @@
             </tr>
           </thead>
           <tbody id="certsBody"></tbody>
+        </table>
+      </section>
+
+      <section id="otherSection" class="subsection" hidden>
+        <h3>Other Associated Cost</h3>
+        <table class="data-table dense">
+          <thead>
+            <tr>
+              <th style="width:18%">Course</th>
+              <th style="width:57%">Item</th>
+              <th style="width:25%; text-align:right;">Price</th>
+            </tr>
+          </thead>
+          <tbody id="otherBody"></tbody>
         </table>
       </section>
     </div>

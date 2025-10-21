@@ -28,6 +28,9 @@ const toolsBody    = document.getElementById("toolsBody");
 const certsSection = document.getElementById("certsSection");
 const certsBody    = document.getElementById("certsBody");
 
+const otherSection = document.getElementById("otherSection");
+const otherBody    = document.getElementById("otherBody");
+
 /* ---------- UI population ---------- */
 function populatePrograms() {
   programSelect.innerHTML = `<option value="">Select a program…</option>`;
@@ -53,8 +56,9 @@ function clearTables() {
   booksBody.innerHTML = "";
   toolsBody.innerHTML = "";
   certsBody.innerHTML = "";
+  otherBody.innerHTML = "";
 
-  [summarySection, booksSection, toolsSection, certsSection]
+  [summarySection, booksSection, toolsSection, certsSection, otherSection]
     .forEach(sec => sec.hidden = true);
 }
 
@@ -151,10 +155,9 @@ programSelect.addEventListener("change", async () => {
     return;
   }
 
-  /* ---------- First table: per-course rows + totals ---------- */
+  /* ---------- First table: per-course rows + totals (exclude "Other") ---------- */
   summarySection.hidden = false;
 
-  // Header (no "Other" column)
   summaryHead.innerHTML = `
     <tr>
       <th>Course #</th>
@@ -176,14 +179,14 @@ programSelect.addEventListener("change", async () => {
   gradRow.className = "graduation-fee";
   gradRow.innerHTML = `
     <td colspan="2" style="text-align:left;">Graduation Fee</td>
-    <td></td> <!-- Credit Hrs -->
-    <td></td> <!-- Clock Hrs -->
-    <td></td> <!-- Tuition -->
-    <td>${money(gradFee)}</td> <!-- Course Fee -->
-    <td></td> <!-- Book -->
-    <td></td> <!-- Tool -->
-    <td></td> <!-- Cert -->
-    <td><strong>${money(gradFee)}</strong></td> <!-- Total -->
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>${money(gradFee)}</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><strong>${money(gradFee)}</strong></td>
   `;
   summaryBody.appendChild(gradRow);
 
@@ -197,15 +200,19 @@ programSelect.addEventListener("change", async () => {
       totalCerts   = 0,
       totalGrand   = gradFee;
 
-  // Collect detailed items for the 3 item tables
+  // Collect detailed items for item tables (including OTHER here, but not in summary totals)
   const itemsBooks = [];
   const itemsTools = [];
   const itemsCerts = [];
+  const itemsOther = [];
 
   for (const course of allCourses) {
     const books = sum(course.courseBooks);
     const tools = sum(course.courseTools);
     const certs = sum(course.courseCertifications);
+    // NOTE: other costs are intentionally NOT included in the summary totals
+    // but we still capture them for the "Other" table:
+    itemsOther.push(...normalizeItemsWithCourse(course.otherAssociatedCosts, course.courseNumber));
 
     const tuition = course.courseTuition || 0;
     const fee = course.courseFee || 0;
@@ -240,7 +247,7 @@ programSelect.addEventListener("change", async () => {
     summaryBody.appendChild(tr);
   }
 
-  // Total row
+  // Total row (no "Other")
   const totalRow = document.createElement("tr");
   totalRow.style.fontWeight = "600";
   totalRow.innerHTML = `
@@ -256,7 +263,7 @@ programSelect.addEventListener("change", async () => {
   `;
   summaryBody.appendChild(totalRow);
 
-  /* ---------- Item tables: Course # | Title | Price ---------- */
+  /* ---------- Item tables: Course # | Title | Price (Other included here) ---------- */
   booksSection.hidden = false;
   booksBody.innerHTML = "";
   renderItemRows3(booksBody, itemsBooks);
@@ -268,6 +275,10 @@ programSelect.addEventListener("change", async () => {
   certsSection.hidden = false;
   certsBody.innerHTML = "";
   renderItemRows3(certsBody, itemsCerts);
+
+  otherSection.hidden = false;
+  otherBody.innerHTML = "";
+  renderItemRows3(otherBody, itemsOther);
 });
 
 /* ---------- Print ---------- */

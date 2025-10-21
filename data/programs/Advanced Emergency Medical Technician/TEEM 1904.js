@@ -13,7 +13,7 @@ const TEEM1904 = [
     courseCredits: 1,
     statewideAlignment: "Aligned",
     courseClockHours: 48,
-    courseTuition: 0,
+    courseTuition: 95,
     courseFee: 0,
     instructionalType: "SUP",
 

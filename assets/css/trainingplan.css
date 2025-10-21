@@ -34,9 +34,9 @@ button{ cursor:pointer; } button:hover{ filter:brightness(.98); }
 .subsection{ margin: .6rem 0; }
 .subsection h3{ margin:.1rem 0 .35rem; font-size:.95rem; }
 
-/* 2×2 grid for item tables */
+/* Grid that wraps neatly with 3–4 tables */
 .item-grid{
-  display:grid; grid-template-columns:1fr 1fr; gap:.6rem;
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:.6rem;
 }
 
 /* Dense table to fit more content */
