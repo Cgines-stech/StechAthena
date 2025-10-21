@@ -1,7 +1,8 @@
 // TEEM 1202
 
-// coursePolicy.js
+// imports
 import gradeScale from "../../gradescale.js";
+import { courseTotals, sum, money } from "../../utils/helpers.js";
 
 const advancedEmergencyMedicalTechnician = [
   {
@@ -542,18 +543,3 @@ const advancedEmergencyMedicalTechnician = [
     ]
   }
 ]
-
-// ---- helpers (drop in once and reuse) ----
-const sum = (arr) => (arr || []).reduce((t, x) => t + (Number(x.price) || 0), 0)
-const money = (n) =>
-  (n ?? 0).toLocaleString("en-US", { style: "currency", currency: "USD" })
-
-export function courseTotals(course) {
-  const tuitionAndFees = (course.courseTuition || 0) + (course.courseFee || 0)
-  const books = sum(course.courseBooks)
-  const tools = sum(course.courseTools)
-  const certs = sum(course.courseCertifications)
-  const other = sum(course.otherAssociatedCosts)
-  const grand = tuitionAndFees + books + tools + certs + other
-  return { tuitionAndFees, books, tools, certs, other, grand }
-}

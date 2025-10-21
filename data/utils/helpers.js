@@ -1,0 +1,20 @@
+// data/utils/helpers.js
+
+/** Sum of item.price values in an array of { price } items */
+export const sum = (arr) =>
+  (arr || []).reduce((t, x) => t + (Number(x?.price) || 0), 0);
+
+/** Format a number as USD currency */
+export const money = (n) =>
+  (n ?? 0).toLocaleString("en-US", { style: "currency", currency: "USD" });
+
+/** Compute tuition/fees and all add-ons for a course object */
+export function courseTotals(course) {
+  const tuitionAndFees = (course?.courseTuition || 0) + (course?.courseFee || 0);
+  const books = sum(course?.courseBooks);
+  const tools = sum(course?.courseTools);
+  const certs = sum(course?.courseCertifications);
+  const other = sum(course?.otherAssociatedCosts);
+  const grand = tuitionAndFees + books + tools + certs + other;
+  return { tuitionAndFees, books, tools, certs, other, grand };
+}
