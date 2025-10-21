@@ -3,7 +3,6 @@
 import gradeScale from "../../data/gradescale.js";
 import { DEPARTMENTS } from "../../data/departments.js";
 import { PROGRAMS } from "../../data/programs.js";
-import AEMT from "../../data/programs/Advanced Emergency Medical Technician/program.js";
 import { courseTotals, money } from "../../data/utils/helpers.js";
 
 /* ---------- tiny DOM helpers ---------- */
@@ -19,34 +18,136 @@ const safeJoin = (arr = [], sep = "") => arr.filter(Boolean).join(sep);
 const deptById = Object.fromEntries(DEPARTMENTS.map(d => [d.id, d]));
 const app = document.getElementById("app");
 
-/* ---------- render: program cards ---------- */
-PROGRAMS.forEach(p => {
-  const deptName = deptById[p.department_id]?.Program || "Unknown Dept";
-  const detailsList = [
-    p.CIP ? `<li><strong>CIP:</strong> ${p.CIP}</li>` : "",
-    p.credential ? `<li><strong>Credential:</strong> ${p.credential}</li>` : "",
-    p.program_credit_hours ? `<li><strong>Credit Hours:</strong> ${p.program_credit_hours}</li>` : "",
-  ];
+/* ---------- UI: controls (program + course selects) ---------- */
+const controls = el("div", "card");
+controls.innerHTML = `
+  <h2>Select a Program & Course</h2>
+  <div style="display:flex; gap:1rem; align-items:end; flex-wrap:wrap;">
+    <div>
+      <label for="programSelect" class="muted">Program</label><br/>
+      <select id="programSelect" style="min-width:280px; padding:.5rem; border-radius:8px; border:1px solid #ccc;"></select>
+    </div>
+    <div>
+      <label for="courseSelect" class="muted">Course</label><br/>
+      <select id="courseSelect" style="min-width:280px; padding:.5rem; border-radius:8px; border:1px solid #ccc;" disabled>
+        <option value="">Select a program first</option>
+      </select>
+    </div>
+  </div>
+  <p class="muted" id="helperNote" style="margin-top:.75rem;"></p>
+`;
+app.appendChild(controls);
 
-  const card = el("div", "card", `
-    <h2>${p.name}</h2>
-    <div class="muted">${deptName}</div>
-    <ul>${safeJoin(detailsList, "")}</ul>
-  `);
+const programSelect = controls.querySelector("#programSelect");
+const courseSelect = controls.querySelector("#courseSelect");
+const helperNote = controls.querySelector("#helperNote");
 
-  app.appendChild(card);
+/* ---------- Registry: course loaders by program ---------- */
+/* 
+   Add programs here as you wire them up.
+   Each entry returns a list of { label, path } where path points to the course module.
+*/
+const COURSE_REGISTRY = {
+  "Advanced Emergency Medical Technician": async () => ([
+    { label: "TEEM 1202 — AEMT Foundations", path: "../../data/programs/Advanced Emergency Medical Technician/TEEM 1202.js" },
+    { label: "TEEM 1904 — AEMT Clinical Practice", path: "../../data/programs/Advanced Emergency Medical Technician/TEEM 1904.js" },
+  ]),
+  // "Automation Technology": async () => ([ ...add course files here... ]),
+  // "Automotive Technology": async () => ([ ... ])
+};
+
+/* ---------- Populate program select ---------- */
+function populatePrograms() {
+  programSelect.innerHTML = `<option value="">Select a program…</option>`;
+  PROGRAMS.forEach(p => {
+    const deptName = deptById[p.department_id]?.Program || "Unknown Dept";
+    const opt = el("option", "", `${p.name} — ${deptName}`);
+    opt.value = p.name;
+    programSelect.appendChild(opt);
+  });
+}
+populatePrograms();
+
+/* ---------- Respond to program selection ---------- */
+programSelect.addEventListener("change", async () => {
+  const programName = programSelect.value;
+  clearDetails();
+
+  if (!programName) {
+    courseSelect.innerHTML = `<option value="">Select a program first</option>`;
+    courseSelect.disabled = true;
+    helperNote.textContent = "";
+    return;
+  }
+
+  helperNote.textContent = "Loading available courses…";
+  courseSelect.disabled = true;
+  courseSelect.innerHTML = `<option value="">Loading…</option>`;
+
+  const loader = COURSE_REGISTRY[programName];
+  if (!loader) {
+    courseSelect.innerHTML = `<option value="">Courses not wired yet for this program</option>`;
+    helperNote.textContent = "Tip: Add this program’s courses to COURSE_REGISTRY in main.js.";
+    return;
+  }
+
+  try {
+    const courses = await loader();
+    courseSelect.innerHTML = `<option value="">Select a course…</option>`;
+    courses.forEach(c => {
+      const opt = el("option", "", c.label);
+      opt.value = c.path;
+      courseSelect.appendChild(opt);
+    });
+    courseSelect.disabled = false;
+    helperNote.textContent = "Choose a course to see details, schedule, and estimated costs.";
+  } catch (e) {
+    console.error(e);
+    courseSelect.innerHTML = `<option value="">Failed to load courses</option>`;
+    helperNote.textContent = "There was a problem loading courses.";
+  }
 });
 
-/* ---------- render: AEMT course details (example) ---------- */
-const detail = el("div", "card");
-const aemt = Array.isArray(AEMT) ? AEMT[0] : null;
+/* ---------- Respond to course selection (dynamic import) ---------- */
+courseSelect.addEventListener("change", async () => {
+  const path = courseSelect.value;
+  clearDetails();
+  if (!path) return;
 
-if (aemt) {
-  // totals (tuition/fees + books/tools/certs/other)
-  const totals = courseTotals(aemt);
+  try {
+    const mod = await import(path);
+    const data = mod?.default;
+    const course = Array.isArray(data) ? data[0] : data; // your course files export an array with one course
+    if (!course) {
+      renderNotice("Couldn’t read course data from the selected file.");
+      return;
+    }
+    renderCourseDetail(course);
+  } catch (e) {
+    console.error(e);
+    renderNotice("There was a problem loading that course file.");
+  }
+});
 
-  // schedule table (if present)
-  const hrs = Array.isArray(aemt.courseClassroomHours) ? aemt.courseClassroomHours[0] : null;
+/* ---------- helpers: renderers ---------- */
+function clearDetails() {
+  const existing = document.querySelector("#detailCard");
+  if (existing) existing.remove();
+}
+
+function renderNotice(text) {
+  const card = el("div", "card", `<p class="muted">${text}</p>`);
+  card.id = "detailCard";
+  app.appendChild(card);
+}
+
+function renderCourseDetail(course) {
+  const detail = el("div", "card");
+  detail.id = "detailCard";
+
+  const totals = courseTotals(course);
+  const hrs = Array.isArray(course.courseClassroomHours) ? course.courseClassroomHours[0] : null;
+
   const scheduleTable = hrs ? `
     <table style="width:100%; border-collapse:collapse; margin-top:.5rem;">
       <thead>
@@ -76,10 +177,8 @@ if (aemt) {
     </table>
   ` : "";
 
-  // instructor list
-  const instructors = (aemt.instructorContactInformation || []).map(x => `<li>${x}</li>`).join("");
+  const instructors = (course.instructorContactInformation || []).map(x => `<li>${x}</li>`).join("");
 
-  // grade scale (first set only for brevity)
   const gs = Array.isArray(gradeScale) && gradeScale[0] ? gradeScale[0] : null;
   const gradeScaleHtml = gs ? `
     <h3>${gs.title}</h3>
@@ -87,7 +186,6 @@ if (aemt) {
     <ul>${gs.scale.map(s => `<li><strong>${s.letter}</strong>: ${s.range}</li>`).join("")}</ul>
   ` : "";
 
-  // costs block (only show rows that are non-zero)
   const costRows = [
     totals.tuitionAndFees ? `<li><strong>Tuition & Fees:</strong> ${money(totals.tuitionAndFees)}</li>` : "",
     totals.books ? `<li><strong>Books:</strong> ${money(totals.books)}</li>` : "",
@@ -98,24 +196,22 @@ if (aemt) {
   ].join("");
 
   detail.innerHTML = `
-    <h2>${aemt.courseNumber} — ${aemt.courseName}</h2>
-
-    ${aemt.programDescription ? `<p>${aemt.programDescription}</p>` : ""}
-
+    <h2>${course.courseNumber || ""} ${course.courseNumber && course.courseName ? "—" : ""} ${course.courseName || ""}</h2>
+    ${course.programDescription ? `<p>${course.programDescription}</p>` : ""}
     ${scheduleTable}
-
     ${instructors ? `
       <h3>Instructors</h3>
       <ul>${instructors}</ul>
     ` : ""}
-
     ${costRows ? `
       <h3>Estimated Costs</h3>
       <ul>${costRows}</ul>
     ` : ""}
-
     ${gradeScaleHtml}
   `;
+
+  app.appendChild(detail);
 }
 
-app.appendChild(detail);
+/* ---------- Initial helper note ---------- */
+helperNote.textContent = "Pick a program to load its courses. Only AEMT is wired up here; we can add others next.";
