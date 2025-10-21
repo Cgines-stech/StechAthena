@@ -1,5 +1,5 @@
 <!-- trainingplan.html -->
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -15,23 +15,29 @@
       <select id="programSelect"></select>
       <button id="printBtn" type="button">Print / Save PDF</button>
     </div>
-    <p class="hint muted">Pick a program to generate a print-ready training plan. Use your browser’s “Save as PDF”.</p>
+    <p class="hint muted">Pick a program to generate a print-ready plan. Use “Save as PDF”.</p>
   </header>
 
-  <main id="content">
-    <!-- Summary (First table) -->
-    <section id="summarySection" class="card" hidden>
-      <h2 id="programTitle">Program</h2>
-      <table class="data-table">
-        <thead>
+  <!-- Single card wrapper -->
+  <main id="content" class="page-card card">
+    <!-- Program title -->
+    <h2 id="programTitle" class="program-title">Program</h2>
+
+    <!-- Summary (First table: course rows + totals) -->
+    <section id="summarySection" class="subsection" hidden>
+      <table class="data-table dense">
+        <thead id="summaryHead">
           <tr>
-            <th>Credit Hours</th>
-            <th>Clock Hours</th>
+            <th>Course #</th>
+            <th>Course Name</th>
+            <th>Credit Hrs</th>
+            <th>Clock Hrs</th>
             <th>Tuition</th>
             <th>Course Fee</th>
-            <th>Book Cost</th>
-            <th>Tool Cost</th>
-            <th>Certification Cost</th>
+            <th>Book</th>
+            <th>Tool</th>
+            <th>Cert</th>
+            <th>Other</th>
             <th>Total</th>
           </tr>
         </thead>
@@ -39,67 +45,70 @@
       </table>
     </section>
 
-    <!-- Books -->
-    <section id="booksSection" class="card" hidden>
-      <h3>Books</h3>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th style="width:20%">Course</th>
-            <th style="width:50%">Book</th>
-            <th style="width:30%; text-align:right;">Price</th>
-          </tr>
-        </thead>
-        <tbody id="booksBody"></tbody>
-      </table>
-    </section>
+    <!-- 2×2 grid for item tables inside the same card -->
+    <div class="item-grid">
+      <!-- Books -->
+      <section id="booksSection" class="subsection" hidden>
+        <h3>Books</h3>
+        <table class="data-table dense">
+          <thead>
+            <tr>
+              <th style="width:18%">Course</th>
+              <th style="width:57%">Book</th>
+              <th style="width:25%; text-align:right;">Price</th>
+            </tr>
+          </thead>
+          <tbody id="booksBody"></tbody>
+        </table>
+      </section>
 
-    <!-- Tools -->
-    <section id="toolsSection" class="card" hidden>
-      <h3>Tools</h3>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th style="width:20%">Course</th>
-            <th style="width:50%">Tool</th>
-            <th style="width:30%; text-align:right;">Price</th>
-          </tr>
-        </thead>
-        <tbody id="toolsBody"></tbody>
-      </table>
-    </section>
+      <!-- Tools -->
+      <section id="toolsSection" class="subsection" hidden>
+        <h3>Tools</h3>
+        <table class="data-table dense">
+          <thead>
+            <tr>
+              <th style="width:18%">Course</th>
+              <th style="width:57%">Tool</th>
+              <th style="width:25%; text-align:right;">Price</th>
+            </tr>
+          </thead>
+          <tbody id="toolsBody"></tbody>
+        </table>
+      </section>
 
-    <!-- Certifications -->
-    <section id="certsSection" class="card" hidden>
-      <h3>Certifications</h3>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th style="width:20%">Course</th>
-            <th style="width:50%">Certification</th>
-            <th style="width:30%; text-align:right;">Price</th>
-          </tr>
-        </thead>
-        <tbody id="certsBody"></tbody>
-      </table>
-    </section>
+      <!-- Certifications -->
+      <section id="certsSection" class="subsection" hidden>
+        <h3>Certifications</h3>
+        <table class="data-table dense">
+          <thead>
+            <tr>
+              <th style="width:18%">Course</th>
+              <th style="width:57%">Certification</th>
+              <th style="width:25%; text-align:right;">Price</th>
+            </tr>
+          </thead>
+          <tbody id="certsBody"></tbody>
+        </table>
+      </section>
 
-    <!-- Other -->
-<section id="otherSection" class="card" hidden>
-  <h3>Other Associated Cost</h3>
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th style="width:20%">Course</th>
-        <th style="width:50%">Item</th>
-        <th style="width:30%; text-align:right;">Price</th>
-      </tr>
-    </thead>
-    <tbody id="otherBody"></tbody>
-  </table>
-</section>
+      <!-- Other -->
+      <section id="otherSection" class="subsection" hidden>
+        <h3>Other Associated Cost</h3>
+        <table class="data-table dense">
+          <thead>
+            <tr>
+              <th style="width:18%">Course</th>
+              <th style="width:57%">Item</th>
+              <th style="width:25%; text-align:right;">Price</th>
+            </tr>
+          </thead>
+          <tbody id="otherBody"></tbody>
+        </table>
+      </section>
+    </div>
+  </main>
 
-</main>
   <script type="module" src="assets/js/trainingplan.js"></script>
 </body>
 </html>
