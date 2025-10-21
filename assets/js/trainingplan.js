@@ -154,39 +154,92 @@ programSelect.addEventListener("change", async () => {
     return;
   }
 
-  /* ---------- Aggregate across courses ---------- */
-  // Hours & base tuition/fees
-  const totalCreditHours = (allCourses || []).reduce((t, c) => t + (Number(c.courseCredits) || 0), 0);
-  const totalClockHours  = (allCourses || []).reduce((t, c) => t + (Number(c.courseClockHours) || 0), 0);
-  const tuitionTotal     = (allCourses || []).reduce((t, c) => t + (Number(c.courseTuition) || 0), 0);
-  const courseFeeTotal   = (allCourses || []).reduce((t, c) => t + (Number(c.courseFee) || 0), 0);
+/* ---------- Aggregate across courses ---------- */
+summarySection.hidden = false;
 
-  // Itemized arrays (normalize mixed shapes)
-  const allBooks = normalizeItems(allCourses.flatMap(c => c.courseBooks || []));
-  const allTools = normalizeItems(allCourses.flatMap(c => c.courseTools || []));
-  const allCerts = normalizeItems(allCourses.flatMap(c => c.courseCertifications || []));
-  const allOther = normalizeItems(allCourses.flatMap(c => c.otherAssociatedCosts || []));
+// Reset the summary table
+summaryBody.innerHTML = `
+  <thead>
+  <tr>
+    <th>Course #</th>
+    <th>Course Name</th>
+    <th>Credit Hours</th>
+    <th>Clock Hours</th>
+    <th>Tuition</th>
+    <th>Course Fee</th>
+    <th>Book Cost</th>
+    <th>Tool Cost</th>
+    <th>Cert Cost</th>
+    <th>Other</th>
+    <th>Total</th>
+  </tr>
+</thead>
+`;
 
-  const bookCost = sum(allBooks);
-  const toolCost = sum(allTools);
-  const certCost = sum(allCerts);
-  const otherCost = sum(allOther);
-  const grandTotal = tuitionTotal + courseFeeTotal + bookCost + toolCost + certCost + otherCost;
+let totalCredits = 0,
+    totalClock = 0,
+    totalTuition = 0,
+    totalFee = 0,
+    totalBooks = 0,
+    totalTools = 0,
+    totalCerts = 0,
+    totalOther = 0,
+    totalGrand = 0;
 
-  /* ---------- Render Summary (First Table) ---------- */
-  summarySection.hidden = false;
+// Render each course
+for (const course of allCourses) {
+  const books = sum(course.courseBooks);
+  const tools = sum(course.courseTools);
+  const certs = sum(course.courseCertifications);
+  const other = sum(course.otherAssociatedCosts);
+
+  const tuition = course.courseTuition || 0;
+  const fee = course.courseFee || 0;
+  const total = tuition + fee + books + tools + certs + other;
+
+  totalCredits += Number(course.courseCredits) || 0;
+  totalClock += Number(course.courseClockHours) || 0;
+  totalTuition += tuition;
+  totalFee += fee;
+  totalBooks += books;
+  totalTools += tools;
+  totalCerts += certs;
+  totalOther += other;
+  totalGrand += total;
+
   const tr = document.createElement("tr");
   tr.innerHTML = `
-    <td>${totalCreditHours}</td>
-    <td>${totalClockHours}</td>
-    <td>${money(tuitionTotal)}</td>
-    <td>${money(courseFeeTotal)}</td>
-    <td>${money(bookCost)}</td>
-    <td>${money(toolCost)}</td>
-    <td>${money(certCost)}</td>
-    <td><strong>${money(grandTotal)}</strong></td>
+    <td>${course.courseNumber || "-"}</td>
+    <td>${course.courseName || "-"}</td>
+    <td>${course.courseCredits || 0}</td>
+    <td>${course.courseClockHours || 0}</td>
+    <td>${money(tuition)}</td>
+    <td>${money(fee)}</td>
+    <td>${money(books)}</td>
+    <td>${money(tools)}</td>
+    <td>${money(certs)}</td>
+    <td>${money(other)}</td>
+    <td><strong>${money(total)}</strong></td>
   `;
   summaryBody.appendChild(tr);
+}
+
+// Total row
+const totalRow = document.createElement("tr");
+totalRow.style.fontWeight = "600";
+totalRow.innerHTML = `
+  <td colspan="2" style="text-align:right;">Program Totals →</td>
+  <td>${totalCredits}</td>
+  <td>${totalClock}</td>
+  <td>${money(totalTuition)}</td>
+  <td>${money(totalFee)}</td>
+  <td>${money(totalBooks)}</td>
+  <td>${money(totalTools)}</td>
+  <td>${money(totalCerts)}</td>
+  <td>${money(totalOther)}</td>
+  <td>${money(totalGrand)}</td>
+`;
+summaryBody.appendChild(totalRow);
 
   /* ---------- Render Item Tables ---------- */
   booksSection.hidden = false;
