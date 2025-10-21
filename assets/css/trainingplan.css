@@ -88,3 +88,22 @@ h2, h3 { margin: 0 0 .75rem; }
   .data-table tr { page-break-inside: avoid; }
   h1, h2, h3 { color: #000; }
 }
+
+/* put this at the top or anywhere globally (NOT inside @media print) */
+@page {
+  size: Letter landscape;   /* or: A4 landscape */
+  margin: 0.5in;            /* controls PDF margins */
+}
+
+/* Print styles */
+@media print {
+  /* remove body padding since @page margin handles whitespace */
+  body { background: #fff; padding: 0; }
+  .no-print { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+  .data-table tr { page-break-inside: avoid; }
+  h1, h2, h3 { color: #000; }
+
+  /* optional: slightly smaller text on paper */
+  body { font-size: 11pt; }
+}

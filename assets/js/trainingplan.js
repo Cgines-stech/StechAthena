@@ -75,6 +75,7 @@ function normalizeItemsWithCourse(arr = [], courseNumber = "") {
     .filter(Boolean);
 }
 
+
 /** 3-col renderer: Course # | Title | Price */
 function renderItemRows3(tbodyEl, items) {
   if (!items.length) {
@@ -242,7 +243,34 @@ programSelect.addEventListener("change", async () => {
   booksBody.innerHTML = ""; // ensure clean
   // Add a header row for clarity (only needed if your HTML <thead> is fixed to 2 cols)
   // If you want a 3-col header, change the HTML thead too. For now we just render rows.
-  renderItemRows3(booksBody, itemsBooks);
+// replace renderItemRows3 with this:
+function renderItemRows3(tbodyEl, items) {
+  if (!items.length) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td class="muted" colspan="3">No data provided</td>`;
+    tbodyEl.appendChild(tr);
+    return 0;
+  }
+  let total = 0;
+  items.forEach(it => {
+    total += it.price || 0;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${it.courseNumber || "-"}</td>
+      <td>${it.title || "-"}</td>
+      <td style="text-align:right;">${money(it.price || 0)}</td>
+    `;
+    tbodyEl.appendChild(tr);
+  });
+  const trTotal = document.createElement("tr");
+  trTotal.innerHTML = `
+    <td colspan="2" style="text-align:right; font-weight:600;">Subtotal</td>
+    <td style="text-align:right; font-weight:600;">${money(total)}</td>
+  `;
+  tbodyEl.appendChild(trTotal);
+  return total;
+}
+
 
   toolsSection.hidden = false;
   toolsBody.innerHTML = "";
