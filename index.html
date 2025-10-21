@@ -1,35 +1,64 @@
 <!-- index.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Academic Data Viewer</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <title>Stech Athena</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 2rem; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+    h1 { margin-top: 0; }
+    .muted { color: #666; font-size: 0.95rem; }
+    ul { margin: 0.25rem 0 0.5rem 1.2rem; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Academic Data Viewer</h1>
-    <p class="muted">Temporary index to browse Departments, Programs, and Courses.</p>
-  </header>
+  <h1>Programs</h1>
+  <div id="app" class="stack"></div>
 
-  <label for="tableSelect">Choose a table:</label>
-  <select id="tableSelect">
-    <option value="departments">Departments</option>
-    <option value="programs">Programs</option>
-    <option value="courses">Courses</option>
-  </select>
+  <script type="module">
+    import gradeScale from "./data/gradescale.js";
+    import { DEPARTMENTS } from "./data/departments.js";
+    import { PROGRAMS } from "./data/programs.js";
+    import AEMT from "./data/programs/Advanced Emergency Medical Technician/program.js";
 
-  <button id="showBtn">Show Table</button>
+    // Simple lookup maps
+    const deptById = Object.fromEntries(DEPARTMENTS.map(d => [d.id, d]));
+    const app = document.getElementById("app");
 
-  <div id="tableContainer"></div>
+    // Render programs
+    PROGRAMS.forEach(p => {
+      const dept = deptById[p.department_id]?.Program || "Unknown Dept";
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h2>${p.name}</h2>
+        <div class="muted">${dept}</div>
+        <ul>
+          ${p.CIP ? `<li><strong>CIP:</strong> ${p.CIP}</li>` : ""}
+          ${p.credential ? `<li><strong>Credential:</strong> ${p.credential}</li>` : ""}
+          ${p.program_credit_hours ? `<li><strong>Credit Hours:</strong> ${p.program_credit_hours}</li>` : ""}
+        </ul>
+      `;
+      app.appendChild(card);
+    });
 
-  <!-- Load data first -->
-  <script src="data/departments.js"></script>
-  <script src="data/programs.js"></script>
-  <script src="data/courses.js"></script>
-
-  <!-- Then main logic -->
-  <script src="main.js"></script>
+    // Example: show some AEMT program details and Grade Scale
+    const detail = document.createElement("div");
+    detail.className = "card";
+    const aemt = Array.isArray(AEMT) ? AEMT[0] : null;
+    detail.innerHTML = `
+      <h2>Advanced Emergency Medical Technician (Details)</h2>
+      ${aemt?.programDescription ? `<p>${aemt.programDescription}</p>` : ""}
+      ${Array.isArray(gradeScale) ? `
+        <h3>${gradeScale[0].title}</h3>
+        <p>${gradeScale[0].description}</p>
+        <ul>
+          ${gradeScale[0].scale.map(s => `<li>${s.letter}: ${s.range}</li>`).join("")}
+        </ul>` : ""}
+    `;
+    app.appendChild(detail);
+  </script>
 </body>
 </html>

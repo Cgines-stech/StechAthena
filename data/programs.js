@@ -1,7 +1,6 @@
 /* programs.js */
-const PROGRAMS = [
-  { id: 1, department_id: 1, name: 'General Studies', credential: 'Certificate' },
-  { id: 2, department_id: 2, name: 'Web Development', credential: 'AAS' },
-  { id: 3, department_id: 2, name: 'Cybersecurity', credential: 'AAS' },
-  { id: 4, department_id: 3, name: 'Nursing', credential: 'AAS' }
+export const PROGRAMS = [
+  { id: 100, department_id: 1, name: 'Advanced Emergency Medical Technician', program_credit_hours: 7, CIP: 51.0904},
+  { id: 200, department_id: 2, name: 'Automation Technology', credential: 'AAS' },
+  { id: 300, department_id: 2, name: 'Automotive Technology', credential: 'AAS' }
 ];
