@@ -16,7 +16,7 @@ const printBtn = document.getElementById("printBtn");
 
 const programTitle   = document.getElementById("programTitle");
 const summarySection = document.getElementById("summarySection");
-const summaryHead    = summarySection.querySelector("thead");  // <-- header element
+const summaryHead    = document.getElementById("summaryHead");
 const summaryBody    = document.getElementById("summaryBody");
 
 const booksSection = document.getElementById("booksSection");
@@ -27,11 +27,6 @@ const toolsBody    = document.getElementById("toolsBody");
 
 const certsSection = document.getElementById("certsSection");
 const certsBody    = document.getElementById("certsBody");
-
-/*
-    const otherSection = document.getElementById("otherSection");
-    const otherBody    = document.getElementById("otherBody");
-*/
 
 /* ---------- UI population ---------- */
 function populatePrograms() {
@@ -58,9 +53,8 @@ function clearTables() {
   booksBody.innerHTML = "";
   toolsBody.innerHTML = "";
   certsBody.innerHTML = "";
-  /* otherBody.innerHTML = ""; */
 
-  [summarySection, booksSection, toolsSection, certsSection, otherSection]
+  [summarySection, booksSection, toolsSection, certsSection]
     .forEach(sec => sec.hidden = true);
 }
 
@@ -75,20 +69,16 @@ function normalizeItemsWithCourse(arr = [], courseNumber = "") {
     .map(x => {
       if (x == null) return null;
 
-      // If already a number, treat as price with generic title
       if (typeof x === "number") return { courseNumber, title: "", price: x };
 
-      // If a simple string: try to split title/price
       if (typeof x === "string") {
         return { courseNumber, title: x.trim(), price: parsePriceFromString(x) };
       }
 
-      // Object: try common field names
       const title = x.title ?? x.name ?? x.book ?? x.item ?? x.description ?? "";
       const rawPrice = x.price ?? x.cost ?? x.amount ?? x.value ?? 0;
       const price = Number(rawPrice) || 0;
 
-      // If totally empty, drop it
       if (!title && price === 0) return null;
 
       return { courseNumber, title, price };
@@ -123,8 +113,6 @@ function renderItemRows3(tbodyEl, items) {
   tbodyEl.appendChild(trTotal);
   return total;
 }
-
-
 
 /* ---------- Main: program selection ---------- */
 programSelect.addEventListener("change", async () => {
@@ -166,58 +154,62 @@ programSelect.addEventListener("change", async () => {
   /* ---------- First table: per-course rows + totals ---------- */
   summarySection.hidden = false;
 
-  // Set the proper header (write to THEAD, not TBODY)
+  // Header (no "Other" column)
   summaryHead.innerHTML = `
     <tr>
       <th>Course #</th>
       <th>Course Name</th>
-      <th>Credit Hours</th>
-      <th>Clock Hours</th>
+      <th>Credit Hrs</th>
+      <th>Clock Hrs</th>
       <th>Tuition</th>
       <th>Course Fee</th>
-      <th>Book Cost</th>
-      <th>Tool Cost</th>
-      <th>Cert Cost</th>
+      <th>Book</th>
+      <th>Tool</th>
+      <th>Cert</th>
       <th>Total</th>
     </tr>
   `;
 
-  // Add fixed graduation fee (always $25)
-const gradFee = 25;
-let gradFeeRow = document.createElement("tr");
-gradFeeRow.innerHTML = `
-  <td colspan="4" style="text-align:left; font-weight:600;">Graduation Fee</td>
-  <td>${money(gradFee)}</td>
-  <td colspan="5"></td>
-  <td><strong>${money(gradFee)}</strong></td>
-`;
-summaryBody.appendChild(gradFeeRow);
+  // Graduation Fee row ($25 as Course Fee)
+  const gradFee = 25;
+  const gradRow = document.createElement("tr");
+  gradRow.className = "graduation-fee";
+  gradRow.innerHTML = `
+    <td colspan="2" style="text-align:left;">Graduation Fee</td>
+    <td></td> <!-- Credit Hrs -->
+    <td></td> <!-- Clock Hrs -->
+    <td></td> <!-- Tuition -->
+    <td>${money(gradFee)}</td> <!-- Course Fee -->
+    <td></td> <!-- Book -->
+    <td></td> <!-- Tool -->
+    <td></td> <!-- Cert -->
+    <td><strong>${money(gradFee)}</strong></td> <!-- Total -->
+  `;
+  summaryBody.appendChild(gradRow);
 
-// Initialize total with grad fee
-let totalCredits = 0,
-    totalClock   = 0,
-    totalTuition = 0,
-    totalFee     = 0,
-    totalBooks   = 0,
-    totalTools   = 0,
-    totalCerts   = 0,
-    totalGrand   = gradFee; // start with grad fee included
+  // Totals init (include graduation fee)
+  let totalCredits = 0,
+      totalClock   = 0,
+      totalTuition = 0,
+      totalFee     = gradFee,
+      totalBooks   = 0,
+      totalTools   = 0,
+      totalCerts   = 0,
+      totalGrand   = gradFee;
 
-  // Also collect items for the other four tables and keep course number
+  // Collect detailed items for the 3 item tables
   const itemsBooks = [];
   const itemsTools = [];
   const itemsCerts = [];
-  const itemsOther = [];
 
   for (const course of allCourses) {
     const books = sum(course.courseBooks);
     const tools = sum(course.courseTools);
     const certs = sum(course.courseCertifications);
-    /* const other = sum(course.otherAssociatedCosts); */
 
     const tuition = course.courseTuition || 0;
     const fee = course.courseFee || 0;
-    const rowTotal = tuition + fee + books + tools + certs + other;
+    const rowTotal = tuition + fee + books + tools + certs;
 
     totalCredits += Number(course.courseCredits) || 0;
     totalClock   += Number(course.courseClockHours) || 0;
@@ -228,13 +220,10 @@ let totalCredits = 0,
     totalCerts   += certs;
     totalGrand   += rowTotal;
 
-    // collect detailed items w/ course number
     itemsBooks.push(...normalizeItemsWithCourse(course.courseBooks, course.courseNumber));
     itemsTools.push(...normalizeItemsWithCourse(course.courseTools, course.courseNumber));
     itemsCerts.push(...normalizeItemsWithCourse(course.courseCertifications, course.courseNumber));
-    itemsOther.push(...normalizeItemsWithCourse(course.otherAssociatedCosts, course.courseNumber));
 
-    // row
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${course.courseNumber || "-"}</td>
@@ -246,7 +235,6 @@ let totalCredits = 0,
       <td>${money(books)}</td>
       <td>${money(tools)}</td>
       <td>${money(certs)}</td>
-      <td>${money(other)}</td>
       <td><strong>${money(rowTotal)}</strong></td>
     `;
     summaryBody.appendChild(tr);
@@ -268,9 +256,9 @@ let totalCredits = 0,
   `;
   summaryBody.appendChild(totalRow);
 
-  /* ---------- Other tables: include Course # | Title | Price ---------- */
+  /* ---------- Item tables: Course # | Title | Price ---------- */
   booksSection.hidden = false;
-  booksBody.innerHTML = ""; // ensure clean
+  booksBody.innerHTML = "";
   renderItemRows3(booksBody, itemsBooks);
 
   toolsSection.hidden = false;
@@ -280,10 +268,6 @@ let totalCredits = 0,
   certsSection.hidden = false;
   certsBody.innerHTML = "";
   renderItemRows3(certsBody, itemsCerts);
-
-  otherSection.hidden = false;
-  otherBody.innerHTML = "";
-  renderItemRows3(otherBody, itemsOther);
 });
 
 /* ---------- Print ---------- */
