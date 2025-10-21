@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Training Plan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/trainingplan.css" />
+</head>
+<body>
+  <header class="page-header no-print">
+    <h1>Training Plan</h1>
+    <div class="controls">
+      <label class="muted" for="programSelect">Program</label>
+      <select id="programSelect"></select>
+      <button id="printBtn" type="button">Print / Save PDF</button>
+    </div>
+    <p class="hint muted">Pick a program to generate a print-ready training plan. Use your browser’s “Save as PDF”.</p>
+  </header>
+
+  <main id="content">
+    <!-- Summary (First table) -->
+    <section id="summarySection" class="card" hidden>
+      <h2 id="programTitle">Program</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Credit Hours</th>
+            <th>Clock Hours</th>
+            <th>Tuition</th>
+            <th>Course Fee</th>
+            <th>Book Cost</th>
+            <th>Tool Cost</th>
+            <th>Certification Cost</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="summaryBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Books -->
+    <section id="booksSection" class="card" hidden>
+      <h3>Books</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:70%">Title</th>
+            <th style="width:30%; text-align:right;">Price</th>
+          </tr>
+        </thead>
+        <tbody id="booksBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Tools -->
+    <section id="toolsSection" class="card" hidden>
+      <h3>Tools</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:70%">Item</th>
+            <th style="width:30%; text-align:right;">Price</th>
+          </tr>
+        </thead>
+        <tbody id="toolsBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certsSection" class="card" hidden>
+      <h3>Certifications</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:70%">Certification</th>
+            <th style="width:30%; text-align:right;">Price</th>
+          </tr>
+        </thead>
+        <tbody id="certsBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Other -->
+    <section id="otherSection" class="card" hidden>
+      <h3>Other Associated Cost</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:70%">Item</th>
+            <th style="width:30%; text-align:right;">Price</th>
+          </tr>
+        </thead>
+        <tbody id="otherBody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module" src="assets/js/trainingplan.js"></script>
+</body>
+</html>

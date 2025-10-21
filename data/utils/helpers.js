@@ -18,3 +18,13 @@ export function courseTotals(course) {
   const grand = tuitionAndFees + books + tools + certs + other;
   return { tuitionAndFees, books, tools, certs, other, grand };
 }
+
+/** Compute tuition/fees and all add-ons for a course object */
+export function courseTotalsNoOther(course) {
+  const tuitionAndFees = (course?.courseTuition || 0) + (course?.courseFee || 0);
+  const books = sum(course?.courseBooks);
+  const tools = sum(course?.courseTools);
+  const certs = sum(course?.courseCertifications);
+  const grand = tuitionAndFees + books + tools + certs;
+  return { tuitionAndFees, books, tools, certs, grand };
+}

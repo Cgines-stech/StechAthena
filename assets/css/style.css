@@ -3,7 +3,7 @@
 /* ---------- Base Layout ---------- */
 :root {
   --bg-color: #f7f8fa;
-  --primary-color: red;
+  --primary-color: rgb(22, 188, 238);
   --text-color: #222;
   --muted-color: #666;
   --card-bg: #fff;
