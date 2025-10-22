@@ -1,4 +1,5 @@
-// Automation Technology (20000–20999)
+// Automation Technology/program.js
+// (20000–20999)
 
 const automationTechnologyProgram = [
   {

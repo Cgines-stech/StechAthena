@@ -132,6 +132,26 @@ programSelect.addEventListener("change", async () => {
   if (!programName) return;
 
   const programMeta = PROGRAMS.find(p => p.name === programName);
+  // Be forgiving about different key styles across datasets
+const getFirst = (obj, keys, fallback = "N/A") =>
+  keys.map(k => obj?.[k]).find(v => v != null) ?? fallback;
+
+const creditsRequired = getFirst(programMeta, [
+  "program_credit_hours",   // snake_case
+  "programCreditHours",     // camelCase (your program.js files)
+  "creditHours",
+  "credits"
+]);
+
+const cip = getFirst(programMeta, [
+  "CIP",                    // snake_case (some PROGRAMS lists)
+  "programCIP",             // camelCase (your program.js files)
+  "cip"
+]);
+
+programTitle.textContent =
+  `${programName} (Credit Hours Required: ${creditsRequired}, CIP: ${cip})`;
+
   const coursePaths = PROGRAM_COURSE_REGISTRY[programName] || [];
 
   programTitle.textContent = `${programName} (Credit Hours Required: ${programMeta?.program_credit_hours ?? "N/A"}, CIP: ${programMeta?.CIP ?? "N/A"})`;

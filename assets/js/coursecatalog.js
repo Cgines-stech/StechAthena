@@ -124,7 +124,7 @@ function renderCoursesPage(courses) {
     const meta = document.createElement("p");
     meta.className = "course-meta";
     meta.textContent = [
-      c.courseCredits != null ? `${c.courseCredits} credit${Number(c.courseCredits) === 1 ? "" : "s"}` : "",
+      c.courseCredits != null ? `${c.courseCredits} Credit${Number(c.courseCredits) === 1 ? "" : "s"}` : "",
       c.instructionalType ? `Type: ${c.instructionalType}` : "",
       c.statewideAlignment ? `Alignment: ${c.statewideAlignment}` : ""
     ].filter(Boolean).join(" • ");
