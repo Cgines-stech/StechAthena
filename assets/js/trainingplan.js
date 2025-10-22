@@ -11,6 +11,7 @@ const PROGRAM_COURSE_REGISTRY = {
   "Automation Technology": [
     "../../data/programs/Automation Technology/TEAM 1010.js",
     "../../data/programs/Automation Technology/TEAM 1040.js",
+    "../../data/programs/Automation Technology/TEAM 1050.js",
   ],
 };
 
