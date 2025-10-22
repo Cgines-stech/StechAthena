@@ -81,3 +81,11 @@ button{ cursor:pointer; } button:hover{ filter:brightness(.98); }
 .data-table .col-course { width: 18%; }
 .data-table .col-item   { width: 57%; }
 .data-table .col-price  { width: 25%; text-align: right; }
+
+/* puts a faint rule above each table so it’s consistent */
+.subsection .data-table{
+  border-top: 1px solid #eee;
+}
+@media print {
+  .subsection .data-table{ border-top-color: #ccc; }
+}
