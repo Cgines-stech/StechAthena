@@ -49,7 +49,8 @@ const COURSE_REGISTRY = {
     { label: "TEEM 1904 — AEMT Clinical Practice", path: "../../data/programs/Advanced Emergency Medical Technician/TEEM 1904.js" },
   ]),
   "Automation Technology": async () => ([
-    { label: "TEAM 1010 — Essential Skills & Safety",      path: "../../data/programs/Automation Technology/TEAM 1010.js" }
+    { label: "TEAM 1010 — Essential Skills & Safety",      path: "../../data/programs/Automation Technology/TEAM 1010.js" },
+    { label: "TEAM 1010 — Essential Skills & Safety",      path: "../../data/programs/Automation Technology/TEAM 1040.js" },
   ]),
 };
 

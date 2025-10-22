@@ -9,7 +9,8 @@ const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Advanced Emergency Medical Technician/TEEM 1904.js",
   ],
   "Automation Technology": [
-    "../../data/programs/Automation Technology/TEAM 1010.js"
+    "../../data/programs/Automation Technology/TEAM 1010.js",
+    "../../data/programs/Automation Technology/TEAM 1040.js",
   ],
 };
 
