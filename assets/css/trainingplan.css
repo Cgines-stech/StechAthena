@@ -79,30 +79,41 @@ button:hover { filter: brightness(0.97); }
 }
 
 /* ---------- SECTION HEADERS ---------- */
-.subsection {
-  margin: 0.8rem 0;
+.subsection{
+  /* remove vertical margins so grid gap is the only spacer */
+  margin: 0;
+  padding: 0.6rem 0.7rem;   /* uniform internal padding for all blocks */
+  border-radius: 8px;       /* keeps a consistent shape whether tinted or not */
 }
-.subsection h3 {
+
+/* section headings */
+.subsection h3{
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--primary);
-  margin: 0.1rem 0 0.35rem;
+  margin: 0 0 0.35rem;      /* no top margin = consistent top edge */
   padding-bottom: 0.25rem;
   border-bottom: 2px solid var(--primary);
 }
 
-/* optional light background tint for visual grouping */
-.subsection:nth-child(odd) {
+/* optional: keep the alternating tint, but DO NOT change padding anymore */
+.subsection:nth-child(odd){
   background: var(--accent);
-  border-radius: 8px;
-  padding: 0.6rem 0.7rem;
+}
+
+/* subtle divider before tables; consistent for all */
+.subsection .data-table{
+  border-top: 1px solid #ddd;
+  margin-top: 0.35rem;
+  padding-top: 0.25rem;
 }
 
 /* ---------- TABLES ---------- */
-.item-grid {
+.item-grid{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.7rem;
+  gap: 0.7rem;              /* handles all spacing between blocks */
+  align-items: start;       /* ensure each column starts at the same top */
 }
 
 .data-table {
@@ -136,15 +147,9 @@ button:hover { filter: brightness(0.97); }
   margin-top: 0.35rem;
   padding-top: 0.25rem;
 }
-@media print {
-  .subsection .data-table { border-top-color: #ccc; }
-}
-
-/* Graduation fee row highlight */
-.data-table tr.graduation-fee td {
-  font-weight: 600;
-  background: #f0fbff;
-  color: #000;
+@media print{
+  .subsection .data-table{ border-top-color: #ccc; }
+  .subsection:nth-child(odd){ background: none; } /* clean paper */
 }
 
 /* ---------- UTILITIES ---------- */
