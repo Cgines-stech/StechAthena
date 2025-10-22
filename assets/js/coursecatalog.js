@@ -6,12 +6,17 @@
 const PROGRAM_FILE_REGISTRY = {
   "Advanced Emergency Medical Technician":
     "../../data/programs/Advanced Emergency Medical Technician/program.js",
+  "Automation Technology":
+    "../../data/programs/Automation Technology/program.js",
 };
 
 const PROGRAM_COURSE_REGISTRY = {
   "Advanced Emergency Medical Technician": [
     "../../data/programs/Advanced Emergency Medical Technician/TEEM 1202.js",
     "../../data/programs/Advanced Emergency Medical Technician/TEEM 1904.js",
+  ],
+  "Automation Technology": [
+    "../../data/programs/Automation Technology/TEAM 1010.js"
   ],
 };
 

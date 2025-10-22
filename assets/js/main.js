@@ -48,7 +48,9 @@ const COURSE_REGISTRY = {
     { label: "TEEM 1202 — AEMT Foundations",      path: "../../data/programs/Advanced Emergency Medical Technician/TEEM 1202.js" },
     { label: "TEEM 1904 — AEMT Clinical Practice", path: "../../data/programs/Advanced Emergency Medical Technician/TEEM 1904.js" },
   ]),
-  // Add more programs here...
+  "Automation Technology": async () => ([
+    { label: "TEAM 1010 — Essential Skills & Safety",      path: "../../data/programs/Automation Technology/TEAM 1010.js" }
+  ]),
 };
 
 /* ---------- Populate programs ---------- */
@@ -120,7 +122,7 @@ courseSelect.addEventListener("change", async () => {
       mod?.default,
       mod?.course,
       mod?.courses,
-      mod?.advancedEmergencyMedicalTechnician,
+      mod?.advancedEmergencyMedicalTechnician, 
     ];
     const data = candidates.find(Boolean);
 
