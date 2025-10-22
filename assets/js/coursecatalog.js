@@ -127,7 +127,7 @@ function renderCoursesPage(courses) {
     desc.textContent = c.courseDescription || "";
 
     const h = document.createElement("h4");
-    h.textContent = "Objectives";
+    h.textContent = "Course Objectives";
 
     const ul = document.createElement("ul");
     ul.className = "bullets";
