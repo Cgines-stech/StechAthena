@@ -81,7 +81,7 @@ function renderCover(programName, programInfo, courses) {
       <td class="col-num">${c.courseNumber || "-"}</td>
       <td class="col-name">${c.courseName || "-"}</td>
       <td class="col-cred" style="text-align:right;">${c.courseCredits ?? ""}</td>
-      <td class="col-align">${c.statewideAlignment || (c.aligned ? "Aligned" : "Non-aligned") || ""}</td>
+      <td class="col-align">${c.statewideAlignment || (c.aligned ? "Aligned" : "Non-Aligned") || ""}</td>
     `;
     coverTableBody.appendChild(tr);
   });
