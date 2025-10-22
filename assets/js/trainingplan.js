@@ -133,6 +133,7 @@ programSelect.addEventListener("change", async () => {
 
   const programMeta = PROGRAMS.find(p => p.name === programName);
   // Be forgiving about different key styles across datasets
+// Be forgiving about different key styles across datasets
 const getFirst = (obj, keys, fallback = "N/A") =>
   keys.map(k => obj?.[k]).find(v => v != null) ?? fallback;
 
@@ -153,8 +154,6 @@ programTitle.textContent =
   `${programName} (Credit Hours Required: ${creditsRequired}, CIP: ${cip})`;
 
   const coursePaths = PROGRAM_COURSE_REGISTRY[programName] || [];
-
-  programTitle.textContent = `${programName} (Credit Hours Required: ${programMeta?.program_credit_hours ?? "N/A"}, CIP: ${programMeta?.CIP ?? "N/A"})`;
 
   if (!coursePaths.length) {
     summarySection.hidden = false;
@@ -312,9 +311,3 @@ summaryBody.appendChild(totalRow);
 
 /* ---------- Print ---------- */
 printBtn.addEventListener("click", () => window.print());
-
-if (!programMeta) {
-  console.warn("PROGRAM not found for:", programName);
-} else {
-  console.debug("Program meta keys:", Object.keys(programMeta));
-}
