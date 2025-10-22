@@ -49,7 +49,7 @@ populatePrograms();
 
 /* ---------- Utilities ---------- */
 const decodeModule = (mod) => {
-  const candidates = [mod?.default, mod?.course, mod?.courses, mod?.advancedEmergencyMedicalTechnician];
+  const candidates = [mod?.default, mod?.course, mod?.courses, mod?.advancedEmergencyMedicalTechnician, mod?.automationTechnologyProgram];
   const data = candidates.find(Boolean);
   return Array.isArray(data) ? data : (data ? [data] : []);
 };
