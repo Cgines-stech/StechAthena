@@ -181,22 +181,22 @@ programSelect.addEventListener("change", async () => {
   `;
 
   // Graduation Fee row ($25 as Course Fee)
-  const gradFee = 25;
+const gradFee = 25;
 const gradRow = document.createElement("tr");
 gradRow.className = "graduation-fee";
 gradRow.innerHTML = `
-  <td class="text-left">STech Fees</td>
-  <td>Graduation Fee</td>
-  <td></td>
-  <td></td>
-  <td>${money(gradFee)}</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td class="price"><strong>${money(gradFee)}</strong></td>
+  <td class="text-left">STech Fees</td>  <!-- Course # -->
+  <td>Graduation Fee</td>                <!-- Course Name -->
+  <td></td>                              <!-- Credit Hrs -->
+  <td></td>                              <!-- Clock Hrs -->
+  <td></td>                              <!-- Tuition (blank) -->
+  <td>${money(gradFee)}</td>             <!-- Fee -->
+  <td></td>                              <!-- Book -->
+  <td></td>                              <!-- Tool -->
+  <td></td>                              <!-- Cert -->
+  <td class="price"><strong>${money(gradFee)}</strong></td> <!-- Total -->
 `;
 summaryBody.appendChild(gradRow);
-
 
   // Totals init (include graduation fee)
   let totalCredits = 0,
