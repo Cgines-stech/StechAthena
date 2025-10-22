@@ -195,3 +195,32 @@ button:hover { filter: brightness(0.97); }
   .item-grid { gap: 0.4rem; }
   .subsection { margin: 0.35rem 0; }
 }
+
+/* Keep whole tables together across page breaks */
+.subsection,
+.subsection table,
+.subsection thead,
+.subsection tbody,
+.subsection tr {
+  break-inside: avoid;
+  page-break-inside: avoid;   /* legacy */
+}
+
+/* Extra help for grid children so each table block moves as a unit */
+.item-grid > .subsection {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+@media print {
+  /* Make sure grid items don’t fragment in print */
+  .item-grid {
+    grid-auto-flow: row;
+    align-items: start;
+  }
+
+  /* If your printer/preview still splits tables in 2-column layout,
+     uncomment the next line to stack tables in a single column for
+     bulletproof keep-together behavior. */
+  /* .item-grid { display: block; } */
+}
