@@ -312,3 +312,9 @@ summaryBody.appendChild(totalRow);
 
 /* ---------- Print ---------- */
 printBtn.addEventListener("click", () => window.print());
+
+if (!programMeta) {
+  console.warn("PROGRAM not found for:", programName);
+} else {
+  console.debug("Program meta keys:", Object.keys(programMeta));
+}

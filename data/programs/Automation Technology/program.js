@@ -22,6 +22,6 @@ const automationTechnologyProgram = [
     programCreditHours: 30,
     certificate: 'Certificate of Program Completion'
   }
-];
+]; 
 
 export default automationTechnologyProgram;
