@@ -103,20 +103,23 @@ function renderItemRows3(tbodyEl, items) {
     total += it.price || 0;
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${it.courseNumber || "-"}</td>
-      <td>${it.title || "-"}</td>
-      <td style="text-align:right;">${money(it.price || 0)}</td>
+      <td class="col-course">${it.courseNumber || "-"}</td>
+      <td class="col-item">${it.title || "-"}</td>
+      <td class="price">${money(it.price || 0)}</td>
     `;
     tbodyEl.appendChild(tr);
   });
+
   const trTotal = document.createElement("tr");
+  trTotal.className = "subtotal-row";
   trTotal.innerHTML = `
-    <td colspan="2" style="text-align:right; font-weight:600;">Subtotal</td>
-    <td style="text-align:right; font-weight:600;">${money(total)}</td>
+    <td colspan="2" class="text-right">Subtotal</td>
+    <td class="price">${money(total)}</td>
   `;
   tbodyEl.appendChild(trTotal);
   return total;
 }
+
 
 /* ---------- Main: program selection ---------- */
 programSelect.addEventListener("change", async () => {
@@ -175,20 +178,21 @@ programSelect.addEventListener("change", async () => {
 
   // Graduation Fee row ($25 as Course Fee)
   const gradFee = 25;
-  const gradRow = document.createElement("tr");
-  gradRow.className = "graduation-fee";
-  gradRow.innerHTML = `
-    <td colspan="2" style="text-align:left;">Graduation Fee</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>${money(gradFee)}</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><strong>${money(gradFee)}</strong></td>
-  `;
-  summaryBody.appendChild(gradRow);
+const gradRow = document.createElement("tr");
+gradRow.className = "graduation-fee";
+gradRow.innerHTML = `
+  <td colspan="2" class="text-left">Graduation Fee</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td>${money(gradFee)}</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td class="price"><strong>${money(gradFee)}</strong></td>
+`;
+summaryBody.appendChild(gradRow);
+
 
   // Totals init (include graduation fee)
   let totalCredits = 0,
@@ -248,20 +252,21 @@ programSelect.addEventListener("change", async () => {
   }
 
   // Total row (no "Other")
-  const totalRow = document.createElement("tr");
-  totalRow.style.fontWeight = "600";
-  totalRow.innerHTML = `
-    <td colspan="2" style="text-align:right;">Program Totals →</td>
-    <td>${totalCredits}</td>
-    <td>${totalClock}</td>
-    <td>${money(totalTuition)}</td>
-    <td>${money(totalFee)}</td>
-    <td>${money(totalBooks)}</td>
-    <td>${money(totalTools)}</td>
-    <td>${money(totalCerts)}</td>
-    <td>${money(totalGrand)}</td>
-  `;
-  summaryBody.appendChild(totalRow);
+const totalRow = document.createElement("tr");
+totalRow.className = "summary-totals";
+totalRow.innerHTML = `
+  <td colspan="2" class="text-right">Program Totals →</td>
+  <td>${totalCredits}</td>
+  <td>${totalClock}</td>
+  <td>${money(totalTuition)}</td>
+  <td>${money(totalFee)}</td>
+  <td>${money(totalBooks)}</td>
+  <td>${money(totalTools)}</td>
+  <td>${money(totalCerts)}</td>
+  <td class="price">${money(totalGrand)}</td>
+`;
+summaryBody.appendChild(totalRow);
+
 
   /* ---------- Item tables: Course # | Title | Price (Other included here) ---------- */
   booksSection.hidden = false;

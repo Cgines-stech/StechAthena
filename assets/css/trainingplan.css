@@ -3,7 +3,7 @@
 @page { size: Letter landscape; margin: 0.35in; }
 
 :root{
-  --bg:#f7f8fa; --text:#222; --muted:#666; --primary:#2a73cc;
+  --bg:#f7f8fa; --text:#222; --muted:#666; --primary:red;
   --card:#fff; --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.08); --border:#e6e6e6;
 }
 
@@ -48,7 +48,6 @@ button{ cursor:pointer; } button:hover{ filter:brightness(.98); }
 
 /* Graduation fee highlight (optional subtle cue) */
 .data-table tr.graduation-fee td{
-  background:#f4f9ff;
   font-weight:600;
 }
 
@@ -65,3 +64,20 @@ button{ cursor:pointer; } button:hover{ filter:brightness(.98); }
   .item-grid{ gap:.4rem; }
   .subsection{ margin:.35rem 0; }
 }
+
+/* generic utilities */
+.text-right { text-align: right; }
+.text-left  { text-align: left; }
+.fw-600     { font-weight: 600; }
+
+/* price/number cells */
+.price { text-align: right; white-space: nowrap; }
+
+/* subtotal & summary total rows */
+.subtotal-row td,
+.summary-totals td { font-weight: 600; }
+
+/* optional: column sizing helpers for item tables */
+.data-table .col-course { width: 18%; }
+.data-table .col-item   { width: 57%; }
+.data-table .col-price  { width: 25%; text-align: right; }
