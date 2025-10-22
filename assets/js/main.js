@@ -50,7 +50,7 @@ const COURSE_REGISTRY = {
   ]),
   "Automation Technology": async () => ([
     { label: "TEAM 1010 — Essential Skills & Safety",      path: "../../data/programs/Automation Technology/TEAM 1010.js" },
-    { label: "TEAM 1010 — Essential Skills & Safety",      path: "../../data/programs/Automation Technology/TEAM 1040.js" },
+    { label: "TEAM 1040 — Industrial Mechanics",      path: "../../data/programs/Automation Technology/TEAM 1040.js" },
   ]),
 };
 
