@@ -190,12 +190,47 @@ function renderCourseDetail(course) {
 
   const instructors = (course.instructorContactInformation || []).map(x => `<li>${x}</li>`).join("");
 
-  const gs = Array.isArray(gradeScale) && gradeScale[0] ? gradeScale[0] : null;
-  const gradeScaleHtml = gs ? `
-    <h3>${gs.title}</h3>
-    <p class="muted">${gs.description || ""}</p>
-    <ul>${gs.scale.map(s => `<li><strong>${s.letter}</strong>: ${s.range}</li>`).join("")}</ul>
-  ` : "";
+const gs = Array.isArray(gradeScale) && gradeScale[0] ? gradeScale[0] : null;
+
+let gradeScaleHtml = "";
+if (gs && Array.isArray(gs.scale) && gs.scale.length) {
+  // ensure exactly 12 cells (pad or trim)
+  const scale = gs.scale.slice(0, 12);
+  while (scale.length < 12) scale.push({ letter: "", range: "" });
+
+  // build 3 rows x 4 columns
+  const rows = [0, 1, 2].map(r => scale.slice(r * 4, r * 4 + 4));
+
+  gradeScaleHtml = `
+    <section class="subsection">
+      <h3>${gs.title}</h3>
+      ${gs.description ? `<p class="muted">${gs.description}</p>` : ""}
+      <table class="grade-table">
+        <tbody>
+          ${rows
+            .map(
+              row => `
+              <tr>
+                ${row
+                  .map(
+                    cell => `
+                    <td>
+                      <div class="grade">
+                        <span class="grade-letter">${cell.letter || ""}</span>
+                        <span class="grade-range">${cell.range || ""}</span>
+                      </div>
+                    </td>`
+                  )
+                  .join("")}
+              </tr>`
+            )
+            .join("")}
+        </tbody>
+      </table>
+    </section>
+  `;
+}
+
 
   const costRows = [
     totals.tuitionAndFees ? `<li><strong>Tuition & Fees:</strong> ${money(totals.tuitionAndFees)}</li>` : "",
