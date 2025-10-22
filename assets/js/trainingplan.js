@@ -168,7 +168,7 @@ programSelect.addEventListener("change", async () => {
       <th>Credit Hrs</th>
       <th>Clock Hrs</th>
       <th>Tuition</th>
-      <th>Course Fee</th>
+      <th>Fee</th>
       <th>Book</th>
       <th>Tool</th>
       <th>Cert</th>
@@ -181,8 +181,8 @@ programSelect.addEventListener("change", async () => {
 const gradRow = document.createElement("tr");
 gradRow.className = "graduation-fee";
 gradRow.innerHTML = `
-  <td colspan="2" class="text-left">Graduation Fee</td>
-  <td></td>
+  <td class="text-left">STech Fees</td>
+  <td>Graduation Fee</td>
   <td></td>
   <td></td>
   <td>${money(gradFee)}</td>
