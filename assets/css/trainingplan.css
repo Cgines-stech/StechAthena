@@ -2,7 +2,7 @@
 /* ---------- PAGE SETUP ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;700&display=swap');
 
-/* Landscape with small margins for print/PDF */
+/* Landscape orientation with small margins for PDF */
 @page { size: Letter landscape; margin: 0.35in; }
 
 :root {
@@ -10,6 +10,7 @@
   --text: #222;
   --muted: #666;
   --primary: rgb(22, 188, 238);
+  --accent: #e8f7ff;
   --card: #fff;
   --radius: 12px;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -77,19 +78,31 @@ button:hover { filter: brightness(0.97); }
   font-weight: 600;
 }
 
-/* ---------- SECTIONS ---------- */
-.subsection { margin: 0.6rem 0; }
+/* ---------- SECTION HEADERS ---------- */
+.subsection {
+  margin: 0.8rem 0;
+}
 .subsection h3 {
-  margin: 0.1rem 0 0.35rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  color: var(--primary);
+  margin: 0.1rem 0 0.35rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--primary);
+}
+
+/* optional light background tint for visual grouping */
+.subsection:nth-child(odd) {
+  background: var(--accent);
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
 }
 
 /* ---------- TABLES ---------- */
 .item-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
+  gap: 0.7rem;
 }
 
 .data-table {
@@ -100,13 +113,14 @@ button:hover { filter: brightness(0.97); }
 .data-table th,
 .data-table td {
   border-bottom: 1px solid #eee;
-  padding: 0.25rem 0.3rem;
+  padding: 0.3rem 0.35rem;
   vertical-align: top;
 }
 .data-table th {
   text-align: left;
   font-weight: 600;
   font-size: 0.82rem;
+  color: #111;
 }
 .data-table td {
   font-size: 0.8rem;
@@ -116,31 +130,28 @@ button:hover { filter: brightness(0.97); }
   text-align: right;
 }
 
-/* Light top border to separate each table visually */
+/* Subtle divider line before tables */
 .subsection .data-table {
-  border-top: 1px solid #eee;
-  margin-top: 0.4rem;
-  padding-top: 0.2rem;
+  border-top: 1px solid #ddd;
+  margin-top: 0.35rem;
+  padding-top: 0.25rem;
 }
 @media print {
   .subsection .data-table { border-top-color: #ccc; }
 }
 
-/* Graduation fee row */
+/* Graduation fee row highlight */
 .data-table tr.graduation-fee td {
   font-weight: 600;
-  background: #f5fbff;
+  background: #f0fbff;
+  color: #000;
 }
 
 /* ---------- UTILITIES ---------- */
 .text-right { text-align: right; }
 .text-left  { text-align: left; }
 .fw-600     { font-weight: 600; }
-
-.price {
-  text-align: right;
-  white-space: nowrap;
-}
+.price { text-align: right; white-space: nowrap; }
 
 .subtotal-row td,
 .summary-totals td {
@@ -168,6 +179,9 @@ button:hover { filter: brightness(0.97); }
   .card {
     box-shadow: none;
     border: 1px solid #ccc;
+  }
+  .subsection:nth-child(odd) {
+    background: none; /* remove tint for clean PDF look */
   }
   .data-table th,
   .data-table td {
