@@ -3,7 +3,7 @@
 @page { size: Letter landscape; margin: 0.35in; }
 
 :root{
-  --bg:#f7f8fa; --text:#222; --muted:#666; --primary:red;
+  --bg:#f7f8fa; --text:#222; --muted:#666; --primary:rgb(22, 188, 238);
   --card:#fff; --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.08); --border:#e6e6e6;
 }
 

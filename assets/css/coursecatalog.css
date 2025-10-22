@@ -1,0 +1,66 @@
+/* coursecatalog.css */
+/* Paper setup: portrait + modest margins (change to landscape if you prefer) */
+@page { size: Letter portrait; margin: 0.5in; }
+
+:root{
+  --bg:#f7f8fa; --text:#222; --muted:#666; --primary:#2a73cc;
+  --card:#fff; --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.08); --border:#e6e6e6;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-size:0.98rem; line-height:1.5; padding:1rem;
+}
+
+.page-header{ display:grid; gap:.5rem; margin-bottom:1rem; }
+.page-header h1{ color:var(--primary); margin:0; letter-spacing:-.3px; }
+.controls{ display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+#programSelect,button{ padding:.45rem .65rem; border:1px solid var(--border); border-radius:8px; background:#fff; font-size:.95rem; }
+button{ cursor:pointer; } button:hover{ filter:brightness(.98); }
+.muted{ color:var(--muted); }
+
+.card{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:1rem 1.1rem; margin:0 auto 1rem; max-width:100%;
+}
+
+/* Each "page" block prints on its own page */
+.page{ page-break-after: always; }
+.page:last-of-type{ page-break-after:auto; }
+
+h2{ margin:.25rem 0 .75rem; }
+h3{ margin:1rem 0 .35rem; }
+h2 + p.muted{ margin-top:-.5rem; }
+
+/* Cover page table — borderless look */
+.catalog-table{ width:100%; border-collapse:collapse; table-layout:fixed; margin-top:.5rem; }
+.catalog-table th, .catalog-table td{ padding:.5rem .35rem; vertical-align:top; }
+.catalog-table.borderless th, .catalog-table.borderless td{ border:0; }
+.catalog-table .col-num{ width:16ch; }
+.catalog-table .col-cred{ width:10ch; text-align:right; }
+.catalog-table .col-align{ width:14ch; }
+
+/* Bulleted lists with a little left indent */
+.bullets{ padding-left:1.25rem; margin:.25rem 0; }
+.bullets li{ margin:.15rem 0; }
+
+/* Course blocks on the last page */
+.course-block{
+  border-top:1px solid var(--border);
+  padding-top:.8rem; margin-top:.8rem;
+}
+.course-block:first-child{ border-top:0; padding-top:0; margin-top:0; }
+.course-title{ margin:0 0 .25rem; font-weight:700; }
+.course-meta{ margin:0 0 .5rem; color:var(--muted); font-size:.95rem; }
+
+/* Print tweaks */
+@media print{
+  body{ background:#fff; padding:0; font-size:11pt; }
+  .no-print{ display:none !important; }
+  .card{ box-shadow:none; border:1px solid #ccc; }
+  .course-block{ border-top-color:#ccc; }
+}

@@ -1,0 +1,59 @@
+<!-- coursecatalog.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Course Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/coursecatalog.css" />
+</head>
+<body>
+  <!-- top controls (not printed) -->
+  <header class="page-header no-print">
+    <h1>Course Catalog</h1>
+    <div class="controls">
+      <label class="muted" for="programSelect">Program</label>
+      <select id="programSelect"></select>
+      <button id="printBtn" type="button">Print / Save PDF</button>
+    </div>
+    <p class="hint muted">
+      Pick a program to generate a print-ready catalog. Use your browser’s “Save as PDF”.
+    </p>
+  </header>
+
+  <!-- Section 1: Cover page -->
+  <section id="coverPage" class="page card" hidden>
+    <h2 id="programName">Program Name</h2>
+    <p id="programMeta" class="muted"></p>
+    <table class="catalog-table borderless">
+      <thead>
+        <tr>
+          <th class="col-num">Course #</th>
+          <th class="col-name">Course Name</th>
+          <th class="col-cred">Credits</th>
+          <th class="col-align">Alignment</th>
+        </tr>
+      </thead>
+      <tbody id="coverTableBody"></tbody>
+    </table>
+  </section>
+
+  <!-- Section 2: Program description & objectives -->
+  <section id="programPage" class="page card" hidden>
+    <h2>Program Overview</h2>
+    <h3>Description</h3>
+    <p id="programDescription"></p>
+
+    <h3>Program Objectives</h3>
+    <ul id="programObjectives" class="bullets"></ul>
+  </section>
+
+  <!-- Section 3: Course descriptions & objectives -->
+  <section id="coursesPage" class="page card" hidden>
+    <h2>Course Descriptions & Objectives</h2>
+    <div id="coursesContainer"></div>
+  </section>
+
+  <script type="module" src="assets/js/coursecatalog.js"></script>
+</body>
+</html>
