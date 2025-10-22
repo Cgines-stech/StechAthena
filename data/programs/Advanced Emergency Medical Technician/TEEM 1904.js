@@ -11,7 +11,7 @@ const TEEM1904 = [
     courseNumber: "TEEM 1904",
     courseName: "AEMT Clinical Practice",
     courseCredits: 1,
-    statewideAlignment: "Aligned",
+    statewideAlignment: "Non-Aligned",
     courseClockHours: 48,
     courseTuition: 95.00,
     courseFee: 0.00,
