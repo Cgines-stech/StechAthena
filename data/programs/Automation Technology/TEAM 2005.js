@@ -11,7 +11,7 @@ const TEAM2005 = [
     courseNumber: "TEAM 2005",
     courseName: "Programmable Logic Controllers II",
     courseCredits: 3,
-    statewideAlignment: "Aligned",
+    statewideAlignment: "Non-Aligned",
     courseClockHours: 90,
     courseTuition: 285.00,
     courseFee: 95.00,

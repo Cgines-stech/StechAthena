@@ -11,7 +11,7 @@ const TEAM1640 = [
     courseNumber: "TEAM 1640",
     courseName: "Electrical Systems II",
     courseCredits: 1,
-    statewideAlignment: "Aligned",
+    statewideAlignment: "Non-Aligned",
     courseClockHours: 30,
     courseTuition: 190.00,
     courseFee: 25.00,

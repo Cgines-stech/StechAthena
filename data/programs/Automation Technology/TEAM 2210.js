@@ -11,7 +11,7 @@ const TEAM2210 = [
     courseNumber: "TEAM 2210",
     courseName: "Fabrication and Repair",
     courseCredits: 3,
-    statewideAlignment: "Aligned",
+    statewideAlignment: "Non-Aligned",
     courseClockHours: 90,
     courseTuition: 285.00,
     courseFee: 140.00,

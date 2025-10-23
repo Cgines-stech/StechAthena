@@ -11,7 +11,7 @@ const TEAM1510 = [
     courseNumber: "TEAM 1510",
     courseName: "Process Control Components and Systems",
     courseCredits: 2,
-    statewideAlignment: "Aligned",
+    statewideAlignment: "Non-Aligned",
     courseClockHours: 60,
     courseTuition: 190.00,
     courseFee: 25.00,
