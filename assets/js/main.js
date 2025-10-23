@@ -52,6 +52,7 @@ const COURSE_REGISTRY = {
     { label: "TEAM 1010 — Essential Skills & Safety",      path: "../../data/programs/Automation Technology/TEAM 1010.js" },
     { label: "TEAM 1040 — Industrial Mechanics",      path: "../../data/programs/Automation Technology/TEAM 1040.js" },
     { label: "TEAM 1050 — Electrical Systems",      path: "../../data/programs/Automation Technology/TEAM 1050.js" },
+    { label: "TEAM 1060 — Motor Controls",      path: "../../data/programs/Automation Technology/TEAM 1060.js" },
   ]),
 };
 
