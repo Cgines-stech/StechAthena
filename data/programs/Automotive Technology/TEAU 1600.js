@@ -158,4 +158,4 @@ const TEAU1600 = [
   }
 ]
 
-export default TEAU1050;
+export default TEAU1600;
