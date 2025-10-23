@@ -48,7 +48,7 @@ const TEAU1800 = [
     ],
     
     courseTools: [
-        { name: "Basic Technician Tool Kit", price: 1900.0, note: "May purchase a kit from bookstore or purchase tools independently." },
+      { name: "Basic Technician Tool Kit", price: 1900.0, note: "May purchase a kit from bookstore or purchase tools independently." },
     ],
 
     courseCertifications: [

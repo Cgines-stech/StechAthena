@@ -11,7 +11,7 @@ const TEAU1050 = [
     courseNumber: "TEAU 1050",
     courseName: "Workshop Practices and Safety",
     courseCredits: 1,
-    statewideAlignment: "Aligned",
+    statewideAlignment: "Non-Aligned",
     courseClockHours: 30,
     courseTuition: 95.00,
     courseFee: 296.00,
