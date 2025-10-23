@@ -76,6 +76,8 @@ const COURSE_REGISTRY = {
     { label: "TEAU 1240 — Automatic Transmissions and Transaxles",      path: "../../data/programs/Automotive Technology/TEAU 1240.js" },
     { label: "TEAU 1140 — Engine Repair",      path: "../../data/programs/Automotive Technology/TEAU 1140.js" },
     { label: "TEAU 2910 — Manufacturer Automotive Service Training - General Motors",      path: "../../data/programs/Automotive Technology/TEAU 2910.js" },
+    { label: "TEAU 2911 — Manufacturer Automotive Service Training - Toyota",      path: "../../data/programs/Automotive Technology/TEAU 2911.js" },
+    { label: "TEAU 2912 — Manufacturer Automotive Service Training - Mopar CAP",      path: "../../data/programs/Automotive Technology/TEAU 2912.js" },
   ]),
 };
 
