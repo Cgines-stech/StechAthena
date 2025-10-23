@@ -25,7 +25,7 @@ const advancedEmergencyMedicalTechnicianProgram = [
 
     programCIP: 51.0904,
     programCreditHours: 7,
-    certificate: 'Certificate of Program Completion'
+    certificate: 'Certificate'
   }
 ];
 

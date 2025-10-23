@@ -62,6 +62,9 @@ const COURSE_REGISTRY = {
     { label: "TEAM 1510 — Process Control Components and Systems",      path: "../../data/programs/Automation Technology/TEAM 1510.js" },
     { label: "TEAM 1640 — Electrical Systems II",      path: "../../data/programs/Automation Technology/TEAM 1640.js" },
   ]),
+  "Automotive Technology": async () => ([
+    { label: "TEAU 1050 — Workshop Practices and Safety",      path: "../../data/programs/Automotive Technology/TEAU 1050.js" },
+  ]),
 };
 
 /* ---------- Populate programs ---------- */

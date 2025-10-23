@@ -1,6 +1,6 @@
 /* departments.js */
 export const DEPARTMENTS = [
-  { id: 1, Program: 'Public Safety'},
-  { id: 2, Program: 'Manufacturing'},
-  { id: 3, Program: 'Computer Science'}
+  { id: 1, Program: 'Health Professions'},
+  { id: 2, Program: 'Other Trades and Industry'},
+  { id: 3, Program: 'Automotive Technology'}
 ];

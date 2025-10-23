@@ -22,6 +22,9 @@ const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Automation Technology/TEAM 1510.js",
     "../../data/programs/Automation Technology/TEAM 1640.js",
   ],
+  "Automotive Technology": [
+    "../../data/programs/Automotive Technology/TEAU 1050.js",
+  ],
 };
 
 /* ---------- DOM ---------- */
@@ -59,7 +62,14 @@ populatePrograms();
 
 /* ---------- Utilities ---------- */
 const decodeModule = (mod) => {
-  const candidates = [mod?.default, mod?.course, mod?.courses, mod?.advancedEmergencyMedicalTechnician, mod?.automationTechnologyProgram];
+  const candidates = [
+    mod?.default, 
+    mod?.course, 
+    mod?.courses, 
+    mod?.advancedEmergencyMedicalTechnician, 
+    mod?.automationTechnologyProgram,
+    mod?.automotiveTechnologyProgram,
+  ];
   const data = candidates.find(Boolean);
   return Array.isArray(data) ? data : (data ? [data] : []);
 };
