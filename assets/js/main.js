@@ -75,6 +75,7 @@ const COURSE_REGISTRY = {
     { label: "TEAU 1400 — Suspension and Steering",      path: "../../data/programs/Automotive Technology/TEAU 1400.js" },
     { label: "TEAU 1240 — Automatic Transmissions and Transaxles",      path: "../../data/programs/Automotive Technology/TEAU 1240.js" },
     { label: "TEAU 1140 — Engine Repair",      path: "../../data/programs/Automotive Technology/TEAU 1140.js" },
+    { label: "TEAU 2910 — Manufacturer Automotive Service Training - General Motors",      path: "../../data/programs/Automotive Technology/TEAU 2910.js" },
   ]),
 };
 
