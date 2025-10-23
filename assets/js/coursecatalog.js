@@ -8,6 +8,8 @@ const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Advanced Emergency Medical Technician/program.js",
   "Automation Technology":
     "../../data/programs/Automation Technology/program.js",
+  "Automotive Technology":
+    "../../data/programs/Automotive Technology/program.js",
 };
 
 const PROGRAM_COURSE_REGISTRY = {
