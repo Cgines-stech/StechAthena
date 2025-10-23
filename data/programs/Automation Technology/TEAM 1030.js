@@ -16,6 +16,8 @@ const TEAM1030 = [
     courseTuition: 190.00,
     courseFee: 45.00,
     instructionalType: "LEL",
+    isElective: false,
+    includeInProgramTotals: true,
 
     courseDescription:
       "The Hydraulics course prepares students with the fundamentals needed to work with hydraulic systems. Hydraulic systems are used in a variety of industries where extra  force may be required. Competencies include safety, maintenance, operation, installation, component identification, displacement principles, troubleshooting, analysis of  performance and efficiency, and design of hydraulic systems.",

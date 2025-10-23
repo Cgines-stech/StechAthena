@@ -238,17 +238,19 @@ summaryBody.appendChild(gradRow);
   const itemsOther = [];
 
   for (const course of allCourses) {
-    const books = sum(course.courseBooks);
-    const tools = sum(course.courseTools);
-    const certs = sum(course.courseCertifications);
-    // NOTE: other costs are intentionally NOT included in the summary totals
-    // but we still capture them for the "Other" table:
-    itemsOther.push(...normalizeItemsWithCourse(course.otherAssociatedCosts, course.courseNumber));
+  const books   = sum(course.courseBooks);
+  const tools   = sum(course.courseTools);
+  const certs   = sum(course.courseCertifications);
+  const tuition = course.courseTuition || 0;
+  const fee     = course.courseFee || 0;
 
-    const tuition = course.courseTuition || 0;
-    const fee = course.courseFee || 0;
-    const rowTotal = tuition + fee + books + tools + certs;
+  // summary table excludes "Other" by design
+  const rowTotal = tuition + fee + books + tools + certs;
 
+  // Include rule: explicit flag wins; otherwise non-electives are included
+  const include = (course.includeInProgramTotals ?? !course.isElective);
+
+  if (include) {
     totalCredits += Number(course.courseCredits) || 0;
     totalClock   += Number(course.courseClockHours) || 0;
     totalTuition += tuition;
@@ -256,27 +258,34 @@ summaryBody.appendChild(gradRow);
     totalBooks   += books;
     totalTools   += tools;
     totalCerts   += certs;
-    totalGrand   += rowTotal;
-
-    itemsBooks.push(...normalizeItemsWithCourse(course.courseBooks, course.courseNumber));
-    itemsTools.push(...normalizeItemsWithCourse(course.courseTools, course.courseNumber));
-    itemsCerts.push(...normalizeItemsWithCourse(course.courseCertifications, course.courseNumber));
-
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${course.courseNumber || "-"}</td>
-      <td>${course.courseName || "-"}</td>
-      <td>${course.courseCredits || 0}</td>
-      <td>${course.courseClockHours || 0}</td>
-      <td>${money(tuition)}</td>
-      <td>${money(fee)}</td>
-      <td>${money(books)}</td>
-      <td>${money(tools)}</td>
-      <td>${money(certs)}</td>
-      <td><strong>${money(rowTotal)}</strong></td>
-    `;
-    summaryBody.appendChild(tr);
+    totalGrand   += rowTotal;   // (you already seeded totalGrand with the $25 grad fee)
   }
+
+  // always collect for detail tables
+  itemsBooks.push(...normalizeItemsWithCourse(course.courseBooks, course.courseNumber));
+  itemsTools.push(...normalizeItemsWithCourse(course.courseTools, course.courseNumber));
+  itemsCerts.push(...normalizeItemsWithCourse(course.courseCertifications, course.courseNumber));
+  itemsOther.push(...normalizeItemsWithCourse(course.otherAssociatedCosts, course.courseNumber));
+
+  // Optional: badge in the first table so you can see which are electives
+  const electiveBadge = course.isElective ? ` <span class="muted">(Elective)</span>` : "";
+
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${course.courseNumber || "-"}</td>
+    <td>${(course.courseName || "-") + electiveBadge}</td>
+    <td>${course.courseCredits || 0}</td>
+    <td>${course.courseClockHours || 0}</td>
+    <td>${money(tuition)}</td>
+    <td>${money(fee)}</td>
+    <td>${money(books)}</td>
+    <td>${money(tools)}</td>
+    <td>${money(certs)}</td>
+    <td><strong>${money(rowTotal)}</strong></td>
+  `;
+  summaryBody.appendChild(tr);
+}
+
 
   // Total row (no "Other")
 const totalRow = document.createElement("tr");

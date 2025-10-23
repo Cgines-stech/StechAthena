@@ -16,6 +16,8 @@ const TEAM1060 = [
     courseTuition: 285.00,
     courseFee: 45.00,
     instructionalType: "LEL",
+    isElective: false,
+    includeInProgramTotals: true,
 
     courseDescription:
       "The Motor Controls course prepares students with a working knowledge and understanding of real-world motor control operations. Students who complete this course are  able to proficiently set up and design motor control circuits utilizing schematics. Students in this course identify components and utilize instrumentation to troubleshoot and  maintain systems.",

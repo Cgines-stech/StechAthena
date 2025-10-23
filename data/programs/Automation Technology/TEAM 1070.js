@@ -16,6 +16,8 @@ const TEAM1070 = [
     courseTuition: 380.00,
     courseFee: 40.00,
     instructionalType: "LEL",
+    isElective: false,
+    includeInProgramTotals: true,
 
     courseDescription:
       "The Programmable Logic Controllers course teaches students to interface with programmable logic controllers (PLCs). Programmable logic controllers are the brains of all  modern automation technology systems. In this course students develop a working knowledge and skill set in the following competencies: ladder logic, programming  standards, hardware selection, various inputs and outputs, communication, troubleshooting, setup and installation.",

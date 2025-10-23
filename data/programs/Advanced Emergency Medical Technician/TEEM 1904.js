@@ -16,6 +16,8 @@ const TEEM1904 = [
     courseTuition: 95.00,
     courseFee: 0.00,
     instructionalType: "SUP",
+    isElective: false,
+    includeInProgramTotals: true,
 
     courseDescription:
       "This clinical course provides Advanced Emergency Medical Technician (AEMT) students with essential hands-on experience in advanced patient management and emergency care. Through practical application in clinical settings, students will master advanced airway management, cardiac care, trauma response, medical emergencies, and specialized obstetric and pediatric care, ensuring preparedness for complex pre-hospital scenarios.",

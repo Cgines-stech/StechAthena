@@ -16,6 +16,8 @@ const TEEM1202 = [
     courseTuition: 570.00,
     courseFee: 412.00,
     instructionalType: "LEL",
+    isElective: false,
+    includeInProgramTotals: true,
 
     courseDescription:
       "Advanced Emergency Medical Technicians provide basic and limited advanced emergency medical care and transportation for critical and emergent patients who access the emergency medical system (EMS). Advanced Emergency Medical Technicians (AEMTs) possess the basic knowledge and skills necessary to provide patient care and transportation. Advanced Emergency Medical Technicians function as part of a comprehensive EMS response, under medical oversight. Advanced Emergency Medical Technicians perform interventions with the basic and advanced equipment typically found on an ambulance. The Advanced Emergency Medical Technician is a link from the scene to the emergency health care system.",

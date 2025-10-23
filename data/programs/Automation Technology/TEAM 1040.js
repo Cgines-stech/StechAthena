@@ -16,6 +16,8 @@ const TEAM1040 = [
     courseTuition: 285.00,
     courseFee: 45.00,
     instructionalType: "LEL",
+    isElective: false,
+    includeInProgramTotals: true,
 
     courseDescription:
       "The Industrial Mechanics course is designed to introduce students to the world of mechanical drive systems and their characteristics. Students can demonstrate competency  in the following: couplers, component identification, system related calculations, alignment, the effects of wear and vibration, component failure detection and prevention.",

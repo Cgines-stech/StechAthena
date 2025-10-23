@@ -16,6 +16,8 @@ const TEAM1010 = [
     courseTuition: 285.00,
     courseFee: 45.00,
     instructionalType: "LEL",
+    isElective: false,
+    includeInProgramTotals: true,
 
     courseDescription:
       "The Essential Skills and Safety course teaches the basic concepts and terminology used in automation technology. Students gain proficiency through applying concepts of  fasteners, measurement equipment, tolerances, and hand and power tool operations. The course covers safety and workplace skills as well as school and shop specific  operations, standards, and procedures.",
