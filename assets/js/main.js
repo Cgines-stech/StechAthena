@@ -70,6 +70,7 @@ const COURSE_REGISTRY = {
     { label: "TEAU 2640 — Electrical II",      path: "../../data/programs/Automotive Technology/TEAU 2640.js" },
     { label: "TEAU 2840 — Engine Performance II",      path: "../../data/programs/Automotive Technology/TEAU 2840.js" },
     { label: "TEAU 1740 — Heating and Air Conditioning",      path: "../../data/programs/Automotive Technology/TEAU 1740.js" },
+    { label: "TEAU 1500 — Brakes",      path: "../../data/programs/Automotive Technology/TEAU 1500.js" },
   ]),
 };
 
