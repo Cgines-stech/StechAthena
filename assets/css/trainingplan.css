@@ -242,3 +242,33 @@ button:hover { filter: brightness(0.97); }
     border-top-color: #ccc;
   }
 }
+
+/* --- Print pagination fixes --- */
+@media print {
+  /* keep the program title with whatever follows it */
+  .program-title {
+    break-after: avoid;
+    page-break-after: avoid;        /* legacy */
+  }
+
+  /* allow ONLY the summary table to split across pages */
+  #summarySection,
+  #summarySection .data-table,
+  #summarySection thead,
+  #summarySection tbody,
+  #summarySection tr {
+    break-inside: auto !important;
+    page-break-inside: auto !important;  /* legacy */
+  }
+
+  /* keep the other tables whole (books/tools/certs/other) */
+  .item-grid .subsection,
+  .item-grid .subsection .data-table {
+    break-inside: avoid;
+    page-break-inside: avoid;            /* legacy */
+  }
+
+  /* ensure header repeats on new page breaks (some browsers need this) */
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+}
