@@ -344,13 +344,17 @@ const electiveCreditsNeeded = Math.max(0, requiredCreditsNum - coreCreditsCounte
 if (hasAnyElectives && electiveCreditsNeeded > 0 && firstElectiveRow) {
   const noteRow = document.createElement("tr");
   noteRow.className = "elective-disclaimer";
+
+  const colCount = summaryHead.querySelectorAll("th").length || 10;
+
   noteRow.innerHTML = `
-    <td colspan="10">
+    <td colspan="${colCount}">
       <em>Must select <strong>${electiveCreditsNeeded}</strong> credit hour(s) from the courses below.</em>
     </td>
   `;
   summaryBody.insertBefore(noteRow, firstElectiveRow);
 }
+
 
   // Total row (no "Other")
 const totalRow = document.createElement("tr");

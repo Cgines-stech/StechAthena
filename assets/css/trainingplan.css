@@ -226,19 +226,14 @@ button:hover { filter: brightness(0.97); }
 }
 
 .elective-disclaimer td {
-  text-align: left !important;   /* ✅ force left alignment */
+  text-align: left !important;
+  white-space: nowrap;         /* keep it on one line */
+  word-break: keep-all;        /* don't break words */
   padding-top: .4rem;
   padding-bottom: .4rem;
   border-top: 2px solid #ddd;
   background: #f8fbff;
   font-size: .9em;
-}
-
-.elective-disclaimer em,
-.elective-disclaimer strong {
-  text-align: left !important;
-  display: inline-block;
-  width: 100%;
 }
 
 @media print {
