@@ -11,7 +11,7 @@ const TEAU1400 = [
     courseNumber: "TEAU 1400",
     courseName: "Suspension and Steering",
     courseCredits: 4,
-    statewideAlignment: "Non-Aligned",
+    statewideAlignment: "Aligned",
     courseClockHours: 120,
     courseTuition: 380.00,
     courseFee: 40.00,
