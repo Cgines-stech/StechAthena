@@ -53,6 +53,7 @@ const COURSE_REGISTRY = {
     { label: "TEAM 1040 — Industrial Mechanics",      path: "../../data/programs/Automation Technology/TEAM 1040.js" },
     { label: "TEAM 1050 — Electrical Systems",      path: "../../data/programs/Automation Technology/TEAM 1050.js" },
     { label: "TEAM 1060 — Motor Controls",      path: "../../data/programs/Automation Technology/TEAM 1060.js" },
+    { label: "TEAM 1070 — Programmable Logic Controllers",      path: "../../data/programs/Automation Technology/TEAM 1070.js" },
   ]),
 };
 
