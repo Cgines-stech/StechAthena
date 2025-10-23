@@ -224,3 +224,14 @@ button:hover { filter: brightness(0.97); }
      bulletproof keep-together behavior. */
   /* .item-grid { display: block; } */
 }
+
+.elective-disclaimer td {
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+  border-top: 2px solid #ddd;   /* creates a clear divider */
+  background: #f8fbff;          /* very light hint; remove if you prefer */
+  font-size: .9em;
+}
+@media print {
+  .elective-disclaimer td { background: none; border-top-color: #ccc; }
+}

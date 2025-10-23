@@ -265,6 +265,16 @@ summaryBody.appendChild(gradRow);
   const itemsCerts = [];
   const itemsOther = [];
 
+// figure out program required credits as a number
+const requiredCreditsNum = Number(creditsRequired) || 0;
+
+// we'll track how many *core* credits are already in the plan totals
+let coreCreditsCounted = 0;
+
+// we’ll remember where the first elective row is so we can insert the disclaimer above it
+let firstElectiveRow = null;
+let hasAnyElectives = false;
+
   for (const course of allCourses) {
   const books   = sum(course.courseBooks);
   const tools   = sum(course.courseTools);
@@ -288,6 +298,15 @@ summaryBody.appendChild(gradRow);
     totalCerts   += certs;
     totalGrand   += rowTotal;   // (you already seeded totalGrand with the $25 grad fee)
   }
+// count core credits that are included in totals
+if (include && !course.isElective) {
+  coreCreditsCounted += Number(course.courseCredits) || 0;
+}
+
+// remember the first elective row we render
+if (course.isElective) {
+  hasAnyElectives = true;
+}
 
   // always collect for detail tables
   itemsBooks.push(...normalizeItemsWithCourse(course.courseBooks, course.courseNumber));
@@ -311,9 +330,27 @@ summaryBody.appendChild(gradRow);
     <td>${money(certs)}</td>
     <td><strong>${money(rowTotal)}</strong></td>
   `;
+  if (course.isElective && !firstElectiveRow) {
+  firstElectiveRow = tr;
+}
+
   summaryBody.appendChild(tr);
 }
 
+// X = required credits - core credits counted (clamped at 0)
+const electiveCreditsNeeded = Math.max(0, requiredCreditsNum - coreCreditsCounted);
+
+// Only show if there are electives AND X > 0
+if (hasAnyElectives && electiveCreditsNeeded > 0 && firstElectiveRow) {
+  const noteRow = document.createElement("tr");
+  noteRow.className = "elective-disclaimer";
+  noteRow.innerHTML = `
+    <td colspan="10">
+      <em>Must select <strong>${electiveCreditsNeeded}</strong> credit hour(s) from the courses below.</em>
+    </td>
+  `;
+  summaryBody.insertBefore(noteRow, firstElectiveRow);
+}
 
   // Total row (no "Other")
 const totalRow = document.createElement("tr");
