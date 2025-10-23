@@ -68,6 +68,7 @@ const COURSE_REGISTRY = {
     { label: "TEAU 1800 — Engine Performance I",      path: "../../data/programs/Automotive Technology/TEAU 1800.js" },
     { label: "TEAU 1055 — Math for Automotive Technicians",      path: "../../data/programs/Automotive Technology/TEAU 1055.js" },
     { label: "TEAU 2640 — Electrical II",      path: "../../data/programs/Automotive Technology/TEAU 2640.js" },
+    { label: "TEAU 2840 — Engine Performance II",      path: "../../data/programs/Automotive Technology/TEAU 2840.js" },
   ]),
 };
 
