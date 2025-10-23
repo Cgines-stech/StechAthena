@@ -23,6 +23,11 @@ const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Automation Technology/TEAM 1070.js",
     "../../data/programs/Automation Technology/TEAM 1030.js",
     "../../data/programs/Automation Technology/TEAM 1020.js",
+    "../../data/programs/Automation Technology/TEAM 1080.js",
+    "../../data/programs/Automation Technology/TEAM 2005.js",
+    "../../data/programs/Automation Technology/TEAM 2210.js",
+    "../../data/programs/Automation Technology/TEAM 1510.js",
+    "../../data/programs/Automation Technology/TEAM 1640.js",
   ],
 };
 

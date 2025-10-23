@@ -56,6 +56,11 @@ const COURSE_REGISTRY = {
     { label: "TEAM 1070 — Programmable Logic Controllers",      path: "../../data/programs/Automation Technology/TEAM 1070.js" },
     { label: "TEAM 1030 — Hydraulics",      path: "../../data/programs/Automation Technology/TEAM 1030.js" },
     { label: "TEAM 1020 — Pneumatics",      path: "../../data/programs/Automation Technology/TEAM 1020.js" },
+    { label: "TEAM 1080 — Applied System Diagnostics",      path: "../../data/programs/Automation Technology/TEAM 1080.js" },
+    { label: "TEAM 2005 — Programmable Logic Controllers II",      path: "../../data/programs/Automation Technology/TEAM 2005.js" },
+    { label: "TEAM 2210 — Fabrication and Repair",      path: "../../data/programs/Automation Technology/TEAM 2210.js" },
+    { label: "TEAM 1510 — Process Control Components and Systems",      path: "../../data/programs/Automation Technology/TEAM 1510.js" },
+    { label: "TEAM 1640 — Electrical Systems II",      path: "../../data/programs/Automation Technology/TEAM 1640.js" },
   ]),
 };
 
