@@ -42,6 +42,8 @@ const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Automotive Technology/TEAU 1500.js",
     "../../data/programs/Automotive Technology/TEAU 1340.js",
     "../../data/programs/Automotive Technology/TEAU 1400.js",
+    "../../data/programs/Automotive Technology/TEAU 1240.js",
+    "../../data/programs/Automotive Technology/TEAU 1140.js",
   ],
 };
 

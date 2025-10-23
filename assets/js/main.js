@@ -73,6 +73,8 @@ const COURSE_REGISTRY = {
     { label: "TEAU 1500 — Brakes",      path: "../../data/programs/Automotive Technology/TEAU 1500.js" },
     { label: "TEAU 1340 — Manual Drive Trains and Axles",      path: "../../data/programs/Automotive Technology/TEAU 1340.js" },
     { label: "TEAU 1400 — Suspension and Steering",      path: "../../data/programs/Automotive Technology/TEAU 1400.js" },
+    { label: "TEAU 1240 — Automatic Transmissions and Transaxles",      path: "../../data/programs/Automotive Technology/TEAU 1240.js" },
+    { label: "TEAU 1140 — Engine Repair",      path: "../../data/programs/Automotive Technology/TEAU 1140.js" },
   ]),
 };
 
