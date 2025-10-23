@@ -72,6 +72,7 @@ const COURSE_REGISTRY = {
     { label: "TEAU 1740 — Heating and Air Conditioning",      path: "../../data/programs/Automotive Technology/TEAU 1740.js" },
     { label: "TEAU 1500 — Brakes",      path: "../../data/programs/Automotive Technology/TEAU 1500.js" },
     { label: "TEAU 1340 — Manual Drive Trains and Axles",      path: "../../data/programs/Automotive Technology/TEAU 1340.js" },
+    { label: "TEAU 1400 — Suspension and Steering",      path: "../../data/programs/Automotive Technology/TEAU 1400.js" },
   ]),
 };
 
