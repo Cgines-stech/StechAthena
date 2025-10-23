@@ -65,6 +65,7 @@ const COURSE_REGISTRY = {
   "Automotive Technology": async () => ([
     { label: "TEAU 1050 — Workshop Practices and Safety",      path: "../../data/programs/Automotive Technology/TEAU 1050.js" },
     { label: "TEAU 1600 — Electrical I",      path: "../../data/programs/Automotive Technology/TEAU 1600.js" },
+    { label: "TEAU 1800 — Engine Performance I",      path: "../../data/programs/Automotive Technology/TEAU 1800.js" },
   ]),
 };
 
