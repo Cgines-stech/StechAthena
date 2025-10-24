@@ -315,26 +315,66 @@ function renderSyllabus(c) {
   }
 
   // Policies — course overrides if non-placeholder; else program default
-  policiesContainer.innerHTML = "";
-  const pol = Array.isArray(c.course_Policies) ? c.course_Policies : [];
-  const courseHasRealPolicies = pol.length > 0 && !isPlaceholderArray(pol);
-  const policies = courseHasRealPolicies ? pol : currentProgramPolicies;
-
   (policies || []).forEach(p => {
-    if (p && typeof p === "object" && p.title && Array.isArray(p.content)) {
+  // Grade scale block
+  if (p && (p.type === "gradeScale" || Array.isArray(p.scale))) {
+    const wrap = document.createElement("div");
+    if (p.title) {
       const h = document.createElement("h4");
       h.textContent = p.title;
-      const ul = document.createElement("ul");
-      ul.className = "bullets";
-      p.content.forEach(line => {
-        const li = document.createElement("li");
-        li.textContent = line;
-        ul.appendChild(li);
-      });
-      policiesContainer.appendChild(h);
-      policiesContainer.appendChild(ul);
+      wrap.appendChild(h);
     }
-  });
+    if (p.description) {
+      const desc = document.createElement("p");
+      desc.className = "muted";
+      desc.textContent = p.description;
+      wrap.appendChild(desc);
+    }
+
+    // 3x4 borderless table
+    const tbl = document.createElement("table");
+    tbl.className = "grade-table"; // your CSS already handles this
+    const rows = 3, cols = 4;
+    const total = rows * cols;
+    const items = p.scale.slice(0, total); // expect 12
+    for (let r = 0; r < rows; r++) {
+      const tr = document.createElement("tr");
+      for (let c = 0; c < cols; c++) {
+        const idx = r * cols + c;
+        const cell = document.createElement("td");
+        const entry = items[idx];
+        if (entry) {
+          cell.innerHTML = `
+            <span class="grade">
+              <span class="grade-letter">${entry.letter ?? ""}</span>
+              <span class="grade-range">${entry.range ?? ""}</span>
+            </span>`;
+        }
+        tr.appendChild(cell);
+      }
+      tbl.appendChild(tr);
+    }
+    wrap.appendChild(tbl);
+    policiesContainer.appendChild(wrap);
+    return; // continue to next policy
+  }
+
+  // Standard policy blocks
+  if (p && typeof p === "object" && p.title && Array.isArray(p.content)) {
+    const h = document.createElement("h4");
+    h.textContent = p.title;
+    const ul = document.createElement("ul");
+    ul.className = "bullets";
+    p.content.forEach(line => {
+      const li = document.createElement("li");
+      li.textContent = line;
+      ul.appendChild(li);
+    });
+    policiesContainer.appendChild(h);
+    policiesContainer.appendChild(ul);
+  }
+});
+
 }
 
 printBtn.addEventListener("click", () => window.print());
