@@ -1,4 +1,4 @@
-// gradeScale.js
+// data/gradeScale.js
 
 const gradeScale = [
   {
