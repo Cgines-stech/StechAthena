@@ -46,6 +46,10 @@ const TEAU1740 = [
     courseBooks: [
       {}
     ],
+
+    syllabiBooks: [
+      {}
+    ],
     
     courseTools: [
       {},

@@ -52,6 +52,10 @@ const TEEM1202 = [
         note: ""
       }
     ],
+
+    syllabiBooks: [
+      {}
+    ],
     
     courseTools: [
       { name: "BP cuff/stethoscope", price: 33.0, note: "Available in Stech Bookstore" },
@@ -92,8 +96,7 @@ const TEEM1202 = [
     ],
 
     instructorContactInformation: [
-        "Adam Scott — ascott@stech.edu",
-        "Christopher Crispin — ccrispin@stech.edu"
+        {}
     ],
 
     course_Policies: [

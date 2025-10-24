@@ -40,6 +40,10 @@ const TEAM2005 = [
     courseBooks: [
       {}
     ],
+
+    syllabiBooks: [
+      {}
+    ],
     
     courseTools: [
       {}
@@ -67,9 +71,7 @@ const TEAM2005 = [
     ],
 
     instructorContactInformation: [
-        "Cody Post — cpost@stech.edu",
-        "Tyson Schurtz — tschurtz@stech.edu",
-        "Naomi Cook — ncook@stech.edu"
+        {}
     ],
 
     course_Policies: [

@@ -46,6 +46,10 @@ const TEAU1050 = [
         note: "Cengage Unlimited Subscription"
       }
     ],
+
+    syllabiBooks: [
+      {}
+    ],
     
     courseTools: [
       {}

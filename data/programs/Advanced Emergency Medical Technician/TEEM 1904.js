@@ -38,6 +38,10 @@ const TEEM1904 = [
     courseBooks: [
       {}
     ],
+
+    syllabiBooks: [
+      {}
+    ],
     
     courseTools: [
       {}
@@ -65,8 +69,7 @@ const TEEM1904 = [
     ],
 
     instructorContactInformation: [
-        "Adam Scott — ascott@stech.edu",
-        "Christopher Crispin — ccrispin@stech.edu"
+        {}
     ],
 
     course_Policies: [

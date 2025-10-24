@@ -33,6 +33,10 @@ const TEAU2911 = [
     courseBooks: [
       {}
     ],
+
+    syllabiBooks: [
+      {}
+    ],
     
     courseTools: [
       {},

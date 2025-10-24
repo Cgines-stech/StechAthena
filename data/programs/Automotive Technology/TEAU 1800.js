@@ -46,6 +46,10 @@ const TEAU1800 = [
     courseBooks: [
       {}
     ],
+
+    syllabiBooks: [
+      {}
+    ],
     
     courseTools: [
       { name: "Basic Technician Tool Kit", price: 1900.0, note: "May purchase a kit from bookstore or purchase tools independently." },

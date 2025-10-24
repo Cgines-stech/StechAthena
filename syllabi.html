@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Syllabi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/coursecatalog.css" />
+</head>
+<body>
+  <header class="page-header no-print">
+    <h1>Course Syllabi</h1>
+    <div class="controls">
+      <label class="muted" for="programSelect">Program</label>
+      <select id="programSelect"></select>
+
+      <label class="muted" for="courseSelect">Course</label>
+      <select id="courseSelect"></select>
+
+      <button id="printBtn" type="button">Print / Save PDF</button>
+      <a class="btn" href="index.html">← Back</a>
+    </div>
+    <p class="hint muted">Choose a program and course to generate a print-ready syllabus.</p>
+  </header>
+
+  <main class="card page" id="syllabus" hidden>
+    <h2 id="syllabusTitle"></h2>
+    <p id="syllabusMeta" class="muted"></p>
+
+    <section>
+      <h3>Description</h3>
+      <p id="courseDescription"></p>
+    </section>
+
+    <section>
+      <h3>Course Objectives</h3>
+      <ul id="courseObjectives" class="bullets"></ul>
+    </section>
+
+    <section id="instructorsSection">
+      <h3>Instructors</h3>
+      <ul id="instructorsList" class="bullets"></ul>
+    </section>
+
+    <section id="materialsSection">
+      <h3>Required Materials</h3>
+      <ul id="materialsList" class="bullets"></ul>
+    </section>
+
+    <section id="policiesSection">
+      <h3>Policies</h3>
+      <div id="policiesContainer"></div>
+    </section>
+  </main>
+
+  <script type="module" src="assets/js/syllabi.js"></script>
+</body>
+</html>
