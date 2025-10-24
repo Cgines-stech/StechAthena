@@ -61,23 +61,11 @@ const TEAU1400 = [
     ],
 
     courseClassroomHours: [
-        {
-          startDate: "",
-          endDate: "",
-          Monday: ["8:00 AM - 12:00 AM", "1:00 PM - 5:00 PM"],
-          Tuesday: ["8:00 AM - 12:00 AM", "1:00 PM - 5:00 PM"],
-          Wednesday: ["8:00 AM - 12:00 AM", "1:00 PM - 5:00 PM"],
-          Thursday: ["8:00 AM - 12:00 AM", "1:00 PM - 5:00 PM"],
-          Friday: ["8:00 AM - 12:00 AM"],
-          Saturday: "",
-        }
+      {}
     ],
 
     instructorContactInformation: [
-        "Cody Dawson — cdawson@stech.edu",
-        "Shad Esplin — sesplin@stech.edu",
-        "Dallin Robinson — drobinson@stech.edu",
-        "McKael Stapel — mstapel@stech.edu",
+      {}
     ],
 
     course_Policies: [

@@ -51,6 +51,7 @@ const PROGRAM_COURSE_REGISTRY = {
   ],
 };
 
+// NEW: program-level fallbacks
 const PROGRAM_INSTRUCTORS_REGISTRY = {
   "Advanced Emergency Medical Technician":
     "../../data/programs/Advanced Emergency Medical Technician/instructors.js",
@@ -58,6 +59,22 @@ const PROGRAM_INSTRUCTORS_REGISTRY = {
     "../../data/programs/Automation Technology/instructors.js",
   "Automotive Technology":
     "../../data/programs/Automotive Technology/instructors.js",
+};
+const PROGRAM_HOURS_REGISTRY = {
+  "Advanced Emergency Medical Technician":
+    "../../data/programs/Advanced Emergency Medical Technician/classRoomDates.js",
+  "Automation Technology":
+    "../../data/programs/Automation Technology/classRoomDates.js",
+  "Automotive Technology":
+    "../../data/programs/Automotive Technology/classRoomDates.js",
+};
+const PROGRAM_POLICIES_REGISTRY = {
+  "Advanced Emergency Medical Technician":
+    "../../data/programs/Advanced Emergency Medical Technician/programPolicies.js",
+  "Automation Technology":
+    "../../data/programs/Automation Technology/programPolicies.js",
+  "Automotive Technology":
+    "../../data/programs/Automotive Technology/programPolicies.js",
 };
 
 /** DOM */
@@ -76,7 +93,9 @@ const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
 const policiesContainer = document.getElementById("policiesContainer");
 
-/** Helpers */
+// NEW: hours container
+const hoursContainer    = document.getElementById("hoursContainer");
+
 const decodeDefaultArray = (mod) => {
   const candidates = [mod?.default, mod?.program, mod?.programs, mod?.course, mod?.courses];
   const data = candidates.find(Boolean);
@@ -98,6 +117,23 @@ const decodeInstructors = (mod) => {
   });
 };
 
+// Treat [ {} ] or [{} , {}] (empty objects) as placeholder/empty
+const isPlaceholderArray = (arr) =>
+  Array.isArray(arr) &&
+  arr.length > 0 &&
+  arr.every(x => x && typeof x === "object" && Object.keys(x).length === 0);
+
+// general loader helper
+async function safeImport(path) {
+  if (!path) return null;
+  try {
+    return await import(/* @vite-ignore */ encodeURI(path));
+  } catch (e) {
+    console.error("Failed to import:", path, e);
+    return null;
+  }
+}
+
 function populatePrograms() {
   programSelect.innerHTML = `<option value="">Select a program…</option>`;
   Object.keys(PROGRAM_FILE_REGISTRY).forEach(name => {
@@ -109,40 +145,39 @@ function populatePrograms() {
 }
 populatePrograms();
 
-/** Data cache per selection */
+/** Data cache */
+let currentProgramName = "";
 let currentProgramCourses = [];
 let currentProgramInstructors = [];
+let currentProgramHours = [];
+let currentProgramPolicies = [];
 
 programSelect.addEventListener("change", async () => {
   syllabus.hidden = true;
+  currentProgramName = programSelect.value;
   courseSelect.innerHTML = `<option value="">Select a course…</option>`;
   currentProgramCourses = [];
   currentProgramInstructors = [];
+  currentProgramHours = [];
+  currentProgramPolicies = [];
 
-  const programName = programSelect.value;
-  if (!programName) return;
+  if (!currentProgramName) return;
 
   // load courses
-  const paths = PROGRAM_COURSE_REGISTRY[programName] || [];
-  for (const p of paths) {
-    try {
-      const mod = await import(/* @vite-ignore */ encodeURI(p));
-      currentProgramCourses = currentProgramCourses.concat(decodeDefaultArray(mod));
-    } catch (e) {
-      console.error("Failed to import course:", p, e);
-    }
+  for (const p of (PROGRAM_COURSE_REGISTRY[currentProgramName] || [])) {
+    const mod = await safeImport(p);
+    if (mod) currentProgramCourses = currentProgramCourses.concat(decodeDefaultArray(mod));
   }
 
-  // load program instructors
-  try {
-    const ipath = PROGRAM_INSTRUCTORS_REGISTRY[programName];
-    if (ipath) {
-      const imod = await import(/* @vite-ignore */ encodeURI(ipath));
-      currentProgramInstructors = decodeInstructors(imod);
-    }
-  } catch (e) {
-    console.error("Failed to import instructors:", e);
-  }
+  // load program-level fallbacks
+  const imod = await safeImport(PROGRAM_INSTRUCTORS_REGISTRY[currentProgramName]);
+  if (imod) currentProgramInstructors = decodeInstructors(imod);
+
+  const hmod = await safeImport(PROGRAM_HOURS_REGISTRY[currentProgramName]);
+  if (hmod) currentProgramHours = hmod.default || [];
+
+  const pmod = await safeImport(PROGRAM_POLICIES_REGISTRY[currentProgramName]);
+  if (pmod) currentProgramPolicies = pmod.default || [];
 
   // populate course dropdown
   currentProgramCourses.forEach(c => {
@@ -156,10 +191,7 @@ programSelect.addEventListener("change", async () => {
 courseSelect.addEventListener("change", () => {
   const num = courseSelect.value;
   const c = currentProgramCourses.find(x => x.courseNumber === num);
-  if (!c) {
-    syllabus.hidden = true;
-    return;
-  }
+  if (!c) { syllabus.hidden = true; return; }
   renderSyllabus(c);
   syllabus.hidden = false;
 });
@@ -183,12 +215,13 @@ function renderSyllabus(c) {
     courseObjectives.appendChild(li);
   });
 
-  // Instructors (course overrides program)
+  // Instructors — course overrides if non-placeholder; else program default
   instructorsList.innerHTML = "";
   const courseInstrRaw = Array.isArray(c.instructorContactInformation) ? c.instructorContactInformation : [];
-  const courseHasInstructors = courseInstrRaw.length > 0;
+  const courseHasRealInstructors =
+    courseInstrRaw.length > 0 && !isPlaceholderArray(courseInstrRaw);
 
-  const courseInstructors = courseHasInstructors
+  const useInstructors = courseHasRealInstructors
     ? courseInstrRaw.map(line => {
         if (typeof line === "string") return { display: line };
         const name  = line?.name || "";
@@ -199,8 +232,8 @@ function renderSyllabus(c) {
       })
     : currentProgramInstructors;
 
-  if (courseInstructors.length) {
-    courseInstructors.forEach(i => {
+  if (useInstructors.length) {
+    useInstructors.forEach(i => {
       const li = document.createElement("li");
       li.textContent = i.display || "";
       instructorsList.appendChild(li);
@@ -211,9 +244,51 @@ function renderSyllabus(c) {
     instructorsList.appendChild(li);
   }
 
-  // Materials (Syllabus-only books)
-  // Use `syllabusBooks` (new field) for items that should NOT affect the training plan.
-  // Each item can be a string or { title, author, isbn, edition, notes }
+  // Classroom Hours — course overrides if non-placeholder; else program default
+  hoursContainer.innerHTML = "";
+  const courseHoursRaw = Array.isArray(c.courseClassroomHours) ? c.courseClassroomHours : [];
+  const courseHasRealHours =
+    courseHoursRaw.length > 0 && !isPlaceholderArray(courseHoursRaw);
+
+  const hours = courseHasRealHours ? courseHoursRaw : currentProgramHours;
+
+  if (Array.isArray(hours) && hours.length) {
+    hours.forEach(h => {
+      const block = document.createElement("div");
+      const header = document.createElement("p");
+      const sd = h.startDate || "";
+      const ed = h.endDate || "";
+      header.innerHTML = `<strong>${sd && ed ? `${sd} – ${ed}` : (sd || ed || "Dates not specified")}</strong>`;
+      block.appendChild(header);
+
+      const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+      const dayList = document.createElement("ul");
+      dayList.className = "bullets";
+      let any = false;
+      days.forEach(d => {
+        const val = h[d];
+        if (val) {
+          any = true;
+          const li = document.createElement("li");
+          li.textContent = `${d}: ${val}`;
+          dayList.appendChild(li);
+        }
+      });
+      if (!any) {
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="muted">No weekly meeting times listed.</span>`;
+        dayList.appendChild(li);
+      }
+      block.appendChild(dayList);
+      hoursContainer.appendChild(block);
+    });
+  } else {
+    const p = document.createElement("p");
+    p.innerHTML = `<span class="muted">No classroom hours available.</span>`;
+    hoursContainer.appendChild(p);
+  }
+
+  // Materials — syllabus-only books
   materialsList.innerHTML = "";
   const mats = Array.isArray(c.syllabusBooks) ? c.syllabusBooks : [];
   if (mats.length) {
@@ -239,10 +314,13 @@ function renderSyllabus(c) {
     materialsList.appendChild(li);
   }
 
-  // Policies (reuse your existing course_Policies array)
+  // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";
-  const policies = Array.isArray(c.course_Policies) ? c.course_Policies : [];
-  policies.forEach(p => {
+  const pol = Array.isArray(c.course_Policies) ? c.course_Policies : [];
+  const courseHasRealPolicies = pol.length > 0 && !isPlaceholderArray(pol);
+  const policies = courseHasRealPolicies ? pol : currentProgramPolicies;
+
+  (policies || []).forEach(p => {
     if (p && typeof p === "object" && p.title && Array.isArray(p.content)) {
       const h = document.createElement("h4");
       h.textContent = p.title;
