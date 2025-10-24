@@ -54,7 +54,13 @@ const TEEM1202 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name:
+          "AEMT: Advanced Emergency Care and Transportation of the Sick and Injured Advantage Package Fourth Edition",
+        price: 390.0,
+        isbn: "9781284228144",
+        note: ""
+      }
     ],
     
     courseTools: [
