@@ -11,7 +11,7 @@ export default [
             "High School Power School Grades: Quarter student grades will be determined by student progress percentage. Faculty will use the higher percentage of either 1) quarter progress, or 2) cumulative progress for the current training plan year."
         ]   
         },
-        gradeScale,
+        
         {
         content2: [
             "Course Policies: Expected Classroom/Campus Behaviors: Students are expected to follow STECH and classroom rules and policies. Appropriate dress is to be worn each day which consists of the EMS uniform. Keep the classroom clean and neat. Clean and put away all equipment and supplies, place chairs in their proper position, counter tops, tables, pick up trash each day and vacuum as needed. All use of illegal drugs, abuse of prescription and/or OTC medication, use of tobacco and alcohol on campus is prohibited. Any student arriving at school under the influence may be disciplined in the following ways: dismissed from the course, not recommended for testing, suspended from STECH and law enforcement may be notified. Inappropriate language, disruptive behavior, lying, cheating, bullying, stalking, threats and/or acts of violence toward faculty and/or student/s may result in involving law enforcement, dismissal from the course and the student will not be recommended for testing. Rules are subject to change without notice",
