@@ -1,4 +1,4 @@
-// trainingplan.js
+// costSheet.js
 import { PROGRAMS } from "../../data/programs.js";
 import { money, sum } from "../../data/utils/helpers.js";
 
