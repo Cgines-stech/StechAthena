@@ -38,6 +38,9 @@ const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Automotive Technology/TEAU 2910.js",
     "../../data/programs/Automotive Technology/TEAU 2911.js",
     "../../data/programs/Automotive Technology/TEAU 2912.js",
+    "../../data/programs/Automotive Technology/TEAU 2913.js",
+    "../../data/programs/Automotive Technology/TEAU 2914.js",
+    "../../data/programs/Automotive Technology/TEAU 2915.js",
   ],
 };
 
