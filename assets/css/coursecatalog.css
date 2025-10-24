@@ -137,3 +137,29 @@ h2 + p.muted{ margin-top:-.4rem; }
 #coursesPage h2 {
   page-break-after: avoid;
 }
+
+/* Back button */
+.back-btn {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 0.5rem;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.back-btn:hover {
+  background: #f0faff;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.back-btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(22,188,238,0.4);
+}
+@media print {
+  .back-btn { display: none !important; }
+}
