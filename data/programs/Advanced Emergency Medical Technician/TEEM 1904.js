@@ -31,10 +31,10 @@ const TEEM1904 = [
     ],
 
     courseOutline: [
-      "AEMT Clinical Practice 1",
-      "AEMT Clinical Practice 2",
-      "AEMT Clinical Practice 3",
-      "AEMT Clinical Practice 4"
+      { title: "AEMT Clinical Practice 1", hours: 12 },
+      { title: "AEMT Clinical Practice 2", hours: 12 },
+      { title: "AEMT Clinical Practice 3", hours: 12 },
+      { title: "AEMT Clinical Practice 4", hours: 12 },
     ],
 
     courseBooks: [

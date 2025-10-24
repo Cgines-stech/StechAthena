@@ -28,3 +28,22 @@ export function courseTotalsNoOther(course) {
   const grand = tuitionAndFees + books + tools + certs;
   return { tuitionAndFees, books, tools, certs, grand };
 }
+
+/** 
+ * Safely extract text titles from a course's outline (ignore hours metadata).
+ */
+export function outlineTitlesOnly(course) {
+  return (course?.courseOutline || [])
+    .map(x => typeof x === "string" ? x : (x?.title || ""))
+    .filter(Boolean);
+}
+
+/** 
+ * Calculate total module hours from mixed outline entries.
+ */
+export function outlineHoursTotal(course) {
+  return (course?.courseOutline || []).reduce((sum, x) => {
+    const h = (typeof x === "object" && x?.hours) ? Number(x.hours) : 0;
+    return sum + (isNaN(h) ? 0 : h);
+  }, 0);
+}
