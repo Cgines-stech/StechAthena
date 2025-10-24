@@ -82,7 +82,12 @@ const TEEM1904 = [
             ]
             
         },
-        gradeScale,
+        {
+          type: "gradeScale",
+          title: GS?.title || "Grading Scale",
+          description: GS?.description || "",
+          scale: GS?.scale || []   // expecting 12 items with { letter, range }
+        },
     ],
 
     courseAssignmentsandAsssessments: [
