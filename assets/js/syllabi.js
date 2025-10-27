@@ -343,31 +343,47 @@ function renderSyllabus(c) {
     </a>`;
   hoursContainer.appendChild(scheduleNote);
 
-  // Materials — syllabus-only books
-  materialsList.innerHTML = "";
-  const mats = Array.isArray(c.syllabusBooks) ? c.syllabusBooks : [];
-  if (mats.length) {
-    mats.forEach(m => {
-      if (typeof m === "string") {
-        const li = document.createElement("li");
-        li.textContent = m;
-        materialsList.appendChild(li);
-      } else {
-        const li = document.createElement("li");
-        const title = m.title || m.name || "";
-        const author = m.author ? ` by ${m.author}` : "";
-        const edition = m.edition ? `, ${m.edition}` : "";
-        const isbn = m.isbn ? ` (ISBN: ${m.isbn})` : "";
-        const notes = m.notes ? ` — ${m.notes}` : "";
-        li.textContent = `${title}${author}${edition}${isbn}${notes}`;
-        materialsList.appendChild(li);
-      }
-    });
-  } else {
+// Materials — syllabus-only books
+materialsList.innerHTML = "";
+
+// Accept both spellings; prefer syllabiBooks if present
+const mats = Array.isArray(c.syllabiBooks)
+  ? c.syllabiBooks
+  : (Array.isArray(c.syllabusBooks) ? c.syllabusBooks : []);
+
+if (mats.length) {
+  mats.forEach(m => {
+    // support strings or objects
+    if (typeof m === "string") {
+      const li = document.createElement("li");
+      li.textContent = m;
+      materialsList.appendChild(li);
+      return;
+    }
+
+    const title   = m.title || m.name || "";
+    const author  = m.author ? ` by ${m.author}` : "";
+    const edition = m.edition ? `, ${m.edition}` : "";
+    const isbn    = m.isbn ? ` (ISBN: ${m.isbn})` : "";
+    const price   = (typeof m.price === "number")
+      ? ` — $${m.price.toFixed(2)}`
+      : (m.price ? ` — ${m.price}` : "");
+    const noteStr = m.notes ?? m.note; // accept both 'notes' and 'note'
+    const notes   = noteStr ? ` — ${noteStr}` : "";
+
+    const text = [title, author, edition, isbn, price, notes]
+      .filter(Boolean)
+      .join("");
+
     const li = document.createElement("li");
-    li.innerHTML = `<span class="muted">No additional materials required.</span>`;
+    li.textContent = text || "Untitled material";
     materialsList.appendChild(li);
-  }
+  });
+} else {
+  const li = document.createElement("li");
+  li.innerHTML = `<span class="muted">No additional materials required.</span>`;
+  materialsList.appendChild(li);
+}
 
   // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";
