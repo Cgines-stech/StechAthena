@@ -596,5 +596,3 @@ function renderSyllabus(c) {
     });
   }
 }
-
-printBtn.addEventListener("click", () => window.print());

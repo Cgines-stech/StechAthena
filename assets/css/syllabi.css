@@ -215,8 +215,8 @@ body{
   break-before: page;
 }
 .aa-chunk.page:last-of-type{
-  page-break-after: auto;
-  break-after: auto;
+  page-break-after: always;
+  break-after: page;
 }
 
 /* Title (we only render it on the first page via JS) */
