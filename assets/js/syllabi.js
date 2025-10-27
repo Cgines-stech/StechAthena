@@ -85,7 +85,7 @@ const courseSelect   = document.getElementById("courseSelect");
 const printBtn       = document.getElementById("printBtn");
 
 const syllabus       = document.getElementById("syllabus");
-const syllabusTitle  = document.getElementById("syllabusTitle");
+const printHeaderTitle = document.getElementById("printHeaderTitle");
 const syllabusMeta   = document.getElementById("syllabusMeta");
 
 const courseDescription = document.getElementById("courseDescription");
@@ -215,8 +215,16 @@ function renderSyllabus(c) {
   // Page title for better PDF filenames
   document.title = c?.courseNumber ? c.courseNumber : "Syllabus";
 
-  // Title & meta
-  syllabusTitle.textContent = `${c.courseNumber || ""} ${c.courseName ? "— " + c.courseName : ""}`;
+  // Put the course title into the header stripe
+  if (printHeaderTitle) {
+    const label = [
+      c.courseNumber || "",
+      c.courseName ? " — " + c.courseName : ""
+    ].join("");
+    printHeaderTitle.textContent = label || "Course Syllabus";
+  }
+
+  // Meta under the (now-removed) H2 stays:
   syllabusMeta.textContent = [
     c.courseCredits != null ? `${c.courseCredits} Credit${Number(c.courseCredits) === 1 ? "" : "s"}` : "",
     c.instructionalType ? `Type: ${c.instructionalType}` : "",
