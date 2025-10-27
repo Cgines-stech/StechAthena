@@ -371,7 +371,7 @@ if (mats.length) {
     const noteStr = m.notes ?? m.note; // accept both 'notes' and 'note'
     const notes   = noteStr ? ` — ${noteStr}` : "";
 
-    const text = [title, author, edition, isbn, price, notes]
+    const text = [title, author, isbn]
       .filter(Boolean)
       .join("");
 

@@ -55,8 +55,9 @@ const TEEM1202 = [
 
     syllabiBooks: [
       {
-        name:
+        title:
           "AEMT: Advanced Emergency Care and Transportation of the Sick and Injured Advantage Package Fourth Edition",
+        author: "American Academy of Orthopaedic Surgeons (AAOS)",
         price: 390.0,
         isbn: "9781284228144",
         note: ""
