@@ -94,6 +94,8 @@ const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
 const policiesContainer = document.getElementById("policiesContainer");
 
+const assignmentsList    = document.getElementById("assignmentsList");
+
 // NEW: outline list element
 const courseOutlineEl   = document.getElementById("courseOutline");
 
@@ -333,6 +335,27 @@ const outlineTitles = outlineTitlesOnly(c);
     li.innerHTML = `<span class="muted">No additional materials required.</span>`;
     materialsList.appendChild(li);
   }
+
+// --- Assignments & Assessments ---
+assignmentsList.innerHTML = "";
+
+// Support several possible field names safely:
+const aa =
+  Array.isArray(c.courseAssignmentsandAsssessments) ? c.courseAssignmentsandAsssessments : // (your sample TEEM1904)
+  Array.isArray(c.courseAssignmentsAndAssessments) ? c.courseAssignmentsAndAssessments :
+  Array.isArray(c.assignmentsAndAssessments)       ? c.assignmentsAndAssessments :
+  [];
+
+const aaItems = aa.length ? aa : ["No assignments provided."];
+
+aaItems.forEach(item => {
+  const li = document.createElement("li");
+  li.innerHTML = (item === "No assignments provided.")
+    ? `<span class="muted">${item}</span>`
+    : (typeof item === "string" ? item : (item?.title || JSON.stringify(item)));
+  assignmentsList.appendChild(li);
+});
+
 
   // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";
