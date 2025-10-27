@@ -93,6 +93,14 @@ body{
 
 .no-print{ display: block; }
 
+/* Make sure the header bar & pill print with color */
+.full-width-container,
+.centered-text-box {
+  /* Helps Chrome/Edge honor backgrounds in print */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
 /* ---------- PRINT (PDF-focused) ---------- */
 @media print {
 
@@ -123,6 +131,29 @@ body{
 
   .page-break{ page-break-before: always; }
   .second-page{ margin-top:20px; padding-top:10px; }
+
+.full-width-container {
+    background: linear-gradient(
+      to bottom,
+      #007cbc 48%,
+      #ffffff 48%,
+      #ffffff 52%,
+      #007cbc 52%,
+      #007cbc 100%
+    ) !important;
+  }
+
+  .centered-text-box {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #007cbc !important;
+  }
+
+  /* (Optional) lightly nudge all elements to keep color where possible */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
   /* Titles */
   h1{
