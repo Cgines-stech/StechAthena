@@ -225,22 +225,12 @@ body{
 }
 
 /* Two-column list */
-.aa-list{
-  column-count: 2;
-  column-gap: 30px;
-  column-fill: auto;
-  margin-top: 4px;
-}
+
 .aa-list li{
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
   margin-bottom: 0;
   padding-top: 0;
-}
-
-/* During pagination measuring we force single column */
-.aa-list.no-columns{
-  column-count: 1 !important;
 }
 
 /* Disclaimer (appended only to the last A&A page in JS) */
@@ -252,7 +242,44 @@ body{
   padding-top: 6px;
 }
 
+
+
+/* ---------- Assignments & Assessments (paginated) ---------- */
+.aa-list{
+  display: block;
+  width: 100%;
+  column-count: 2 !important;
+  column-gap: 30px !important;
+  column-fill: auto;
+  /* vendor prefixes for print engines */
+  -webkit-column-count: 2 !important;
+  -webkit-column-gap: 30px !important;
+  -webkit-column-fill: auto;
+  -moz-column-count: 2 !important;
+  -moz-column-gap: 30px !important;
+}
+
+/* During pagination measuring we force single column */
+.aa-list.no-columns{
+  column-count: 1 !important;
+  -webkit-column-count: 1 !important;
+  -moz-column-count: 1 !important;
+}
+
 @media print{
+  .aa-list{
+    display: block;
+    width: 100%;
+    column-count: 2 !important;
+    column-gap: 30px !important;
+    column-fill: auto;
+    -webkit-column-count: 2 !important;
+    -webkit-column-gap: 30px !important;
+    -webkit-column-fill: auto;
+    -moz-column-count: 2 !important;
+    -moz-column-gap: 30px !important;
+  }
+
   .aa-chunk.page{ padding: 20px; }
   .aa-title{
     font-family: "Roboto Condensed", sans-serif !important;
@@ -262,12 +289,7 @@ body{
     break-after: avoid;
     page-break-after: avoid;
   }
-  .aa-list{
-    column-count: 2;
-    column-gap: 30px;
-    column-fill: auto;
-    margin-bottom: 8px;
-  }
+
   .aa-disclaimer{
     font-size: 12px !important;
     color: #000 !important;
