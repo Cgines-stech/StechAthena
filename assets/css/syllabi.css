@@ -257,6 +257,7 @@ body{
   -webkit-column-fill: auto;
   -moz-column-count: 2 !important;
   -moz-column-gap: 30px !important;
+  padding-left: 14px; /* was 19px via .bullets */
 }
 
 /* During pagination measuring we force single column */
@@ -271,16 +272,19 @@ body{
     display: block;
     width: 100%;
     column-count: 2 !important;
-    column-gap: 30px !important;
-    column-fill: auto;
+    column-gap: 24px !important;
+    column-fill: balance;
     -webkit-column-count: 2 !important;
-    -webkit-column-gap: 30px !important;
-    -webkit-column-fill: auto;
+    -webkit-column-gap: 24px !important;
+    -webkit-column-fill: balance;
     -moz-column-count: 2 !important;
-    -moz-column-gap: 30px !important;
+    -moz-column-gap: 24px !important;
+    padding-left: 12px; /* a bit tighter on printed A&A pages */
   }
 
-  .aa-chunk.page{ padding: 20px; }
+  .aa-chunk.page{
+    padding: 16px; /* was 20px */
+  }
   .aa-title{
     font-family: "Roboto Condensed", sans-serif !important;
     color: #007cbc !important;

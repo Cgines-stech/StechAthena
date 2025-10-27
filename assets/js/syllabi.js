@@ -340,12 +340,13 @@ function buildAssignmentsPages(items) {
     return sec;
   }
 
-  function cloneForMeasure(pageNode) {
-    const clone = pageNode.cloneNode(true);
-    const ul = clone.querySelector("ul");
-    if (ul) ul.classList.add("no-columns"); // force single column for measuring
-    return clone;
-  }
+function cloneForMeasure(pageNode) {
+  // Clone the page as-is (two columns). This makes height checks match print.
+  const clone = pageNode.cloneNode(true);
+  // Important: don’t force single column here.
+  return clone;
+}
+
 }
 
 
