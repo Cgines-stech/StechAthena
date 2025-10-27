@@ -360,3 +360,25 @@ body{
     page-break-inside: avoid !important;
   }
 }
+
+/* --- Hard "do not split" for sections in Chrome/Edge print --- */
+@media print {
+  .no-split {
+    /* Force the whole block to act like one “line” */
+    display: inline-block !important;
+    width: 100% !important;
+
+    /* Ask nicely, too */
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+
+    /* Avoid margin-collapsing weirdness that can trigger splits */
+    padding-top: 0.01px !important; /* imperceptible shim */
+  }
+
+  /* Keep immediate children from splitting internally */
+  .no-split > * {
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+  }
+}
