@@ -32,15 +32,15 @@ const TEEM1202 = [
     ],
 
     courseOutline: [
-      "Preparing for Advanced Emergency Medical Technician Practice",
-      "Human Development, Health and Disease",
-      "Pharmacology",
-      "Assessment and Management",
-      "Medical Emergencies",
-      "Trauma",
-      "Special Patient Populations",
-      "Rescue and Special Operations",
-      "Final Testing"
+      { title: "Preparing for Advanced Emergency Medical Technician Practice", hours: 10},
+      { title: "Human Development, Health and Disease", hours: 10},
+      { title: "Pharmacology", hours: 20},
+      { title: "Assessment and Management", hours: 30},
+      { title: "Medical Emergencies", hours: 30},
+      { title: "Trauma", hours: 30},
+      { title: "Special Patient Populations", hours: 20},
+      { title: "Rescue and Special Operations", hours: 20},
+      { title: "Final Testing", hours: 10},
     ],
 
     courseBooks: [
