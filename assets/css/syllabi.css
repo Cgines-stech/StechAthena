@@ -158,3 +158,25 @@
     break-inside: avoid;
   }
 }
+
+/* Institutional Policy section */
+.institutional-section {
+  break-before: page;
+  page-break-before: always;
+  margin-top: 1rem;
+}
+
+#institutionalPolicyContainer p {
+  margin: 0.35rem 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+#institutionalPolicyContainer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+#institutionalPolicyContainer a:hover {
+  text-decoration: underline;
+}

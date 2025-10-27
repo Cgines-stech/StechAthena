@@ -1,5 +1,6 @@
 // assets/js/syllabi.js
 import { outlineTitlesOnly, outlineHoursTotal } from "../../data/utils/helpers.js";
+import institutionalPolicy from "../../data/institutionalPolicy.js";
 
 /** Registries */
 const PROGRAM_FILE_REGISTRY = {
@@ -101,6 +102,8 @@ const courseOutlineEl   = document.getElementById("courseOutline");
 
 // NEW: hours container
 const hoursContainer    = document.getElementById("hoursContainer");
+
+const institutionalPolicyContainer = document.getElementById("institutionalPolicyContainer");
 
 const decodeDefaultArray = (mod) => {
   const candidates = [mod?.default, mod?.program, mod?.programs, mod?.course, mod?.courses];
@@ -265,7 +268,7 @@ const outlineTitles = outlineTitlesOnly(c);
     li.innerHTML = `<span class="muted">No instructor information available.</span>`;
     instructorsList.appendChild(li);
   }
-  
+
 // --- Add instructor communication note ---
 const instructorNote = document.createElement("p");
 instructorNote.className = "instructor-note";
@@ -443,6 +446,28 @@ aaItems.forEach(item => {
     }
   });
 
+// --- Institutional Policy (static data file) ---
+institutionalPolicyContainer.innerHTML = "";
+
+if (Array.isArray(institutionalPolicy) && institutionalPolicy.length) {
+  institutionalPolicy.forEach(section => {
+    if (section.title) {
+      const h = document.createElement("h4");
+      h.textContent = section.title;
+      institutionalPolicyContainer.appendChild(h);
+    }
+
+    if (Array.isArray(section.content)) {
+      const div = document.createElement("div");
+      section.content.forEach(pText => {
+        const p = document.createElement("p");
+        p.innerHTML = pText; // includes <a> and <br> tags
+        div.appendChild(p);
+      });
+      institutionalPolicyContainer.appendChild(div);
+    }
+  });
+}
 
 }
 
