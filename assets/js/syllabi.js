@@ -257,9 +257,9 @@ function buildAssignmentsPages(items) {
   sandbox.style.width = "800px";
   document.body.appendChild(sandbox);
 
-  let pageIndex = 0;
-  let currentPage = createAAChunk(pageIndex === 0 /*withTitle*/);
-  let currentList = currentPage.querySelector("ul");
+let pageIndex = 0;
+let currentPage = createAAChunk(pageIndex === 0 /*withTitle*/, true /*isFirst*/);
+let currentList = currentPage.querySelector("ul");
 
   // measuring list (single column)
   let measureList = document.createElement("ul");
@@ -319,21 +319,24 @@ function buildAssignmentsPages(items) {
   assignmentsPagesContainer.hidden = false;
 
   // ---- helpers
-  function createAAChunk(withTitle) {
-    const sec = document.createElement("section");
-    sec.className = "aa-chunk page";
-    if (withTitle) {
-      const h2 = document.createElement("h2");
-      h2.className = "aa-title";
-      h2.textContent = "Assignments and Assessments";
-      sec.appendChild(h2);
-    }
-    const ul = document.createElement("ul");
-    ul.className = "bullets aa-list"; // columns applied by CSS
-    sec.appendChild(ul);
-    assignmentsPagesContainer.appendChild(sec);
-    return sec;
+function createAAChunk(withTitle, isFirst = false) {
+  const sec = document.createElement("section");
+  sec.className = "aa-chunk page";
+  if (isFirst) sec.classList.add("first"); // <-- ensures page-break BEFORE the 1st A&A page
+
+  if (withTitle) {
+    const h2 = document.createElement("h2");
+    h2.className = "aa-title";
+    h2.textContent = "Assignments and Assessments";
+    sec.appendChild(h2);
   }
+  const ul = document.createElement("ul");
+  ul.className = "bullets aa-list"; // columns via CSS
+  sec.appendChild(ul);
+  assignmentsPagesContainer.appendChild(sec);
+  return sec;
+}
+
 
   function cloneForMeasure(pageNode) {
     const clone = pageNode.cloneNode(true);

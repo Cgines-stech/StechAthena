@@ -87,7 +87,7 @@ body{
     color:#007cbc !important;
     font-size:14px !important;
     margin:10px 0 6px 0;
-    break-after: avoid;            /* keep heading with next block */
+    break-after: avoid;
     page-break-after: avoid;
   }
   h4{ font-size:13px !important; margin:8px 0 6px; }
@@ -135,39 +135,6 @@ body{
     page-break-inside: avoid;
   }
 
-  /* --- Assignments & Assessments ---
-     Allow this section to span across pages, but keep the heading with the first items. */
-  .aa-section{
-    break-inside: auto;         /* allow multi-page flow */
-    page-break-inside: auto;
-    /* comment these in only if you want A&A to always start on a new page: */
-    /* break-before: page; page-break-before: always; */
-  }
-  .aa-section h3{
-    break-after: avoid;
-    page-break-after: avoid;
-  }
-  .aa-list{
-    column-count: 2;
-    column-gap: 30px;
-    column-fill: auto;
-    margin-top: 4px;
-  }
-  .aa-list li{
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-    margin-bottom: 0;
-    padding-top: 0;
-  }
-  .aa-disclaimer{
-    font-style: italic;
-    font-size: 12px !important;
-    border-top: 1px solid #ccc;
-    margin-top: 8px;
-    padding-top: 6px;
-    break-inside: avoid;
-  }
-
   /* Classroom Hours */
   #hoursContainer{ margin-top:4px; }
   #hoursContainer ul{ margin-top:2px; }
@@ -185,18 +152,17 @@ body{
   .canvas-section a{ color:#007cbc !important; text-decoration:none; }
   .canvas-section a:hover{ text-decoration: underline; }
 
-  /* ---- Additional Information (Institutional Policy) ----
-     Start it on a fresh page AND remove top margin so last page margins/padding match others. */
+  /* ---- Additional Information (Institutional Policy) ---- */
   .institutional-section{
     break-before: page;
     page-break-before: always;
     break-inside: avoid-page;
     page-break-inside: avoid;
-    margin-top: 0 !important;        /* critical: no stacked margin at page top */
+    margin-top: 0 !important;  /* ensure margins match other pages */
     padding-top: 0 !important;
   }
   .institutional-section > *:first-child{
-    margin-top: 0 !important;        /* ensure first element doesn't add top gap */
+    margin-top: 0 !important;
   }
   #institutionalPolicyContainer p{
     margin:4px 0;
@@ -210,7 +176,7 @@ body{
   }
   #institutionalPolicyContainer a:hover{ text-decoration: underline; }
 
-  /* <hr> separators: visible, discouraged from page edges */
+  /* <hr> separators */
   .section-sep{
     border:0;
     border-top:1px solid #ccc;
@@ -222,7 +188,7 @@ body{
     break-inside: avoid;
   }
 
-  /* If a section starts a page, don't add extra top spacing */
+  /* If a section starts a page, don’t add extra top spacing */
   #syllabus section > *:first-child{ margin-top:0 !important; }
 
   /* Keep complex blocks together when possible */
@@ -237,110 +203,35 @@ body{
   .card{ border:0 !important; box-shadow:none !important; background:transparent !important; }
 }
 
-/* ---------- Assignments & Assessments page ---------- */
-.aa-page {
-  /* screen */
+/* ---------- Assignments & Assessments (paginated) ---------- */
+/* Each chunk is one printable page */
+.aa-chunk.page{
   padding: 20px;
-}
-
-/* A&A title (screen + print) */
-.aa-title {
-  margin: 0 0 8px 0;
-}
-
-/* Two-column list (screen) */
-.aa-list {
-  column-count: 2;
-  column-gap: 30px;
-  column-fill: auto;
-  margin-top: 4px;
-}
-.aa-list li {
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-  margin-bottom: 0;
-  padding-top: 0;
-}
-
-/* Disclaimer sits under list on screen */
-.aa-disclaimer {
-  margin-top: 12px;
-  font-style: italic;
-  color: var(--muted);
-  border-top: 1px solid #ccc;
-  padding-top: 6px;
-}
-
-/* ---------- Print behavior ---------- */
-@media print {
-  /* A&A is its own page(s) */
-  .aa-page {
-    page-break-before: always;
-    page-break-after: always;
-    break-before: page;
-    break-after: page;
-    position: relative; /* establish a containing block for fallback pinning */
-    padding: 20px;
-  }
-
-  .aa-title {
-    font-family: "Roboto Condensed", sans-serif !important;
-    color: #007cbc !important;
-    font-size: 16px !important;
-    margin: 0 0 8px 0;
-    break-after: avoid; /* keep title with list start */
-    page-break-after: avoid;
-  }
-
-  .aa-list {
-    column-count: 2;
-    column-gap: 30px;
-    column-fill: auto;
-    margin-bottom: 24px; /* breathing room above the footer */
-  }
-
-  /* Pin the disclaimer to the bottom of each A&A page.
-     Chrome/Edge print duplicate position:fixed on every page, which is
-     perfect because A&A has its *own* pages. It will not appear on non-A&A pages. */
-  .aa-disclaimer {
-    position: fixed;
-    left: 16px;                /* match @page left margin */
-    right: 16px;               /* match @page right margin */
-    bottom: 34px;              /* match @page bottom margin */
-    font-style: italic;
-    font-size: 12px !important;
-    color: #000 !important;
-    border-top: 1px solid #ccc;
-    padding-top: 6px;
-    background: transparent;
-  }
-}
-
-/* ---------- A&A pagination pages ---------- */
-.aa-chunk.page {
-  padding: 20px;
-  /* each chunk prints on its own page */
   page-break-after: always;
   break-after: page;
 }
-.aa-chunk.page:last-of-type {
+.aa-chunk.page.first{
+  page-break-before: always;
+  break-before: page;
+}
+.aa-chunk.page:last-of-type{
   page-break-after: auto;
   break-after: auto;
 }
 
-/* Title on each A&A page (we'll put only one on the first page) */
-.aa-title {
+/* Title (we only render it on the first page via JS) */
+.aa-title{
   margin: 0 0 8px 0;
 }
 
-/* Two-column list (screen + print) */
-.aa-list {
+/* Two-column list */
+.aa-list{
   column-count: 2;
   column-gap: 30px;
   column-fill: auto;
   margin-top: 4px;
 }
-.aa-list li {
+.aa-list li{
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
   margin-bottom: 0;
@@ -348,12 +239,12 @@ body{
 }
 
 /* During pagination measuring we force single column */
-.aa-list.no-columns {
+.aa-list.no-columns{
   column-count: 1 !important;
 }
 
-/* Disclaimer text (ONLY added to the last A&A page) */
-.aa-disclaimer {
+/* Disclaimer (appended only to the last A&A page in JS) */
+.aa-disclaimer{
   margin-top: 12px;
   font-style: italic;
   color: var(--muted);
@@ -361,11 +252,9 @@ body{
   padding-top: 6px;
 }
 
-@media print {
-  .aa-chunk.page {
-    padding: 20px;
-  }
-  .aa-title {
+@media print{
+  .aa-chunk.page{ padding: 20px; }
+  .aa-title{
     font-family: "Roboto Condensed", sans-serif !important;
     color: #007cbc !important;
     font-size: 16px !important;
@@ -373,14 +262,13 @@ body{
     break-after: avoid;
     page-break-after: avoid;
   }
-  .aa-list {
+  .aa-list{
     column-count: 2;
     column-gap: 30px;
     column-fill: auto;
     margin-bottom: 8px;
   }
-  /* Keep the disclaimer with the bottom of that last page when possible */
-  .aa-disclaimer {
+  .aa-disclaimer{
     font-size: 12px !important;
     color: #000 !important;
   }
