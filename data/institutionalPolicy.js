@@ -13,7 +13,7 @@ export default [
       `Non-Discriminatory Policy: Southwest Technical College affirms its commitment to promote the goals of fairness and equity in all aspects of the educational enterprise, and bases its policies on the idea of global human dignity.<br>
       Southwest Tech is committed to a policy of nondiscrimination. No otherwise qualified person may be excluded from participation in or be subjected to discrimination in any course, program or activity because of race, age, color, religion, sex, pregnancy, national origin or disability. Southwest Technical College does not discriminate on the basis of sex in the education programs or activities that it operates, as required by Title IX and 34 CFR part 106. The requirement not to discriminate in education programs or activities extends to admission and employment. Inquiries about Title IX and its regulations to STECH may be referred to the Title IX Coordinator, to the Department of Education, and/or to the Office for Civil rights.<br><br>
       If you believe you have experienced discrimination or harassment on our campus, please contact the Title IX Coordinator, Cory Estes: cestes@stech.edu, (435) 865-3938.<br>
-      For special accommodations, please contact the ADA Coordinator, Cyndie Tracy: ctracy@stech.edu, (435) 865-3944.<br>
+      For special accommodations, please contact the ADA Coordinator, Cyndie Tracy: ctracy@stech.edu, (435) 865-3944.<br><br>
       Southwest Technical College<br>
       757 West 800 South<br>
       Cedar City, UT 84720<br>

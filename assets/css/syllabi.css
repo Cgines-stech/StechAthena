@@ -417,4 +417,32 @@ body{
     page-break-before: avoid !important;
     page-break-after:  avoid !important;
   }
+
+  .section-sep {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+    break-before: avoid-page !important;
+    break-after: avoid-page !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Hide <hr> if it’s the very first element inside #syllabus or a section */
+  #syllabus > .section-sep:first-child,
+  #syllabus section > .section-sep:first-child {
+    display: none !important;
+  }
+
+  /* Hide <hr> if it’s the very last element inside #syllabus or a section */
+  #syllabus > .section-sep:last-child,
+  #syllabus section > .section-sep:last-child {
+    display: none !important;
+  }
+
+  /* Optional: reduce faint lines that would appear too close to a new page */
+  .section-sep {
+    orphans: 3;
+    widows: 3;
+  }
 }
