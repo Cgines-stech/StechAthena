@@ -355,7 +355,6 @@ function renderSyllabus(c) {
       } else {
         const li = document.createElement("li");
         const title = m.title || m.name || "";
-        the
         const author = m.author ? ` by ${m.author}` : "";
         const edition = m.edition ? `, ${m.edition}` : "";
         const isbn = m.isbn ? ` (ISBN: ${m.isbn})` : "";
