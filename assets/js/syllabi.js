@@ -201,6 +201,13 @@ courseSelect.addEventListener("change", () => {
 });
 
 function renderSyllabus(c) {
+  // --- Set page title for better PDF filenames ---
+  if (c.courseNumber) {
+    document.title = c.courseNumber;
+  } else {
+    document.title = "Syllabus";
+  }
+  
   // Title & meta
   syllabusTitle.textContent = `${c.courseNumber || ""} ${c.courseName ? "— " + c.courseName : ""}`;
   syllabusMeta.textContent = [
