@@ -337,13 +337,21 @@ function createAAChunk(withTitle, isFirst = false) {
   return sec;
 }
 
-
   function cloneForMeasure(pageNode) {
     const clone = pageNode.cloneNode(true);
     const ul = clone.querySelector("ul");
     if (ul) ul.classList.add("no-columns");
     return clone;
   }
+  
+  // After constructing all pages:
+  document.body.removeChild(sandbox);
+  // Ensure visible A&A lists are in 2-column mode
+  assignmentsPagesContainer
+    .querySelectorAll(".aa-list")
+    .forEach(ul => ul.classList.remove("no-columns"));
+
+  assignmentsPagesContainer.hidden = false;
 }
 
 /** ------------------------ Render ------------------------ */
