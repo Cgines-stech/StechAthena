@@ -310,7 +310,7 @@ instructorsList.parentElement.appendChild(instructorNote);
       const header = document.createElement("p");
       const sd = h.startDate || "";
       const ed = h.endDate || "";
-      header.innerHTML = `<strong>${sd && ed ? `${sd} – ${ed}` : (sd || ed || "Dates not specified")}</strong>`;
+      header.innerHTML = `${sd && ed ? `${sd} – ${ed}` : (sd || ed || "Dates not specified")}`;
       block.appendChild(header);
 
       const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
