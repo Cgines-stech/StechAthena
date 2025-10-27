@@ -20,11 +20,6 @@
       <label class="muted" for="courseSelect">Course</label>
       <select id="courseSelect"></select>
 
-      <!-- inside .controls, after the Course select -->
-<label class="muted" for="toggleAA">Assignments</label>
-<input type="checkbox" id="toggleAA" checked />
-
-
       <button id="printBtn" type="button">Print / Save PDF</button>
       <a class="btn back-btn" href="index.html">← Back</a>
     </div>
@@ -51,7 +46,7 @@
 
     <hr class="section-sep" />
 
-    <!-- NEW: Course Outline just under Course Objectives -->
+    <!-- Course Outline just under Course Objectives -->
     <section id="outlineSection">
       <h3>Course Outline</h3>
       <ul id="courseOutline" class="bullets"></ul>
@@ -78,40 +73,37 @@
       <ul id="materialsList" class="bullets"></ul>
     </section>
 
-<hr class="section-sep" />
+    <hr class="section-sep" />
 
-<!-- NEW: Canvas Information -->
-<section id="canvasSection" class="canvas-section">
-  <h3>Canvas Information</h3>
-  <p>Canvas is where course content, grades, and communication will reside for this course.</p>
-  <p>
-    Canvas URL: 
-    <a class="canvas-url" href="https://stech.instructure.com" target="_blank" rel="noopener">
-      stech.instructure.com
-    </a>
-  </p>
-  <p>Support: For Canvas passwords or any other computer-related technical support contact Student Services.</p>
-  <ul class="bullets">
-    <li>Regular Hours &amp; Weekdays: (435) 586 - 2899</li>
-    <li>After Hours &amp; Weekends: (435) 865 - 3929 <span class="muted">(Leave a message if no response)</span></li>
-  </ul>
-</section>
+    <!-- Canvas Information -->
+    <section id="canvasSection" class="canvas-section">
+      <h3>Canvas Information</h3>
+      <p>Canvas is where course content, grades, and communication will reside for this course.</p>
+      <p>
+        Canvas URL:
+        <a class="canvas-url" href="https://stech.instructure.com" target="_blank" rel="noopener">
+          stech.instructure.com
+        </a>
+      </p>
+      <p>Support: For Canvas passwords or any other computer-related technical support contact Student Services.</p>
+      <ul class="bullets">
+        <li>Regular Hours &amp; Weekdays: (435) 586 - 2899</li>
+        <li>After Hours &amp; Weekends: (435) 865 - 3929 <span class="muted">(Leave a message if no response)</span></li>
+      </ul>
+    </section>
 
-<!-- Assignments & Assessments: multiple pages injected here -->
-<section id="assignmentsPagesContainer" hidden></section>
-
-<!-- Policies -->
+    <!-- Policies -->
     <section id="policiesSection">
       <h3>Policies</h3>
       <div id="policiesContainer"></div>
     </section>
   </main>
 
-<!-- NEW: Institutional Policy Section -->
-<section id="institutionalPolicySection" class="institutional-section">
-  <h3>Additional Information</h3>
-  <div id="institutionalPolicyContainer"></div>
-</section>
+  <!-- Institutional Policy Section -->
+  <section id="institutionalPolicySection" class="institutional-section">
+    <h3>Additional Information</h3>
+    <div id="institutionalPolicyContainer"></div>
+  </section>
 
   <script type="module" src="assets/js/syllabi.js"></script>
 </body>

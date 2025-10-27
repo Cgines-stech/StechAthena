@@ -1,5 +1,5 @@
 // assets/js/syllabi.js
-import { outlineTitlesOnly, outlineHoursTotal } from "../../data/utils/helpers.js";
+import { outlineTitlesOnly } from "../../data/utils/helpers.js";
 import institutionalPolicy from "../../data/institutionalPolicy.js";
 
 /** ------------------------ Registries ------------------------ */
@@ -83,7 +83,6 @@ const PROGRAM_POLICIES_REGISTRY = {
 const programSelect  = document.getElementById("programSelect");
 const courseSelect   = document.getElementById("courseSelect");
 const printBtn       = document.getElementById("printBtn");
-const toggleAA       = document.getElementById("toggleAA");
 
 const syllabus       = document.getElementById("syllabus");
 const syllabusTitle  = document.getElementById("syllabusTitle");
@@ -102,9 +101,6 @@ const hoursContainer    = document.getElementById("hoursContainer");
 
 // Institutional
 const institutionalPolicyContainer = document.getElementById("institutionalPolicyContainer");
-
-// NEW: A&A multi-page container
-const assignmentsPagesContainer = document.getElementById("assignmentsPagesContainer");
 
 /** ------------------------ Helpers ------------------------ */
 const decodeDefaultArray = (mod) => {
@@ -163,7 +159,6 @@ let currentProgramCourses = [];
 let currentProgramInstructors = [];
 let currentProgramHours = [];
 let currentProgramPolicies = [];
-let currentAAItems = []; // for toggle reuse
 
 /** ------------------------ Events ------------------------ */
 programSelect.addEventListener("change", async () => {
@@ -174,8 +169,6 @@ programSelect.addEventListener("change", async () => {
   currentProgramInstructors = [];
   currentProgramHours = [];
   currentProgramPolicies = [];
-  assignmentsPagesContainer.hidden = true;
-  assignmentsPagesContainer.innerHTML = "";
 
   if (!currentProgramName) return;
 
@@ -209,181 +202,13 @@ courseSelect.addEventListener("change", () => {
   const c = currentProgramCourses.find(x => x.courseNumber === num);
   if (!c) {
     syllabus.hidden = true;
-    assignmentsPagesContainer.hidden = true;
     return;
   }
   renderSyllabus(c);
   syllabus.hidden = false;
 });
 
-// Toggle A&A on/off without reselecting course
-toggleAA?.addEventListener("change", () => {
-  if (toggleAA.checked && currentAAItems.length) {
-    buildAssignmentsPages(currentAAItems);
-    assignmentsPagesContainer.hidden = false;
-  } else {
-    assignmentsPagesContainer.hidden = true;
-    assignmentsPagesContainer.innerHTML = "";
-  }
-});
-
 printBtn.addEventListener("click", () => window.print());
-
-/** ------------------------ A&A paginator ------------------------ */
-/**
- * Build paginated A&A pages with two-column lists and a disclaimer ONLY on the last page.
- * We paginate by measuring in a temporary one-column list to get stable heights,
- * then we re-enable columns for each page's list.
- */
-function buildAssignmentsPages(items) {
-  assignmentsPagesContainer.innerHTML = "";
-  if (!Array.isArray(items) || !items.length) {
-    assignmentsPagesContainer.hidden = true;
-    return;
-  }
-
-  // PRINT geometry:
-  // 11" page ~1056px @96dpi
-  // @page top+bottom = 34 + 34 => 1056 - 68 = 988px printable
-  // .aa-chunk.page padding (print below) = 12 + 12 => 988 - 24 = 964px
-  const PAGE_CONTENT_MAX_PX = 972;
-  const SLACK = 8; // tolerance so we don't break too early
-
-  // hidden measuring sandbox
-  const sandbox = document.createElement("div");
-  sandbox.style.position = "absolute";
-  sandbox.style.left = "-99999px";
-  sandbox.style.top = "0";
-  sandbox.style.width = "800px";
-  document.body.appendChild(sandbox);
-
-  let pageIndex = 0;
-  let currentPage = createAAChunk(pageIndex === 0, true);
-  let currentList = currentPage.querySelector("ul");
-
-  // measuring list (we won't force single column anymore)
-  let measureList = document.createElement("ul");
-  measureList.className = "bullets aa-list"; // keep 2 columns while measuring
-  sandbox.appendChild(measureList);
-
-  items.forEach((item) => {
-    const li = document.createElement("li");
-    li.innerHTML = (typeof item === "string") ? item : (item?.title || JSON.stringify(item));
-
-    // try on current page
-    measureList.appendChild(li.cloneNode(true));
-    currentList.appendChild(li);
-
-    const measurePage = cloneForMeasure(currentPage); // 2-column clone
-    sandbox.appendChild(measurePage);
-
-    const tooTall = measurePage.scrollHeight > (PAGE_CONTENT_MAX_PX - SLACK);
-    sandbox.removeChild(measurePage);
-
-    if (tooTall) {
-      // undo add to current page
-      currentList.removeChild(currentList.lastElementChild);
-      // undo add to measuring list
-      measureList.removeChild(measureList.lastElementChild);
-
-      // start new page
-      pageIndex += 1;
-      currentPage = createAAChunk(false);
-      currentList = currentPage.querySelector("ul");
-
-      // place the item on the new page
-      const li2 = document.createElement("li");
-      li2.innerHTML = (typeof item === "string") ? item : (item?.title || JSON.stringify(item));
-      currentList.appendChild(li2);
-
-      // reset measuring list to match new page contents
-      sandbox.removeChild(measureList);
-      measureList = document.createElement("ul");
-      measureList.className = "bullets aa-list";
-      measureList.appendChild(li2.cloneNode(true));
-      sandbox.appendChild(measureList);
-    }
-  });
-
-  // disclaimer ONLY on last page
-  const pages = assignmentsPagesContainer.querySelectorAll(".aa-chunk.page");
-  if (pages.length) {
-    const lastPage = pages[pages.length - 1];
-    const disclaimer = document.createElement("p");
-    disclaimer.className = "aa-disclaimer";
-    disclaimer.innerHTML = `<em>Subject to change. Please consult your Canvas course for the most current instructions and updates</em>`;
-    lastPage.appendChild(disclaimer);
-  }
-
-  if (sandbox.parentNode) sandbox.parentNode.removeChild(sandbox);
-  assignmentsPagesContainer.hidden = false;
-
-  // helpers
-  function createAAChunk(withTitle, isFirst = false) {
-    const sec = document.createElement("section");
-    sec.className = "aa-chunk page";
-    if (isFirst) sec.classList.add("first");
-    if (withTitle) {
-      const h2 = document.createElement("h2");
-      h2.className = "aa-title";
-      h2.textContent = "Assignments and Assessments";
-      sec.appendChild(h2);
-    }
-    const ul = document.createElement("ul");
-    ul.className = "bullets aa-list";
-    sec.appendChild(ul);
-    assignmentsPagesContainer.appendChild(sec);
-    return sec;
-  }
-
-  function cloneForMeasure(pageNode) {
-    // Clone with 2-column UL intact so height matches print
-    return pageNode.cloneNode(true);
-  }
-  // --- FORCE TWO COLUMNS INLINE (beats any CSS conflicts) ---
-assignmentsPagesContainer
-  .querySelectorAll('ul.aa-list')
-  .forEach(ul => {
-    ul.classList.remove('no-columns');  // safety, in case it slipped in
-    ul.style.columnCount = '2';
-    ul.style.columnGap = '24px';
-    ul.style.columnFill = 'auto';
-    ul.style.WebkitColumnCount = '2';
-    ul.style.WebkitColumnGap = '24px';
-    ul.style.WebkitColumnFill = 'auto';
-    ul.style.MozColumnCount = '2';
-    ul.style.MozColumnGap = '24px';
-  });
-
-// Optional: quick sanity log for the first page
-const firstUL = assignmentsPagesContainer.querySelector('ul.aa-list');
-if (firstUL) {
-  const cs = getComputedStyle(firstUL);
-  console.debug('A&A columns -> count:', cs.columnCount, 'gap:', cs.columnGap);
-}
-
-}
-function forceAAColumnsInline() {
-  assignmentsPagesContainer
-    .querySelectorAll('ul.aa-list')
-    .forEach(ul => {
-      ul.classList.remove('no-columns');
-      ul.style.columnCount = '2';
-      ul.style.columnGap = '24px';
-      ul.style.columnFill = 'auto';
-      ul.style.WebkitColumnCount = '2';
-      ul.style.WebkitColumnGap = '24px';
-      ul.style.WebkitColumnFill = 'auto';
-      ul.style.MozColumnCount = '2';
-      ul.style.MozColumnGap = '24px';
-    });
-}
-
-// run when pages are (re)built
-// (you already added the inline forcing above)
-
-// also run right before printing
-window.addEventListener('beforeprint', forceAAColumnsInline);
 
 /** ------------------------ Render ------------------------ */
 function renderSyllabus(c) {
@@ -522,6 +347,7 @@ function renderSyllabus(c) {
       } else {
         const li = document.createElement("li");
         const title = m.title || m.name || "";
+        the
         const author = m.author ? ` by ${m.author}` : "";
         const edition = m.edition ? `, ${m.edition}` : "";
         const isbn = m.isbn ? ` (ISBN: ${m.isbn})` : "";
@@ -534,22 +360,6 @@ function renderSyllabus(c) {
     const li = document.createElement("li");
     li.innerHTML = `<span class="muted">No additional materials required.</span>`;
     materialsList.appendChild(li);
-  }
-
-  // -------- Assignments & Assessments (paginated own pages) --------
-  const aa =
-    Array.isArray(c.courseAssignmentsandAsssessments) ? c.courseAssignmentsandAsssessments :
-    Array.isArray(c.courseAssignmentsAndAssessments) ? c.courseAssignmentsAndAssessments :
-    Array.isArray(c.assignmentsAndAssessments)       ? c.assignmentsAndAssessments :
-    [];
-
-  currentAAItems = Array.isArray(aa) && aa.length ? aa : [];
-  if (toggleAA.checked && currentAAItems.length) {
-    buildAssignmentsPages(currentAAItems);
-    assignmentsPagesContainer.hidden = false;
-  } else {
-    assignmentsPagesContainer.hidden = true;
-    assignmentsPagesContainer.innerHTML = "";
   }
 
   // Policies — course overrides if non-placeholder; else program default
@@ -619,7 +429,7 @@ function renderSyllabus(c) {
     }
   });
 
-  // -------- Institutional Policy (static data file) --------
+  // Institutional Policy (static data file)
   institutionalPolicyContainer.innerHTML = "";
   if (Array.isArray(institutionalPolicy) && institutionalPolicy.length) {
     institutionalPolicy.forEach(section => {
