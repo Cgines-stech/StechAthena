@@ -1,0 +1,54 @@
+/* assets/css/syllabi.css */
+
+/* Section separator — subtle on screen, visible on paper */
+.section-sep {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
+}
+
+/* Tighten/normalize section spacing for syllabus */
+#syllabus section {
+  margin: 0.6rem 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+#syllabus h3 {
+  margin-top: 0.2rem;
+}
+
+/* Outline list tweaks */
+#outlineSection .bullets li {
+  margin-bottom: 0.15rem; /* subtle extra spacing */
+}
+
+/* Grade table (inherits from base); ensure it never splits mid-row on print */
+.grade-table {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Make meta a hair smaller to keep focus on content */
+#syllabusMeta {
+  font-size: 0.82rem;
+}
+
+/* Print-specific improvements */
+@media print {
+  .section-sep {
+    border-top-color: #bbb;
+    margin: 0.8rem 0;
+  }
+
+  /* Avoid orphan headings at page tops */
+  #syllabus h3 {
+    page-break-after: avoid;
+  }
+
+  /* Ensure sections stay together as much as possible */
+  #syllabus section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

@@ -1,4 +1,5 @@
 // assets/js/syllabi.js
+import { outlineTitlesOnly } from "../../utils/helpers.js";
 
 /** Registries */
 const PROGRAM_FILE_REGISTRY = {
@@ -92,6 +93,9 @@ const courseObjectives  = document.getElementById("courseObjectives");
 const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
 const policiesContainer = document.getElementById("policiesContainer");
+
+// NEW: outline list element
+const courseOutlineEl   = document.getElementById("courseOutline");
 
 // NEW: hours container
 const hoursContainer    = document.getElementById("hoursContainer");
@@ -214,6 +218,15 @@ function renderSyllabus(c) {
     li.innerHTML = text === "No objectives provided." ? `<span class="muted">${text}</span>` : text;
     courseObjectives.appendChild(li);
   });
+
+  // --- Course Outline (titles only) ---
+courseOutlineEl.innerHTML = "";
+const outlineTitles = outlineTitlesOnly(c);
+(outlineTitles.length ? outlineTitles : ["No outline provided."]).forEach(title => {
+  const li = document.createElement("li");
+  li.innerHTML = title === "No outline provided." ? `<span class="muted">${title}</span>` : title;
+  courseOutlineEl.appendChild(li);
+});
 
   // Instructors — course overrides if non-placeholder; else program default
   instructorsList.innerHTML = "";

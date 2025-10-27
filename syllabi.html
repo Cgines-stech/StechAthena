@@ -1,11 +1,14 @@
-<!-- syllabi.html-->
+<!-- syllabi.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>Syllabi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Keep base styles -->
   <link rel="stylesheet" href="assets/css/coursecatalog.css" />
+  <!-- New, syllabus-specific tweaks/overrides -->
+  <link rel="stylesheet" href="assets/css/syllabi.css" />
 </head>
 <body>
   <header class="page-header no-print">
@@ -18,7 +21,7 @@
       <select id="courseSelect"></select>
 
       <button id="printBtn" type="button">Print / Save PDF</button>
-      <a class="btn" href="index.html">← Back</a>
+      <a class="btn back-btn" href="index.html">← Back</a>
     </div>
     <p class="hint muted">Choose a program and course to generate a print-ready syllabus.</p>
   </header>
@@ -32,26 +35,41 @@
       <p id="courseDescription"></p>
     </section>
 
+    <hr class="section-sep" />
+
     <section>
       <h3>Course Objectives</h3>
       <ul id="courseObjectives" class="bullets"></ul>
     </section>
 
-    <section id="hoursSection">
-    <h3>Classroom Hours</h3>
-    <div id="hoursContainer"></div>
+    <!-- NEW: Course Outline just under Course Objectives -->
+    <section id="outlineSection">
+      <h3>Course Outline</h3>
+      <ul id="courseOutline" class="bullets"></ul>
     </section>
 
+    <hr class="section-sep" />
+
+    <section id="hoursSection">
+      <h3>Classroom Hours</h3>
+      <div id="hoursContainer"></div>
+    </section>
+
+    <hr class="section-sep" />
 
     <section id="instructorsSection">
       <h3>Instructors</h3>
       <ul id="instructorsList" class="bullets"></ul>
     </section>
 
+    <hr class="section-sep" />
+
     <section id="materialsSection">
       <h3>Required Materials</h3>
       <ul id="materialsList" class="bullets"></ul>
     </section>
+
+    <hr class="section-sep" />
 
     <section id="policiesSection">
       <h3>Policies</h3>
