@@ -22,14 +22,13 @@ body{
 }
 
 .header-logo {
-    max-width: 50%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    padding-bottom: 5px;
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 5px;
 }
 
-/* Full-width header bar */
 /* Full-width header bar (screen) */
 .full-width-container {
   width: 100%;
@@ -62,22 +61,7 @@ body{
   border: 2px solid #007cbc;
 }
 
-/* Print-specific spacing so it doesn’t overlap top margin */
-@media print {
-  .print-header {
-    break-inside: avoid;
-    page-break-inside: avoid;
-    page-break-before: avoid;
-    page-break-after: avoid;
-    margin-bottom: 8px !important;
-  }
-
-  /* Extra safety: don't show this header after page 1 even if duplicated by mistake */
-  .print-header:not(:first-of-type) {
-    display: none !important;
-  }
-}
-
+/* Page container */
 .page{
   max-width: 100%;
   margin: 0;
@@ -85,12 +69,14 @@ body{
   box-sizing: border-box;
 }
 
+/* Section separator */
 .section-sep{
   border: 0;
   border-top: 1px solid #ccc;
   margin: 1rem 0;
 }
 
+/* Lists */
 .bullets, .bulleted-list{
   list-style: disc outside;
   padding-left: 19px;
@@ -102,10 +88,9 @@ body{
 
 .no-print{ display: block; }
 
-/* Make sure the header bar & pill print with color */
+/* Ensure header bar & pill keep color in print-aware browsers */
 .full-width-container,
 .centered-text-box {
-  /* Helps Chrome/Edge honor backgrounds in print */
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
@@ -126,6 +111,18 @@ body{
     font-size:11px !important;
   }
 
+  /* Print header: keep it on page 1, with a bit of spacing */
+  .print-header {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    page-break-before: avoid;
+    page-break-after: avoid;
+    margin-bottom: 8px !important;
+  }
+  .print-header:not(:first-of-type) {
+    display: none !important;
+  }
+
   /* Page container & last page behavior */
   .page{
     padding:20px;
@@ -141,10 +138,10 @@ body{
   .page-break{ page-break-before: always; }
   .second-page{ margin-top:20px; padding-top:10px; }
 
+  /* Header stripe gradient (print-safe gap) */
   .full-width-container {
     width: 100%;
     height: 45px;
-    /* use a narrower gap between the two blue sections */
     background: linear-gradient(
       to bottom,
       #007cbc 0%,
@@ -167,12 +164,6 @@ body{
     background-color: #ffffff !important;
     color: #000000 !important;
     border: 2px solid #007cbc !important;
-  }
-
-  /* (Optional) lightly nudge all elements to keep color where possible */
-  * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
   }
 
   /* Titles */
@@ -234,68 +225,51 @@ body{
   /* Controls hidden in print */
   #controls, .no-print{ display:none !important; }
 
-  /* Default: keep each section intact (if it would split, push to next page) */
-  #syllabus section{
-    margin:10px 0;
-    break-inside: avoid-page;
-    page-break-inside: avoid;
+  /* ---- Keep sections together + smart <hr> behavior ---- */
+
+  /* Do NOT split sections across pages */
+  #syllabus section,
+  .no-split,
+  .canvas-section,
+  .institutional-section {
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+    display: block !important;        /* block avoids inline-block gaps */
+    width: 100% !important;
+    overflow: visible !important;
   }
 
-  /* Classroom Hours */
-  #hoursContainer{ margin-top:4px; }
-  #hoursContainer ul{ margin-top:2px; }
-  .hours-note{ margin-top:6px; font-size:12px !important; }
-
-  /* Instructor note */
-  .instructor-note{
-    margin-top:6px;
-    font-size:12px !important;
-    line-height:1.4;
+  /* Keep each section heading with its content */
+  #syllabus section > h3 {
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+    margin-bottom: 6px !important;
   }
 
-  /* Canvas */
-  .canvas-section{ break-inside: avoid; page-break-inside: avoid; }
-  .canvas-section a{ color:#007cbc !important; text-decoration:none; }
-  .canvas-section a:hover{ text-decoration: underline; }
-
-  /* ---- Additional Information (Institutional Policy) ---- */
-  .institutional-section{
-    break-before: page;
-    page-break-before: always;
-    break-inside: avoid-page;
-    page-break-inside: avoid;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  .institutional-section > *:first-child{
-    margin-top: 0 !important;
-  }
-  #institutionalPolicyContainer p{
-    margin:4px 0;
-    font-size:13px !important;
-    line-height:1.45;
-    break-inside: avoid;
-  }
-  #institutionalPolicyContainer a{
-    color:#007cbc !important;
-    text-decoration: none;
-  }
-  #institutionalPolicyContainer a:hover{ text-decoration: underline; }
-
-  /* <hr> separators */
+  /* <hr> separators: don’t allow them at page top/bottom and keep spacing tight */
   .section-sep{
     border:0;
     border-top:1px solid #ccc;
-    margin:10px 0;
-    break-before: avoid-page;
-    break-after:  avoid-page;
-    page-break-before: avoid;
-    page-break-after:  avoid;
-    break-inside: avoid;
+    margin:8px 0;
+    break-before: avoid-page !important;
+    break-after:  avoid-page !important;
+    page-break-before: avoid !important;
+    page-break-after:  avoid !important;
   }
 
-  /* If a section starts a page, don’t add extra top spacing */
-  #syllabus section > *:first-child{ margin-top:0 !important; }
+  /* Hide <hr> if it’s the first/last child in #syllabus or a section */
+  #syllabus > .section-sep:first-child,
+  #syllabus > .section-sep:last-child,
+  #syllabus section > .section-sep:first-child,
+  #syllabus section > .section-sep:last-child{
+    display:none !important;
+  }
+
+  /* Institutional page: still start on its own page and keep intact */
+  .institutional-section{
+    break-before: page;
+    page-break-before: always;
+  }
 
   /* Keep complex blocks together when possible */
   .grade-table,
@@ -307,142 +281,4 @@ body{
 
   /* Remove any card chrome in print */
   .card{ border:0 !important; box-shadow:none !important; background:transparent !important; }
-}
-
-/* ===== Keep each syllabus section together in PDF (strong overrides) ===== */
-@media print {
-  /* Keep the entire section on one page when possible */
-  #syllabus section {
-    break-inside: avoid-page !important;
-    page-break-inside: avoid !important;
-    display: block !important;
-    overflow: visible !important;
-  }
-
-  /* Keep headings with their content (avoid orphaned h3) */
-  #syllabus section > h3 {
-    break-after: avoid-page !important;
-    page-break-after: avoid !important;
-    margin-bottom: 6px !important;
-  }
-
-  /* Ensure the hr separators don't trigger page breaks */
-  .section-sep {
-    break-before: avoid-page !important;
-    break-after:  avoid-page !important;
-    page-break-before: avoid !important;
-    page-break-after:  avoid !important;
-  }
-
-  /* Inner elements try to avoid splitting */
-  #syllabus section table,
-  #syllabus section ul,
-  #syllabus section ol,
-  #syllabus section p,
-  #syllabus section div {
-    break-inside: avoid-page !important;
-    page-break-inside: avoid !important;
-  }
-
-  /* Apply same keep-together behavior to the institutional page */
-  .institutional-section {
-    break-inside: avoid-page !important;
-    page-break-inside: avoid !important;
-    display: block !important;
-    overflow: visible !important;
-  }
-}
-
-/* Optional utility */
-@media print {
-  .keep-together {
-    break-inside: avoid-page !important;
-    page-break-inside: avoid !important;
-  }
-}
-
-/* --- Hard "do not split" for sections in Chrome/Edge print --- */
-@media print {
-  .no-split {
-    /* Force the whole block to act like one “line” */
-    display: inline-block !important;
-    width: 100% !important;
-
-    /* Ask nicely, too */
-    break-inside: avoid-page !important;
-    page-break-inside: avoid !important;
-
-    /* Avoid margin-collapsing weirdness that can trigger splits */
-    padding-top: 0.01px !important; /* imperceptible shim */
-  }
-
-  /* Keep immediate children from splitting internally */
-  .no-split > * {
-    break-inside: avoid-page !important;
-    page-break-inside: avoid !important;
-  }
-
-  .card,
-  #syllabus {
-    overflow: visible !important;
-    display: block !important;
-  }
-
-  /* Strongest anti-split combo for sections */
-  #syllabus section,
-  .no-split {
-    break-inside: avoid-page !important;
-    page-break-inside: avoid !important;
-
-    /* Extra vendor fallbacks Chrome respects in print */
-    -webkit-column-break-inside: avoid !important;
-    -webkit-region-break-inside: avoid !important;
-
-    /* Inline-block often helps Chrome treat the whole section as atomic */
-    display: inline-block !important;
-    width: 100% !important;
-  }
-
-  /* Keep the section heading glued to its content */
-  #syllabus section > h3 {
-    break-after: avoid-page !important;
-    page-break-after: avoid !important;
-    margin-bottom: 6px !important;
-  }
-
-  /* Ensure <hr> never forces a break around sections */
-  .section-sep {
-    break-before: avoid-page !important;
-    break-after:  avoid-page !important;
-    page-break-before: avoid !important;
-    page-break-after:  avoid !important;
-  }
-
-  .section-sep {
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 10px 0;
-    break-before: avoid-page !important;
-    break-after: avoid-page !important;
-    page-break-before: avoid !important;
-    page-break-after: avoid !important;
-  }
-
-  /* Hide <hr> if it’s the very first element inside #syllabus or a section */
-  #syllabus > .section-sep:first-child,
-  #syllabus section > .section-sep:first-child {
-    display: none !important;
-  }
-
-  /* Hide <hr> if it’s the very last element inside #syllabus or a section */
-  #syllabus > .section-sep:last-child,
-  #syllabus section > .section-sep:last-child {
-    display: none !important;
-  }
-
-  /* Optional: reduce faint lines that would appear too close to a new page */
-  .section-sep {
-    orphans: 3;
-    widows: 3;
-  }
 }
