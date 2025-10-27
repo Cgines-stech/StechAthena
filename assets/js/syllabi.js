@@ -246,8 +246,8 @@ function buildAssignmentsPages(items) {
   // 11" page ~1056px @96dpi
   // @page top+bottom = 34 + 34 => 1056 - 68 = 988px printable
   // .aa-chunk.page padding (print below) = 12 + 12 => 988 - 24 = 964px
-  const PAGE_CONTENT_MAX_PX = 964;
-  const SLACK = 16; // tolerance so we don't break too early
+  const PAGE_CONTENT_MAX_PX = 972;
+  const SLACK = 8; // tolerance so we don't break too early
 
   // hidden measuring sandbox
   const sandbox = document.createElement("div");
@@ -340,7 +340,50 @@ function buildAssignmentsPages(items) {
     // Clone with 2-column UL intact so height matches print
     return pageNode.cloneNode(true);
   }
+  // --- FORCE TWO COLUMNS INLINE (beats any CSS conflicts) ---
+assignmentsPagesContainer
+  .querySelectorAll('ul.aa-list')
+  .forEach(ul => {
+    ul.classList.remove('no-columns');  // safety, in case it slipped in
+    ul.style.columnCount = '2';
+    ul.style.columnGap = '24px';
+    ul.style.columnFill = 'auto';
+    ul.style.WebkitColumnCount = '2';
+    ul.style.WebkitColumnGap = '24px';
+    ul.style.WebkitColumnFill = 'auto';
+    ul.style.MozColumnCount = '2';
+    ul.style.MozColumnGap = '24px';
+  });
+
+// Optional: quick sanity log for the first page
+const firstUL = assignmentsPagesContainer.querySelector('ul.aa-list');
+if (firstUL) {
+  const cs = getComputedStyle(firstUL);
+  console.debug('A&A columns -> count:', cs.columnCount, 'gap:', cs.columnGap);
 }
+
+}
+function forceAAColumnsInline() {
+  assignmentsPagesContainer
+    .querySelectorAll('ul.aa-list')
+    .forEach(ul => {
+      ul.classList.remove('no-columns');
+      ul.style.columnCount = '2';
+      ul.style.columnGap = '24px';
+      ul.style.columnFill = 'auto';
+      ul.style.WebkitColumnCount = '2';
+      ul.style.WebkitColumnGap = '24px';
+      ul.style.WebkitColumnFill = 'auto';
+      ul.style.MozColumnCount = '2';
+      ul.style.MozColumnGap = '24px';
+    });
+}
+
+// run when pages are (re)built
+// (you already added the inline forcing above)
+
+// also run right before printing
+window.addEventListener('beforeprint', forceAAColumnsInline);
 
 /** ------------------------ Render ------------------------ */
 function renderSyllabus(c) {
