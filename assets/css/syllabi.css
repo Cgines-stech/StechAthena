@@ -261,3 +261,46 @@ body{
     margin-top: 0 !important;
   }
 }
+
+@media print {
+  /* Consistent last page behavior (no phantom blank page) */
+  .page { page-break-after: always; }
+  .page:last-of-type { page-break-after: auto; }
+
+  /* Keep entire sections together: if they don't fit, move to next page */
+  #syllabus section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Sections that you already force to new pages: remove extra top margin so it
+     doesn't "double up" with the page margin. Add any other special sections if needed. */
+  .aa-section,
+  .institutional-section {
+    margin-top: 0 !important;
+  }
+
+  /* Restore normal hr look, but now each hr lives inside its section so it won't
+     be stranded at page top/bottom */
+  .section-sep {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+    /* DO NOT set break-before/after avoid here anymore */
+  }
+
+  /* When a section starts a new page, remove top margin on its first content item
+     so spacing looks consistent */
+  #syllabus section > *:first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Optional: ensure complex blocks also avoid being split internally */
+  .grade-table,
+  .aa-list,
+  #hoursContainer > div,
+  #policiesContainer > div {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

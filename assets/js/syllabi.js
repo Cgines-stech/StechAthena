@@ -2,6 +2,23 @@
 import { outlineTitlesOnly, outlineHoursTotal } from "../../data/utils/helpers.js";
 import institutionalPolicy from "../../data/institutionalPolicy.js";
 
+// Keep <hr> with the section ABOVE it so it's never stranded at page top/bottom
+(function absorbSectionSeparators() {
+  // Move each hr.section-sep into the previous <section>
+  document.querySelectorAll('hr.section-sep').forEach((hr, i, all) => {
+    const prev = hr.previousElementSibling;
+    if (prev && prev.tagName === 'SECTION') {
+      prev.appendChild(hr); // now the hr is the last child of the section above it
+    }
+  });
+  // Remove a final trailing hr if present
+  const hrs = document.querySelectorAll('hr.section-sep');
+  if (hrs.length) {
+    const last = hrs[hrs.length - 1];
+    if (!last.nextElementSibling) last.remove();
+  }
+})();
+
 /** Registries */
 const PROGRAM_FILE_REGISTRY = {
   "Advanced Emergency Medical Technician":
@@ -273,7 +290,7 @@ const outlineTitles = outlineTitlesOnly(c);
 const instructorNote = document.createElement("p");
 instructorNote.className = "instructor-note";
 instructorNote.innerHTML = `
-  <strong>Office Hours:</strong> By appointment<br>
+  Office Hours: By appointment<br>
   <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
 `;
 instructorsList.parentElement.appendChild(instructorNote);
