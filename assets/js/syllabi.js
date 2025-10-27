@@ -243,10 +243,7 @@ function buildAssignmentsPages(items) {
     return;
   }
 
-  // Match your print layout math:
-  // 11" page ~1056px @ ~96dpi
-  // @page margins top/bottom 34px => 1056 - 68 = 988px
-  // .page padding top/bottom 20px => 988 - 40 = 948px
+  // 11" printable area math
   const PAGE_CONTENT_MAX_PX = 948;
 
   // hidden measuring sandbox
@@ -257,9 +254,9 @@ function buildAssignmentsPages(items) {
   sandbox.style.width = "800px";
   document.body.appendChild(sandbox);
 
-let pageIndex = 0;
-let currentPage = createAAChunk(pageIndex === 0 /*withTitle*/, true /*isFirst*/);
-let currentList = currentPage.querySelector("ul");
+  let pageIndex = 0;
+  let currentPage = createAAChunk(pageIndex === 0 /*withTitle*/, true /*isFirst*/);
+  let currentList = currentPage.querySelector("ul");
 
   // measuring list (single column)
   let measureList = document.createElement("ul");
@@ -270,7 +267,7 @@ let currentList = currentPage.querySelector("ul");
     const li = document.createElement("li");
     li.innerHTML = (typeof item === "string") ? item : (item?.title || JSON.stringify(item));
 
-    // Try to fit in current page:
+    // try on current page
     measureList.appendChild(li.cloneNode(true));
     currentList.appendChild(li);
 
@@ -281,22 +278,22 @@ let currentList = currentPage.querySelector("ul");
     sandbox.removeChild(measurePage);
 
     if (tooTall) {
-      // remove from visible current page
+      // undo add to current page
       currentList.removeChild(currentList.lastElementChild);
-      // remove from measure list
+      // undo add to measuring list
       measureList.removeChild(measureList.lastElementChild);
 
-      // New page
+      // start new page
       pageIndex += 1;
       currentPage = createAAChunk(false /*withTitle*/);
       currentList = currentPage.querySelector("ul");
 
-      // put the item there
+      // place the item on the new page
       const li2 = document.createElement("li");
       li2.innerHTML = (typeof item === "string") ? item : (item?.title || JSON.stringify(item));
       currentList.appendChild(li2);
 
-      // reset measuring list to only items on the new page
+      // reset measuring list to match new page contents
       sandbox.removeChild(measureList);
       measureList = document.createElement("ul");
       measureList.className = "bullets aa-list no-columns";
@@ -315,44 +312,42 @@ let currentList = currentPage.querySelector("ul");
     lastPage.appendChild(disclaimer);
   }
 
-  document.body.removeChild(sandbox);
-  assignmentsPagesContainer.hidden = false;
+  // cleanup sandbox ONCE (guarded)
+  if (sandbox.parentNode) sandbox.parentNode.removeChild(sandbox);
 
-  // ---- helpers
-function createAAChunk(withTitle, isFirst = false) {
-  const sec = document.createElement("section");
-  sec.className = "aa-chunk page";
-  if (isFirst) sec.classList.add("first"); // <-- ensures page-break BEFORE the 1st A&A page
-
-  if (withTitle) {
-    const h2 = document.createElement("h2");
-    h2.className = "aa-title";
-    h2.textContent = "Assignments and Assessments";
-    sec.appendChild(h2);
-  }
-  const ul = document.createElement("ul");
-  ul.className = "bullets aa-list"; // columns via CSS
-  sec.appendChild(ul);
-  assignmentsPagesContainer.appendChild(sec);
-  return sec;
-}
-
-  function cloneForMeasure(pageNode) {
-    const clone = pageNode.cloneNode(true);
-    const ul = clone.querySelector("ul");
-    if (ul) ul.classList.add("no-columns");
-    return clone;
-  }
-  
-  // After constructing all pages:
-  document.body.removeChild(sandbox);
-  // Ensure visible A&A lists are in 2-column mode
+  // make sure visible lists are 2-column (remove measuring class)
   assignmentsPagesContainer
     .querySelectorAll(".aa-list")
     .forEach(ul => ul.classList.remove("no-columns"));
 
   assignmentsPagesContainer.hidden = false;
+
+  // ---- helpers
+  function createAAChunk(withTitle, isFirst = false) {
+    const sec = document.createElement("section");
+    sec.className = "aa-chunk page";
+    if (isFirst) sec.classList.add("first"); // page-break BEFORE the 1st A&A page
+    if (withTitle) {
+      const h2 = document.createElement("h2");
+      h2.className = "aa-title";
+      h2.textContent = "Assignments and Assessments";
+      sec.appendChild(h2);
+    }
+    const ul = document.createElement("ul");
+    ul.className = "bullets aa-list"; // columns via CSS
+    sec.appendChild(ul);
+    assignmentsPagesContainer.appendChild(sec);
+    return sec;
+  }
+
+  function cloneForMeasure(pageNode) {
+    const clone = pageNode.cloneNode(true);
+    const ul = clone.querySelector("ul");
+    if (ul) ul.classList.add("no-columns"); // force single column for measuring
+    return clone;
+  }
 }
+
 
 /** ------------------------ Render ------------------------ */
 function renderSyllabus(c) {
