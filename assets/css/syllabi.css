@@ -159,19 +159,20 @@
   }
 }
 
-/* Institutional Policy section */
+/* Institutional Policy section — match other sections inside the main card */
 .institutional-section {
   break-before: page;
   page-break-before: always;
   margin-top: 1rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 1rem;
+  /* remove nested card visuals */
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
 
-/* Section heading */
+/* Section heading (keep consistent with others) */
 .institutional-section h3,
 .institutional-section h4 {
   margin-top: 0;
@@ -195,7 +196,6 @@
   text-decoration: none;
   word-break: break-word;
 }
-
 #institutionalPolicyContainer a:hover {
   text-decoration: underline;
 }
@@ -205,8 +205,9 @@
   .institutional-section {
     page-break-before: always;
     break-before: page;
+    /* still no nested card on print */
+    background: transparent;
+    border: 0;
     box-shadow: none;
-    border: 1px solid #ccc;
-    background: #fff;
   }
 }
