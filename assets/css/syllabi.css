@@ -1,6 +1,6 @@
 /* assets/css/syllabi.css */
 
-/* --------- Screen (light touch) --------- */
+/* ---------- Screen (light touch) ---------- */
 :root{
   --primary:#007cbc;
   --text:#000;
@@ -14,293 +14,219 @@ body{
   margin: 0;
 }
 
-.page { /* matches your <main class="card page" ...> */
+.page{            /* Your <main class="page" ...> */
   max-width: 100%;
   margin: 0;
   padding: 20px;
 }
 
-/* keep your section separators for screen */
-.section-sep { border: 0; border-top: 1px solid #ccc; margin: 1rem 0; }
+.section-sep{
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1rem 0;
+}
 
-.bullets, .bulleted-list {
+.bullets, .bulleted-list{
   list-style: disc outside;
   padding-left: 19px;
   margin: 0 0 .5rem 0;
 }
-.bullets li, .bulleted-list li { font-size: 13px; }
+.bullets li, .bulleted-list li{ font-size: 13px; }
 
-/* subtle notes */
-.hours-note, .instructor-note { font-size: 0.9rem; color: var(--muted); }
+.hours-note, .instructor-note{ font-size: .9rem; color: var(--muted); }
 
-/* hide “no-print” controls in print, but show on screen */
-.no-print { display: block; }
+.no-print{ display: block; }
 
-/* --------- PRINT (match styles5.css as closely as possible) --------- */
+/* ---------- PRINT (styles5-compatible) ---------- */
 @media print {
 
-  @page { margin: 34px 16px 34px 16px; } /* top, right, bottom, left */
+  @page{
+    margin: 34px 16px 34px 16px; /* top right bottom left */
+  }
 
-  body {
-    background-color: #fff !important;
-    color: #000 !important;
-    padding: 0;
-    margin: 0;
+  body{
+    background:#fff !important;
+    color:#000 !important;
+    padding:0;
+    margin:0;
     font-family: Roboto, Arial, sans-serif;
-    font-size: 11px !important;
+    font-size:11px !important;
   }
 
-  /* Page container */
-  .page {
-    padding: 20px;
-    margin: 0;
+  /* Page container & last page behavior */
+  .page{
+    padding:20px;
+    margin:0;
     page-break-after: always;
-    /* strip any card visuals */
     background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
+    border:0 !important;
+    box-shadow:none !important;
   }
+  .page:last-of-type{ page-break-after: auto; } /* no phantom blank page */
 
-  .page-break { page-break-before: always; }
-  .second-page { margin-top: 20px; padding-top: 10px; }
+  .page-break{ page-break-before: always; }
+  .second-page{ margin-top:20px; padding-top:10px; }
 
   /* Titles */
-  h1 {
+  h1{
     font-family: "Roboto Condensed", sans-serif !important;
-    color: #007cbc !important;
-    font-size: 18px !important;
-    margin: 0 0 8px 0;
+    color:#007cbc !important;
+    font-size:18px !important;
+    margin:0 0 8px 0;
   }
-  h2 {
+  h2{
     font-family: "Roboto Condensed", sans-serif !important;
-    color: #007cbc !important;
-    font-size: 16px !important;
-    margin: 0 0 8px 0;
+    color:#007cbc !important;
+    font-size:16px !important;
+    margin:0 0 8px 0;
   }
-  h3 {
+  h3{
     font-family: "Roboto Condensed", sans-serif !important;
-    color: #007cbc !important;
-    font-size: 14px !important;
-    margin: 10px 0 6px 0;
+    color:#007cbc !important;
+    font-size:14px !important;
+    margin:10px 0 6px 0;
+    break-after: avoid;            /* keep heading with next block (important for A&A) */
+    page-break-after: avoid;
   }
-  h4 { font-size: 13px !important; margin: 8px 0 6px; }
+  h4{ font-size:13px !important; margin:8px 0 6px; }
 
   /* General text */
-  div, p, li, table {
-    font-size: 13px !important;
+  div, p, li, table{
+    font-size:13px !important;
     font-family: Roboto, Arial, sans-serif !important;
-    color: #000 !important;
-    padding: 0;
-    margin: 0;
-    line-height: 1.35;
+    color:#000 !important;
+    padding:0;
+    margin:0;
+    line-height:1.35;
   }
 
-  /* Bulleted lists */
-  .bulleted-list, .bullets {
+  /* Meta under title */
+  #syllabusMeta{ font-size:11px !important; color:#000 !important; }
+
+  /* Lists */
+  .bulleted-list, .bullets{
     list-style-type: disc;
     list-style-position: outside;
     padding-left: 19px;
     margin-bottom: 0;
     font-weight: normal !important;
   }
-  .bulleted-list li, .bullets li {
-    font-size: 13px !important;
+  .bulleted-list li, .bullets li{
+    font-size:13px !important;
     font-weight: normal !important;
-    text-indent: 0;
-    padding-left: 0;
-    margin: 0 0 2px 0;
+    text-indent:0;
+    padding-left:0;
+    margin:0 0 2px 0;
     break-inside: avoid;
   }
 
   /* Tables */
-  table { padding-left: 7px; }
+  table{ padding-left:7px; }
 
-  /* Inline HR inside list (if you ever insert one) */
-  ul .hr-inside-list {
-    width: 100% !important;
-    height: 0.5px;
-    background-color: grey;
-    border: none;
-    margin-left: -10px !important;
-    padding-left: 0 !important;
+  /* Controls hidden in print */
+  #controls, .no-print{ display:none !important; }
+
+  /* Section spacing & page-break control
+     Default: keep each section intact (if it would split, push to next page). */
+  #syllabus section{
+    margin:10px 0;
+    break-inside: avoid-page;   /* modern */
+    page-break-inside: avoid;   /* legacy */
   }
 
-  /* Hide controls when printing */
-  #controls, .no-print { display: none !important; }
-
-  /* Full-width “header bar” pattern (optional, if you add it later) */
-  .full-width-container {
-    width: 100%;
-    height: 45px;
-    background: linear-gradient(to bottom, #007cbc 48%, white 48%, white 52%, #007cbc 52%, #007cbc 100%) !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Roboto !important;
-    font-size: 18px !important;
-    margin: 0 0 10px 0;
+  /* --- Assignments & Assessments ---
+     Allow THIS section to span across pages (it can run 4-5 pages),
+     but keep the heading with the first list chunk. */
+  .aa-section{
+    break-inside: auto;         /* override default; allow section to flow across pages */
+    page-break-inside: auto;
+    /* If you still want A&A to *start* on a fresh page, uncomment the next line: */
+    /* break-before: page; page-break-before: always; */
   }
-  .centered-text-box {
-    font-family: "Roboto Condensed", sans-serif !important;
-    background-color: white !important;
-    color: black !important;
-    padding: 0.5px 20px !important;
-    border-radius: 15px !important;
-    font-size: 18px !important;
-    text-align: center !important;
-    display: inline-block !important;
+  .aa-section h3{
+    break-after: avoid;         /* keep heading with the beginning of the list */
+    page-break-after: avoid;
   }
-
-  /* Section spacing & page-break control */
-  #syllabus section {
-    page-break-inside: avoid;
-    break-inside: avoid;
-    margin: 10px 0;
-  }
-  .section-sep { border: 0; border-top: 1px solid #ccc; margin: 10px 0; }
-
-  /* Meta line just under the title */
-  #syllabusMeta { font-size: 11px !important; color: #000 !important; }
-
-  /* Classroom Hours */
-  #hoursContainer { margin-top: 4px; }
-  #hoursContainer ul { margin-top: 2px; }
-  .hours-note { margin-top: 6px; font-size: 12px !important; }
-
-  /* Instructors note */
-  .instructor-note {
-    margin-top: 6px;
-    font-size: 12px !important;
-    line-height: 1.4;
-  }
-
-  /* Canvas section */
-  .canvas-section { page-break-inside: avoid; break-inside: avoid; }
-  .canvas-section a { color: #007cbc !important; text-decoration: none; }
-  .canvas-section a:hover { text-decoration: underline; }
-
-  /* Assignments & Assessments — two columns + page wrap */
-  .aa-section {
-    page-break-before: always; /* per your earlier requirement */
-    page-break-after: always;  /* per your earlier requirement */
-    break-before: page;
-    break-after: page;
-  }
-
-  /* mimic styles5 “two-column-container” for your existing .aa-list */
-  .aa-list {
+  .aa-list{
     column-count: 2;
     column-gap: 30px;
-    column-fill: auto; /* better vertical flow */
+    column-fill: auto;
+    margin-top: 4px;
   }
-  .aa-list li {
+  .aa-list li{
     break-inside: avoid;
     -webkit-column-break-inside: avoid;
-    margin-bottom: 0; /* match styles5 */
+    margin-bottom: 0;
     padding-top: 0;
   }
-
-  /* disclaimer at the end of the A&A section */
-  .aa-disclaimer {
+  .aa-disclaimer{
     font-style: italic;
     font-size: 12px !important;
     border-top: 1px solid #ccc;
     margin-top: 8px;
     padding-top: 6px;
+    break-inside: avoid;
   }
 
-  /* Institutional Policy — keep as text blocks, consistent spacing */
-  .institutional-section {
-    page-break-before: always;
-    break-before: page;
+  /* Classroom Hours */
+  #hoursContainer{ margin-top:4px; }
+  #hoursContainer ul{ margin-top:2px; }
+  .hours-note{ margin-top:6px; font-size:12px !important; }
+
+  /* Instructor note */
+  .instructor-note{
+    margin-top:6px;
+    font-size:12px !important;
+    line-height:1.4;
+  }
+
+  /* Canvas */
+  .canvas-section{ break-inside: avoid; page-break-inside: avoid; }
+  .canvas-section a{ color:#007cbc !important; text-decoration:none; }
+  .canvas-section a:hover{ text-decoration: underline; }
+
+  /* Institutional Policy (last page): same margins/padding as all pages */
+  .institutional-section{
+    /* let it behave like normal sections (no forced break by default) */
+    break-inside: avoid-page;
     page-break-inside: avoid;
+    margin-top:10px;
+  }
+  #institutionalPolicyContainer p{
+    margin:4px 0;
+    font-size:13px !important;
+    line-height:1.45;
     break-inside: avoid;
-    margin-top: 10px;
   }
-  #institutionalPolicyContainer p {
-    margin: 4px 0;
-    font-size: 13px !important;
-    line-height: 1.45;
-  }
-  #institutionalPolicyContainer a {
-    color: #007cbc !important;
+  #institutionalPolicyContainer a{
+    color:#007cbc !important;
     text-decoration: none;
   }
-  #institutionalPolicyContainer a:hover { text-decoration: underline; }
+  #institutionalPolicyContainer a:hover{ text-decoration: underline; }
 
-  /* Strip any card look in print */
-  .card { border: 0 !important; box-shadow: none !important; background: transparent !important; }
-}
-@media print {
-  /* Keep all pages consistent, but don't add a phantom page after the last one */
-  .page { page-break-after: always; }
-  .page:last-of-type { page-break-after: auto; }
-
-  /* When a section starts a new page, remove its top margin to match the page margin */
-  .aa-section,
-  .institutional-section {
-    /* these already have page breaks before/after */
-    margin-top: 0 !important;   /* eliminate stacked top whitespace */
-  }
-}
-/* Screen stays the same; print avoids page edges around the rule */
-@media print {
-  .section-sep {
+  /* <hr> separators: visible, and discouraged from sitting at page edges */
+  .section-sep{
+    border:0;
+    border-top:1px solid #ccc;
+    margin:10px 0;
     break-before: avoid-page;
     break-after:  avoid-page;
-    /* legacy synonyms for broader support */
     page-break-before: avoid;
     page-break-after:  avoid;
-    /* keep the rule with its neighbors */
     break-inside: avoid;
   }
-}
-@media print {
-  .aa-section > *:first-child,
-  .institutional-section > *:first-child {
-    margin-top: 0 !important;
-  }
-}
 
-@media print {
-  /* Consistent last page behavior (no phantom blank page) */
-  .page { page-break-after: always; }
-  .page:last-of-type { page-break-after: auto; }
+  /* Ensure a section that *starts* a page doesn't add extra top margin */
+  #syllabus section > *:first-child{ margin-top:0 !important; }
 
-  /* Keep entire sections together: if they don't fit, move to next page */
-  #syllabus section {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  /* Sections that you already force to new pages: remove extra top margin so it
-     doesn't "double up" with the page margin. Add any other special sections if needed. */
-  .aa-section,
-  .institutional-section {
-    margin-top: 0 !important;
-  }
-
-  /* Restore normal hr look, but now each hr lives inside its section so it won't
-     be stranded at page top/bottom */
-  .section-sep {
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 10px 0;
-    /* DO NOT set break-before/after avoid here anymore */
-  }
-
-  /* When a section starts a new page, remove top margin on its first content item
-     so spacing looks consistent */
-  #syllabus section > *:first-child {
-    margin-top: 0 !important;
-  }
-
-  /* Optional: ensure complex blocks also avoid being split internally */
+  /* Keep complex blocks together when possible */
   .grade-table,
-  .aa-list,
   #hoursContainer > div,
-  #policiesContainer > div {
+  #policiesContainer > div{
     break-inside: avoid;
     page-break-inside: avoid;
   }
+
+  /* Remove any card chrome in print */
+  .card{ border:0 !important; box-shadow:none !important; background:transparent !important; }
 }
