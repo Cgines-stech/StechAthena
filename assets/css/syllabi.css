@@ -18,7 +18,7 @@ body{
 .print-header {
   width: 100%;
   text-align: center;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
 }
 
 .header-logo {
@@ -43,8 +43,8 @@ body{
 
 .centered-text-box {
   font-family: "Roboto Condensed", sans-serif !important;
-  background-color: white !important;
-  color: black !important;
+  background-color: #fff !important;
+  color: #000 !important;
   padding: 0.5px 20px !important;
   border-radius: 15px !important;
   font-size: 18px !important;
@@ -58,11 +58,17 @@ body{
   .print-header {
     margin-top: 0 !important;
     margin-bottom: 8px !important;
-    page-break-before: avoid;
     break-before: avoid;
+    break-after: avoid;
+    page-break-before: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Extra safety: don't show this header after page 1 even if duplicated by mistake */
+  .print-header:not(:first-of-type) {
+    display: none !important;
   }
 }
-
 
 .page{
   max-width: 100%;
