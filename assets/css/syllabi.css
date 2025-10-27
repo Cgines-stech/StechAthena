@@ -14,6 +14,56 @@ body{
   margin: 0;
 }
 
+/* ---------- Header Bar + Logo (Print + Screen) ---------- */
+.print-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.header-logo {
+    max-width: 50%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 5px;
+}
+
+/* Full-width header bar */
+.full-width-container {
+  width: 100%;
+  height: 45px;
+  background: linear-gradient(to bottom, #007cbc 48%, white 48%, white 52%, #007cbc 52%, #007cbc 100%) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Roboto, sans-serif !important;
+  font-size: 18px !important;
+}
+
+.centered-text-box {
+  font-family: "Roboto Condensed", sans-serif !important;
+  background-color: white !important;
+  color: black !important;
+  padding: 0.5px 20px !important;
+  border-radius: 15px !important;
+  font-size: 18px !important;
+  text-align: center !important;
+  display: inline-block !important;
+  border: 2px solid #007cbc;
+}
+
+/* Print-specific spacing so it doesn’t overlap top margin */
+@media print {
+  .print-header {
+    margin-top: 0 !important;
+    margin-bottom: 8px !important;
+    page-break-before: avoid;
+    break-before: avoid;
+  }
+}
+
+
 .page{
   max-width: 100%;
   margin: 0;
