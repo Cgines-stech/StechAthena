@@ -451,11 +451,14 @@ institutionalPolicyContainer.innerHTML = "";
 
 if (Array.isArray(institutionalPolicy) && institutionalPolicy.length) {
   institutionalPolicy.forEach(section => {
+
+    /* Removed Title
     if (section.title) {
       const h = document.createElement("h4");
       h.textContent = section.title;
       institutionalPolicyContainer.appendChild(h);
     }
+    */
 
     if (Array.isArray(section.content)) {
       const div = document.createElement("div");
