@@ -235,10 +235,15 @@ body{
 
   /* Default: keep each section intact (if it would split, push to next page) */
   #syllabus section{
-    margin:10px 0;
-    break-inside: avoid-page;
-    page-break-inside: avoid;
+    margin: 0 !important;
+    padding: 8px 0 !important;   /* was margin:10px 0; */
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
   }
+
+  /* First/last section shouldn’t add extra outer padding */
+  #syllabus section:first-of-type { padding-top: 0 !important; }
+  #syllabus section:last-of-type  { padding-bottom: 0 !important; }
 
   /* Classroom Hours */
   #hoursContainer{ margin-top:4px; }
@@ -283,13 +288,13 @@ body{
 
   /* <hr> separators */
   .section-sep{
-    border:0;
-    border-top:1px solid #ccc;
-    break-before: avoid-page;
-    break-after:  avoid-page;
-    page-break-before: avoid;
-    page-break-after:  avoid;
-    break-inside: avoid;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 6px 0 !important;    /* add a small gap only here */
+    break-before: avoid-page !important;
+    break-after:  avoid-page !important;
+    page-break-before: avoid !important;
+    page-break-after:  avoid !important;
   }
 
   /* If a section starts a page, don’t add extra top spacing */
@@ -407,5 +412,13 @@ body{
   #syllabus section > h3 {
     break-after: avoid-page !important;
     page-break-after: avoid !important;
+  }
+  
+  /* Hide <hr> if it’s the very first/last child (edge cases) */
+  #syllabus > .section-sep:first-child,
+  #syllabus > .section-sep:last-child,
+  #syllabus section > .section-sep:first-child,
+  #syllabus section > .section-sep:last-child{
+    display: none !important;
   }
 }
