@@ -2,24 +2,7 @@
 import { outlineTitlesOnly, outlineHoursTotal } from "../../data/utils/helpers.js";
 import institutionalPolicy from "../../data/institutionalPolicy.js";
 
-// Keep <hr> with the section ABOVE it so it's never stranded at page top/bottom
-(function absorbSectionSeparators() {
-  // Move each hr.section-sep into the previous <section>
-  document.querySelectorAll('hr.section-sep').forEach((hr, i, all) => {
-    const prev = hr.previousElementSibling;
-    if (prev && prev.tagName === 'SECTION') {
-      prev.appendChild(hr); // now the hr is the last child of the section above it
-    }
-  });
-  // Remove a final trailing hr if present
-  const hrs = document.querySelectorAll('hr.section-sep');
-  if (hrs.length) {
-    const last = hrs[hrs.length - 1];
-    if (!last.nextElementSibling) last.remove();
-  }
-})();
-
-/** Registries */
+/** ------------------------ Registries ------------------------ */
 const PROGRAM_FILE_REGISTRY = {
   "Advanced Emergency Medical Technician":
     "../../data/programs/Advanced Emergency Medical Technician/program.js",
@@ -70,7 +53,7 @@ const PROGRAM_COURSE_REGISTRY = {
   ],
 };
 
-// NEW: program-level fallbacks
+// Program-level fallbacks
 const PROGRAM_INSTRUCTORS_REGISTRY = {
   "Advanced Emergency Medical Technician":
     "../../data/programs/Advanced Emergency Medical Technician/instructors.js",
@@ -96,14 +79,15 @@ const PROGRAM_POLICIES_REGISTRY = {
     "../../data/programs/Automotive Technology/programPolicies.js",
 };
 
-/** DOM */
-const programSelect = document.getElementById("programSelect");
-const courseSelect  = document.getElementById("courseSelect");
-const printBtn      = document.getElementById("printBtn");
+/** ------------------------ DOM ------------------------ */
+const programSelect  = document.getElementById("programSelect");
+const courseSelect   = document.getElementById("courseSelect");
+const printBtn       = document.getElementById("printBtn");
+const toggleAA       = document.getElementById("toggleAA");
 
-const syllabus      = document.getElementById("syllabus");
-const syllabusTitle = document.getElementById("syllabusTitle");
-const syllabusMeta  = document.getElementById("syllabusMeta");
+const syllabus       = document.getElementById("syllabus");
+const syllabusTitle  = document.getElementById("syllabusTitle");
+const syllabusMeta   = document.getElementById("syllabusMeta");
 
 const courseDescription = document.getElementById("courseDescription");
 const courseObjectives  = document.getElementById("courseObjectives");
@@ -112,19 +96,17 @@ const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
 const policiesContainer = document.getElementById("policiesContainer");
 
-const toggleAA        = document.getElementById("toggleAA");
-const assignmentsPage = document.getElementById("assignmentsPage");
-const assignmentsList = document.getElementById("assignmentsList"); // moved to here now
-
-
-// NEW: outline list element
+// Outline + Hours
 const courseOutlineEl   = document.getElementById("courseOutline");
-
-// NEW: hours container
 const hoursContainer    = document.getElementById("hoursContainer");
 
+// Institutional
 const institutionalPolicyContainer = document.getElementById("institutionalPolicyContainer");
 
+// NEW: A&A multi-page container
+const assignmentsPagesContainer = document.getElementById("assignmentsPagesContainer");
+
+/** ------------------------ Helpers ------------------------ */
 const decodeDefaultArray = (mod) => {
   const candidates = [mod?.default, mod?.program, mod?.programs, mod?.course, mod?.courses];
   const data = candidates.find(Boolean);
@@ -163,6 +145,7 @@ async function safeImport(path) {
   }
 }
 
+/** ------------------------ Init ------------------------ */
 function populatePrograms() {
   programSelect.innerHTML = `<option value="">Select a program…</option>`;
   Object.keys(PROGRAM_FILE_REGISTRY).forEach(name => {
@@ -174,13 +157,15 @@ function populatePrograms() {
 }
 populatePrograms();
 
-/** Data cache */
+/** ------------------------ Data cache ------------------------ */
 let currentProgramName = "";
 let currentProgramCourses = [];
 let currentProgramInstructors = [];
 let currentProgramHours = [];
 let currentProgramPolicies = [];
+let currentAAItems = []; // for toggle reuse
 
+/** ------------------------ Events ------------------------ */
 programSelect.addEventListener("change", async () => {
   syllabus.hidden = true;
   currentProgramName = programSelect.value;
@@ -189,6 +174,8 @@ programSelect.addEventListener("change", async () => {
   currentProgramInstructors = [];
   currentProgramHours = [];
   currentProgramPolicies = [];
+  assignmentsPagesContainer.hidden = true;
+  assignmentsPagesContainer.innerHTML = "";
 
   if (!currentProgramName) return;
 
@@ -217,28 +204,149 @@ programSelect.addEventListener("change", async () => {
   });
 });
 
-toggleAA.addEventListener("change", () => {
-  // If there is content, show/hide the A&A page
-  const hasItems = assignmentsList && assignmentsList.children.length > 0 &&
-                   !(assignmentsList.children.length === 1 && assignmentsList.firstElementChild?.textContent?.includes("No assignments"));
-  assignmentsPage.hidden = !toggleAA.checked || !hasItems;
-});
-
 courseSelect.addEventListener("change", () => {
   const num = courseSelect.value;
   const c = currentProgramCourses.find(x => x.courseNumber === num);
-  if (!c) { syllabus.hidden = true; return; }
+  if (!c) {
+    syllabus.hidden = true;
+    assignmentsPagesContainer.hidden = true;
+    return;
+  }
   renderSyllabus(c);
   syllabus.hidden = false;
 });
 
-function renderSyllabus(c) {
-  // --- Set page title for better PDF filenames ---
-  if (c.courseNumber) {
-    document.title = c.courseNumber;
+// Toggle A&A on/off without reselecting course
+toggleAA?.addEventListener("change", () => {
+  if (toggleAA.checked && currentAAItems.length) {
+    buildAssignmentsPages(currentAAItems);
+    assignmentsPagesContainer.hidden = false;
   } else {
-    document.title = "Syllabus";
+    assignmentsPagesContainer.hidden = true;
+    assignmentsPagesContainer.innerHTML = "";
   }
+});
+
+printBtn.addEventListener("click", () => window.print());
+
+/** ------------------------ A&A paginator ------------------------ */
+/**
+ * Build paginated A&A pages with two-column lists and a disclaimer ONLY on the last page.
+ * We paginate by measuring in a temporary one-column list to get stable heights,
+ * then we re-enable columns for each page's list.
+ */
+function buildAssignmentsPages(items) {
+  assignmentsPagesContainer.innerHTML = "";
+
+  if (!Array.isArray(items) || !items.length) {
+    assignmentsPagesContainer.hidden = true;
+    return;
+  }
+
+  // Match your print layout math:
+  // 11" page ~1056px @ ~96dpi
+  // @page margins top/bottom 34px => 1056 - 68 = 988px
+  // .page padding top/bottom 20px => 988 - 40 = 948px
+  const PAGE_CONTENT_MAX_PX = 948;
+
+  // hidden measuring sandbox
+  const sandbox = document.createElement("div");
+  sandbox.style.position = "absolute";
+  sandbox.style.left = "-99999px";
+  sandbox.style.top = "0";
+  sandbox.style.width = "800px";
+  document.body.appendChild(sandbox);
+
+  let pageIndex = 0;
+  let currentPage = createAAChunk(pageIndex === 0 /*withTitle*/);
+  let currentList = currentPage.querySelector("ul");
+
+  // measuring list (single column)
+  let measureList = document.createElement("ul");
+  measureList.className = "bullets aa-list no-columns";
+  sandbox.appendChild(measureList);
+
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    li.innerHTML = (typeof item === "string") ? item : (item?.title || JSON.stringify(item));
+
+    // Try to fit in current page:
+    measureList.appendChild(li.cloneNode(true));
+    currentList.appendChild(li);
+
+    const measurePage = cloneForMeasure(currentPage);
+    sandbox.appendChild(measurePage);
+
+    const tooTall = measurePage.scrollHeight > PAGE_CONTENT_MAX_PX;
+    sandbox.removeChild(measurePage);
+
+    if (tooTall) {
+      // remove from visible current page
+      currentList.removeChild(currentList.lastElementChild);
+      // remove from measure list
+      measureList.removeChild(measureList.lastElementChild);
+
+      // New page
+      pageIndex += 1;
+      currentPage = createAAChunk(false /*withTitle*/);
+      currentList = currentPage.querySelector("ul");
+
+      // put the item there
+      const li2 = document.createElement("li");
+      li2.innerHTML = (typeof item === "string") ? item : (item?.title || JSON.stringify(item));
+      currentList.appendChild(li2);
+
+      // reset measuring list to only items on the new page
+      sandbox.removeChild(measureList);
+      measureList = document.createElement("ul");
+      measureList.className = "bullets aa-list no-columns";
+      measureList.appendChild(li2.cloneNode(true));
+      sandbox.appendChild(measureList);
+    }
+  });
+
+  // Add disclaimer ONLY on the last page
+  const pages = assignmentsPagesContainer.querySelectorAll(".aa-chunk.page");
+  if (pages.length) {
+    const lastPage = pages[pages.length - 1];
+    const disclaimer = document.createElement("p");
+    disclaimer.className = "aa-disclaimer";
+    disclaimer.innerHTML = `<em>Subject to change. Please consult your Canvas course for the most current instructions and updates</em>`;
+    lastPage.appendChild(disclaimer);
+  }
+
+  document.body.removeChild(sandbox);
+  assignmentsPagesContainer.hidden = false;
+
+  // ---- helpers
+  function createAAChunk(withTitle) {
+    const sec = document.createElement("section");
+    sec.className = "aa-chunk page";
+    if (withTitle) {
+      const h2 = document.createElement("h2");
+      h2.className = "aa-title";
+      h2.textContent = "Assignments and Assessments";
+      sec.appendChild(h2);
+    }
+    const ul = document.createElement("ul");
+    ul.className = "bullets aa-list"; // columns applied by CSS
+    sec.appendChild(ul);
+    assignmentsPagesContainer.appendChild(sec);
+    return sec;
+  }
+
+  function cloneForMeasure(pageNode) {
+    const clone = pageNode.cloneNode(true);
+    const ul = clone.querySelector("ul");
+    if (ul) ul.classList.add("no-columns");
+    return clone;
+  }
+}
+
+/** ------------------------ Render ------------------------ */
+function renderSyllabus(c) {
+  // Page title for better PDF filenames
+  document.title = c?.courseNumber ? c.courseNumber : "Syllabus";
 
   // Title & meta
   syllabusTitle.textContent = `${c.courseNumber || ""} ${c.courseName ? "— " + c.courseName : ""}`;
@@ -258,14 +366,14 @@ function renderSyllabus(c) {
     courseObjectives.appendChild(li);
   });
 
-  // --- Course Outline (titles only) ---
-courseOutlineEl.innerHTML = "";
-const outlineTitles = outlineTitlesOnly(c);
-(outlineTitles.length ? outlineTitles : ["No outline provided."]).forEach(title => {
-  const li = document.createElement("li");
-  li.innerHTML = title === "No outline provided." ? `<span class="muted">${title}</span>` : title;
-  courseOutlineEl.appendChild(li);
-});
+  // Course Outline (titles only)
+  courseOutlineEl.innerHTML = "";
+  const outlineTitles = outlineTitlesOnly(c);
+  (outlineTitles.length ? outlineTitles : ["No outline provided."]).forEach(title => {
+    const li = document.createElement("li");
+    li.innerHTML = title === "No outline provided." ? `<span class="muted">${title}</span>` : title;
+    courseOutlineEl.appendChild(li);
+  });
 
   // Instructors — course overrides if non-placeholder; else program default
   instructorsList.innerHTML = "";
@@ -296,15 +404,16 @@ const outlineTitles = outlineTitlesOnly(c);
     instructorsList.appendChild(li);
   }
 
-// --- Add instructor communication note ---
-const instructorNote = document.createElement("p");
-instructorNote.className = "instructor-note";
-instructorNote.innerHTML = `
-  Office Hours: By appointment<br>
-  <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
-`;
-instructorsList.parentElement.appendChild(instructorNote);
-
+  // Ensure previous instructor note is removed, then add it
+  const oldNotes = instructorsList.parentElement.querySelectorAll(".instructor-note");
+  oldNotes.forEach(n => n.remove());
+  const instructorNote = document.createElement("p");
+  instructorNote.className = "instructor-note";
+  instructorNote.innerHTML = `
+    Office Hours: By appointment<br>
+    <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
+  `;
+  instructorsList.parentElement.appendChild(instructorNote);
 
   // Classroom Hours — course overrides if non-placeholder; else program default
   hoursContainer.innerHTML = "";
@@ -320,7 +429,7 @@ instructorsList.parentElement.appendChild(instructorNote);
       const header = document.createElement("p");
       const sd = h.startDate || "";
       const ed = h.endDate || "";
-      header.innerHTML = `${sd && ed ? `${sd} – ${ed}` : (sd || ed || "Dates not specified")}`;
+      header.textContent = (sd && ed) ? `${sd} – ${ed}` : (sd || ed || "Dates not specified");
       block.appendChild(header);
 
       const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
@@ -350,14 +459,14 @@ instructorsList.parentElement.appendChild(instructorNote);
     hoursContainer.appendChild(p);
   }
 
-  // --- Add link to full course schedule ---
-const scheduleNote = document.createElement("p");
-scheduleNote.className = "hours-note";
-scheduleNote.innerHTML = `For a full list of course hours visit: 
-  <a href="https://stech.edu/course-schedules/" target="_blank" rel="noopener">
-    Course Schedule
-  </a>`;
-hoursContainer.appendChild(scheduleNote);
+  // Add link to full course schedule
+  const scheduleNote = document.createElement("p");
+  scheduleNote.className = "hours-note";
+  scheduleNote.innerHTML = `For a full list of course hours visit:
+    <a href="https://stech.edu/course-schedules/" target="_blank" rel="noopener">
+      Course Schedule
+    </a>`;
+  hoursContainer.appendChild(scheduleNote);
 
   // Materials — syllabus-only books
   materialsList.innerHTML = "";
@@ -385,29 +494,21 @@ hoursContainer.appendChild(scheduleNote);
     materialsList.appendChild(li);
   }
 
-// --- Assignments & Assessments (own page) ---
-assignmentsList.innerHTML = "";
+  // -------- Assignments & Assessments (paginated own pages) --------
+  const aa =
+    Array.isArray(c.courseAssignmentsandAsssessments) ? c.courseAssignmentsandAsssessments :
+    Array.isArray(c.courseAssignmentsAndAssessments) ? c.courseAssignmentsAndAssessments :
+    Array.isArray(c.assignmentsAndAssessments)       ? c.assignmentsAndAssessments :
+    [];
 
-// Support several possible field names safely:
-const aa =
-  Array.isArray(c.courseAssignmentsandAsssessments) ? c.courseAssignmentsandAsssessments :
-  Array.isArray(c.courseAssignmentsAndAssessments) ? c.courseAssignmentsAndAssessments :
-  Array.isArray(c.assignmentsAndAssessments)       ? c.assignmentsAndAssessments :
-  [];
-
-const aaItems = aa.length ? aa : ["No assignments provided."];
-
-aaItems.forEach(item => {
-  const li = document.createElement("li");
-  li.innerHTML = (item === "No assignments provided.")
-    ? `<span class="muted">${item}</span>`
-    : (typeof item === "string" ? item : (item?.title || JSON.stringify(item)));
-  assignmentsList.appendChild(li);
-});
-
-// Show/hide A&A page based on data + toggle
-const hasAARealItems = !(aaItems.length === 1 && aaItems[0] === "No assignments provided.");
-assignmentsPage.hidden = !(toggleAA.checked && hasAARealItems);
+  currentAAItems = Array.isArray(aa) && aa.length ? aa : [];
+  if (toggleAA.checked && currentAAItems.length) {
+    buildAssignmentsPages(currentAAItems);
+    assignmentsPagesContainer.hidden = false;
+  } else {
+    assignmentsPagesContainer.hidden = true;
+    assignmentsPagesContainer.innerHTML = "";
+  }
 
   // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";
@@ -437,7 +538,7 @@ assignmentsPage.hidden = !(toggleAA.checked && hasAARealItems);
       tbl.className = "grade-table";
       const rows = 3, cols = 4;
       const total = rows * cols;
-      const items = p.scale.slice(0, total);
+      const items = (p.scale || []).slice(0, total);
       for (let r = 0; r < rows; r++) {
         const tr = document.createElement("tr");
         for (let c = 0; c < cols; c++) {
@@ -476,32 +577,21 @@ assignmentsPage.hidden = !(toggleAA.checked && hasAARealItems);
     }
   });
 
-// --- Institutional Policy (static data file) ---
-institutionalPolicyContainer.innerHTML = "";
-
-if (Array.isArray(institutionalPolicy) && institutionalPolicy.length) {
-  institutionalPolicy.forEach(section => {
-
-    /* Removed Title
-    if (section.title) {
-      const h = document.createElement("h4");
-      h.textContent = section.title;
-      institutionalPolicyContainer.appendChild(h);
-    }
-    */
-
-    if (Array.isArray(section.content)) {
-      const div = document.createElement("div");
-      section.content.forEach(pText => {
-        const p = document.createElement("p");
-        p.innerHTML = pText; // includes <a> and <br> tags
-        div.appendChild(p);
-      });
-      institutionalPolicyContainer.appendChild(div);
-    }
-  });
-}
-
+  // -------- Institutional Policy (static data file) --------
+  institutionalPolicyContainer.innerHTML = "";
+  if (Array.isArray(institutionalPolicy) && institutionalPolicy.length) {
+    institutionalPolicy.forEach(section => {
+      if (Array.isArray(section.content)) {
+        const div = document.createElement("div");
+        section.content.forEach(pText => {
+          const p = document.createElement("p");
+          p.innerHTML = pText; // includes <a> and <br> tags
+          div.appendChild(p);
+        });
+        institutionalPolicyContainer.appendChild(div);
+      }
+    });
+  }
 }
 
 printBtn.addEventListener("click", () => window.print());

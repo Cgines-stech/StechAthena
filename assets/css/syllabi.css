@@ -315,3 +315,73 @@ body{
     background: transparent;
   }
 }
+
+/* ---------- A&A pagination pages ---------- */
+.aa-chunk.page {
+  padding: 20px;
+  /* each chunk prints on its own page */
+  page-break-after: always;
+  break-after: page;
+}
+.aa-chunk.page:last-of-type {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+/* Title on each A&A page (we'll put only one on the first page) */
+.aa-title {
+  margin: 0 0 8px 0;
+}
+
+/* Two-column list (screen + print) */
+.aa-list {
+  column-count: 2;
+  column-gap: 30px;
+  column-fill: auto;
+  margin-top: 4px;
+}
+.aa-list li {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+/* During pagination measuring we force single column */
+.aa-list.no-columns {
+  column-count: 1 !important;
+}
+
+/* Disclaimer text (ONLY added to the last A&A page) */
+.aa-disclaimer {
+  margin-top: 12px;
+  font-style: italic;
+  color: var(--muted);
+  border-top: 1px solid #ccc;
+  padding-top: 6px;
+}
+
+@media print {
+  .aa-chunk.page {
+    padding: 20px;
+  }
+  .aa-title {
+    font-family: "Roboto Condensed", sans-serif !important;
+    color: #007cbc !important;
+    font-size: 16px !important;
+    margin: 0 0 8px 0;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .aa-list {
+    column-count: 2;
+    column-gap: 30px;
+    column-fill: auto;
+    margin-bottom: 8px;
+  }
+  /* Keep the disclaimer with the bottom of that last page when possible */
+  .aa-disclaimer {
+    font-size: 12px !important;
+    color: #000 !important;
+  }
+}
