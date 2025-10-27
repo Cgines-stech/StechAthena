@@ -247,7 +247,7 @@ function buildAssignmentsPages(items) {
   // @page top+bottom = 34 + 34 => 1056 - 68 = 988px printable
   // .aa-chunk.page padding (print below) = 12 + 12 => 988 - 24 = 964px
   const PAGE_CONTENT_MAX_PX = 964;
-  const SLACK = 48; // tolerance so we don't break too early
+  const SLACK = 16; // tolerance so we don't break too early
 
   // hidden measuring sandbox
   const sandbox = document.createElement("div");

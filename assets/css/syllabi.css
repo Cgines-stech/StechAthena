@@ -268,60 +268,63 @@ body{
 }
 
 /* ---------- A&A: print-only, PDF-focused ---------- */
+/* ===== A&A: Print-only hard rules (must be last) ===== */
 @media print {
-  /* Each A&A chunk == one page with minimal padding */
-  .aa-chunk.page{
-    padding: 12px;                 /* tighter than 20px */
-    page-break-after: always;
-    break-after: page;
+  /* Every A&A chunk is a true page with tight padding */
+  .aa-chunk.page {
+    display: block !important;
+    padding: 12px !important;               /* tighter = more vertical room */
+    page-break-before: auto !important;
+    page-break-after: always !important;
+    break-before: auto !important;
+    break-after: page !important;
   }
-  .aa-chunk.page.first{
-    page-break-before: always;
-    break-before: page;
-  }
-  .aa-chunk.page:last-of-type{
-    page-break-after: always;
-    break-after: page;
-  }
-
-  /* Title on first page only (added by JS) */
-  .aa-title{
-    font-family: "Roboto Condensed", sans-serif !important;
-    color: #007cbc !important;
-    font-size: 16px !important;
-    margin: 0 0 6px 0;
-    break-after: avoid;
-    page-break-after: avoid;
+  .aa-chunk.page.first {
+    page-break-before: always !important;
+    break-before: page !important;
   }
 
-  /* Two-column list that fills vertically (no balancing) */
-  .aa-list{
-    display: block;
-    width: 100%;
-    padding-left: 10px;            /* less inset than .bullets default */
+  /* Force the list into two columns, no matter what else is loaded */
+  #assignmentsPagesContainer ul.aa-list {
+    display: block !important;
+    width: 100% !important;
+    padding-left: 10px !important;
+
+    /* columns */
+    columns: 2 !important;
     column-count: 2 !important;
     column-gap: 24px !important;
-    column-fill: auto;             /* <-- DO NOT balance; fill down to bottom */
+    column-fill: auto !important;           /* fill down the page */
+    -webkit-columns: 2 !important;
     -webkit-column-count: 2 !important;
     -webkit-column-gap: 24px !important;
-    -webkit-column-fill: auto;
+    -webkit-column-fill: auto !important;
+    -moz-columns: 2 !important;
     -moz-column-count: 2 !important;
     -moz-column-gap: 24px !important;
   }
 
-  .aa-list li{
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-    margin: 0 0 2px 0;
-    padding: 0;
+  #assignmentsPagesContainer ul.aa-list li {
+    break-inside: avoid !important;
+    -webkit-column-break-inside: avoid !important;
+    margin: 0 0 2px 0 !important;
+    padding: 0 !important;
   }
 
-  /* Disclaimer only appears on the last A&A page (added by JS) */
-  .aa-disclaimer{
-    margin-top: 10px;
+  /* Title + disclaimer (unchanged logic; just tidy sizing) */
+  .aa-title {
+    font-family: "Roboto Condensed", sans-serif !important;
+    color: #007cbc !important;
+    font-size: 16px !important;
+    margin: 0 0 6px 0 !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+  .aa-disclaimer {
+    margin-top: 10px !important;
     font-size: 12px !important;
     color: #000 !important;
-    border-top: 1px solid #ccc;
-    padding-top: 6px;
+    border-top: 1px solid #ccc !important;
+    padding-top: 6px !important;
   }
 }
