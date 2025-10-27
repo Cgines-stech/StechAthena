@@ -30,10 +30,19 @@ body{
 }
 
 /* Full-width header bar */
+/* Full-width header bar (screen) */
 .full-width-container {
   width: 100%;
   height: 45px;
-  background: linear-gradient(to bottom, #007cbc 48%, white 48%, white 52%, #007cbc 52%, #007cbc 100%) !important;
+  background: linear-gradient(
+    to bottom,
+    #007cbc 0%,
+    #007cbc 47.5%,
+    #ffffff 47.5%,
+    #ffffff 52.5%,
+    #007cbc 52.5%,
+    #007cbc 100%
+  ) !important;
   display: flex;
   justify-content: center;
   align-items: center;
