@@ -159,57 +159,54 @@
   }
 }
 
-/* Institutional Policy section — match bullets/spacing */
+/* Institutional Policy section */
 .institutional-section {
   break-before: page;
   page-break-before: always;
   margin-top: 1rem;
-  page-break-inside: avoid;
-  break-inside: avoid;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
 }
 
-/* Title style (align with other subheads) */
+/* Section heading */
+.institutional-section h3,
 .institutional-section h4 {
-  margin: .6rem 0 .3rem;
-  font-size: .95rem;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
   font-weight: 600;
-}
-
-/* Make items look like the standard bullets list */
-#institutionalPolicyContainer {
-  padding-left: 1.1rem; /* same indent as .bullets */
-  margin: .25rem 0;
-}
-
-#institutionalPolicyContainer p {
-  margin: 0.1rem 0;           /* match .bullets li spacing */
-  font-size: .85rem;          /* match .bullets li size */
-  line-height: 1.45;
-  position: relative;
-}
-
-/* Simulated bullet to match .bullets */
-#institutionalPolicyContainer p::before {
-  content: "•";
-  position: absolute;
-  left: -1.1rem;              /* aligns with padding-left above */
-  top: 0;
-  line-height: 1.45;
   color: var(--text);
 }
 
-/* Links match the rest */
+/* Paragraph styling */
+#institutionalPolicyContainer p {
+  margin: 0.4rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* Links */
 #institutionalPolicyContainer a {
   color: var(--primary);
   text-decoration: none;
+  word-break: break-word;
 }
+
 #institutionalPolicyContainer a:hover {
   text-decoration: underline;
 }
 
+/* Print */
 @media print {
   .institutional-section {
-    page-break-inside: avoid;
-    break-inside: avoid;
+    page-break-before: always;
+    break-before: page;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    background: #fff;
   }
 }
