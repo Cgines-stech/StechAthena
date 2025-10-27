@@ -56,12 +56,11 @@ body{
 /* Print-specific spacing so it doesn’t overlap top margin */
 @media print {
   .print-header {
-    margin-top: 0 !important;
-    margin-bottom: 8px !important;
-    break-before: avoid;
-    break-after: avoid;
+    break-inside: avoid;
+    page-break-inside: avoid;
     page-break-before: avoid;
     page-break-after: avoid;
+    margin-bottom: 8px !important;
   }
 
   /* Extra safety: don't show this header after page 1 even if duplicated by mistake */
