@@ -363,13 +363,10 @@ if (mats.length) {
 
     const title   = m.title || m.name || "";
     const author  = m.author ? ` by ${m.author}` : "";
-    const edition = m.edition ? `, ${m.edition}` : "";
     const isbn    = m.isbn ? ` (ISBN: ${m.isbn})` : "";
     const price   = (typeof m.price === "number")
       ? ` — $${m.price.toFixed(2)}`
       : (m.price ? ` — ${m.price}` : "");
-    const noteStr = m.notes ?? m.note; // accept both 'notes' and 'note'
-    const notes   = noteStr ? ` — ${noteStr}` : "";
 
     const text = [title, author, isbn]
       .filter(Boolean)
