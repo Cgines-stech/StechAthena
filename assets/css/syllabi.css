@@ -408,12 +408,4 @@ body{
     break-after: avoid-page !important;
     page-break-after: avoid !important;
   }
-
-  /* Ensure <hr> never forces a break around sections */
-  .section-sep {
-    break-before: avoid-page !important;
-    break-after:  avoid-page !important;
-    page-break-before: avoid !important;
-    page-break-after:  avoid !important;
-  }
 }
