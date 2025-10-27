@@ -231,3 +231,33 @@ body{
   /* Strip any card look in print */
   .card { border: 0 !important; box-shadow: none !important; background: transparent !important; }
 }
+@media print {
+  /* Keep all pages consistent, but don't add a phantom page after the last one */
+  .page { page-break-after: always; }
+  .page:last-of-type { page-break-after: auto; }
+
+  /* When a section starts a new page, remove its top margin to match the page margin */
+  .aa-section,
+  .institutional-section {
+    /* these already have page breaks before/after */
+    margin-top: 0 !important;   /* eliminate stacked top whitespace */
+  }
+}
+/* Screen stays the same; print avoids page edges around the rule */
+@media print {
+  .section-sep {
+    break-before: avoid-page;
+    break-after:  avoid-page;
+    /* legacy synonyms for broader support */
+    page-break-before: avoid;
+    page-break-after:  avoid;
+    /* keep the rule with its neighbors */
+    break-inside: avoid;
+  }
+}
+@media print {
+  .aa-section > *:first-child,
+  .institutional-section > *:first-child {
+    margin-top: 0 !important;
+  }
+}
