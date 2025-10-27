@@ -310,6 +310,15 @@ const outlineTitles = outlineTitlesOnly(c);
     hoursContainer.appendChild(p);
   }
 
+  // --- Add link to full course schedule ---
+const scheduleNote = document.createElement("p");
+scheduleNote.className = "hours-note";
+scheduleNote.innerHTML = `For a full list of course hours visit: 
+  <a href="https://stech.edu/course-schedules/" target="_blank" rel="noopener">
+    Course Schedule
+  </a>`;
+hoursContainer.appendChild(scheduleNote);
+
   // Materials — syllabus-only books
   materialsList.innerHTML = "";
   const mats = Array.isArray(c.syllabusBooks) ? c.syllabusBooks : [];

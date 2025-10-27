@@ -102,3 +102,19 @@
     margin-top: 1.5rem;
   }
 }
+
+/* Classroom hours note */
+.hours-note {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hours-note a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.hours-note a:hover {
+  text-decoration: underline;
+}
