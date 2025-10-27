@@ -268,15 +268,13 @@ body{
 }
 
 /* ---------- A&A: print-only, PDF-focused ---------- */
-/* ===== A&A: Print-only hard rules (must be last) ===== */
+/* ===== FINAL print fixes for A&A (append at end of file) ===== */
 @media print {
-  /* Every A&A chunk is a true page with tight padding */
+  /* Let A&A chunks behave as independent pages */
   .aa-chunk.page {
     display: block !important;
-    padding: 12px !important;               /* tighter = more vertical room */
-    page-break-before: auto !important;
+    padding: 12px !important;
     page-break-after: always !important;
-    break-before: auto !important;
     break-after: page !important;
   }
   .aa-chunk.page.first {
@@ -284,17 +282,23 @@ body{
     break-before: page !important;
   }
 
-  /* Force the list into two columns, no matter what else is loaded */
+  /* Cancel the generic "avoid breaking inside sections" just for A&A,
+     so multi-columns aren't neutered by break-inside rules */
+  #syllabus section.aa-chunk.page {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Hard-force two columns for the A&A lists in print */
   #assignmentsPagesContainer ul.aa-list {
     display: block !important;
     width: 100% !important;
     padding-left: 10px !important;
 
-    /* columns */
     columns: 2 !important;
     column-count: 2 !important;
     column-gap: 24px !important;
-    column-fill: auto !important;           /* fill down the page */
+    column-fill: auto !important; /* fill down the page */
     -webkit-columns: 2 !important;
     -webkit-column-count: 2 !important;
     -webkit-column-gap: 24px !important;
@@ -309,22 +313,5 @@ body{
     -webkit-column-break-inside: avoid !important;
     margin: 0 0 2px 0 !important;
     padding: 0 !important;
-  }
-
-  /* Title + disclaimer (unchanged logic; just tidy sizing) */
-  .aa-title {
-    font-family: "Roboto Condensed", sans-serif !important;
-    color: #007cbc !important;
-    font-size: 16px !important;
-    margin: 0 0 6px 0 !important;
-    break-after: avoid !important;
-    page-break-after: avoid !important;
-  }
-  .aa-disclaimer {
-    margin-top: 10px !important;
-    font-size: 12px !important;
-    color: #000 !important;
-    border-top: 1px solid #ccc !important;
-    padding-top: 6px !important;
   }
 }
