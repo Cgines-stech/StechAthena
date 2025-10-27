@@ -1,5 +1,5 @@
 // assets/js/syllabi.js
-import { outlineTitlesOnly } from "../../utils/helpers.js";
+import { outlineTitlesOnly, outlineHoursTotal } from "../../data/utils/helpers.js";
 
 /** Registries */
 const PROGRAM_FILE_REGISTRY = {
@@ -207,7 +207,7 @@ function renderSyllabus(c) {
   } else {
     document.title = "Syllabus";
   }
-  
+
   // Title & meta
   syllabusTitle.textContent = `${c.courseNumber || ""} ${c.courseName ? "— " + c.courseName : ""}`;
   syllabusMeta.textContent = [
