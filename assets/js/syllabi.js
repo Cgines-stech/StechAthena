@@ -112,7 +112,10 @@ const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
 const policiesContainer = document.getElementById("policiesContainer");
 
-const assignmentsList    = document.getElementById("assignmentsList");
+const toggleAA        = document.getElementById("toggleAA");
+const assignmentsPage = document.getElementById("assignmentsPage");
+const assignmentsList = document.getElementById("assignmentsList"); // moved to here now
+
 
 // NEW: outline list element
 const courseOutlineEl   = document.getElementById("courseOutline");
@@ -212,6 +215,13 @@ programSelect.addEventListener("change", async () => {
     opt.textContent = `${c.courseNumber || ""} ${c.courseName ? "— " + c.courseName : ""}`;
     courseSelect.appendChild(opt);
   });
+});
+
+toggleAA.addEventListener("change", () => {
+  // If there is content, show/hide the A&A page
+  const hasItems = assignmentsList && assignmentsList.children.length > 0 &&
+                   !(assignmentsList.children.length === 1 && assignmentsList.firstElementChild?.textContent?.includes("No assignments"));
+  assignmentsPage.hidden = !toggleAA.checked || !hasItems;
 });
 
 courseSelect.addEventListener("change", () => {
@@ -375,12 +385,12 @@ hoursContainer.appendChild(scheduleNote);
     materialsList.appendChild(li);
   }
 
-// --- Assignments & Assessments ---
+// --- Assignments & Assessments (own page) ---
 assignmentsList.innerHTML = "";
 
 // Support several possible field names safely:
 const aa =
-  Array.isArray(c.courseAssignmentsandAsssessments) ? c.courseAssignmentsandAsssessments : // (your sample TEEM1904)
+  Array.isArray(c.courseAssignmentsandAsssessments) ? c.courseAssignmentsandAsssessments :
   Array.isArray(c.courseAssignmentsAndAssessments) ? c.courseAssignmentsAndAssessments :
   Array.isArray(c.assignmentsAndAssessments)       ? c.assignmentsAndAssessments :
   [];
@@ -395,6 +405,9 @@ aaItems.forEach(item => {
   assignmentsList.appendChild(li);
 });
 
+// Show/hide A&A page based on data + toggle
+const hasAARealItems = !(aaItems.length === 1 && aaItems[0] === "No assignments provided.");
+assignmentsPage.hidden = !(toggleAA.checked && hasAARealItems);
 
   // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";

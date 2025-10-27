@@ -20,6 +20,11 @@
       <label class="muted" for="courseSelect">Course</label>
       <select id="courseSelect"></select>
 
+      <!-- inside .controls, after the Course select -->
+<label class="muted" for="toggleAA">Assignments</label>
+<input type="checkbox" id="toggleAA" checked />
+
+
       <button id="printBtn" type="button">Print / Save PDF</button>
       <a class="btn back-btn" href="index.html">← Back</a>
     </div>
@@ -93,13 +98,19 @@
 </section>
 
 <!-- (Your existing Assignments & Assessments section follows here) -->
-<section id="assignmentsSection" class="aa-section">
-  <h3>Assignments and Assessments</h3>
+<!-- Assignments & Assessments live on their own page(s) -->
+<section id="assignmentsPage" class="page aa-page" hidden>
+  <h2 class="aa-title">Assignments and Assessments</h2>
+
+  <!-- Two-column list -->
   <ul id="assignmentsList" class="bullets aa-list"></ul>
+
+  <!-- Page footer (prints at the bottom of each A&A page) -->
   <p class="aa-disclaimer">
     <em>Subject to change. Please consult your Canvas course for the most current instructions and updates</em>
   </p>
 </section>
+
 
 <hr class="section-sep" />
 

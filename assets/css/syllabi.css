@@ -236,3 +236,82 @@ body{
   /* Remove any card chrome in print */
   .card{ border:0 !important; box-shadow:none !important; background:transparent !important; }
 }
+
+/* ---------- Assignments & Assessments page ---------- */
+.aa-page {
+  /* screen */
+  padding: 20px;
+}
+
+/* A&A title (screen + print) */
+.aa-title {
+  margin: 0 0 8px 0;
+}
+
+/* Two-column list (screen) */
+.aa-list {
+  column-count: 2;
+  column-gap: 30px;
+  column-fill: auto;
+  margin-top: 4px;
+}
+.aa-list li {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+/* Disclaimer sits under list on screen */
+.aa-disclaimer {
+  margin-top: 12px;
+  font-style: italic;
+  color: var(--muted);
+  border-top: 1px solid #ccc;
+  padding-top: 6px;
+}
+
+/* ---------- Print behavior ---------- */
+@media print {
+  /* A&A is its own page(s) */
+  .aa-page {
+    page-break-before: always;
+    page-break-after: always;
+    break-before: page;
+    break-after: page;
+    position: relative; /* establish a containing block for fallback pinning */
+    padding: 20px;
+  }
+
+  .aa-title {
+    font-family: "Roboto Condensed", sans-serif !important;
+    color: #007cbc !important;
+    font-size: 16px !important;
+    margin: 0 0 8px 0;
+    break-after: avoid; /* keep title with list start */
+    page-break-after: avoid;
+  }
+
+  .aa-list {
+    column-count: 2;
+    column-gap: 30px;
+    column-fill: auto;
+    margin-bottom: 24px; /* breathing room above the footer */
+  }
+
+  /* Pin the disclaimer to the bottom of each A&A page.
+     Chrome/Edge print duplicate position:fixed on every page, which is
+     perfect because A&A has its *own* pages. It will not appear on non-A&A pages. */
+  .aa-disclaimer {
+    position: fixed;
+    left: 16px;                /* match @page left margin */
+    right: 16px;               /* match @page right margin */
+    bottom: 34px;              /* match @page bottom margin */
+    font-style: italic;
+    font-size: 12px !important;
+    color: #000 !important;
+    border-top: 1px solid #ccc;
+    padding-top: 6px;
+    background: transparent;
+  }
+}
