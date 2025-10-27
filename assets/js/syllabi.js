@@ -102,6 +102,8 @@ const hoursContainer    = document.getElementById("hoursContainer");
 // Institutional
 const institutionalPolicyContainer = document.getElementById("institutionalPolicyContainer");
 
+const aaContainer = document.getElementById("aaContainer");
+
 /** ------------------------ Helpers ------------------------ */
 const decodeDefaultArray = (mod) => {
   const candidates = [mod?.default, mod?.program, mod?.programs, mod?.course, mod?.courses];
@@ -209,6 +211,103 @@ courseSelect.addEventListener("change", () => {
 });
 
 printBtn.addEventListener("click", () => window.print());
+/**
+ * Build paginated A&A pages with 2-column lists.
+ * Only the last page gets the disclaimer.
+ */
+function buildAAPages(items) {
+  aaContainer.innerHTML = "";
+  if (!Array.isArray(items) || !items.length) {
+    aaContainer.hidden = true;
+    return;
+  }
+
+  // PRINT geometry hints:
+  // 11" page ~1056px @96dpi; your @page margins are 34/16/34/16
+  // We keep a conservative content height to avoid overflows.
+  const PAGE_CONTENT_MAX_PX = 970; // tweak if you see over/under-flow
+  const SLACK = 12;
+
+  // hidden measuring sandbox
+  const sandbox = document.createElement("div");
+  sandbox.style.position = "absolute";
+  sandbox.style.left = "-99999px";
+  sandbox.style.top = "0";
+  sandbox.style.width = "800px";
+  document.body.appendChild(sandbox);
+
+  let pageIndex = 0;
+  let currentPage = createPage(pageIndex === 0);
+  let currentList = currentPage.querySelector("ul");
+
+  // a measuring clone of the current page (columns intact to match print height)
+  function cloneForMeasure(pageNode) {
+    return pageNode.cloneNode(true);
+  }
+
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    li.innerHTML = (typeof item === "string") ? item : (item?.title || JSON.stringify(item));
+
+    // Try placing on current page
+    currentList.appendChild(li);
+
+    // Measure
+    const measurePage = cloneForMeasure(currentPage);
+    sandbox.appendChild(measurePage);
+    const tooTall = measurePage.scrollHeight > (PAGE_CONTENT_MAX_PX - SLACK);
+    sandbox.removeChild(measurePage);
+
+    if (tooTall) {
+      // Undo add
+      currentList.removeChild(li);
+
+      // New page
+      pageIndex += 1;
+      currentPage = createPage(false);
+      currentList = currentPage.querySelector("ul");
+
+      // Place on new page
+      currentList.appendChild(li);
+    }
+  });
+
+  // Disclaimer ONLY on last page
+  const pages = aaContainer.querySelectorAll(".aa-page");
+  if (pages.length) {
+    const last = pages[pages.length - 1];
+    const p = document.createElement("p");
+    p.className = "aa-disclaimer";
+    p.textContent = "Subject to change. Please consult your Canvas course for the most current instructions and updates.";
+    last.appendChild(p);
+  }
+
+  // Cleanup
+  if (sandbox.parentNode) sandbox.parentNode.removeChild(sandbox);
+  aaContainer.hidden = false;
+
+  function createPage(isFirst) {
+    const sec = document.createElement("section");
+    sec.className = "aa-page";
+
+    // Title only on the first page
+    if (isFirst) {
+      const h3 = document.createElement("h3");
+      h3.textContent = "Assignments & Assessments";
+      sec.appendChild(h3);
+      // Make sure A&A starts on a new page
+      sec.style.breakBefore = "page";
+      sec.style.pageBreakBefore = "always";
+    }
+
+    const ul = document.createElement("ul");
+    ul.className = "aa-list";
+    sec.appendChild(ul);
+
+    aaContainer.appendChild(sec);
+    return sec;
+  }
+}
 
 /** ------------------------ Render ------------------------ */
 function renderSyllabus(c) {
@@ -345,6 +444,26 @@ function renderSyllabus(c) {
 
 // Materials — syllabus-only books
 materialsList.innerHTML = "";
+
+// -------- Assignments & Assessments (A&A) --------
+// Accept common key spellings/variants
+const aaRaw =
+  (Array.isArray(c.courseAssignmentsandAsssessments) && c.courseAssignmentsandAsssessments) ||
+  (Array.isArray(c.courseAssignmentsAndAssessments) && c.courseAssignmentsAndAssessments) ||
+  (Array.isArray(c.assignmentsAndAssessments) && c.assignmentsAndAssessments) ||
+  [];
+
+if (aaRaw.length) {
+  buildAAPages(aaRaw);
+  aaContainer.hidden = false;
+
+  // Ensure Hours begins on a new page after A&A
+  document.getElementById("hoursSection")?.classList.add("page-break-before");
+} else {
+  aaContainer.hidden = true;
+  aaContainer.innerHTML = "";
+  document.getElementById("hoursSection")?.classList.remove("page-break-before");
+}
 
 // Accept both spellings; prefer syllabiBooks if present
 const mats = Array.isArray(c.syllabiBooks)

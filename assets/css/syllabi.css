@@ -422,3 +422,62 @@ body{
     display: none !important;
   }
 }
+/* ---------- Assignments & Assessments layout ---------- */
+.aa-section { margin: 0; }
+
+/* Each .aa-page is one printable page for A&A */
+.aa-page {
+  padding: 12px 0;
+}
+
+/* A&A list (two columns) */
+.aa-list {
+  list-style: disc outside;
+  padding-left: 19px;
+  margin: 0;
+  column-count: 2;
+  column-gap: 28px;
+  column-fill: auto;
+  /* vendor prefixes */
+  -webkit-column-count: 2;
+  -webkit-column-gap: 28px;
+  -webkit-column-fill: auto;
+  -moz-column-count: 2;
+  -moz-column-gap: 28px;
+}
+
+.aa-list li {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin: 0 0 2px 0;
+}
+
+/* Disclaimer (only appended to the last .aa-page via JS) */
+.aa-disclaimer {
+  margin-top: 10px;
+  font-style: italic;
+  color: var(--muted);
+  border-top: 1px solid #ccc;
+  padding-top: 6px;
+}
+
+/* Force Hours to begin on a new page AFTER A&A */
+@media print {
+  .page-break-before { page-break-before: always !important; break-before: page !important; }
+
+  /* Keep each A&A page separate in PDF */
+  .aa-page {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+  .aa-page:last-of-type {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  /* Encourage keeping A&A chunks together */
+  .aa-page, .aa-list, .aa-list li {
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+  }
+}
