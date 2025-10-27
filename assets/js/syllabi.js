@@ -265,6 +265,16 @@ const outlineTitles = outlineTitlesOnly(c);
     li.innerHTML = `<span class="muted">No instructor information available.</span>`;
     instructorsList.appendChild(li);
   }
+  
+// --- Add instructor communication note ---
+const instructorNote = document.createElement("p");
+instructorNote.className = "instructor-note";
+instructorNote.innerHTML = `
+  <strong>Office Hours:</strong> By appointment<br>
+  <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
+`;
+instructorsList.parentElement.appendChild(instructorNote);
+
 
   // Classroom Hours — course overrides if non-placeholder; else program default
   hoursContainer.innerHTML = "";

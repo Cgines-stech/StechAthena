@@ -118,3 +118,22 @@
 .hours-note a:hover {
   text-decoration: underline;
 }
+
+/* Instructor note */
+.instructor-note {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.instructor-note strong {
+  color: var(--text);
+}
+
+.instructor-note em {
+  display: block;
+  margin-top: 0.25rem;
+  font-style: italic;
+  color: var(--muted);
+}
