@@ -237,14 +237,17 @@ printBtn.addEventListener("click", () => window.print());
  */
 function buildAssignmentsPages(items) {
   assignmentsPagesContainer.innerHTML = "";
-
   if (!Array.isArray(items) || !items.length) {
     assignmentsPagesContainer.hidden = true;
     return;
   }
 
-  // 11" printable area math
-  const PAGE_CONTENT_MAX_PX = 948;
+  // PRINT geometry:
+  // 11" page ~1056px @96dpi
+  // @page top+bottom = 34 + 34 => 1056 - 68 = 988px printable
+  // .aa-chunk.page padding (print below) = 12 + 12 => 988 - 24 = 964px
+  const PAGE_CONTENT_MAX_PX = 964;
+  const SLACK = 48; // tolerance so we don't break too early
 
   // hidden measuring sandbox
   const sandbox = document.createElement("div");
@@ -255,12 +258,12 @@ function buildAssignmentsPages(items) {
   document.body.appendChild(sandbox);
 
   let pageIndex = 0;
-  let currentPage = createAAChunk(pageIndex === 0 /*withTitle*/, true /*isFirst*/);
+  let currentPage = createAAChunk(pageIndex === 0, true);
   let currentList = currentPage.querySelector("ul");
 
-  // measuring list (single column)
+  // measuring list (we won't force single column anymore)
   let measureList = document.createElement("ul");
-  measureList.className = "bullets aa-list no-columns";
+  measureList.className = "bullets aa-list"; // keep 2 columns while measuring
   sandbox.appendChild(measureList);
 
   items.forEach((item) => {
@@ -271,10 +274,10 @@ function buildAssignmentsPages(items) {
     measureList.appendChild(li.cloneNode(true));
     currentList.appendChild(li);
 
-    const measurePage = cloneForMeasure(currentPage);
+    const measurePage = cloneForMeasure(currentPage); // 2-column clone
     sandbox.appendChild(measurePage);
 
-    const tooTall = measurePage.scrollHeight > PAGE_CONTENT_MAX_PX;
+    const tooTall = measurePage.scrollHeight > (PAGE_CONTENT_MAX_PX - SLACK);
     sandbox.removeChild(measurePage);
 
     if (tooTall) {
@@ -285,7 +288,7 @@ function buildAssignmentsPages(items) {
 
       // start new page
       pageIndex += 1;
-      currentPage = createAAChunk(false /*withTitle*/);
+      currentPage = createAAChunk(false);
       currentList = currentPage.querySelector("ul");
 
       // place the item on the new page
@@ -296,13 +299,13 @@ function buildAssignmentsPages(items) {
       // reset measuring list to match new page contents
       sandbox.removeChild(measureList);
       measureList = document.createElement("ul");
-      measureList.className = "bullets aa-list no-columns";
+      measureList.className = "bullets aa-list";
       measureList.appendChild(li2.cloneNode(true));
       sandbox.appendChild(measureList);
     }
   });
 
-  // Add disclaimer ONLY on the last page
+  // disclaimer ONLY on last page
   const pages = assignmentsPagesContainer.querySelectorAll(".aa-chunk.page");
   if (pages.length) {
     const lastPage = pages[pages.length - 1];
@@ -312,21 +315,14 @@ function buildAssignmentsPages(items) {
     lastPage.appendChild(disclaimer);
   }
 
-  // cleanup sandbox ONCE (guarded)
   if (sandbox.parentNode) sandbox.parentNode.removeChild(sandbox);
-
-  // make sure visible lists are 2-column (remove measuring class)
-  assignmentsPagesContainer
-    .querySelectorAll(".aa-list")
-    .forEach(ul => ul.classList.remove("no-columns"));
-
   assignmentsPagesContainer.hidden = false;
 
-  // ---- helpers
+  // helpers
   function createAAChunk(withTitle, isFirst = false) {
     const sec = document.createElement("section");
     sec.className = "aa-chunk page";
-    if (isFirst) sec.classList.add("first"); // page-break BEFORE the 1st A&A page
+    if (isFirst) sec.classList.add("first");
     if (withTitle) {
       const h2 = document.createElement("h2");
       h2.className = "aa-title";
@@ -334,21 +330,17 @@ function buildAssignmentsPages(items) {
       sec.appendChild(h2);
     }
     const ul = document.createElement("ul");
-    ul.className = "bullets aa-list"; // columns via CSS
+    ul.className = "bullets aa-list";
     sec.appendChild(ul);
     assignmentsPagesContainer.appendChild(sec);
     return sec;
   }
 
-function cloneForMeasure(pageNode) {
-  // Clone the page as-is (two columns). This makes height checks match print.
-  const clone = pageNode.cloneNode(true);
-  // Important: don’t force single column here.
-  return clone;
+  function cloneForMeasure(pageNode) {
+    // Clone with 2-column UL intact so height matches print
+    return pageNode.cloneNode(true);
+  }
 }
-
-}
-
 
 /** ------------------------ Render ------------------------ */
 function renderSyllabus(c) {

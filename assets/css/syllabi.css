@@ -267,35 +267,61 @@ body{
   -moz-column-count: 1 !important;
 }
 
-@media print{
-  .aa-list{
-    display: block;
-    width: 100%;
-    column-count: 2 !important;
-    column-gap: 24px !important;
-    column-fill: balance;
-    -webkit-column-count: 2 !important;
-    -webkit-column-gap: 24px !important;
-    -webkit-column-fill: balance;
-    -moz-column-count: 2 !important;
-    -moz-column-gap: 24px !important;
-    padding-left: 12px; /* a bit tighter on printed A&A pages */
+/* ---------- A&A: print-only, PDF-focused ---------- */
+@media print {
+  /* Each A&A chunk == one page with minimal padding */
+  .aa-chunk.page{
+    padding: 12px;                 /* tighter than 20px */
+    page-break-after: always;
+    break-after: page;
+  }
+  .aa-chunk.page.first{
+    page-break-before: always;
+    break-before: page;
+  }
+  .aa-chunk.page:last-of-type{
+    page-break-after: always;
+    break-after: page;
   }
 
-  .aa-chunk.page{
-    padding: 16px; /* was 20px */
-  }
+  /* Title on first page only (added by JS) */
   .aa-title{
     font-family: "Roboto Condensed", sans-serif !important;
     color: #007cbc !important;
     font-size: 16px !important;
-    margin: 0 0 8px 0;
+    margin: 0 0 6px 0;
     break-after: avoid;
     page-break-after: avoid;
   }
 
+  /* Two-column list that fills vertically (no balancing) */
+  .aa-list{
+    display: block;
+    width: 100%;
+    padding-left: 10px;            /* less inset than .bullets default */
+    column-count: 2 !important;
+    column-gap: 24px !important;
+    column-fill: auto;             /* <-- DO NOT balance; fill down to bottom */
+    -webkit-column-count: 2 !important;
+    -webkit-column-gap: 24px !important;
+    -webkit-column-fill: auto;
+    -moz-column-count: 2 !important;
+    -moz-column-gap: 24px !important;
+  }
+
+  .aa-list li{
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    margin: 0 0 2px 0;
+    padding: 0;
+  }
+
+  /* Disclaimer only appears on the last A&A page (added by JS) */
   .aa-disclaimer{
+    margin-top: 10px;
     font-size: 12px !important;
     color: #000 !important;
+    border-top: 1px solid #ccc;
+    padding-top: 6px;
   }
 }
