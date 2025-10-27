@@ -381,4 +381,40 @@ body{
     break-inside: avoid-page !important;
     page-break-inside: avoid !important;
   }
+
+  .card,
+  #syllabus {
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  /* Strongest anti-split combo for sections */
+  #syllabus section,
+  .no-split {
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+
+    /* Extra vendor fallbacks Chrome respects in print */
+    -webkit-column-break-inside: avoid !important;
+    -webkit-region-break-inside: avoid !important;
+
+    /* Inline-block often helps Chrome treat the whole section as atomic */
+    display: inline-block !important;
+    width: 100% !important;
+  }
+
+  /* Keep the section heading glued to its content */
+  #syllabus section > h3 {
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Ensure <hr> never forces a break around sections */
+  .section-sep {
+    break-before: avoid-page !important;
+    break-after:  avoid-page !important;
+    page-break-before: avoid !important;
+    page-break-after:  avoid !important;
+  }
 }
