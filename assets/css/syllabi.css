@@ -1,213 +1,233 @@
 /* assets/css/syllabi.css */
 
-/* Section separator — subtle on screen, visible on paper */
-.section-sep {
-  border: 0;
-  border-top: 1px solid var(--border);
-  margin: 1rem 0;
+/* --------- Screen (light touch) --------- */
+:root{
+  --primary:#007cbc;
+  --text:#000;
+  --muted:#666;
 }
 
-/* Tighten/normalize section spacing for syllabus */
-#syllabus section {
-  margin: 0.6rem 0;
-  page-break-inside: avoid;
-  break-inside: avoid;
+body{
+  font-family: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: #fff;
+  margin: 0;
 }
 
-#syllabus h3 {
-  margin-top: 0.2rem;
+.page { /* matches your <main class="card page" ...> */
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
 }
 
-/* Outline list tweaks */
-#outlineSection .bullets li {
-  margin-bottom: 0.15rem; /* subtle extra spacing */
-}
+/* keep your section separators for screen */
+.section-sep { border: 0; border-top: 1px solid #ccc; margin: 1rem 0; }
 
-/* Grade table (inherits from base); ensure it never splits mid-row on print */
-.grade-table {
-  page-break-inside: avoid;
-  break-inside: avoid;
+.bullets, .bulleted-list {
+  list-style: disc outside;
+  padding-left: 19px;
+  margin: 0 0 .5rem 0;
 }
+.bullets li, .bulleted-list li { font-size: 13px; }
 
-/* Make meta a hair smaller to keep focus on content */
-#syllabusMeta {
-  font-size: 0.82rem;
-}
+/* subtle notes */
+.hours-note, .instructor-note { font-size: 0.9rem; color: var(--muted); }
 
-/* Print-specific improvements */
+/* hide “no-print” controls in print, but show on screen */
+.no-print { display: block; }
+
+/* --------- PRINT (match styles5.css as closely as possible) --------- */
 @media print {
-  .section-sep {
-    border-top-color: #bbb;
-    margin: 0.8rem 0;
+
+  @page { margin: 34px 16px 34px 16px; } /* top, right, bottom, left */
+
+  body {
+    background-color: #fff !important;
+    color: #000 !important;
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 11px !important;
   }
 
-  /* Avoid orphan headings at page tops */
-  #syllabus h3 {
-    page-break-after: avoid;
+  /* Page container */
+  .page {
+    padding: 20px;
+    margin: 0;
+    page-break-after: always;
+    /* strip any card visuals */
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
 
-  /* Ensure sections stay together as much as possible */
+  .page-break { page-break-before: always; }
+  .second-page { margin-top: 20px; padding-top: 10px; }
+
+  /* Titles */
+  h1 {
+    font-family: "Roboto Condensed", sans-serif !important;
+    color: #007cbc !important;
+    font-size: 18px !important;
+    margin: 0 0 8px 0;
+  }
+  h2 {
+    font-family: "Roboto Condensed", sans-serif !important;
+    color: #007cbc !important;
+    font-size: 16px !important;
+    margin: 0 0 8px 0;
+  }
+  h3 {
+    font-family: "Roboto Condensed", sans-serif !important;
+    color: #007cbc !important;
+    font-size: 14px !important;
+    margin: 10px 0 6px 0;
+  }
+  h4 { font-size: 13px !important; margin: 8px 0 6px; }
+
+  /* General text */
+  div, p, li, table {
+    font-size: 13px !important;
+    font-family: Roboto, Arial, sans-serif !important;
+    color: #000 !important;
+    padding: 0;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  /* Bulleted lists */
+  .bulleted-list, .bullets {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-left: 19px;
+    margin-bottom: 0;
+    font-weight: normal !important;
+  }
+  .bulleted-list li, .bullets li {
+    font-size: 13px !important;
+    font-weight: normal !important;
+    text-indent: 0;
+    padding-left: 0;
+    margin: 0 0 2px 0;
+    break-inside: avoid;
+  }
+
+  /* Tables */
+  table { padding-left: 7px; }
+
+  /* Inline HR inside list (if you ever insert one) */
+  ul .hr-inside-list {
+    width: 100% !important;
+    height: 0.5px;
+    background-color: grey;
+    border: none;
+    margin-left: -10px !important;
+    padding-left: 0 !important;
+  }
+
+  /* Hide controls when printing */
+  #controls, .no-print { display: none !important; }
+
+  /* Full-width “header bar” pattern (optional, if you add it later) */
+  .full-width-container {
+    width: 100%;
+    height: 45px;
+    background: linear-gradient(to bottom, #007cbc 48%, white 48%, white 52%, #007cbc 52%, #007cbc 100%) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto !important;
+    font-size: 18px !important;
+    margin: 0 0 10px 0;
+  }
+  .centered-text-box {
+    font-family: "Roboto Condensed", sans-serif !important;
+    background-color: white !important;
+    color: black !important;
+    padding: 0.5px 20px !important;
+    border-radius: 15px !important;
+    font-size: 18px !important;
+    text-align: center !important;
+    display: inline-block !important;
+  }
+
+  /* Section spacing & page-break control */
   #syllabus section {
     page-break-inside: avoid;
     break-inside: avoid;
+    margin: 10px 0;
   }
-}
+  .section-sep { border: 0; border-top: 1px solid #ccc; margin: 10px 0; }
 
-/* --- Assignments & Assessments layout --- */
-.aa-section {
-  /* Always start the section on a new page in print, and end on a new page */
-  break-before: page;
-  break-after: page;
-  page-break-before: always; /* legacy */
-  page-break-after: always;  /* legacy */
-}
+  /* Meta line just under the title */
+  #syllabusMeta { font-size: 11px !important; color: #000 !important; }
 
-/* Two-column list (screen + print) */
-.aa-list {
-  column-count: 2;
-  column-gap: 1.25rem;
-  /* keep items together in a column */
-}
-.aa-list li {
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-  margin-bottom: 0.15rem;
-}
+  /* Classroom Hours */
+  #hoursContainer { margin-top: 4px; }
+  #hoursContainer ul { margin-top: 2px; }
+  .hours-note { margin-top: 6px; font-size: 12px !important; }
 
-/* Disclaimer at the end of the section */
-.aa-disclaimer {
-  margin-top: 1rem;
-  font-style: italic;
-  color: var(--muted);
-}
+  /* Instructors note */
+  .instructor-note {
+    margin-top: 6px;
+    font-size: 12px !important;
+    line-height: 1.4;
+  }
 
-/* Print refinements */
-@media print {
+  /* Canvas section */
+  .canvas-section { page-break-inside: avoid; break-inside: avoid; }
+  .canvas-section a { color: #007cbc !important; text-decoration: none; }
+  .canvas-section a:hover { text-decoration: underline; }
+
+  /* Assignments & Assessments — two columns + page wrap */
   .aa-section {
-    /* reinforce print page breaks for broader browser support */
+    page-break-before: always; /* per your earlier requirement */
+    page-break-after: always;  /* per your earlier requirement */
     break-before: page;
     break-after: page;
-    page-break-before: always;
-    page-break-after: always;
   }
 
+  /* mimic styles5 “two-column-container” for your existing .aa-list */
   .aa-list {
     column-count: 2;
+    column-gap: 30px;
+    column-fill: auto; /* better vertical flow */
   }
-
-  /* Nudge the disclaimer toward the bottom when there's room.
-     Note: true 'stick-to-bottom-of-LAST-page-only' footers
-     aren't fully supported by browsers' print engines. */
-  .aa-disclaimer {
-    margin-top: 1.5rem;
-  }
-}
-
-/* Classroom hours note */
-.hours-note {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.hours-note a {
-  color: var(--primary);
-  text-decoration: none;
-}
-
-.hours-note a:hover {
-  text-decoration: underline;
-}
-
-/* Instructor note */
-.instructor-note {
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-.instructor-note strong {
-  color: var(--text);
-}
-
-.instructor-note em {
-  display: block;
-  margin-top: 0.25rem;
-  font-style: italic;
-  color: var(--muted);
-}
-
-/* Canvas section styling */
-.canvas-section {
-  page-break-inside: avoid;
-  break-inside: avoid;
-}
-
-.canvas-section .canvas-url {
-  text-decoration: none;
-  color: var(--primary);
-}
-.canvas-section .canvas-url:hover {
-  text-decoration: underline;
-}
-
-@media print {
-  .canvas-section {
-    page-break-inside: avoid;
+  .aa-list li {
     break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    margin-bottom: 0; /* match styles5 */
+    padding-top: 0;
   }
-}
 
-/* Institutional Policy section — match other sections inside the main card */
-.institutional-section {
-  break-before: page;
-  page-break-before: always;
-  margin-top: 1rem;
-  /* remove nested card visuals */
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-}
+  /* disclaimer at the end of the A&A section */
+  .aa-disclaimer {
+    font-style: italic;
+    font-size: 12px !important;
+    border-top: 1px solid #ccc;
+    margin-top: 8px;
+    padding-top: 6px;
+  }
 
-/* Section heading (keep consistent with others) */
-.institutional-section h3,
-.institutional-section h4 {
-  margin-top: 0;
-  margin-bottom: 0.6rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* Paragraph styling */
-#institutionalPolicyContainer p {
-  margin: 0.4rem 0;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--text);
-}
-
-/* Links */
-#institutionalPolicyContainer a {
-  color: var(--primary);
-  text-decoration: none;
-  word-break: break-word;
-}
-#institutionalPolicyContainer a:hover {
-  text-decoration: underline;
-}
-
-/* Print */
-@media print {
+  /* Institutional Policy — keep as text blocks, consistent spacing */
   .institutional-section {
     page-break-before: always;
     break-before: page;
-    /* still no nested card on print */
-    background: transparent;
-    border: 0;
-    box-shadow: none;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-top: 10px;
   }
+  #institutionalPolicyContainer p {
+    margin: 4px 0;
+    font-size: 13px !important;
+    line-height: 1.45;
+  }
+  #institutionalPolicyContainer a {
+    color: #007cbc !important;
+    text-decoration: none;
+  }
+  #institutionalPolicyContainer a:hover { text-decoration: underline; }
+
+  /* Strip any card look in print */
+  .card { border: 0 !important; box-shadow: none !important; background: transparent !important; }
 }
