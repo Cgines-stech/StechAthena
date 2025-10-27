@@ -137,3 +137,24 @@
   font-style: italic;
   color: var(--muted);
 }
+
+/* Canvas section styling */
+.canvas-section {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.canvas-section .canvas-url {
+  text-decoration: none;
+  color: var(--primary);
+}
+.canvas-section .canvas-url:hover {
+  text-decoration: underline;
+}
+
+@media print {
+  .canvas-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
