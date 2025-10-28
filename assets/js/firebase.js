@@ -25,6 +25,12 @@ onAuthStateChanged(auth, (u) => {
   }
 });
 
-// Optional: expose Firebase objects for quick testing in browser console
+import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+onAuthStateChanged(auth, u => console.log("auth state:", u ? u.uid : null));
+signInAnonymously(auth)
+  .then(res => console.log("anon signed-in uid:", res.user.uid))
+  .catch(e => console.error("anon sign-in failed:", e.code, e.message));
+
+// optional: expose for console poking
 window.__fb = { auth, db };
-console.log("Firebase connected:", db);
