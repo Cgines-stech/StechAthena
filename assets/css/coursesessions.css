@@ -150,3 +150,6 @@ textarea{ min-height:96px }
 .daycell.override-add { border-color: var(--ok); }
 .daycell.override-edit { border-color: var(--accent); }
 .daycell.override-remove { border:2px solid var(--bad); box-shadow:0 0 6px rgba(255, 80, 80, 0.3); }
+
+/* Make a card span both columns on wide screens */
+.fullspan { grid-column: 1 / -1; }
