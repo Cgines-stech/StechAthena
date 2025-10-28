@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,98 +5,6 @@
   <title>Southwest Technical College — Athena Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- Minimal page-specific styles for the nav + notes (kept here to avoid touching style.css) -->
-  <style>
-    .home-wrap { max-width: 950px; margin: 0 auto; }
-    .home-title { text-align: center; margin: 0 0 1rem; }
-    .nav-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.9rem;
-      margin: 1rem 0 1.5rem;
-    }
-    .nav-btn {
-      display: inline-block;
-      text-align: center;
-      padding: .8rem 1rem;
-      border: 1px solid #e3e3e3;
-      border-radius: 10px;
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0,0,0,.08);
-      text-decoration: none;
-      color: inherit;
-      font-weight: 600;
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .nav-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 3px 8px rgba(0,0,0,.12);
-      border-color: rgb(22,188,238);
-    }
-
-    /* Notes block */
-    .notes.card { margin-top: 1.25rem; }
-    .notes h2 { margin: 0 0 .5rem; }
-    .notes-form {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: .5rem;
-      margin: .5rem 0 1rem;
-    }
-    .notes-form textarea {
-      width: 100%;
-      min-height: 80px;
-      resize: vertical;
-      padding: .6rem .7rem;
-      border-radius: 8px;
-      border: 1px solid #e3e3e3;
-      font: inherit;
-    }
-    .notes-form button {
-      padding: .6rem .9rem;
-      border: 1px solid #e3e3e3;
-      border-radius: 8px;
-      background: #fff;
-      font: inherit;
-      font-weight: 600;
-      cursor: pointer;
-      height: fit-content;
-    }
-    .notes-form button:hover { filter: brightness(.98); }
-
-    .notes-list {
-      display: grid;
-      gap: .6rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .note {
-      border: 1px solid #e3e3e3;
-      border-radius: 10px;
-      background: #fff;
-      padding: .75rem .85rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,.06);
-    }
-    .note-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: .75rem;
-      margin-bottom: .35rem;
-      font-size: .9rem;
-      color: #666;
-    }
-    .note-text { margin: 0; white-space: pre-wrap; }
-    .note-actions {
-      display: flex; gap: .5rem; margin-top: .5rem;
-    }
-    .note-actions button {
-      border: 1px solid #e3e3e3; border-radius: 6px; background: #fff; cursor: pointer;
-      padding: .3rem .5rem; font: inherit; font-size: .85rem;
-    }
-    .note-actions button:hover { filter: brightness(.98); }
-  </style>
 </head>
 <body>
   <div class="home-wrap">
@@ -110,7 +17,6 @@
       <a class="nav-btn" href="coursesessions.html">Course Sessions</a>
     </div>
 
-    <!-- Optional: a little explainer card (uses your existing .card styles) -->
     <div class="card">
       <h2>Welcome</h2>
       <p class="muted">Use the buttons above to jump into the Athena pages. This home screen also keeps lightweight update notes below.</p>
@@ -119,16 +25,21 @@
     <!-- Update notes -->
     <section class="notes card" aria-labelledby="notes-heading">
       <h2 id="notes-heading">Update Notes</h2>
-      <form class="notes-form" id="notesForm">
-        <textarea id="noteText" placeholder="Add a quick update… (stored locally on this device)"></textarea>
+
+      <!-- Dev-only authoring UI (hidden in production) -->
+      <form class="notes-form" id="notesForm" data-dev-only hidden>
+        <textarea id="noteText" placeholder="Add a quick update (dev-only)…"></textarea>
         <button type="submit">Add Note</button>
       </form>
+
+      <p id="notesReadOnlyHint" class="muted notes-readonly-hint">
+        Maintained by the development team. This list is read-only here.
+      </p>
 
       <ul id="notesList" class="notes-list" aria-live="polite"></ul>
     </section>
   </div>
 
-  <!-- Replace main.js with a tiny notes module -->
   <script type="module" src="assets/js/notes.js"></script>
 </body>
 </html>
