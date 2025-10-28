@@ -6,8 +6,6 @@
 import { campusClosedDates } from "./baddates.js";
 import { saveCourseSession } from "./coursesessions.store.js";
 
-
-
 const dayLabels = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; // UI-editable days (Sunday omitted)
 const wkDays = new Set(DAYS);

@@ -20,3 +20,7 @@ onAuthStateChanged(auth, (u) => {
     signInAnonymously(auth).catch(console.error);
   }
 });
+
+// Optional: expose Firebase objects for quick testing in browser console
+window.__fb = { auth, db };
+console.log("Firebase connected:", db);
