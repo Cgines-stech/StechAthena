@@ -65,3 +65,18 @@ textarea{ min-height:96px }
   color: #ff6b6b;
   opacity: 0.8;
 }
+
+/* place button neatly inside each calendar card */
+.calday .removedatebtn{
+  margin-top:8px;
+}
+
+/* red accent for destructive action */
+.smallbtn.danger{
+  background:#2c1a1a;
+  border-color:#4a2626;
+  color:var(--bad);
+}
+.smallbtn.danger:hover{
+  filter:brightness(1.06);
+}
