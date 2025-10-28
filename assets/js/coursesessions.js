@@ -1,7 +1,7 @@
 /* coursesessions.js */
 // ES Module with multiple time slots per day + Program/Course dropdowns,
 // dynamic import of course files, per-date Overrides (add/edit/remove),
-// and a Visual Month Calendar that mirrors the overview.
+// Visual Month Calendar, and a Share Link snapshot system.
 
 import { campusClosedDates } from "./baddates.js";
 
@@ -101,16 +101,27 @@ function isCampusClosedDate(d){
   const dStr = `${pad(d.getMonth() + 1)}-${pad(d.getDate())}-${d.getFullYear()}`;
   return campusClosedDates.some(c => c.date === dStr);
 }
-function renderSlotLines(slots){
-  if (!Array.isArray(slots) || !slots.length) return '';
-  const items = slots.map(s => `<li>${s.start} - ${s.end}</li>`).join('');
-  return `<ul class="slotslist">${items}</ul>`;
-}
 function isoOf(d){
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 }
 function firstOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
 function lastOfMonth(d){ return new Date(d.getFullYear(), d.getMonth()+1, 0); }
+function renderSlotLines(slots){
+  if (!Array.isArray(slots) || !slots.length) return '';
+  const items = slots.map(s => `<li>${s.start} - ${s.end}</li>`).join('');
+  return `<ul class="slotslist">${items}</ul>`;
+}
+
+// ---- Share link helpers ----
+function encodeForUrl(obj){
+  const json = JSON.stringify(obj);
+  const b64  = btoa(unescape(encodeURIComponent(json))); // UTF-8 safe
+  return b64;
+}
+function decodeFromUrl(b64){
+  const json = decodeURIComponent(escape(atob(b64)));
+  return JSON.parse(json);
+}
 
 // ---- State ----
 const state = {
@@ -531,7 +542,7 @@ function generate(){
     const iso = isoOf(d);
     const ov = state.overrides[iso] || null;
 
-    // 1) Override: remove
+    // 1) Override: remove (wins)
     if (ov?.type === 'remove') {
       const cd = document.createElement('div');
       cd.className = 'calday closed override override-remove';
@@ -667,11 +678,90 @@ function exportCSV(){
   const a = document.createElement('a'); a.href = url; a.download = 'course_schedule.csv'; a.click(); URL.revokeObjectURL(url);
 }
 
+// ---- Share Link: build/apply/wire ----
+function buildSnapshot(){
+  return {
+    program: programSelect?.value || null,
+    coursePath: courseSelect?.value || null,
+    targetHours: targetHoursEl?.value || '',
+    startDate: document.getElementById('startDate')?.value || '',
+    endDate: document.getElementById('endDate')?.value || '',
+    times: state.times,           // { Monday:[{start,end}], ... }
+    overrides: state.overrides,   // { "YYYY-MM-DD": {type, slots?} }
+    version: 1
+  };
+}
+function applySnapshot(snap){
+  if(!snap || typeof snap !== 'object') return;
+
+  // selections
+  if (snap.program && programSelect) programSelect.value = snap.program;
+  if (snap.coursePath && courseSelect) {
+    // ensure the option exists (if not loaded yet)
+    if (![...courseSelect.options].some(o => o.value === snap.coursePath)) {
+      const opt = document.createElement('option');
+      opt.value = snap.coursePath;
+      opt.textContent = snap.coursePath.split('/').pop();
+      courseSelect.appendChild(opt);
+    }
+    courseSelect.value = snap.coursePath;
+  }
+
+  // simple fields
+  if (typeof snap.targetHours !== 'undefined') {
+    targetHoursEl.value = String(snap.targetHours || '');
+    targetTag.style.display = snap.targetHours ? 'inline-block' : 'none';
+    if (snap.targetHours) targetTag.textContent = `Target: ${snap.targetHours} hrs`;
+  }
+  const startEl = document.getElementById('startDate');
+  const endEl   = document.getElementById('endDate');
+  if (startEl) startEl.value = snap.startDate || '';
+  if (endEl)   endEl.value   = snap.endDate   || '';
+
+  // deep state
+  if (snap.times)      state.times = JSON.parse(JSON.stringify(snap.times));
+  if (snap.overrides)  state.overrides = JSON.parse(JSON.stringify(snap.overrides));
+
+  // re-render weekday editor with restored times
+  renderDays();
+  // refresh overrides list if panel is present
+  renderOverridesList();
+}
+
+function wireShareLink(){
+  const btn = document.getElementById('shareLinkBtn');
+  if(!btn) return;
+  btn.addEventListener('click', () => {
+    const snap = buildSnapshot();
+    const s = encodeForUrl(snap);
+    const url = `${location.origin}${location.pathname}?s=${s}`;
+    navigator.clipboard.writeText(url).then(
+      () => alert('Share link copied to clipboard!'),
+      () => { prompt('Copy this link:', url); } // fallback
+    );
+  });
+}
+
+function loadSnapshotFromUrl(){
+  const params = new URLSearchParams(location.search);
+  const s = params.get('s');
+  if(!s) return;
+  try{
+    const snap = decodeFromUrl(s);
+    applySnapshot(snap);
+  } catch(err){
+    console.error('Failed to load shared snapshot:', err);
+    alert('This share link appears invalid or corrupted.');
+  }
+}
+
 // Buttons
 document.getElementById('generateBtn').addEventListener('click', generate);
 document.getElementById('exportBtn').addEventListener('click', exportCSV);
+wireShareLink(); // Copy Share Link button
 
 // Boot
 renderDays();
 initPrograms();
 setupOverridesUI(); // safe if overrides panel is not present
+loadSnapshotFromUrl(); // apply shared state if provided
