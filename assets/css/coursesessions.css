@@ -33,13 +33,36 @@ tfoot{ background:#0f162b; }
 .rightinfo{ font-size:14px }
 
 /* multiple-slot UI */
-.header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:6px }
-.slotrow{ display:grid; grid-template-columns:1fr 1fr auto; gap:8px; align-items:end; margin-bottom:8px }
+
+.header{
+  display:flex;
+  justify-content:flex-start;   /* was space-between */
+  align-items:center;
+  margin-bottom:6px;
+}
+
+/* slot layout now just two columns (no remove column) */
+.slotrow{
+  display:grid;
+  grid-template-columns:1fr 1fr; /* was 1fr 1fr auto */
+  gap:8px;
+  align-items:end;
+  margin-bottom:8px;
+}
+
+/* "add" button now below slots */
+.addrow{
+  display:flex;
+  justify-content:flex-start;
+  margin-top:4px;
+}
+
 .smallbtn{ padding:8px 10px; border-radius:10px; border:1px solid #2a3246; background:#1b2233; color:var(--text); cursor:pointer }
 .smallbtn:hover{ filter:brightness(1.1) }
+
 /* .addslot just reuses .smallbtn */
 .addslot{ padding:8px 10px; border-radius:10px; border:1px solid #2a3246; background:#1b2233; color:var(--text); cursor:pointer }
-.removebtn{ background:#2a3246; color:var(--text) }
+
 .tinylabel{ display:block; font-size:11px; color:var(--muted); margin-bottom:4px }
 .calday.closed {
   background: #1a1a1a;

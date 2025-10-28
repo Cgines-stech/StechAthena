@@ -112,15 +112,19 @@ const targetHoursEl = document.getElementById('targetHours');
 const targetTag     = document.getElementById('targetTag');
 const daysContainer = document.getElementById('daysContainer');
 
+// ...imports and constants unchanged...
+
 // ---- Render Days with slot controls ----
 function renderDays(){
   daysContainer.innerHTML = DAYS.map(d => `
     <div class="daybox" data-daybox="${d}">
       <div class="header">
         <div class="tag">${d}</div>
-        <button class="smallbtn addslot" data-add="${d}" type="button">+ Add time</button>
       </div>
       <div class="slots" data-slots="${d}"></div>
+      <div class="addrow">
+        <button class="smallbtn addslot" data-add="${d}" type="button">+Add Addition Time</button>
+      </div>
     </div>
   `).join('');
 
@@ -129,9 +133,8 @@ function renderDays(){
     if (!state.times[d] || state.times[d].length === 0) {
       addSlot(d, "", "");
     } else {
-      // re-render existing slots (e.g., after selecting a course)
       const arr = state.times[d];
-      state.times[d] = []; // will be repopulated by addSlot
+      state.times[d] = [];
       arr.forEach(s => addSlot(d, s.start || "", s.end || ""));
     }
   });
@@ -149,15 +152,13 @@ function addSlot(day, startVal, endVal){
   const slotsEl = daysContainer.querySelector(`[data-slots="${day}"]`);
   if(!slotsEl) return;
 
-  // push into state
   const slot = { start: startVal || "", end: endVal || "" };
   state.times[day].push(slot);
-  const index = state.times[day].length - 1;
 
   const row = document.createElement('div');
   row.className = 'slotrow';
   row.setAttribute('data-slot-day', day);
-  row.setAttribute('data-slot-idx', String(index));
+  row.setAttribute('data-slot-idx', String(state.times[day].length - 1));
   row.innerHTML = `
     <div>
       <label class="tinylabel">Start</label>
@@ -167,30 +168,13 @@ function addSlot(day, startVal, endVal){
       <label class="tinylabel">End</label>
       <input type="text" placeholder="1:00 PM" value="${slot.end}">
     </div>
-    <div>
-      <button class="smallbtn removebtn" type="button">Remove</button>
-    </div>
   `;
 
-  // wire inputs
   const inputs = row.querySelectorAll('input');
-  inputs[0].addEventListener('input', e => {
-    slot.start = e.target.value;
-  });
-  inputs[1].addEventListener('input', e => {
-    slot.end = e.target.value;
-  });
+  inputs[0].addEventListener('input', e => { slot.start = e.target.value; });
+  inputs[1].addEventListener('input', e => { slot.end   = e.target.value;  });
 
-  // remove button
-  row.querySelector('.removebtn').addEventListener('click', () => {
-    // remove from state
-    const arr = state.times[day];
-    const i = Array.from(slotsEl.children).indexOf(row);
-    if (i >= 0) { arr.splice(i, 1); }
-    row.remove();
-    // ensure at least one slot row remains to keep UI approachable
-    if (slotsEl.children.length === 0) addSlot(day, "", "");
-  });
+  // Note: Remove button eliminated per request. We keep at least one slot by default.
 
   slotsEl.appendChild(row);
 }
