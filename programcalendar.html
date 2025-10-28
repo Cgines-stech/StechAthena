@@ -1,0 +1,44 @@
+<!-- programcalendar.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Program Calendar</title>
+
+  <!-- Reuse your global course sessions styles -->
+  <link rel="stylesheet" href="assets/css/coursesessions.css" />
+
+  <!-- Add the new page-specific stylesheet -->
+  <link rel="stylesheet" href="assets/css/programcalendar.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="card pad fullspan">
+      <div class="headerbar">
+        <button class="smallbtn" onclick="window.location.href='index.html'">← Back To Home</button>
+        <h1 style="margin:0">Program Calendar</h1>
+      </div>
+
+      <div class="row" style="align-items:end">
+        <div>
+          <label>Program</label>
+          <select id="programFilter"></select>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button class="btn" id="refreshBtn" type="button">Load Sessions</button>
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+      <div id="countTag" class="tag" style="display:none"></div>
+
+      <div style="height:12px"></div>
+      <div id="results" class="results"></div>
+    </div>
+  </div>
+
+  <script type="module" src="assets/js/programcalendar.js"></script>
+</body>
+</html>

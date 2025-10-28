@@ -1,0 +1,54 @@
+/* assets/css/programcalendar.css */
+
+.headerbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .results {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sesscard {
+  background: #0f1320;
+  border: 1px solid #2a3246;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.sesshead {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sessmeta {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.pill {
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 999px;
+  background: #1b2233;
+  border: 1px solid #2a3246;
+  color: var(--muted);
+}
+
+.empty {
+  color: var(--muted);
+  font-style: italic;
+  padding: 8px 0;
+}
