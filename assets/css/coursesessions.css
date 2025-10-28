@@ -31,3 +31,10 @@ thead{ background:#111628; color:var(--muted) }
 th,td{ padding:10px; border-top:1px solid #222a3d }
 tfoot{ background:#0f162b; }
 .rightinfo{ font-size:14px }
+/* multiple-slot UI */
+.header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:6px }
+.slotrow{ display:grid; grid-template-columns:1fr 1fr auto; gap:8px; align-items:end; margin-bottom:8px }
+.smallbtn{ padding:8px 10px; border-radius:10px; border:1px solid #2a3246; background:#1b2233; color:var(--text); cursor:pointer }
+.smallbtn:hover{ filter:brightness(1.1) }
+.removebtn{ background:#2a3246; }
+.tinylabel{ display:block; font-size:11px; color:var(--muted); margin-bottom:4px }

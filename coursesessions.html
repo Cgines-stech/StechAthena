@@ -30,7 +30,7 @@
       </div>
 
       <div style="height:14px"></div>
-      <!-- New: Program / Course selectors -->
+      <!-- Program / Course selectors -->
       <div class="row" style="margin-top:8px">
         <div>
           <label>Program</label>
@@ -43,33 +43,9 @@
       </div>
 
       <div style="height:14px"></div>
-      <div class="days">
-        <!-- Monday–Saturday time windows -->
-        <div class="daybox"><div class="tag">Monday</div>
-          <label>Start</label><input type="text" data-day="Monday" data-field="start" placeholder="9:00 AM" />
-          <label>End</label><input type="text" data-day="Monday" data-field="end" placeholder="5:00 PM" />
-        </div>
-        <div class="daybox"><div class="tag">Tuesday</div>
-          <label>Start</label><input type="text" data-day="Tuesday" data-field="start" placeholder="9:00 AM" />
-          <label>End</label><input type="text" data-day="Tuesday" data-field="end" placeholder="5:00 PM" />
-        </div>
-        <div class="daybox"><div class="tag">Wednesday</div>
-          <label>Start</label><input type="text" data-day="Wednesday" data-field="start" placeholder="9:00 AM" />
-          <label>End</label><input type="text" data-day="Wednesday" data-field="end" placeholder="5:00 PM" />
-        </div>
-        <div class="daybox"><div class="tag">Thursday</div>
-          <label>Start</label><input type="text" data-day="Thursday" data-field="start" placeholder="9:00 AM" />
-          <label>End</label><input type="text" data-day="Thursday" data-field="end" placeholder="5:00 PM" />
-        </div>
-        <div class="daybox"><div class="tag">Friday</div>
-          <label>Start</label><input type="text" data-day="Friday" data-field="start" placeholder="9:00 AM" />
-          <label>End</label><input type="text" data-day="Friday" data-field="end" placeholder="5:00 PM" />
-        </div>
-        <div class="daybox"><div class="tag">Saturday</div>
-          <label>Start</label><input type="text" data-day="Saturday" data-field="start" placeholder="9:00 AM" />
-          <label>End</label><input type="text" data-day="Saturday" data-field="end" placeholder="5:00 PM" />
-        </div>
-      </div>
+
+      <!-- Dynamic days UI will render here -->
+      <div class="days" id="daysContainer"></div>
 
       <div style="height:12px"></div>
       <div class="actions">

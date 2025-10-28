@@ -1,14 +1,11 @@
 // assets/js/coursesessions.js
-// ES Module: populates Program/Course selectors by dynamically importing course files.
-// Also handles schedule generation, CSV export, and target-hour comparison.
+// ES Module with multiple time slots per day + Program/Course dropdowns + dynamic import of course files.
 
 const dayLabels = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const wkDays = new Set(["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]); // exclude Sunday
+const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const wkDays = new Set(DAYS);
 
-/** ---- Registries: map program names to module paths ----
- * Add your programs/courses here. Paths are relative to coursesession.html.
- * If your actual tree differs, adjust these paths accordingly.
- */
+/** ---- Registries: update paths as needed for your repo ---- */
 const PROGRAM_FILE_REGISTRY = {
   "Advanced Emergency Medical Technician":
     "../../data/programs/Advanced Emergency Medical Technician/program.js",
@@ -18,7 +15,6 @@ const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Automotive Technology/program.js",
 };
 
-// List of course module files per program (each module exports a default array with one object)
 const PROGRAM_COURSE_REGISTRY = {
   "Advanced Emergency Medical Technician": [
     "../../data/programs/Advanced Emergency Medical Technician/TEEM 1202.js",
@@ -60,17 +56,14 @@ const PROGRAM_COURSE_REGISTRY = {
   ],
 };
 
-function encodePath(p) {
-  // safely encode spaces for GitHub Pages
-  return p.replace(/ /g, "%20");
-}
+function encodePath(p){ return p.replace(/ /g, "%20"); }
 
-// ------- date & time helpers -------
+// ---- Date & time helpers ----
 function parseDateISO(v){
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v||"");
   if(!m) return null;
   const d = new Date(Number(m[1]), Number(m[2])-1, Number(m[3]));
-  if(Number.isNaN(d.getTime())) return null; return d;
+  return Number.isNaN(d.getTime()) ? null : d;
 }
 function formatDateHuman(d){
   return d.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'2-digit', year:'numeric' });
@@ -102,36 +95,112 @@ function eachDay(start,end){
   return days;
 }
 
-// ------- app state -------
+// ---- State ----
 const state = {
-  times: { Monday:{}, Tuesday:{}, Wednesday:{}, Thursday:{}, Friday:{}, Saturday:{} },
+  times: Object.fromEntries(DAYS.map(d => [d, [] /* array of {start,end} */])),
   rows:[],
   total:0,
-  coursesCache: new Map(), // key: module path, value: course object
+  coursesCache: new Map(),
 };
 
-// ------- UI refs -------
+// ---- UI refs ----
 const programSelect = document.getElementById('programSelect');
 const courseSelect  = document.getElementById('courseSelect');
 const targetHoursEl = document.getElementById('targetHours');
 const targetTag     = document.getElementById('targetTag');
+const daysContainer = document.getElementById('daysContainer');
 
-// Hook up time inputs to state
-document.querySelectorAll('[data-day]').forEach(inp=>{
-  inp.addEventListener('input', e=>{
-    const day=e.target.getAttribute('data-day');
-    const field=e.target.getAttribute('data-field');
-    if(!state.times[day]) state.times[day] = {};
-    state.times[day][field]=e.target.value;
-  })
-});
+// ---- Render Days with slot controls ----
+function renderDays(){
+  daysContainer.innerHTML = DAYS.map(d => `
+    <div class="daybox" data-daybox="${d}">
+      <div class="header">
+        <div class="tag">${d}</div>
+        <button class="smallbtn addslot" data-add="${d}" type="button">+ Add time</button>
+      </div>
+      <div class="slots" data-slots="${d}"></div>
+    </div>
+  `).join('');
 
-// init program dropdown
+  // seed one empty slot for each day
+  DAYS.forEach(d => {
+    if (!state.times[d] || state.times[d].length === 0) {
+      addSlot(d, "", "");
+    } else {
+      // re-render existing slots (e.g., after selecting a course)
+      const arr = state.times[d];
+      state.times[d] = []; // will be repopulated by addSlot
+      arr.forEach(s => addSlot(d, s.start || "", s.end || ""));
+    }
+  });
+
+  // add-slot buttons
+  daysContainer.querySelectorAll('[data-add]').forEach(btn=>{
+    btn.addEventListener('click', () => {
+      const day = btn.getAttribute('data-add');
+      addSlot(day, "", "");
+    });
+  });
+}
+
+function addSlot(day, startVal, endVal){
+  const slotsEl = daysContainer.querySelector(`[data-slots="${day}"]`);
+  if(!slotsEl) return;
+
+  // push into state
+  const slot = { start: startVal || "", end: endVal || "" };
+  state.times[day].push(slot);
+  const index = state.times[day].length - 1;
+
+  const row = document.createElement('div');
+  row.className = 'slotrow';
+  row.setAttribute('data-slot-day', day);
+  row.setAttribute('data-slot-idx', String(index));
+  row.innerHTML = `
+    <div>
+      <label class="tinylabel">Start</label>
+      <input type="text" placeholder="9:00 AM" value="${slot.start}">
+    </div>
+    <div>
+      <label class="tinylabel">End</label>
+      <input type="text" placeholder="1:00 PM" value="${slot.end}">
+    </div>
+    <div>
+      <button class="smallbtn removebtn" type="button">Remove</button>
+    </div>
+  `;
+
+  // wire inputs
+  const inputs = row.querySelectorAll('input');
+  inputs[0].addEventListener('input', e => {
+    slot.start = e.target.value;
+  });
+  inputs[1].addEventListener('input', e => {
+    slot.end = e.target.value;
+  });
+
+  // remove button
+  row.querySelector('.removebtn').addEventListener('click', () => {
+    // remove from state
+    const arr = state.times[day];
+    const i = Array.from(slotsEl.children).indexOf(row);
+    if (i >= 0) { arr.splice(i, 1); }
+    row.remove();
+    // ensure at least one slot row remains to keep UI approachable
+    if (slotsEl.children.length === 0) addSlot(day, "", "");
+  });
+
+  slotsEl.appendChild(row);
+}
+
+// ---- Program/Course dynamic import ----
+function encodePath(p){ return p.replace(/ /g, "%20"); }
+
 function initPrograms(){
   const programs = Object.keys(PROGRAM_COURSE_REGISTRY).sort();
   programSelect.innerHTML = programs.map(p => `<option value="${p}">${p}</option>`).join('');
   programSelect.addEventListener('change', onProgramChange);
-  onProgramChange(); // load first
+  onProgramChange();
 }
 
 async function onProgramChange(){
@@ -140,7 +209,6 @@ async function onProgramChange(){
   courseSelect.disabled = true;
   courseSelect.innerHTML = `<option>Loading courses…</option>`;
 
-  // load each course module to build labels
   const loaded = [];
   for (const relPath of files){
     try {
@@ -151,7 +219,6 @@ async function onProgramChange(){
       state.coursesCache.set(relPath, course);
       loaded.push({ path: relPath, label });
     } catch (e) {
-      // Leave a fallback option with the filename so you can spot path issues
       const filename = relPath.split('/').pop();
       loaded.push({ path: relPath, label: `⚠ ${filename} (load error)` });
       console.error('Import failed:', relPath, e);
@@ -166,7 +233,6 @@ async function onProgramChange(){
     courseSelect.value = loaded[0].path;
     onCourseChange();
   } else {
-    // clear course-linked UI
     setTargetHours(null);
   }
 }
@@ -203,28 +269,23 @@ function applyCourseDefaults(course){
     if (ch.startDate) setDateIfValid(startDateEl, ch.startDate);
     if (ch.endDate)   setDateIfValid(endDateEl,   ch.endDate);
 
-    // Copy Mon–Sat "9:00 AM - 5:00 PM" style times into inputs/state
-    ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].forEach(d=>{
+    // For each day, if string like "9:00 AM - 5:00 PM", set a single slot.
+    DAYS.forEach(d=>{
       const v = ch[d];
-      const startInp = document.querySelector(`input[data-day="${d}"][data-field="start"]`);
-      const endInp   = document.querySelector(`input[data-day="${d}"][data-field="end"]`);
       if (typeof v === 'string' && v.includes('-')){
         const [st, en] = v.split('-').map(s=>s.trim());
-        startInp.value = st; endInp.value = en;
-        state.times[d] = { start:st, end:en };
+        state.times[d] = [{ start: st, end: en }];
       } else {
-        // clear if not present
-        if (startInp) startInp.value = '';
-        if (endInp)   endInp.value   = '';
-        state.times[d] = {};
+        state.times[d] = []; // clear if not present
       }
     });
+
+    renderDays(); // re-render UI with those defaults
   }
 }
 
 async function onCourseChange(){
   const path = courseSelect.value;
-  // try cache first
   let course = state.coursesCache.get(path);
   if (!course){
     try {
@@ -250,7 +311,7 @@ targetHoursEl.addEventListener('input', ()=>{
   }
 });
 
-// ------- Generate / Export logic -------
+// ---- Generate / Export ----
 function generate(){
   const s = parseDateISO(document.getElementById('startDate').value);
   const e = parseDateISO(document.getElementById('endDate').value);
@@ -265,27 +326,35 @@ function generate(){
 
   const days = eachDay(s,e);
   let dayNum=0; let running=0;
+
   for(const d of days){
     const dow = dayLabels[d.getDay()];
     if(!wkDays.has(dow)) continue; // skip Sundays
-    const cfg = state.times[dow]||{};
-    const startM = timeToMinutes(cfg.start||'');
-    const endM   = timeToMinutes(cfg.end||'');
-    if(startM==null || endM==null || endM<=startM) continue;
-    const mins = endM - startM;
-    const hrs = minutesToHrs(mins);
+    const slots = state.times[dow] || [];
+    let totalMins = 0;
+
+    // Sum each valid slot for that day
+    for (const {start, end} of slots){
+      const startM = timeToMinutes(start);
+      const endM   = timeToMinutes(end);
+      if(startM==null || endM==null || endM<=startM) continue;
+      totalMins += (endM - startM);
+    }
+
+    if (totalMins <= 0) continue;
+
+    const hrs = minutesToHrs(totalMins);
     running = Math.round((running + hrs)*100)/100;
     dayNum += 1;
 
-    state.rows.push({ day:dayNum, date:new Date(d), startM, endM, hours:hrs, running });
+    state.rows.push({ day:dayNum, date:new Date(d), hours:hrs, running });
 
-    // Table row
+    // Table row (note: we show combined start/end not relevant; we keep hours per day)
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${dayNum}</td>
       <td>${formatDateHuman(d)}</td>
-      <td>${minutesTo12h(startM)}</td>
-      <td>${minutesTo12h(endM)}</td>
+      <td colspan="2">Multiple slots</td>
       <td>${hrs}</td>
       <td>${running}</td>`;
     tbody.appendChild(tr);
@@ -295,14 +364,13 @@ function generate(){
     cd.innerHTML = `
       <div class="meta">Day ${dayNum}</div>
       <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-      <div class="meta">${minutesTo12h(startM)} – ${minutesTo12h(endM)}</div>
       <div class="meta">${hrs} hrs • run: ${running}</div>`;
     cal.appendChild(cd);
   }
 
   state.total = running;
   if(state.rows.length===0){
-    tbody.innerHTML = `<tr><td colspan="6">No sessions. Fill weekday times and try again.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6">No sessions. Add times and try again.</td></tr>`;
     tfoot.style.display='none';
   } else {
     document.getElementById('totalHours').textContent = state.total;
@@ -325,8 +393,8 @@ function exportCSV(){
   const rows = state.rows.map(r=>[
     r.day,
     formatDateHuman(r.date),
-    minutesTo12h(r.startM),
-    minutesTo12h(r.endM),
+    'Multiple',
+    'Multiple',
     r.hours,
     r.running
   ]);
@@ -337,9 +405,10 @@ function exportCSV(){
   const a = document.createElement('a'); a.href = url; a.download = 'course_schedule.csv'; a.click(); URL.revokeObjectURL(url);
 }
 
-// wire buttons
+// Buttons
 document.getElementById('generateBtn').addEventListener('click', generate);
 document.getElementById('exportBtn').addEventListener('click', exportCSV);
 
-// boot
+// Boot
+renderDays();
 initPrograms();
