@@ -14,30 +14,42 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="card pad fullspan">
-      <div class="headerbar">
-        <button class="smallbtn" onclick="window.location.href='index.html'">← Back To Home</button>
-        <h1 style="margin:0">Program Calendar</h1>
-      </div>
-
-      <div class="row" style="align-items:end">
-        <div>
-          <label>Program</label>
-          <select id="programFilter"></select>
-        </div>
-        <div>
-          <label>&nbsp;</label>
-          <button class="btn" id="refreshBtn" type="button">Load Sessions</button>
-        </div>
-      </div>
-
-      <div style="height:12px"></div>
-      <div id="countTag" class="tag" style="display:none"></div>
-
-      <div style="height:12px"></div>
-      <div id="results" class="results"></div>
+  <div class="card pad fullspan">
+    <div class="headerbar">
+      <button class="smallbtn" onclick="window.location.href='index.html'">← Back To Home</button>
+      <h1 style="margin:0">Program Calendar</h1>
     </div>
+
+    <div class="row" style="align-items:end">
+      <div>
+        <label>Program</label>
+        <select id="programFilter"></select>
+      </div>
+      <div>
+        <label>&nbsp;</label>
+        <button class="btn" id="refreshBtn" type="button">Load Sessions</button>
+      </div>
+    </div>
+
+    <div style="height:12px"></div>
+    <div id="countTag" class="tag" style="display:none"></div>
+
+    <div style="height:12px"></div>
+    <!-- ✅ New: selectable list of sessions -->
+    <div id="sessionList" class="sessionlist"></div>
+
+    <div style="height:12px"></div>
+    <!-- ✅ New: legend for selected sessions -->
+    <div id="legend" class="legend"></div>
   </div>
+
+  <!-- ✅ New: Visual Calendar output -->
+  <div class="card pad fullspan">
+    <h2>Visual Calendar</h2>
+    <div id="monthGrid" class="monthgrid" aria-live="polite"></div>
+  </div>
+</div>
+
 
   <script type="module" src="assets/js/programcalendar.js"></script>
 </body>
