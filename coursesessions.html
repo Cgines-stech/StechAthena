@@ -28,62 +28,63 @@
       <div style="height:14px"></div>
 
       <!-- Course hours / dates -->
-<div class="grid-3">
-  <div>
-    <label>Course Clock Hours</label>
-    <input id="targetHours" type="text" placeholder="e.g., 48" />
-  </div>
-  <div>
-    <label>Start Date</label>
-    <input id="startDate" type="date" placeholder="MM-DD-YYYY" />
-  </div>
-  <div>
-    <label>End Date</label>
-    <input id="endDate" type="date" placeholder="MM-DD-YYYY" />
-  </div>
-</div>
+      <div class="grid-3">
+        <div>
+          <label>Course Clock Hours</label>
+          <input id="targetHours" type="text" placeholder="e.g., 48" />
+        </div>
+        <div>
+          <label>Start Date</label>
+          <input id="startDate" type="date" placeholder="MM-DD-YYYY" />
+        </div>
+        <div>
+          <label>End Date</label>
+          <input id="endDate" type="date" placeholder="MM-DD-YYYY" />
+        </div>
+      </div>
 
       <div style="height:14px"></div>
 
-      <div class="days" id="daysContainer">
-        <!-- Overrides: Add / Edit / Remove specific dates -->
-<div class="overrides card pad" style="margin-top:12px">
-  <h3 style="margin:0 0 10px 0">Date Overrides</h3>
-  <div class="row" style="align-items:end">
-    <div>
-      <label>Type</label>
-      <select id="overrideType">
-        <option value="add">Add extra date</option>
-        <option value="edit">Edit date</option>
-        <option value="remove">Remove date</option>
-      </select>
-    </div>
-    <div>
-      <label>Date</label>
-      <input id="overrideDate" type="date" placeholder="MM-DD-YYYY" />
-    </div>
-  </div>
+      <!-- Weekday pattern editor (JS populates this) -->
+      <div class="days" id="daysContainer"></div>
 
-  <div class="row" id="overrideTimesRow" style="margin-top:10px">
-    <div style="grid-column:1/-1">
-      <label>Times (one per line, e.g. “9:00 AM - 12:00 PM”)</label>
-      <textarea id="overrideTimes" placeholder="9:00 AM - 12:00 PM
+      <!-- Overrides: Add / Edit / Remove specific dates (MOVED OUTSIDE daysContainer) -->
+      <div class="overrides card pad" style="margin-top:12px">
+        <h3 style="margin:0 0 10px 0">Date Overrides</h3>
+        <div class="row" style="align-items:end">
+          <div>
+            <label>Type</label>
+            <select id="overrideType">
+              <option value="add">Add extra date</option>
+              <option value="edit">Edit date</option>
+              <option value="remove">Remove date</option>
+            </select>
+          </div>
+          <div>
+            <label>Date</label>
+            <input id="overrideDate" type="date" placeholder="MM-DD-YYYY" />
+          </div>
+        </div>
+
+        <div class="row" id="overrideTimesRow" style="margin-top:10px">
+          <div style="grid-column:1/-1">
+            <label>Times (one per line, e.g. “9:00 AM - 12:00 PM”)</label>
+            <textarea id="overrideTimes" placeholder="9:00 AM - 12:00 PM
 1:00 PM - 3:00 PM"></textarea>
-      <div class="hint">You can add multiple slots—one per line.</div>
-    </div>
-  </div>
+            <div class="hint">You can add multiple slots—one per line.</div>
+          </div>
+        </div>
 
-  <div class="actions" style="margin-top:10px">
-    <button class="smallbtn" id="addOverrideBtn" type="button">Add Override</button>
-  </div>
+        <div class="actions" style="margin-top:10px">
+          <button class="smallbtn" id="addOverrideBtn" type="button">Add Override</button>
+        </div>
 
-  <div style="height:10px"></div>
-  <div id="overridesList"></div>
-</div>
-
+        <div style="height:10px"></div>
+        <div id="overridesList"></div>
       </div>
 
       <div style="height:12px"></div>
+
       <div class="actions">
         <button class="btn" id="generateBtn">Generate</button>
         <button class="btn secondary" id="exportBtn">Export CSV</button>
