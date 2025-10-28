@@ -13,6 +13,7 @@
     <!-- Left: Controls -->
     <div class="card pad">
       <h1>Course Hours Scheduler (No Frameworks)</h1>
+
       <div class="grid-3">
         <div>
           <label>Course Clock Hours</label>
@@ -28,13 +29,16 @@
         </div>
       </div>
 
-      <div style="height:10px"></div>
-      <div class="hint">Optional: paste your course file (like <code>TEEM 1904</code>) and click Parse to auto-fill target hours, date range, and weekly time block.</div>
+      <div style="height:14px"></div>
+      <!-- New: Program / Course selectors -->
       <div class="row" style="margin-top:8px">
-        <textarea id="paste" placeholder="Paste the JS content here to auto-parse courseClockHours and courseClassroomHours..."></textarea>
-        <div style="display:flex; gap:10px; flex-direction:column">
-          <button class="btn" id="parseBtn">Parse</button>
-          <button class="btn secondary" id="clearBtn">Clear</button>
+        <div>
+          <label>Program</label>
+          <select id="programSelect"></select>
+        </div>
+        <div>
+          <label>Course</label>
+          <select id="courseSelect" disabled></select>
         </div>
       </div>
 
@@ -105,6 +109,7 @@
     </div>
   </div>
 
-  <script src="assets/js/coursesessions.js" defer></script>
+  <!-- ES module for dynamic imports -->
+  <script type="module" src="assets/js/coursesessions.js"></script>
 </body>
 </html>

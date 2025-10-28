@@ -1,4 +1,4 @@
-// coursecatlog.js
+// coursecatalog.js
 // Pulls from course files AND a program file per program
 // Example assumes your files live under /data/programs/… similar to AEMT
 
