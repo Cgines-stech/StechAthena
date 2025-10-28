@@ -253,15 +253,22 @@ function applyCourseDefaults(course){
     document.getElementById('endDate').value = '';
 
     // For each day, if string like "9:00 AM - 5:00 PM", set a single slot.
-    DAYS.forEach(d=>{
-      const v = ch[d];
-      if (typeof v === 'string' && v.includes('-')){
-        const [st, en] = v.split('-').map(s=>s.trim());
-        state.times[d] = [{ start: st, end: en }];
-      } else {
-        state.times[d] = [];
-      }
-    });
+DAYS.forEach(d => {
+  if (d === "Saturday") {
+    // force Saturday to be blank, even if data includes it
+    state.times[d] = [];
+    return;
+  }
+
+  const v = ch[d];
+  if (typeof v === 'string' && v.includes('-')) {
+    const [st, en] = v.split('-').map(s => s.trim());
+    state.times[d] = [{ start: st, end: en }];
+  } else {
+    state.times[d] = [];
+  }
+});
+
 
     renderDays();
   }
