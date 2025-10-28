@@ -46,3 +46,16 @@ tfoot{ background:#0f162b; }
   color: #ff6b6b;
   opacity: 0.8;
 }
+/* highlight when running total hits target hours */
+.calday.hit{
+  outline: 2px solid var(--ok);
+  box-shadow: 0 0 0 3px rgba(69, 209, 159, 0.25);
+}
+.calday.hit.clickable{
+  cursor: pointer;
+}
+.calday .tagline{
+  font-size: 12px;
+  color: var(--ok);
+  margin-top: 4px;
+}

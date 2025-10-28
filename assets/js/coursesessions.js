@@ -334,14 +334,38 @@ function generate(){
 // Campus-closed dates: render a closed card and continue
 const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
 if (campusClosedDates.some(c => c.date === dStr)) {
-  const cd = document.createElement('div');
-  cd.className = 'calday closed';
-  cd.innerHTML = `
-    <div class="meta">Closed</div>
-    <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-    <div class="meta">Campus Closed</div>
-  `;
-  cal.appendChild(cd);
+// Calendar card (with target-hit detection)
+const cd = document.createElement('div');
+
+// determine if this running total equals target hours (2-decimal compare)
+const targetVal = Number(targetHoursEl.value);
+const isHit = !Number.isNaN(targetVal) && targetVal > 0 &&
+              running.toFixed(2) === targetVal.toFixed(2);
+
+cd.className = 'calday' + (isHit ? ' hit clickable' : '');
+
+// store ISO date so we can set the end date on click
+const iso = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+cd.setAttribute('data-date-iso', iso);
+
+cd.innerHTML = `
+  <div class="meta">Day ${dayNum}</div>
+  <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+  <div class="meta">${hrs} hrs • run: ${running}</div>
+  ${isHit ? '<div class="tagline">Target reached</div>' : ''}
+`;
+
+if (isHit) {
+  // clicking sets End Date to this date and regenerates
+  cd.addEventListener('click', () => {
+    const endInput = document.getElementById('endDate');
+    endInput.value = iso;
+    generate();
+  });
+}
+
+cal.appendChild(cd);
+
   continue; // <-- keep this continue, just moved into the block
 }
 
