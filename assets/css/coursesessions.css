@@ -88,3 +88,23 @@ textarea{ min-height:96px }
   filter: brightness(1.2);
   color: var(--text);
 }
+
+.calday.override {
+  border-width: 2px;         /* make the highlight more visible */
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+}
+
+.calday.override-add {
+  border-color: var(--ok);    /* green-ish for added dates */
+}
+.calday.override-edit {
+  border-color: var(--accent);/* blue-ish for edited dates */
+}
+.slotslist {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.slotslist li { margin: 2px 0; }
+

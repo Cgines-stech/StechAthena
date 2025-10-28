@@ -1,10 +1,11 @@
+/* coursesessions.js */
 // ES Module with multiple time slots per day + Program/Course dropdowns,
 // dynamic import of course files, and per-date Overrides (add/edit/remove).
 
 import { campusClosedDates } from "./baddates.js";
 
 const dayLabels = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; // UI-editable days
+const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; // UI-editable days (Sunday omitted)
 const wkDays = new Set(DAYS);
 
 /** ---- Registries: update paths as needed for your repo ---- */
@@ -92,6 +93,15 @@ function eachDay(start,end){
   while(d<=end){ days.push(new Date(d)); d.setDate(d.getDate()+1); }
   return days;
 }
+function isCampusClosedDate(d){
+  const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
+  return campusClosedDates.some(c => c.date === dStr);
+}
+function renderSlotLines(slots){
+  if (!Array.isArray(slots) || !slots.length) return '';
+  const items = slots.map(s => `<li>${s.start} - ${s.end}</li>`).join('');
+  return `<ul class="slotslist">${items}</ul>`;
+}
 
 // ---- State ----
 const state = {
@@ -174,7 +184,7 @@ function addSlot(day, startVal, endVal){
   inputs[0].addEventListener('input', e => { slot.start = e.target.value; });
   inputs[1].addEventListener('input', e => { slot.end   = e.target.value;  });
 
-  // No per-slot remove button (per earlier request). We keep at least one slot visible by default.
+  // No per-slot remove button (per earlier direction). We keep at least one slot visible by default.
 
   slotsEl.appendChild(row);
 }
@@ -384,7 +394,7 @@ function setupOverridesUI(){
     }
 
     renderOverridesList();
-    // leave fields as-is; user may add several
+    // Keep fields for quick successive adds/edits
   });
 
   renderOverridesList();
@@ -413,10 +423,55 @@ function generate(){
   for (const d of days) {
     const dow = dayLabels[d.getDay()];
     const iso = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const ov = state.overrides[iso] || null;
 
-    // Campus closed always wins
-    const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
-    if (campusClosedDates.some(c => c.date === dStr)) {
+    // 1) Override: remove (wins over closed/open)
+    if (ov?.type === 'remove') {
+      const cd = document.createElement('div');
+      cd.className = 'calday closed override override-remove';
+      cd.innerHTML = `
+        <div class="meta">Removed</div>
+        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+        <div class="meta">Removed by override</div>
+      `;
+      cal.appendChild(cd);
+      continue;
+    }
+
+    // 2) Override: add/edit (wins over campusClosed + weekday rules)
+    if (ov?.type === 'add' || ov?.type === 'edit') {
+      const slotsToUse = ov.slots || [];
+      let totalMins = 0;
+      for (const { start, end } of slotsToUse) {
+        const startM = timeToMinutes(start);
+        const endM   = timeToMinutes(end);
+        if (startM == null || endM == null || endM <= startM) continue;
+        totalMins += (endM - startM);
+      }
+      if (totalMins <= 0) {
+        // no valid time; skip rendering a card
+        continue;
+      }
+
+      const hrs = minutesToHrs(totalMins);
+      running = Math.round((running + hrs) * 100) / 100;
+      dayNum += 1;
+      state.rows.push({ day: dayNum, date: new Date(d), hours: hrs, running });
+
+      const cd = document.createElement('div');
+      cd.className = `calday override override-${ov.type}`;
+      cd.innerHTML = `
+        <div class="meta">Day ${dayNum} • ${ov.type.toUpperCase()}</div>
+        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+        ${renderSlotLines(slotsToUse)}
+        <div class="meta">${hrs} hrs • run: ${running}</div>
+      `;
+      cal.appendChild(cd);
+      continue;
+    }
+
+    // 3) No override => check campus closed
+    if (isCampusClosedDate(d)) {
       const cd = document.createElement('div');
       cd.className = 'calday closed';
       cd.innerHTML = `
@@ -428,50 +483,18 @@ function generate(){
       continue;
     }
 
-    const ov = state.overrides[iso];
+    // 4) Normal weekday pattern (Mon–Sat set; Sundays skipped)
+    if (!wkDays.has(dow)) continue;
 
-    // Decide which slots to use:
-    // - remove: skip
-    // - edit: use override slots (even if it’s Sunday)
-    // - add: include date using override slots (even if not in wkDays)
-    // - default: if weekday allowed, use pattern for that weekday
-    let slotsToUse = [];
-    let useDay = false;
-
-    if (ov?.type === 'remove') {
-      const cd = document.createElement('div');
-      cd.className = 'calday closed';
-      cd.innerHTML = `
-        <div class="meta">Removed</div>
-        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-        <div class="meta">Removed by override</div>
-      `;
-      cal.appendChild(cd);
-      continue;
-    } else if (ov?.type === 'edit') {
-      slotsToUse = ov.slots || [];
-      useDay = slotsToUse.length > 0;
-    } else if (ov?.type === 'add') {
-      slotsToUse = ov.slots || [];
-      useDay = slotsToUse.length > 0;
-    } else if (wkDays.has(dow)) {
-      slotsToUse = state.times[dow] || [];
-      useDay = true;
-    } else {
-      continue; // non-weekday and no override
-    }
-
-    // Sum valid minutes
+    const slots = state.times[dow] || [];
     let totalMins = 0;
-    for (const { start, end } of slotsToUse) {
+    for (const { start, end } of slots) {
       const startM = timeToMinutes(start);
       const endM   = timeToMinutes(end);
       if (startM == null || endM == null || endM <= startM) continue;
       totalMins += (endM - startM);
     }
-    if (!useDay || totalMins <= 0) {
-      continue; // nothing to render
-    }
+    if (totalMins <= 0) continue;
 
     const hrs = minutesToHrs(totalMins);
     running = Math.round((running + hrs) * 100) / 100;
@@ -479,11 +502,10 @@ function generate(){
 
     state.rows.push({ day: dayNum, date: new Date(d), hours: hrs, running });
 
-    // Calendar card
     const cd = document.createElement('div');
     cd.className = 'calday';
     cd.innerHTML = `
-      <div class="meta">Day ${dayNum}${ov ? ` • ${ov.type.toUpperCase()}` : ''}</div>
+      <div class="meta">Day ${dayNum}</div>
       <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
       <div class="meta">${hrs} hrs • run: ${running}</div>
     `;
