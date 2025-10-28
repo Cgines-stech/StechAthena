@@ -97,9 +97,18 @@ textarea{ min-height:96px }
 .calday.override-add {
   border-color: var(--ok);    /* green-ish for added dates */
 }
+
+/* Highlight removed override dates (red border) */
+.calday.override-remove {
+  border: 2px solid var(--bad);
+  box-shadow: 0 0 6px rgba(255, 80, 80, 0.3);
+  opacity: 0.9;
+}
+
 .calday.override-edit {
   border-color: var(--accent);/* blue-ish for edited dates */
 }
+
 .slotslist {
   margin: 6px 0 0;
   padding-left: 18px;
