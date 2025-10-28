@@ -300,87 +300,76 @@ targetHoursEl.addEventListener('input', ()=>{
 function generate(){
   const s = parseDateISO(document.getElementById('startDate').value);
   const e = parseDateISO(document.getElementById('endDate').value);
-  const tbody = document.querySelector('#table tbody');
-  const tfoot = document.querySelector('#table tfoot');
   const cal = document.getElementById('calendar');
   const compareBlock = document.getElementById('compareBlock');
-  tbody.innerHTML=''; cal.innerHTML=''; compareBlock.innerHTML='';
-  state.rows=[]; state.total=0;
+  cal.innerHTML = '';
+  compareBlock.innerHTML = '';
+  state.rows = [];
+  state.total = 0;
 
-  if(!s || !e || e<s){ tbody.innerHTML = `<tr><td colspan="6">Enter a valid date range.</td></tr>`; tfoot.style.display='none'; return; }
+  if (!s || !e || e < s) {
+    cal.innerHTML = `<div class="calday closed">Enter a valid date range.</div>`;
+    return;
+  }
 
-  const days = eachDay(s,e);
-  let dayNum=0; let running=0;
+  const days = eachDay(s, e);
+  let dayNum = 0;
+  let running = 0;
 
   for (const d of days) {
-  const dow = dayLabels[d.getDay()];
-  if (!wkDays.has(dow)) continue; // skip Sundays
+    const dow = dayLabels[d.getDay()];
+    if (!wkDays.has(dow)) continue;
 
-  // Campus-closed dates: render a closed card and continue
-  const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
-  if (campusClosedDates.some(c => c.date === dStr)) {
+    const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
+    if (campusClosedDates.some(c => c.date === dStr)) {
+      const cd = document.createElement('div');
+      cd.className = 'calday closed';
+      cd.innerHTML = `
+        <div class="meta">Closed</div>
+        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+        <div class="meta">Campus Closed</div>
+      `;
+      cal.appendChild(cd);
+      continue;
+    }
+
+    const slots = state.times[dow] || [];
+    let totalMins = 0;
+
+    for (const { start, end } of slots) {
+      const startM = timeToMinutes(start);
+      const endM = timeToMinutes(end);
+      if (startM == null || endM == null || endM <= startM) continue;
+      totalMins += (endM - startM);
+    }
+
+    if (totalMins <= 0) continue;
+
+    const hrs = minutesToHrs(totalMins);
+    running = Math.round((running + hrs) * 100) / 100;
+    dayNum += 1;
+
+    state.rows.push({ day: dayNum, date: new Date(d), hours: hrs, running });
+
     const cd = document.createElement('div');
-    cd.className = 'calday closed';
+    cd.className = 'calday';
     cd.innerHTML = `
-      <div class="meta">Closed</div>
+      <div class="meta">Day ${dayNum}</div>
       <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-      <div class="meta">Campus Closed</div>
+      <div class="meta">${hrs} hrs • run: ${running}</div>
     `;
     cal.appendChild(cd);
-    continue;
   }
-
-  const slots = state.times[dow] || [];
-  let totalMins = 0;
-
-  // Sum each valid slot for that day
-  for (const { start, end } of slots) {
-    const startM = timeToMinutes(start);
-    const endM   = timeToMinutes(end);
-    if (startM == null || endM == null || endM <= startM) continue;
-    totalMins += (endM - startM);
-  }
-
-  if (totalMins <= 0) continue;
-
-  const hrs = minutesToHrs(totalMins);
-  running = Math.round((running + hrs) * 100) / 100;
-  dayNum += 1;
-
-  state.rows.push({ day: dayNum, date: new Date(d), hours: hrs, running });
-
-  // Table row
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td>${dayNum}</td>
-    <td>${formatDateHuman(d)}</td>
-    <td colspan="2">Multiple slots</td>
-    <td>${hrs}</td>
-    <td>${running}</td>`;
-  tbody.appendChild(tr);
-
-  // Calendar card
-  const cd = document.createElement('div'); cd.className = 'calday';
-  cd.innerHTML = `
-    <div class="meta">Day ${dayNum}</div>
-    <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-    <div class="meta">${hrs} hrs • run: ${running}</div>`;
-  cal.appendChild(cd);
-}
 
   state.total = running;
-  if(state.rows.length===0){
-    tbody.innerHTML = `<tr><td colspan="6">No sessions. Add times and try again.</td></tr>`;
-    tfoot.style.display='none';
-  } else {
-    document.getElementById('totalHours').textContent = state.total;
-    tfoot.style.display='table-footer-group';
+
+  if (state.rows.length === 0) {
+    cal.innerHTML = `<div class="calday closed">No sessions. Add times and try again.</div>`;
   }
 
-  // Compare to target
   const t = Number(targetHoursEl.value);
-  if(!isNaN(t) && t>0){
-    const diff = Math.round((t - state.total)*100)/100;
+  if (!isNaN(t) && t > 0) {
+    const diff = Math.round((t - state.total) * 100) / 100;
     compareBlock.innerHTML = diff >= 0
       ? `<span class="good">Remaining to target: ${diff} hrs</span>`
       : `<span class="bad">Over target by: ${Math.abs(diff)} hrs</span>`;

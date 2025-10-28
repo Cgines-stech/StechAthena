@@ -26,10 +26,6 @@ textarea{ min-height:96px }
 .calday .date{ font-weight:700 }
 .calday .meta{ font-size:12px; color:var(--muted) }
 .good{ color:var(--ok) } .bad{ color:var(--bad) }
-table{ width:100%; border-collapse:collapse; font-size:14px }
-thead{ background:#111628; color:var(--muted) }
-th,td{ padding:10px; border-top:1px solid #222a3d }
-tfoot{ background:#0f162b; }
 .rightinfo{ font-size:14px }
 
 /* multiple-slot UI */

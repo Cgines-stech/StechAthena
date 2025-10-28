@@ -13,7 +13,7 @@
     <div class="card pad">
       <h1>Course Hours Scheduler (No Frameworks)</h1>
 
-      <!-- Program / Course selectors — moved ABOVE hours/dates -->
+      <!-- Program / Course selectors -->
       <div class="row" style="margin-top:8px">
         <div>
           <label>Program</label>
@@ -27,7 +27,7 @@
 
       <div style="height:14px"></div>
 
-      <!-- Course hours / dates — moved BELOW program/course -->
+      <!-- Course hours / dates -->
       <div class="grid-3">
         <div>
           <label>Course Clock Hours</label>
@@ -45,7 +45,6 @@
 
       <div style="height:14px"></div>
 
-      <!-- Dynamic days UI will render here -->
       <div class="days" id="daysContainer"></div>
 
       <div style="height:12px"></div>
@@ -56,37 +55,15 @@
       </div>
     </div>
 
-    <!-- Right: Calendar + Table -->
+    <!-- Right: Calendar -->
     <div class="card pad">
       <h2>Calendar Overview</h2>
       <div id="calendar" class="calendar" aria-live="polite"></div>
       <div style="height:12px"></div>
       <div class="rightinfo" id="compareBlock"></div>
-      <div style="height:18px"></div>
-      <div style="overflow:auto">
-        <table id="table">
-          <thead>
-            <tr>
-              <th>Day</th>
-              <th>Date</th>
-              <th>Start Time</th>
-              <th>End Time</th>
-              <th>Hours</th>
-              <th>Running Total</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-          <tfoot style="display:none"><tr>
-            <td colspan="4" style="font-weight:700">Total</td>
-            <td id="totalHours" style="font-weight:700"></td>
-            <td></td>
-          </tr></tfoot>
-        </table>
-      </div>
     </div>
   </div>
 
-  <!-- ES module for dynamic imports -->
   <script type="module" src="assets/js/coursesessions.js"></script>
 </body>
 </html>
