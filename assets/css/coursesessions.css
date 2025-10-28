@@ -75,3 +75,16 @@ textarea{ min-height:96px }
 .ovactions { margin-top:8px; display:flex; gap:8px; }
 .smallbtn.danger { background:#2c1a1a; border-color:#4a2626; color:var(--bad); }
 .smallbtn.danger:hover{ filter:brightness(1.06); }
+#backBtn {
+  background: #1b2233;
+  border: 1px solid #2a3246;
+  color: var(--muted);
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+#backBtn:hover {
+  filter: brightness(1.2);
+  color: var(--text);
+}
