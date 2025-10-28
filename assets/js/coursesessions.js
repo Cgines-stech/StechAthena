@@ -1,6 +1,8 @@
 // assets/js/coursesessions.js
 // ES Module with multiple time slots per day + Program/Course dropdowns + dynamic import of course files.
 
+import { campusClosedDates } from "./baddates.js";
+
 const dayLabels = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const wkDays = new Set(DAYS);
@@ -329,6 +331,20 @@ function generate(){
   for(const d of days){
     const dow = dayLabels[d.getDay()];
     if(!wkDays.has(dow)) continue; // skip Sundays
+// Campus-closed dates: render a closed card and continue
+const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
+if (campusClosedDates.some(c => c.date === dStr)) {
+  const cd = document.createElement('div');
+  cd.className = 'calday closed';
+  cd.innerHTML = `
+    <div class="meta">Closed</div>
+    <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+    <div class="meta">Campus Closed</div>
+  `;
+  cal.appendChild(cd);
+  continue; // <-- keep this continue, just moved into the block
+}
+
     const slots = state.times[dow] || [];
     let totalMins = 0;
 
