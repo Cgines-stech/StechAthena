@@ -1,9 +1,8 @@
 // assets/js/programcalendar.js
-import { saveCourseSession } from "./coursesessions.store.js";
+import { listCourseSessions } from "./coursesessions.store.js";
 
 // Helpers
 function safeDate(ts) {
-  // Accepts Firestore Timestamp or ISO string or JS Date; returns Date or null
   if (!ts) return null;
   if (ts.toDate) { try { return ts.toDate(); } catch {} }
   if (typeof ts === "string") { const d = new Date(ts); return isNaN(d) ? null : d; }
@@ -26,14 +25,17 @@ const resultsEl  = document.getElementById("results");
 const countTag   = document.getElementById("countTag");
 
 async function bootstrapPrograms() {
-  // Pull a recent slice to discover available programs
-  const recent = await listCourseSessions({ max: 200 });
-  const programs = Array.from(new Set(recent.map(d => d.program).filter(Boolean))).sort();
+  try {
+    const recent = await listCourseSessions({ max: 200 });
+    const programs = Array.from(new Set(recent.map(d => d.program).filter(Boolean))).sort();
 
-  // If no programs yet, still show a blank option
-  programSel.innerHTML = programs.length
-    ? programs.map(p => `<option value="${p}">${p}</option>`).join("")
-    : `<option value="">(no programs found)</option>`;
+    programSel.innerHTML = programs.length
+      ? programs.map(p => `<option value="${p}">${p}</option>`).join("")
+      : `<option value="">(no programs found)</option>`;
+  } catch (e) {
+    console.error(e);
+    programSel.innerHTML = `<option value="">(error loading programs)</option>`;
+  }
 }
 
 function renderSessions(docs) {
@@ -59,7 +61,6 @@ function renderSessions(docs) {
     const updatedAt = safeDate(d.updatedAt);
     const updatedStr = updatedAt ? `${fmt(updatedAt)}` : "—";
 
-    // Build slots summary for the first day (kept simple)
     const firstSlots = rows[0]?.slots || [];
     const slotPreview = firstSlots.length
       ? firstSlots.map(s => `${s.start}–${s.end}`).join(" | ")
@@ -79,8 +80,6 @@ function renderSessions(docs) {
     card.appendChild(el("div",
       `<div class="sessmeta">Updated: ${updatedStr}</div>`
     ));
-
-    // Small preview line
     card.appendChild(el("div",
       `<div class="sessmeta">Example slots (Day 1): ${slotPreview}</div>`
     ));
@@ -91,12 +90,17 @@ function renderSessions(docs) {
 
 async function loadForSelectedProgram() {
   const program = programSel.value || "";
-  if (!program) {
-    renderSessions([]);
-    return;
+  if (!program) { renderSessions([]); return; }
+
+  try {
+    const docs = await listCourseSessions({ program, max: 200 });
+    renderSessions(docs);
+  } catch (e) {
+    console.error(e);
+    resultsEl.innerHTML = "";
+    resultsEl.appendChild(el("div", "Error loading sessions.", "empty"));
+    countTag.style.display = "none";
   }
-  const docs = await listCourseSessions({ program, max: 200 });
-  renderSessions(docs);
 }
 
 // Wire up
