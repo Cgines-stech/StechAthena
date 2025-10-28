@@ -4,6 +4,9 @@
 // and a Visual Month Calendar that mirrors the overview.
 
 import { campusClosedDates } from "./baddates.js";
+import { saveCourseSession } from "./coursesessions.store.js";
+
+
 
 const dayLabels = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; // UI-editable days (Sunday omitted)
@@ -197,6 +200,44 @@ function addSlot(day, startVal, endVal){
 
   slotsEl.appendChild(row);
 }
+
+function collectPayloadForFirestore() {
+  const program = document.getElementById('programSelect').value || '';
+  const coursePath = document.getElementById('courseSelect').value || '';
+  const courseLabel = document.getElementById('courseSelect').selectedOptions?.[0]?.textContent || '';
+
+  const startISO = document.getElementById('startDate').value || '';
+  const endISO   = document.getElementById('endDate').value || '';
+
+  return {
+    program,
+    course: courseLabel || coursePath,
+    targetHours: Number(document.getElementById('targetHours').value) || null,
+    startDate: startISO,
+    endDate: endISO,
+    timesByWeekday: structuredClone(state.times),
+    overrides: structuredClone(state.overrides),
+    rows: state.rows.map(r => ({ ...r, date: r.date.toISOString().split('T')[0] })),
+    total: state.total,
+    version: 1,
+  };
+}
+async function saveAfterGenerate() {
+  try {
+    if (!state.rows.length) {
+      alert('Generate first so we have rows and totals to save.');
+      return;
+    }
+    const payload = collectPayloadForFirestore();
+    const id = await saveCourseSession(payload);
+    alert(`Saved! ID: ${id}`);
+  } catch (e) {
+    console.error(e);
+    alert(e.message || 'Failed to save. Are you signed in (Google)?');
+  }
+}
+
+document.getElementById('saveBtn').addEventListener('click', saveAfterGenerate);
 
 // ---- Program/Course dynamic import ----
 

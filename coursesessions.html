@@ -17,6 +17,28 @@
 
   <h1>Course Hours Scheduler</h1>
 
+<div id="authBox" class="row" style="justify-content:space-between; align-items:center; gap:8px;">
+  <div id="authStatus" class="hint">Not signed in</div>
+  <button class="smallbtn" id="authBtn" type="button">Sign in with Google</button>
+</div>
+
+<script type="module">
+  import { onAuth, signInWithGoogle, signOutNow } from "./assets/js/firebase.js";
+  const status = document.getElementById('authStatus');
+  const btn = document.getElementById('authBtn');
+
+  onAuth(user => {
+    if (user) {
+      status.textContent = `Signed in as ${user.email || user.displayName || 'User'}`;
+      btn.textContent = 'Sign out';
+      btn.onclick = () => signOutNow();
+    } else {
+      status.textContent = 'Not signed in';
+      btn.textContent = 'Sign in with Google';
+      btn.onclick = () => signInWithGoogle();
+    }
+  });
+</script>
 
       <!-- Program / Course selectors -->
       <div class="row" style="margin-top:8px">
@@ -93,7 +115,10 @@
       <div class="actions">
   <button class="btn" id="generateBtn">Generate</button>
   <button class="btn secondary" id="exportBtn">Export CSV</button>
+  <button class="btn" id="saveBtn">Save to Firebase</button> <!-- NEW -->
   <div id="targetTag" class="tag" style="margin-left:auto; display:none"></div>
+</div>
+
 </div>
 
     </div>
