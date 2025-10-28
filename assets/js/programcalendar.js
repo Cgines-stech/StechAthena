@@ -27,6 +27,13 @@ function el(tag, html, cls) {
   if (html != null) e.innerHTML = html;
   return e;
 }
+function isTimeFilled(v) {
+  if (v == null) return false;
+  const s = String(v).trim();
+  if (!s || s === "?" || s === "-") return false;
+  // Accept common formats like "9", "9:00", "9:00 AM", "09:00", etc.
+  return /am|pm/i.test(s) || /^\d{1,2}(:\d{2})?$/.test(s);
+}
 
 // ---------- DOM refs ----------
 const programSel = document.getElementById("programFilter");
@@ -152,38 +159,45 @@ function renderVisualCalendar() {
   let start = null, end = null;
 
   for (const doc of selected.values()) {
-    const rows = Array.isArray(doc.rows) ? doc.rows : [];
-    for (const r of rows) {
-      const iso = r.date; // YYYY-MM-DD
-      if (!iso) continue;
+  const rows = Array.isArray(doc.rows) ? doc.rows : [];
+  for (const r of rows) {
+    const iso = r.date; // YYYY-MM-DD
+    if (!iso) continue;
 
-      const d = new Date(iso);
-      if (!start || d < start) start = d;
-      if (!end || d > end) end = d;
+    const d = new Date(iso);
+    if (!start || d < start) start = d;
+    if (!end || d > end) end = d;
 
-      const slots = Array.isArray(r.slots) ? r.slots : [];
-      if (!byIso[iso]) byIso[iso] = [];
+    const slots = Array.isArray(r.slots) ? r.slots : [];
+    const cleanSlots = slots.filter(s => isTimeFilled(s.start) && isTimeFilled(s.end));
 
-      // If there are no slots, still show an entry with hours/running
-      if (!slots.length) {
+    if (!byIso[iso]) byIso[iso] = [];
+
+    if (cleanSlots.length) {
+      // Render only valid time ranges
+      for (const s of cleanSlots) {
+        const line1 = `${doc.course || "(untitled)"}: ${s.start} – ${s.end}`;
+        const line2 = `Run: ${r.running ?? "—"} hrs`;
         byIso[iso].push({
           color: doc._color,
           course: doc.course || "(untitled)",
-          lines: [`No explicit times`, `Run: ${r.running ?? "—"} hrs`]
+          lines: [line1, line2]
         });
-      } else {
-        for (const s of slots) {
-          const line1 = `${doc.course || "(untitled)"}: ${s.start || "?"} – ${s.end || "?"}`;
-          const line2 = `Run: ${r.running ?? "—"} hrs`;
-          byIso[iso].push({
-            color: doc._color,
-            course: doc.course || "(untitled)",
-            lines: [line1, line2]
-          });
-        }
       }
+    } else if (r?.hours || r?.running) {
+      // No explicit times, but we do have hours/running — show a summary
+      const l1 = `${doc.course || "(untitled)"}`;
+      const l2 = `Hours: ${r.hours ?? "—"} • Run: ${r.running ?? "—"} hrs`;
+      byIso[iso].push({
+        color: doc._color,
+        course: doc.course || "(untitled)",
+        lines: [l1, l2]
+      });
     }
+    // else: no valid times and no hours info — render nothing for this date
   }
+}
+
 
   if (!start || !end) return;
 
