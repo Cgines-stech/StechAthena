@@ -117,3 +117,36 @@ textarea{ min-height:96px }
 }
 .slotslist li { margin: 2px 0; }
 
+/* ====== Visual Month Calendar ====== */
+.monthgrid { width:100%; display:grid; grid-template-columns:1fr; gap:14px; }
+.month {
+  border:1px solid #2a3246; border-radius:12px; background:#0f1320; padding:12px;
+}
+.month-header {
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;
+}
+.month-title { font-weight:700; }
+.weekday-row, .week {
+  display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:6px;
+}
+.weekday {
+  font-size:11px; color:var(--muted); text-align:center; padding:6px 0;
+}
+.daycell {
+  min-height:84px; border:1px solid #2a3246; border-radius:10px; padding:6px; position:relative; background:#0f1320;
+}
+.daycell .date-num { font-size:12px; color:var(--muted); position:absolute; top:6px; right:8px; }
+.daycell .slotslist { margin:18px 0 0; padding-left:14px; color:var(--muted); font-size:12px; }
+.daycell .slotslist li { margin:2px 0; }
+
+/* States */
+.daycell.inactive { opacity:.35; }
+.daycell.has-schedule { border-color:#3a4561; }
+.daycell.closed { background:#1a1a1a; color:var(--bad); border-color:#3a2323; }
+.daycell.closed .date-num { color:var(--bad); }
+
+/* Override highlights (match overview) */
+.daycell.override { border-width:2px; box-shadow:0 0 0 2px rgba(0,0,0,0.15); }
+.daycell.override-add { border-color: var(--ok); }
+.daycell.override-edit { border-color: var(--accent); }
+.daycell.override-remove { border:2px solid var(--bad); box-shadow:0 0 6px rgba(255, 80, 80, 0.3); }

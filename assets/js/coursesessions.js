@@ -1,6 +1,7 @@
 /* coursesessions.js */
 // ES Module with multiple time slots per day + Program/Course dropdowns,
-// dynamic import of course files, and per-date Overrides (add/edit/remove).
+// dynamic import of course files, per-date Overrides (add/edit/remove),
+// and a Visual Month Calendar that mirrors the overview.
 
 import { campusClosedDates } from "./baddates.js";
 
@@ -71,6 +72,9 @@ function parseDateISO(v){
 function formatDateHuman(d){
   return d.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'2-digit', year:'numeric' });
 }
+function monthYearLabel(d){
+  return d.toLocaleDateString(undefined, { month:'long', year:'numeric' });
+}
 function pad(n){ return String(n).padStart(2,'0'); }
 function timeToMinutes(str){
   if(!str) return null;
@@ -94,7 +98,7 @@ function eachDay(start,end){
   return days;
 }
 function isCampusClosedDate(d){
-  const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
+  const dStr = `${pad(d.getMonth() + 1)}-${pad(d.getDate())}-${d.getFullYear()}`;
   return campusClosedDates.some(c => c.date === dStr);
 }
 function renderSlotLines(slots){
@@ -102,6 +106,11 @@ function renderSlotLines(slots){
   const items = slots.map(s => `<li>${s.start} - ${s.end}</li>`).join('');
   return `<ul class="slotslist">${items}</ul>`;
 }
+function isoOf(d){
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+function firstOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
+function lastOfMonth(d){ return new Date(d.getFullYear(), d.getMonth()+1, 0); }
 
 // ---- State ----
 const state = {
@@ -307,7 +316,7 @@ targetHoursEl.addEventListener('input', ()=>{
 function isoFromDateInput(v){
   const d = parseDateISO(v);
   if(!d) return null;
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 }
 
 function parseOverrideSlots(text){
@@ -394,10 +403,104 @@ function setupOverridesUI(){
     }
 
     renderOverridesList();
-    // Keep fields for quick successive adds/edits
   });
 
   renderOverridesList();
+}
+
+// ---- Visual Month Calendar ----
+
+function renderMonthCalendars(s, e, entriesByIso){
+  const grid = document.getElementById('monthGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+
+  // Start at first of start month, end at last of end month
+  const startMonth = new Date(s.getFullYear(), s.getMonth(), 1);
+  const endMonth   = new Date(e.getFullYear(), e.getMonth(), 1);
+
+  for (let cur = new Date(startMonth); cur <= endMonth; cur.setMonth(cur.getMonth()+1)) {
+    const first = firstOfMonth(cur);
+    const last  = lastOfMonth(cur);
+
+    const monthEl = document.createElement('div');
+    monthEl.className = 'month';
+
+    // Header
+    monthEl.innerHTML = `
+      <div class="month-header">
+        <div class="month-title">${monthYearLabel(first)}</div>
+      </div>
+      <div class="weekday-row">
+        ${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(w=>`<div class="weekday">${w}</div>`).join('')}
+      </div>
+    `;
+
+    // Weeks container
+    const weeksFrag = document.createDocumentFragment();
+    let weekEl = document.createElement('div');
+    weekEl.className = 'week';
+
+    // Leading blanks
+    const leadBlanks = first.getDay(); // 0=Sun..6=Sat
+    for(let i=0;i<leadBlanks;i++){
+      const blank = document.createElement('div');
+      blank.className = 'daycell inactive';
+      weekEl.appendChild(blank);
+    }
+
+    // Days of month
+    for(let day=1; day<=last.getDate(); day++){
+      const d = new Date(first.getFullYear(), first.getMonth(), day);
+      const iso = isoOf(d);
+      const entry = entriesByIso[iso] || null;
+
+      const cell = document.createElement('div');
+      cell.className = 'daycell';
+      cell.innerHTML = `<div class="date-num">${day}</div>`;
+
+      if (entry) {
+        // Classes based on status
+        if (entry.status === 'closed') {
+          cell.classList.add('closed');
+        } else if (entry.status.startsWith('override-')) {
+          cell.classList.add('override', entry.status);
+          if (entry.slots?.length) {
+            cell.innerHTML += renderSlotLines(entry.slots);
+          }
+        } else if (entry.status === 'normal') {
+          cell.classList.add('has-schedule');
+          if (entry.slots?.length) {
+            cell.innerHTML += renderSlotLines(entry.slots);
+          }
+        }
+      }
+
+      weekEl.appendChild(cell);
+
+      // If Saturday, push week row and start a new one
+      if (d.getDay() === 6) {
+        weeksFrag.appendChild(weekEl);
+        weekEl = document.createElement('div');
+        weekEl.className = 'week';
+      }
+    }
+
+    // Trailing blanks to complete last week
+    const lastDow = last.getDay();
+    if (lastDow !== 6) {
+      for (let i=lastDow+1; i<=6; i++) {
+        const blank = document.createElement('div');
+        blank.className = 'daycell inactive';
+        weekEl.appendChild(blank);
+      }
+    }
+    // Append the final week row
+    weeksFrag.appendChild(weekEl);
+
+    monthEl.appendChild(weeksFrag);
+    grid.appendChild(monthEl);
+  }
 }
 
 // ---- Generate / Export ----
@@ -408,11 +511,14 @@ function generate(){
   const compareBlock = document.getElementById('compareBlock');
   cal.innerHTML = '';
   compareBlock.innerHTML = '';
+  const monthEntries = {}; // iso -> { status: 'normal'|'closed'|'override-add'|'override-edit'|'override-remove', slots?:[] }
+
   state.rows = [];
   state.total = 0;
 
   if (!s || !e || e < s) {
     cal.innerHTML = `<div class="calday closed">Enter a valid date range.</div>`;
+    document.getElementById('monthGrid')?.replaceChildren(); // clear month grid
     return;
   }
 
@@ -422,10 +528,10 @@ function generate(){
 
   for (const d of days) {
     const dow = dayLabels[d.getDay()];
-    const iso = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const iso = isoOf(d);
     const ov = state.overrides[iso] || null;
 
-    // 1) Override: remove (wins over closed/open)
+    // 1) Override: remove
     if (ov?.type === 'remove') {
       const cd = document.createElement('div');
       cd.className = 'calday closed override override-remove';
@@ -435,6 +541,7 @@ function generate(){
         <div class="meta">Removed by override</div>
       `;
       cal.appendChild(cd);
+      monthEntries[iso] = { status:'override-remove' };
       continue;
     }
 
@@ -449,7 +556,7 @@ function generate(){
         totalMins += (endM - startM);
       }
       if (totalMins <= 0) {
-        // no valid time; skip rendering a card
+        monthEntries[iso] = { status:'override-' + ov.type, slots: [] };
         continue;
       }
 
@@ -467,10 +574,12 @@ function generate(){
         <div class="meta">${hrs} hrs • run: ${running}</div>
       `;
       cal.appendChild(cd);
+
+      monthEntries[iso] = { status:'override-' + ov.type, slots: slotsToUse.slice() };
       continue;
     }
 
-    // 3) No override => check campus closed
+    // 3) No override => campus closed?
     if (isCampusClosedDate(d)) {
       const cd = document.createElement('div');
       cd.className = 'calday closed';
@@ -480,11 +589,15 @@ function generate(){
         <div class="meta">Campus Closed</div>
       `;
       cal.appendChild(cd);
+      monthEntries[iso] = { status:'closed' };
       continue;
     }
 
     // 4) Normal weekday pattern (Mon–Sat set; Sundays skipped)
-    if (!wkDays.has(dow)) continue;
+    if (!wkDays.has(dow)) {
+      // Month grid will show it as empty/inactive by default
+      continue;
+    }
 
     const slots = state.times[dow] || [];
     let totalMins = 0;
@@ -494,7 +607,10 @@ function generate(){
       if (startM == null || endM == null || endM <= startM) continue;
       totalMins += (endM - startM);
     }
-    if (totalMins <= 0) continue;
+    if (totalMins <= 0) {
+      // no schedule; leave as empty
+      continue;
+    }
 
     const hrs = minutesToHrs(totalMins);
     running = Math.round((running + hrs) * 100) / 100;
@@ -510,6 +626,9 @@ function generate(){
       <div class="meta">${hrs} hrs • run: ${running}</div>
     `;
     cal.appendChild(cd);
+
+    // store normal day slots for month grid
+    monthEntries[iso] = { status:'normal', slots: slots.slice() };
   }
 
   state.total = running;
@@ -525,6 +644,9 @@ function generate(){
       ? `<span class="good">Remaining to target: ${diff} hrs</span>`
       : `<span class="bad">Over target by: ${Math.abs(diff)} hrs</span>`;
   }
+
+  // Finally render the month-by-month grid
+  renderMonthCalendars(s, e, monthEntries);
 }
 
 function exportCSV(){
