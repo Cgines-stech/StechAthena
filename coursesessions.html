@@ -11,11 +11,11 @@
   <div class="wrap">
     <!-- Left: Controls -->
     <div class="card pad">
-  <button class="smallbtn" id="backBtn" onclick="window.location.href='index.html'" style="margin-bottom:12px">
-    ← Back To Home
-  </button>
+      <button class="smallbtn" id="backBtn" onclick="window.location.href='index.html'" style="margin-bottom:12px">
+        ← Back To Home
+      </button>
 
-  <h1>Course Hours Scheduler</h1>
+      <h1>Course Hours Scheduler</h1>
 
       <!-- Program / Course selectors -->
       <div class="row" style="margin-top:8px">
@@ -49,10 +49,10 @@
 
       <div style="height:14px"></div>
 
-      <!-- Weekday pattern editor (JS populates this) -->
+      <!-- Weekday pattern editor -->
       <div class="days" id="daysContainer"></div>
 
-      <!-- Overrides: Add / Edit / Remove specific dates (MOVED OUTSIDE daysContainer) -->
+      <!-- Overrides -->
       <div class="overrides card pad" style="margin-top:12px">
         <h3 style="margin:0 0 10px 0">Date Overrides</h3>
         <div class="row" style="align-items:end">
@@ -87,42 +87,39 @@
         <div id="overridesList"></div>
       </div>
 
-<div class="row" style="margin-top:12px">
-  <div>
-    <label>Your Name (for recordkeeping)</label>
-    <input id="displayName" type="text" placeholder="e.g., John Smith" />
-  </div>
-</div>
+      <!-- Name -->
+      <div class="row" style="margin-top:12px">
+        <div>
+          <label>Your Name (for recordkeeping)</label>
+          <input id="displayName" type="text" placeholder="e.g., John Smith" />
+        </div>
+      </div>
 
-<div style="height:12px"></div>
+      <div style="height:12px"></div>
 
-<div class="actions">
-  <button class="btn" id="generateBtn">Generate</button>
-  <button class="btn secondary" id="exportBtn">Export CSV</button>
-  <button class="btn" id="saveBtn">Save to Firebase</button>
-  <div id="targetTag" class="tag" style="margin-left:auto; display:none"></div>
-</div>
+      <!-- Actions -->
+      <div class="actions">
+        <button class="btn" id="generateBtn">Generate</button>
+        <button class="btn secondary" id="exportBtn">Export CSV</button>
+        <button class="btn" id="saveBtn">Save to Firebase</button>
+        <div id="targetTag" class="tag" style="margin-left:auto; display:none"></div>
+      </div>
+    </div> <!-- END left card -->
 
-
-</div>
-
+    <!-- Right: Calendar -->
+    <div class="card pad">
+      <h2>Calendar Overview</h2>
+      <div id="calendar" class="calendar" aria-live="polite"></div>
+      <div style="height:12px"></div>
+      <div class="rightinfo" id="compareBlock"></div>
     </div>
 
-<!-- Right: Calendar -->
-<div class="card pad">
-  <h2>Calendar Overview</h2>
-  <div id="calendar" class="calendar" aria-live="polite"></div>
-  <div style="height:12px"></div>
-  <div class="rightinfo" id="compareBlock"></div>
-</div>
-
-<!-- Full-width Visual Calendar -->
-<div class="card pad fullspan">
-  <h2>Visual Calendar</h2>
-  <div id="monthGrid" class="monthgrid" aria-live="polite"></div>
-</div>
-
-  </div>
+    <!-- Full-width Visual Calendar -->
+    <div class="card pad fullspan">
+      <h2>Visual Calendar</h2>
+      <div id="monthGrid" class="monthgrid" aria-live="polite"></div>
+    </div>
+  </div> <!-- END .wrap -->
 
   <script type="module" src="assets/js/coursesessions.js"></script>
 </body>
