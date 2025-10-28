@@ -194,7 +194,6 @@ function addSlot(day, startVal, endVal){
 }
 
 // ---- Program/Course dynamic import ----
-function encodePath(p){ return p.replace(/ /g, "%20"); }
 
 function initPrograms(){
   const programs = Object.keys(PROGRAM_COURSE_REGISTRY).sort();
