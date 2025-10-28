@@ -1,4 +1,4 @@
-/* coursesessions.js */
+/* assets/js/coursesessions.js */
 // ES Module with multiple time slots per day + Program/Course dropdowns,
 // dynamic import of course files, per-date Overrides (add/edit/remove),
 // and a Visual Month Calendar that mirrors the overview.
@@ -194,11 +194,10 @@ function addSlot(day, startVal, endVal){
   inputs[0].addEventListener('input', e => { slot.start = e.target.value; });
   inputs[1].addEventListener('input', e => { slot.end   = e.target.value;  });
 
-  // No per-slot remove button (per earlier direction). We keep at least one slot visible by default.
-
   slotsEl.appendChild(row);
 }
 
+// ---- Payload for Firestore ----
 function collectPayloadForFirestore() {
   const program = document.getElementById('programSelect').value || '';
   const coursePath = document.getElementById('courseSelect').value || '';
@@ -215,7 +214,6 @@ function collectPayloadForFirestore() {
     startDate: startISO,
     endDate: endISO,
     displayName,
-    // rows now carry their own slots and an ISO date string
     rows: state.rows.map(r => ({
       day: r.day,
       date: r.date.toISOString().split('T')[0],
@@ -224,7 +222,7 @@ function collectPayloadForFirestore() {
       slots: (r.slots || []).map(s => ({ start: s.start, end: s.end }))
     })),
     total: state.total,
-    version: 2, // bump schema version
+    version: 2,
   };
 }
 
@@ -239,14 +237,13 @@ async function saveAfterGenerate() {
     alert(`Saved! ID: ${id}`);
   } catch (e) {
     console.error(e);
-    alert(e.message || 'Failed to save. Are you signed in (Google)?');
+    alert(e.message || 'Failed to save. Are you signed in?');
   }
 }
 
 document.getElementById('saveBtn').addEventListener('click', saveAfterGenerate);
 
 // ---- Program/Course dynamic import ----
-
 function initPrograms(){
   const programs = Object.keys(PROGRAM_COURSE_REGISTRY).sort();
   programSelect.innerHTML = programs.map(p => `<option value="${p}">${p}</option>`).join('');
@@ -359,7 +356,6 @@ targetHoursEl.addEventListener('input', ()=>{
 });
 
 // ---- Overrides UI + helpers (safe if HTML controls are absent) ----
-
 function isoFromDateInput(v){
   const d = parseDateISO(v);
   if(!d) return null;
@@ -456,7 +452,6 @@ function setupOverridesUI(){
 }
 
 // ---- Visual Month Calendar ----
-
 function renderMonthCalendars(s, e, entriesByIso){
   const grid = document.getElementById('monthGrid');
   if(!grid) return;
@@ -507,7 +502,6 @@ function renderMonthCalendars(s, e, entriesByIso){
       cell.innerHTML = `<div class="date-num">${day}</div>`;
 
       if (entry) {
-        // Classes based on status
         if (entry.status === 'closed') {
           cell.classList.add('closed');
         } else if (entry.status.startsWith('override-')) {
@@ -534,7 +528,7 @@ function renderMonthCalendars(s, e, entriesByIso){
     }
 
     // Trailing blanks to complete last week
-    const lastDow = last.getDay();
+    const lastDow = lastOfMonth(cur).getDay();
     if (lastDow !== 6) {
       for (let i=lastDow+1; i<=6; i++) {
         const blank = document.createElement('div');
@@ -542,7 +536,6 @@ function renderMonthCalendars(s, e, entriesByIso){
         weekEl.appendChild(blank);
       }
     }
-    // Append the final week row
     weeksFrag.appendChild(weekEl);
 
     monthEl.appendChild(weeksFrag);
@@ -610,14 +603,14 @@ function generate(){
       const hrs = minutesToHrs(totalMins);
       running = Math.round((running + hrs) * 100) / 100;
       dayNum += 1;
-      state.rows.push({
-  day: dayNum,
-  date: new Date(d),
-  hours: hrs,
-  running,
-  slots: (state.times[dow] || []).map(s => ({ start: s.start, end: s.end }))
-});
 
+      state.rows.push({
+        day: dayNum,
+        date: new Date(d),
+        hours: hrs,
+        running,
+        slots: slotsToUse.map(s => ({ start: s.start, end: s.end }))
+      });
 
       const cd = document.createElement('div');
       cd.className = `calday override override-${ov.type}`;
@@ -649,7 +642,6 @@ function generate(){
 
     // 4) Normal weekday pattern (Mon–Sat set; Sundays skipped)
     if (!wkDays.has(dow)) {
-      // Month grid will show it as empty/inactive by default
       continue;
     }
 
@@ -661,23 +653,19 @@ function generate(){
       if (startM == null || endM == null || endM <= startM) continue;
       totalMins += (endM - startM);
     }
-    if (totalMins <= 0) {
-      // no schedule; leave as empty
-      continue;
-    }
+    if (totalMins <= 0) continue;
 
     const hrs = minutesToHrs(totalMins);
     running = Math.round((running + hrs) * 100) / 100;
     dayNum += 1;
 
     state.rows.push({
-  day: dayNum,
-  date: new Date(d),
-  hours: hrs,
-  running,
-  slots: slotsToUse.map(s => ({ start: s.start, end: s.end }))
-});
-
+      day: dayNum,
+      date: new Date(d),
+      hours: hrs,
+      running,
+      slots: slots.map(s => ({ start: s.start, end: s.end }))
+    });
 
     const cd = document.createElement('div');
     cd.className = 'calday';
@@ -688,7 +676,6 @@ function generate(){
     `;
     cal.appendChild(cd);
 
-    // store normal day slots for month grid
     monthEntries[iso] = { status:'normal', slots: slots.slice() };
   }
 
@@ -712,15 +699,18 @@ function generate(){
 
 function exportCSV(){
   if(!state.rows.length){ alert('Nothing to export. Generate first.'); return; }
-  const headers = ['Day','Date','Start Time','End Time','Hours','Running Total'];
-  const rows = state.rows.map(r=>[
-    r.day,
-    formatDateHuman(r.date),
-    'Multiple',
-    'Multiple',
-    r.hours,
-    r.running
-  ]);
+  const headers = ['Day','Date','Start Time(s)','(unused)','Hours','Running Total'];
+  const rows = state.rows.map(r=>{
+    const startEndJoined = (r.slots || []).map(s => `${s.start} - ${s.end}`).join(' | ') || '—';
+    return [
+      r.day,
+      formatDateHuman(r.date),
+      startEndJoined,
+      '', // kept for compatibility; remove if not needed
+      r.hours,
+      r.running
+    ];
+  });
   const all = [headers, ...rows];
   const csv = all.map(row => row.map(cell => '"'+String(cell).replaceAll('"','""')+'"').join(',')).join('\n');
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
