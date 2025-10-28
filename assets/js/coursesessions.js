@@ -245,14 +245,12 @@ function applyCourseDefaults(course){
   // 1) clock hours
   setTargetHours(course?.courseClockHours);
 
-  // 2) classroom hours block (dates + day windows)
+  // 2) classroom hours block (times only — no date autofill)
   const ch = Array.isArray(course?.courseClassroomHours) ? course.courseClassroomHours[0] : null;
   if (ch){
-    const startDateEl = document.getElementById('startDate');
-    const endDateEl   = document.getElementById('endDate');
-
-    if (ch.startDate) setDateIfValid(startDateEl, ch.startDate);
-    if (ch.endDate)   setDateIfValid(endDateEl,   ch.endDate);
+    // clear any prefilled date values
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
 
     // For each day, if string like "9:00 AM - 5:00 PM", set a single slot.
     DAYS.forEach(d=>{
@@ -261,11 +259,11 @@ function applyCourseDefaults(course){
         const [st, en] = v.split('-').map(s=>s.trim());
         state.times[d] = [{ start: st, end: en }];
       } else {
-        state.times[d] = []; // clear if not present
+        state.times[d] = [];
       }
     });
 
-    renderDays(); // re-render UI with those defaults
+    renderDays();
   }
 }
 
