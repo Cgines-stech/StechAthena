@@ -203,6 +203,7 @@ function collectPayloadForFirestore() {
   const program = document.getElementById('programSelect').value || '';
   const coursePath = document.getElementById('courseSelect').value || '';
   const courseLabel = document.getElementById('courseSelect').selectedOptions?.[0]?.textContent || '';
+  const displayName = document.getElementById('displayName')?.value?.trim() || null;
 
   const startISO = document.getElementById('startDate').value || '';
   const endISO   = document.getElementById('endDate').value || '';
@@ -213,13 +214,20 @@ function collectPayloadForFirestore() {
     targetHours: Number(document.getElementById('targetHours').value) || null,
     startDate: startISO,
     endDate: endISO,
-    timesByWeekday: structuredClone(state.times),
-    overrides: structuredClone(state.overrides),
-    rows: state.rows.map(r => ({ ...r, date: r.date.toISOString().split('T')[0] })),
+    displayName,
+    // rows now carry their own slots and an ISO date string
+    rows: state.rows.map(r => ({
+      day: r.day,
+      date: r.date.toISOString().split('T')[0],
+      hours: r.hours,
+      running: r.running,
+      slots: (r.slots || []).map(s => ({ start: s.start, end: s.end }))
+    })),
     total: state.total,
-    version: 1,
+    version: 2, // bump schema version
   };
 }
+
 async function saveAfterGenerate() {
   try {
     if (!state.rows.length) {
@@ -602,7 +610,14 @@ function generate(){
       const hrs = minutesToHrs(totalMins);
       running = Math.round((running + hrs) * 100) / 100;
       dayNum += 1;
-      state.rows.push({ day: dayNum, date: new Date(d), hours: hrs, running });
+      state.rows.push({
+  day: dayNum,
+  date: new Date(d),
+  hours: hrs,
+  running,
+  slots: (state.times[dow] || []).map(s => ({ start: s.start, end: s.end }))
+});
+
 
       const cd = document.createElement('div');
       cd.className = `calday override override-${ov.type}`;
@@ -655,7 +670,14 @@ function generate(){
     running = Math.round((running + hrs) * 100) / 100;
     dayNum += 1;
 
-    state.rows.push({ day: dayNum, date: new Date(d), hours: hrs, running });
+    state.rows.push({
+  day: dayNum,
+  date: new Date(d),
+  hours: hrs,
+  running,
+  slots: slotsToUse.map(s => ({ start: s.start, end: s.end }))
+});
+
 
     const cd = document.createElement('div');
     cd.className = 'calday';
