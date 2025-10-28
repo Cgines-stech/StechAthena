@@ -1,8 +1,7 @@
 /* coursesessions.js */
 // ES Module with multiple time slots per day + Program/Course dropdowns,
 // dynamic import of course files, per-date Overrides (add/edit/remove),
-// Visual Month Calendar, and a Share Link snapshot system with compression
-// + auto-generate on shared link load.
+// and a Visual Month Calendar that mirrors the overview.
 
 import { campusClosedDates } from "./baddates.js";
 
@@ -102,373 +101,16 @@ function isCampusClosedDate(d){
   const dStr = `${pad(d.getMonth() + 1)}-${pad(d.getDate())}-${d.getFullYear()}`;
   return campusClosedDates.some(c => c.date === dStr);
 }
-function isoOf(d){
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-}
-function firstOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
-function lastOfMonth(d){ return new Date(d.getFullYear(), d.getMonth()+1, 0); }
 function renderSlotLines(slots){
   if (!Array.isArray(slots) || !slots.length) return '';
   const items = slots.map(s => `<li>${s.start} - ${s.end}</li>`).join('');
   return `<ul class="slotslist">${items}</ul>`;
 }
-
-/* LZString (URI component only) — MIT — trimmed build */
-/* eslint-disable */
-const LZString = (() => {
-  function mapInit(dict, ch) {
-    if (!cache[dict]) {
-      cache[dict] = {};
-      for (let i = 0; i < dict.length; i++) cache[dict][dict.charAt(i)] = i;
-    }
-    return cache[dict][ch];
-  }
-  const fcc = String.fromCharCode;
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
-  const cache = {};
-  const api = {
-    compressToEncodedURIComponent: function (input) {
-      if (input == null) return "";
-      return api._compress(input, 6, function (a) { return alphabet.charAt(a); });
-    },
-    decompressFromEncodedURIComponent: function (input) {
-      if (input == null) return "";
-      if (input === "") return null;
-      return api._decompress(input.length, 32, function (idx) { return mapInit(alphabet, input.charAt(idx)); });
-    },
-    _compress: function (uncompressed, bitsPerChar, getCharFromInt) {
-      let i, value,
-        context_dictionary = {},
-        context_dictionaryToCreate = {},
-        context_c = "",
-        context_wc = "",
-        context_w = "",
-        context_enlargeIn = 2,
-        context_dictSize = 3,
-        context_numBits = 2,
-        context_data = [],
-        context_data_val = 0,
-        context_data_position = 0;
-
-      for (let ii = 0; ii < uncompressed.length; ii += 1) {
-        context_c = uncompressed.charAt(ii);
-        if (!Object.prototype.hasOwnProperty.call(context_dictionary, context_c)) {
-          context_dictionary[context_c] = context_dictSize++;
-          context_dictionaryToCreate[context_c] = true;
-        }
-        context_wc = context_w + context_c;
-        if (Object.prototype.hasOwnProperty.call(context_dictionary, context_wc)) {
-          context_w = context_wc;
-        } else {
-          if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
-            if (context_w.charCodeAt(0) < 256) {
-              for (i = 0; i < context_numBits; i++) {
-                context_data_val = (context_data_val << 1);
-                if (context_data_position == bitsPerChar - 1) {
-                  context_data_position = 0;
-                  context_data.push(getCharFromInt(context_data_val));
-                  context_data_val = 0;
-                } else {
-                  context_data_position++;
-                }
-              }
-              value = context_w.charCodeAt(0);
-              for (i = 0; i < 8; i++) {
-                context_data_val = (context_data_val << 1) | (value & 1);
-                if (context_data_position == bitsPerChar - 1) {
-                  context_data_position = 0;
-                  context_data.push(getCharFromInt(context_data_val));
-                  context_data_val = 0;
-                } else {
-                  context_data_position++;
-                }
-                value = value >> 1;
-              }
-            } else {
-              value = 1;
-              for (i = 0; i < context_numBits; i++) {
-                context_data_val = (context_data_val << 1) | value;
-                if (context_data_position == bitsPerChar - 1) {
-                  context_data_position = 0;
-                  context_data.push(getCharFromInt(context_data_val));
-                  context_data_val = 0;
-                } else {
-                  context_data_position++;
-                }
-                value = 0;
-              }
-              value = context_w.charCodeAt(0);
-              for (i = 0; i < 16; i++) {
-                context_data_val = (context_data_val << 1) | (value & 1);
-                if (context_data_position == bitsPerChar - 1) {
-                  context_data_position = 0;
-                  context_data.push(getCharFromInt(context_data_val));
-                  context_data_val = 0;
-                } else {
-                  context_data_position++;
-                }
-                value = value >> 1;
-              }
-            }
-            context_enlargeIn--;
-            if (context_enlargeIn == 0) {
-              context_enlargeIn = Math.pow(2, ++context_numBits);
-            }
-            delete context_dictionaryToCreate[context_w];
-          } else {
-            value = context_dictionary[context_w];
-            for (i = 0; i < context_numBits; i++) {
-              context_data_val = (context_data_val << 1) | (value & 1);
-              if (context_data_position == bitsPerChar - 1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-              value = value >> 1;
-            }
-          }
-          context_enlargeIn--;
-          if (context_enlargeIn == 0) {
-            context_enlargeIn = Math.pow(2, ++context_numBits);
-          }
-          context_dictionary[context_wc] = context_dictSize++;
-          context_w = String(context_c);
-        }
-      }
-
-      if (context_w !== "") {
-        if (Object.prototype.hasOwnProperty.call(context_dictionaryToCreate, context_w)) {
-          if (context_w.charCodeAt(0) < 256) {
-            for (i = 0; i < context_numBits; i++) {
-              context_data_val = (context_data_val << 1);
-              if (context_data_position == bitsPerChar - 1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-            }
-            value = context_w.charCodeAt(0);
-            for (i = 0; i < 8; i++) {
-              context_data_val = (context_data_val << 1) | (value & 1);
-              if (context_data_position == bitsPerChar - 1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-              value = value >> 1;
-            }
-          } else {
-            value = 1;
-            for (i = 0; i < context_numBits; i++) {
-              context_data_val = (context_data_val << 1) | value;
-              if (context_data_position == bitsPerChar - 1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-              value = 0;
-            }
-            value = context_w.charCodeAt(0);
-            for (i = 0; i < 16; i++) {
-              context_data_val = (context_data_val << 1) | (value & 1);
-              if (context_data_position == bitsPerChar - 1) {
-                context_data_position = 0;
-                context_data.push(getCharFromInt(context_data_val));
-                context_data_val = 0;
-              } else {
-                context_data_position++;
-              }
-              value = value >> 1;
-            }
-          }
-          context_enlargeIn--;
-          if (context_enlargeIn == 0) {
-            context_enlargeIn = Math.pow(2, ++context_numBits);
-          }
-          delete context_dictionaryToCreate[context_w];
-        } else {
-          value = context_dictionary[context_w];
-          for (i = 0; i < context_numBits; i++) {
-            context_data_val = (context_data_val << 1) | (value & 1);
-            if (context_data_position == bitsPerChar - 1) {
-              context_data_position = 0;
-              context_data.push(getCharFromInt(context_data_val));
-              context_data_val = 0;
-            } else {
-              context_data_position++;
-            }
-            value = value >> 1;
-          }
-        }
-        context_enlargeIn--;
-        if (context_enlargeIn == 0) {
-          context_enlargeIn = Math.pow(2, ++context_numBits);
-        }
-      }
-
-      value = 2;
-      for (i = 0; i < context_numBits; i++) {
-        context_data_val = (context_data_val << 1) | (value & 1);
-        if (context_data_position == bitsPerChar - 1) {
-          context_data_position = 0;
-          context_data.push(getCharFromInt(context_data_val));
-          context_data_val = 0;
-        } else {
-          context_data_position++;
-        }
-        value = value >> 1;
-      }
-
-      while (true) {
-        context_data_val = (context_data_val << 1);
-        if (context_data_position == bitsPerChar - 1) {
-          context_data.push(getCharFromInt(context_data_val));
-          break;
-        } else {
-          context_data_position++;
-        }
-      }
-      return context_data.join("");
-    },
-    _decompress: function (length, resetValue, getNextValue) {
-      let dictionary = [],
-        next,
-        enlargeIn = 4,
-        dictSize = 4,
-        numBits = 3,
-        entry = "",
-        result = [],
-        i,
-        w,
-        bits, resb, maxpower, power,
-        c,
-        data = { val: getNextValue(0), position: resetValue, index: 1 };
-
-      for (i = 0; i < 3; i += 1) dictionary[i] = i;
-
-      bits = 0; maxpower = Math.pow(2, 2); power = 1;
-      while (power != maxpower) {
-        resb = data.val & data.position; data.position >>= 1;
-        if (data.position == 0) { data.position = resetValue; data.val = getNextValue(data.index++); }
-        bits |= (resb > 0 ? 1 : 0) * power; power <<= 1;
-      }
-
-      switch (next = bits) {
-        case 0:
-          bits = 0; maxpower = Math.pow(2, 8); power = 1;
-          while (power != maxpower) {
-            resb = data.val & data.position; data.position >>= 1;
-            if (data.position == 0) { data.position = resetValue; data.val = getNextValue(data.index++); }
-            bits |= (resb > 0 ? 1 : 0) * power; power <<= 1;
-          }
-          c = fcc(bits);
-          break;
-        case 1:
-          bits = 0; maxpower = Math.pow(2, 16); power = 1;
-          while (power != maxpower) {
-            resb = data.val & data.position; data.position >>= 1;
-            if (data.position == 0) { data.position = resetValue; data.val = getNextValue(data.index++); }
-            bits |= (resb > 0 ? 1 : 0) * power; power <<= 1;
-          }
-          c = fcc(bits);
-          break;
-        case 2:
-          return "";
-      }
-
-      dictionary[3] = c;
-      w = c;
-      result.push(c);
-
-      while (true) {
-        if (data.index > length) return "";
-        bits = 0; maxpower = Math.pow(2, numBits); power = 1;
-        while (power != maxpower) {
-          resb = data.val & data.position; data.position >>= 1;
-          if (data.position == 0) { data.position = resetValue; data.val = getNextValue(data.index++); }
-          bits |= (resb > 0 ? 1 : 0) * power; power <<= 1;
-        }
-
-        switch (next = bits) {
-          case 0:
-            bits = 0; maxpower = Math.pow(2, 8); power = 1;
-            while (power != maxpower) {
-              resb = data.val & data.position; data.position >>= 1;
-              if (data.position == 0) { data.position = resetValue; data.val = getNextValue(data.index++); }
-              bits |= (resb > 0 ? 1 : 0) * power; power <<= 1;
-            }
-            dictionary[dictSize++] = fcc(bits); next = dictSize - 1; enlargeIn--;
-            break;
-          case 1:
-            bits = 0; maxpower = Math.pow(2, 16); power = 1;
-            while (power != maxpower) {
-              resb = data.val & data.position; data.position >>= 1;
-              if (data.position == 0) { data.position = resetValue; data.val = getNextValue(data.index++); }
-              bits |= (resb > 0 ? 1 : 0) * power; power <<= 1;
-            }
-            dictionary[dictSize++] = fcc(bits); next = dictSize - 1; enlargeIn--;
-            break;
-          case 2:
-            return result.join("");
-        }
-
-        if (enlargeIn == 0) { enlargeIn = Math.pow(2, numBits); numBits++; }
-
-        let entryStr;
-        if (dictionary[next]) {
-          entryStr = dictionary[next];
-        } else {
-          if (next !== dictSize) return null;
-          entryStr = w + w.charAt(0);
-        }
-        result.push(entryStr);
-
-        dictionary[dictSize++] = w + entryStr.charAt(0);
-        enlargeIn--;
-        w = entryStr;
-
-        if (enlargeIn == 0) { enlargeIn = Math.pow(2, numBits); numBits++; }
-      }
-    }
-  };
-  return api;
-})();
-/* eslint-enable */
-
-// ---- Share link helpers (compressed + URL-safe) ----
-function encodeForUrl(obj){
-  const json = JSON.stringify(obj);
-  return LZString.compressToEncodedURIComponent(json);
+function isoOf(d){
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 }
-function decodeFromUrl(comp){
-  const json = LZString.decompressFromEncodedURIComponent(comp);
-  return JSON.parse(json);
-}
-
-// --- Date normalization helpers (handle both YYYY-MM-DD and MM-DD-YYYY) ---
-function normalizeToISODate(s) {
-  if (!s) return "";
-  // already ISO?
-  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
-  // MM-DD-YYYY -> YYYY-MM-DD
-  const m = /^(\d{2})-(\d{2})-(\d{4})$/.exec(s);
-  if (m) return `${m[3]}-${m[1]}-${m[2]}`;
-  return ""; // unknown/invalid
-}
-
-function haveValidDateRangeFromInputs() {
-  const sd = parseDateISO(document.getElementById('startDate')?.value || "");
-  const ed = parseDateISO(document.getElementById('endDate')?.value || "");
-  return !!(sd && ed && ed >= sd);
-}
+function firstOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
+function lastOfMonth(d){ return new Date(d.getFullYear(), d.getMonth()+1, 0); }
 
 // ---- State ----
 const state = {
@@ -551,6 +193,8 @@ function addSlot(day, startVal, endVal){
   inputs[0].addEventListener('input', e => { slot.start = e.target.value; });
   inputs[1].addEventListener('input', e => { slot.end   = e.target.value;  });
 
+  // No per-slot remove button (per earlier direction). We keep at least one slot visible by default.
+
   slotsEl.appendChild(row);
 }
 
@@ -621,6 +265,7 @@ function applyCourseDefaults(course){
     if (startDateEl) startDateEl.value = '';
     if (endDateEl)   endDateEl.value   = '';
 
+    // For each day, if string like "9:00 AM - 5:00 PM", set a single slot.
     DAYS.forEach(d => {
       if (d === "Saturday") {
         state.times[d] = []; // force Saturday blank
@@ -635,7 +280,7 @@ function applyCourseDefaults(course){
       }
     });
 
-    renderDays();
+    renderDays(); // re-render UI with those defaults
   }
 }
 
@@ -690,7 +335,7 @@ function parseOverrideSlots(text){
 
 function renderOverridesList(){
   const el = document.getElementById('overridesList');
-  if(!el) return;
+  if(!el) return; // HTML not present
   const keys = Object.keys(state.overrides).sort();
   if(keys.length === 0){
     el.innerHTML = `<div class="hint">No overrides added yet.</div>`;
@@ -725,7 +370,11 @@ function setupOverridesUI(){
   const timesEl = document.getElementById('overrideTimes');
   const timesRow= document.getElementById('overrideTimesRow');
   const addBtn  = document.getElementById('addOverrideBtn');
-  if(!typeSel || !dateEl || !addBtn) return;
+
+  // If the overrides panel isn't present, skip wiring.
+  if(!typeSel || !dateEl || !addBtn){
+    return;
+  }
 
   const syncTimesVisibility = () => {
     const t = typeSel.value;
@@ -766,6 +415,7 @@ function renderMonthCalendars(s, e, entriesByIso){
   if(!grid) return;
   grid.innerHTML = '';
 
+  // Start at first of start month, end at last of end month
   const startMonth = new Date(s.getFullYear(), s.getMonth(), 1);
   const endMonth   = new Date(e.getFullYear(), e.getMonth(), 1);
 
@@ -776,6 +426,7 @@ function renderMonthCalendars(s, e, entriesByIso){
     const monthEl = document.createElement('div');
     monthEl.className = 'month';
 
+    // Header
     monthEl.innerHTML = `
       <div class="month-header">
         <div class="month-title">${monthYearLabel(first)}</div>
@@ -785,12 +436,13 @@ function renderMonthCalendars(s, e, entriesByIso){
       </div>
     `;
 
+    // Weeks container
     const weeksFrag = document.createDocumentFragment();
     let weekEl = document.createElement('div');
     weekEl.className = 'week';
 
     // Leading blanks
-    const leadBlanks = first.getDay();
+    const leadBlanks = first.getDay(); // 0=Sun..6=Sat
     for(let i=0;i<leadBlanks;i++){
       const blank = document.createElement('div');
       blank.className = 'daycell inactive';
@@ -808,19 +460,25 @@ function renderMonthCalendars(s, e, entriesByIso){
       cell.innerHTML = `<div class="date-num">${day}</div>`;
 
       if (entry) {
+        // Classes based on status
         if (entry.status === 'closed') {
           cell.classList.add('closed');
         } else if (entry.status.startsWith('override-')) {
           cell.classList.add('override', entry.status);
-          if (entry.slots?.length) cell.innerHTML += renderSlotLines(entry.slots);
+          if (entry.slots?.length) {
+            cell.innerHTML += renderSlotLines(entry.slots);
+          }
         } else if (entry.status === 'normal') {
           cell.classList.add('has-schedule');
-          if (entry.slots?.length) cell.innerHTML += renderSlotLines(entry.slots);
+          if (entry.slots?.length) {
+            cell.innerHTML += renderSlotLines(entry.slots);
+          }
         }
       }
 
       weekEl.appendChild(cell);
 
+      // If Saturday, push week row and start a new one
       if (d.getDay() === 6) {
         weeksFrag.appendChild(weekEl);
         weekEl = document.createElement('div');
@@ -828,7 +486,7 @@ function renderMonthCalendars(s, e, entriesByIso){
       }
     }
 
-    // Trailing blanks
+    // Trailing blanks to complete last week
     const lastDow = last.getDay();
     if (lastDow !== 6) {
       for (let i=lastDow+1; i<=6; i++) {
@@ -837,6 +495,7 @@ function renderMonthCalendars(s, e, entriesByIso){
         weekEl.appendChild(blank);
       }
     }
+    // Append the final week row
     weeksFrag.appendChild(weekEl);
 
     monthEl.appendChild(weeksFrag);
@@ -859,7 +518,7 @@ function generate(){
 
   if (!s || !e || e < s) {
     cal.innerHTML = `<div class="calday closed">Enter a valid date range.</div>`;
-    document.getElementById('monthGrid')?.replaceChildren();
+    document.getElementById('monthGrid')?.replaceChildren(); // clear month grid
     return;
   }
 
@@ -872,7 +531,7 @@ function generate(){
     const iso = isoOf(d);
     const ov = state.overrides[iso] || null;
 
-    // 1) Remove override
+    // 1) Override: remove
     if (ov?.type === 'remove') {
       const cd = document.createElement('div');
       cd.className = 'calday closed override override-remove';
@@ -886,7 +545,7 @@ function generate(){
       continue;
     }
 
-    // 2) Add/Edit override (wins over campus closed + weekday)
+    // 2) Override: add/edit (wins over campusClosed + weekday rules)
     if (ov?.type === 'add' || ov?.type === 'edit') {
       const slotsToUse = ov.slots || [];
       let totalMins = 0;
@@ -920,7 +579,7 @@ function generate(){
       continue;
     }
 
-    // 3) Campus closed?
+    // 3) No override => campus closed?
     if (isCampusClosedDate(d)) {
       const cd = document.createElement('div');
       cd.className = 'calday closed';
@@ -934,8 +593,11 @@ function generate(){
       continue;
     }
 
-    // 4) Normal weekday pattern (Sun skipped)
-    if (!wkDays.has(dow)) continue;
+    // 4) Normal weekday pattern (Mon–Sat set; Sundays skipped)
+    if (!wkDays.has(dow)) {
+      // Month grid will show it as empty/inactive by default
+      continue;
+    }
 
     const slots = state.times[dow] || [];
     let totalMins = 0;
@@ -945,7 +607,10 @@ function generate(){
       if (startM == null || endM == null || endM <= startM) continue;
       totalMins += (endM - startM);
     }
-    if (totalMins <= 0) continue;
+    if (totalMins <= 0) {
+      // no schedule; leave as empty
+      continue;
+    }
 
     const hrs = minutesToHrs(totalMins);
     running = Math.round((running + hrs) * 100) / 100;
@@ -962,6 +627,7 @@ function generate(){
     `;
     cal.appendChild(cd);
 
+    // store normal day slots for month grid
     monthEntries[iso] = { status:'normal', slots: slots.slice() };
   }
 
@@ -979,6 +645,7 @@ function generate(){
       : `<span class="bad">Over target by: ${Math.abs(diff)} hrs</span>`;
   }
 
+  // Finally render the month-by-month grid
   renderMonthCalendars(s, e, monthEntries);
 }
 
@@ -1000,100 +667,11 @@ function exportCSV(){
   const a = document.createElement('a'); a.href = url; a.download = 'course_schedule.csv'; a.click(); URL.revokeObjectURL(url);
 }
 
-// ---- Share Link: build/apply/wire ----
-function buildSnapshot(){
-  const startRaw = document.getElementById('startDate')?.value || '';
-  const endRaw   = document.getElementById('endDate')?.value   || '';
-  const startISO = normalizeToISODate(startRaw);
-  const endISO   = normalizeToISODate(endRaw);
-  return {
-    program: programSelect?.value || null,
-    coursePath: courseSelect?.value || null,
-    targetHours: targetHoursEl?.value || '',
-    startDate: startISO,  // always ISO in snapshot
-    endDate: endISO,      // always ISO in snapshot
-    times: state.times,
-    overrides: state.overrides,
-    version: 2
-  };
-}
-
-function applySnapshot(snap){
-  if(!snap || typeof snap !== 'object') return;
-
-  // selections
-  if (snap.program && programSelect) programSelect.value = snap.program;
-  if (snap.coursePath && courseSelect) {
-    if (![...courseSelect.options].some(o => o.value === snap.coursePath)) {
-      const opt = document.createElement('option');
-      opt.value = snap.coursePath;
-      opt.textContent = snap.coursePath.split('/').pop();
-      courseSelect.appendChild(opt);
-    }
-    courseSelect.value = snap.coursePath;
-  }
-
-  // fields (normalize dates to ISO for <input type="date">)
-  if (typeof snap.targetHours !== 'undefined') {
-    targetHoursEl.value = String(snap.targetHours || '');
-    targetTag.style.display = snap.targetHours ? 'inline-block' : 'none';
-    if (snap.targetHours) targetTag.textContent = `Target: ${snap.targetHours} hrs`;
-  }
-  const startEl = document.getElementById('startDate');
-  const endEl   = document.getElementById('endDate');
-  if (startEl) startEl.value = normalizeToISODate(snap.startDate || '');
-  if (endEl)   endEl.value   = normalizeToISODate(snap.endDate   || '');
-
-  // deep state
-  if (snap.times)      state.times = JSON.parse(JSON.stringify(snap.times));
-  if (snap.overrides)  state.overrides = JSON.parse(JSON.stringify(snap.overrides));
-
-  renderDays();
-  renderOverridesList();
-}
-
-function wireShareLink(){
-  const btn = document.getElementById('shareLinkBtn');
-  if(!btn) return;
-  btn.addEventListener('click', () => {
-    const snap = buildSnapshot();
-    const payload = encodeForUrl(snap);
-    const url = `${location.origin}${location.pathname}?s=${payload}`;
-    navigator.clipboard.writeText(url).then(
-      () => alert('Share link copied to clipboard!'),
-      () => { prompt('Copy this link:', url); }
-    );
-  });
-}
-
-function loadSnapshotFromUrl(){
-  const params = new URLSearchParams(location.search);
-  const s = params.get('s');
-  if(!s) return;
-  try{
-    const snap = decodeFromUrl(s);
-    applySnapshot(snap);
-
-    // Only auto-generate if both dates are valid ISO and range is correct
-    if (haveValidDateRangeFromInputs()) {
-      generate();
-    } else {
-      // Optional: gentle hint so users know what to do next
-      console.warn('Snapshot loaded, but dates were missing/invalid. Waiting for user to set a valid range.');
-    }
-  } catch(err){
-    console.error('Failed to load shared snapshot:', err);
-    alert('This share link appears invalid or corrupted.');
-  }
-}
-
 // Buttons
 document.getElementById('generateBtn').addEventListener('click', generate);
 document.getElementById('exportBtn').addEventListener('click', exportCSV);
-wireShareLink(); // Copy Share Link button
 
 // Boot
 renderDays();
 initPrograms();
 setupOverridesUI(); // safe if overrides panel is not present
-loadSnapshotFromUrl(); // apply + auto-generate if provided
