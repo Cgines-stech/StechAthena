@@ -1,0 +1,110 @@
+<!-- coursesession.html -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Course Hours Scheduler</title>
+  <link rel="stylesheet" href="assets/css/coursesessions.css" />
+</head>
+<body>
+  <div class="wrap">
+    <!-- Left: Controls -->
+    <div class="card pad">
+      <h1>Course Hours Scheduler (No Frameworks)</h1>
+      <div class="grid-3">
+        <div>
+          <label>Course Clock Hours</label>
+          <input id="targetHours" type="text" placeholder="e.g., 48" />
+        </div>
+        <div>
+          <label>Start Date</label>
+          <input id="startDate" type="date" />
+        </div>
+        <div>
+          <label>End Date</label>
+          <input id="endDate" type="date" />
+        </div>
+      </div>
+
+      <div style="height:10px"></div>
+      <div class="hint">Optional: paste your course file (like <code>TEEM 1904</code>) and click Parse to auto-fill target hours, date range, and weekly time block.</div>
+      <div class="row" style="margin-top:8px">
+        <textarea id="paste" placeholder="Paste the JS content here to auto-parse courseClockHours and courseClassroomHours..."></textarea>
+        <div style="display:flex; gap:10px; flex-direction:column">
+          <button class="btn" id="parseBtn">Parse</button>
+          <button class="btn secondary" id="clearBtn">Clear</button>
+        </div>
+      </div>
+
+      <div style="height:14px"></div>
+      <div class="days">
+        <!-- Monday–Saturday time windows -->
+        <div class="daybox"><div class="tag">Monday</div>
+          <label>Start</label><input type="text" data-day="Monday" data-field="start" placeholder="9:00 AM" />
+          <label>End</label><input type="text" data-day="Monday" data-field="end" placeholder="5:00 PM" />
+        </div>
+        <div class="daybox"><div class="tag">Tuesday</div>
+          <label>Start</label><input type="text" data-day="Tuesday" data-field="start" placeholder="9:00 AM" />
+          <label>End</label><input type="text" data-day="Tuesday" data-field="end" placeholder="5:00 PM" />
+        </div>
+        <div class="daybox"><div class="tag">Wednesday</div>
+          <label>Start</label><input type="text" data-day="Wednesday" data-field="start" placeholder="9:00 AM" />
+          <label>End</label><input type="text" data-day="Wednesday" data-field="end" placeholder="5:00 PM" />
+        </div>
+        <div class="daybox"><div class="tag">Thursday</div>
+          <label>Start</label><input type="text" data-day="Thursday" data-field="start" placeholder="9:00 AM" />
+          <label>End</label><input type="text" data-day="Thursday" data-field="end" placeholder="5:00 PM" />
+        </div>
+        <div class="daybox"><div class="tag">Friday</div>
+          <label>Start</label><input type="text" data-day="Friday" data-field="start" placeholder="9:00 AM" />
+          <label>End</label><input type="text" data-day="Friday" data-field="end" placeholder="5:00 PM" />
+        </div>
+        <div class="daybox"><div class="tag">Saturday</div>
+          <label>Start</label><input type="text" data-day="Saturday" data-field="start" placeholder="9:00 AM" />
+          <label>End</label><input type="text" data-day="Saturday" data-field="end" placeholder="5:00 PM" />
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+      <div class="actions">
+        <button class="btn" id="generateBtn">Generate</button>
+        <button class="btn secondary" id="exportBtn">Export CSV</button>
+        <div id="targetTag" class="tag" style="margin-left:auto; display:none"></div>
+      </div>
+    </div>
+
+    <!-- Right: Calendar + Table -->
+    <div class="card pad">
+      <h2>Calendar Overview</h2>
+      <div id="calendar" class="calendar" aria-live="polite"></div>
+      <div style="height:12px"></div>
+      <div class="rightinfo" id="compareBlock"></div>
+      <div style="height:18px"></div>
+      <div style="overflow:auto">
+        <table id="table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Date</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Hours</th>
+              <th>Running Total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot style="display:none"><tr>
+            <td colspan="4" style="font-weight:700">Total</td>
+            <td id="totalHours" style="font-weight:700"></td>
+            <td></td>
+          </tr></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/coursesessions.js" defer></script>
+</body>
+</html>

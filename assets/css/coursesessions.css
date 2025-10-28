@@ -1,0 +1,33 @@
+/* assets/css/coursesessions.css */
+
+:root { --bg:#0b0c10; --panel:#151821; --muted:#9aa3b2; --text:#e9eef7; --accent:#6ea8fe; --ok:#45d19f; --warn:#ffb86b; --bad:#ff6b6b; }
+*{ box-sizing:border-box }
+body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial; color:var(--text); background:linear-gradient(180deg,#0c1016,#0b0c10 70%); }
+.wrap{ max-width:1200px; margin:0 auto; padding:24px; display:grid; grid-template-columns:1fr; gap:16px; }
+@media(min-width:1000px){ .wrap{ grid-template-columns:1fr 1fr; } }
+.card{ background:var(--panel); border:1px solid #202636; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.25); }
+.card h1,.card h2{ margin:0 0 12px 0 }
+.pad{ padding:20px }
+label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px }
+input[type="text"],input[type="date"],textarea,button{ width:100%; padding:10px 12px; border-radius:12px; border:1px solid #2a3246; background:#0f1320; color:var(--text); }
+textarea{ min-height:96px }
+.row{ display:grid; grid-template-columns:1fr 1fr; gap:12px }
+.grid-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px }
+.days{ display:grid; grid-template-columns:1fr 1fr; gap:12px }
+.daybox{ border:1px solid #2a3246; border-radius:14px; padding:12px }
+.actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center }
+.btn{ cursor:pointer; background:var(--accent); border:none; color:#001029; font-weight:700 }
+.btn.secondary{ background:#222b3f; color:var(--text) }
+.hint{ color:var(--muted); font-size:12px }
+.tag{ display:inline-block; padding:2px 8px; border-radius:999px; background:#1b2233; color:var(--muted); font-size:12px }
+.calendar{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px }
+@media(min-width:900px){ .calendar{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+.calday{ border:1px solid #2a3246; border-radius:12px; padding:10px; background:#0f1320 }
+.calday .date{ font-weight:700 }
+.calday .meta{ font-size:12px; color:var(--muted) }
+.good{ color:var(--ok) } .bad{ color:var(--bad) }
+table{ width:100%; border-collapse:collapse; font-size:14px }
+thead{ background:#111628; color:var(--muted) }
+th,td{ padding:10px; border-top:1px solid #222a3d }
+tfoot{ background:#0f162b; }
+.rightinfo{ font-size:14px }
