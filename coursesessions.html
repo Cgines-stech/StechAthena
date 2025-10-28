@@ -1,5 +1,4 @@
 <!-- coursesession.html -->
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,25 +18,13 @@
           <label>Course Clock Hours</label>
           <input id="targetHours" type="text" placeholder="e.g., 48" />
         </div>
-<div>
-  <label>Start Date</label>
-  <div class="dpicker">
-    <button type="button" id="startTrigger" class="dpicker-trigger">
-      <span id="startDateDisplay" class="dpicker-display">Select date…</span>
-    </button>
-    <input id="startDate" type="date" style="display:none" />
-  </div>
-</div>
-<div>
-  <label>End Date</label>
-  <div class="dpicker">
-    <button type="button" id="endTrigger" class="dpicker-trigger">
-      <span id="endDateDisplay" class="dpicker-display">Select date…</span>
-    </button>
-    <input id="endDate" type="date" style="display:none" />
-  </div>
-</div>
-
+        <div>
+          <label>Start Date</label>
+          <input id="startDate" type="date" />
+        </div>
+        <div>
+          <label>End Date</label>
+          <input id="endDate" type="date" />
         </div>
       </div>
 
@@ -93,24 +80,6 @@
             <td></td>
           </tr></tfoot>
         </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Date Picker Overlay -->
-  <div id="datepickerOverlay" class="dp-overlay" hidden>
-    <div class="dp-modal" role="dialog" aria-modal="true" aria-label="Select a date">
-      <div class="dp-header">
-        <button type="button" id="dpPrev" class="smallbtn">‹</button>
-        <div id="dpMonthLabel" class="dp-month"></div>
-        <button type="button" id="dpNext" class="smallbtn">›</button>
-      </div>
-      <div class="dp-weekdays">
-        <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
-      </div>
-      <div id="dpGrid" class="dp-grid"></div>
-      <div class="dp-actions">
-        <button type="button" id="dpCancel" class="smallbtn">Cancel</button>
       </div>
     </div>
   </div>
