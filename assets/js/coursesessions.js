@@ -453,6 +453,23 @@ function decodeFromUrl(comp){
   return JSON.parse(json);
 }
 
+// --- Date normalization helpers (handle both YYYY-MM-DD and MM-DD-YYYY) ---
+function normalizeToISODate(s) {
+  if (!s) return "";
+  // already ISO?
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  // MM-DD-YYYY -> YYYY-MM-DD
+  const m = /^(\d{2})-(\d{2})-(\d{4})$/.exec(s);
+  if (m) return `${m[3]}-${m[1]}-${m[2]}`;
+  return ""; // unknown/invalid
+}
+
+function haveValidDateRangeFromInputs() {
+  const sd = parseDateISO(document.getElementById('startDate')?.value || "");
+  const ed = parseDateISO(document.getElementById('endDate')?.value || "");
+  return !!(sd && ed && ed >= sd);
+}
+
 // ---- State ----
 const state = {
   times: Object.fromEntries(DAYS.map(d => [d, [] /* array of {start,end} */])),
@@ -985,20 +1002,26 @@ function exportCSV(){
 
 // ---- Share Link: build/apply/wire ----
 function buildSnapshot(){
+  const startRaw = document.getElementById('startDate')?.value || '';
+  const endRaw   = document.getElementById('endDate')?.value   || '';
+  const startISO = normalizeToISODate(startRaw);
+  const endISO   = normalizeToISODate(endRaw);
   return {
     program: programSelect?.value || null,
     coursePath: courseSelect?.value || null,
     targetHours: targetHoursEl?.value || '',
-    startDate: document.getElementById('startDate')?.value || '',
-    endDate: document.getElementById('endDate')?.value || '',
-    times: state.times,           // { Monday:[{start,end}], ... }
-    overrides: state.overrides,   // { "YYYY-MM-DD": {type, slots?} }
-    version: 2                    // bump version for compressed links
+    startDate: startISO,  // always ISO in snapshot
+    endDate: endISO,      // always ISO in snapshot
+    times: state.times,
+    overrides: state.overrides,
+    version: 2
   };
 }
+
 function applySnapshot(snap){
   if(!snap || typeof snap !== 'object') return;
 
+  // selections
   if (snap.program && programSelect) programSelect.value = snap.program;
   if (snap.coursePath && courseSelect) {
     if (![...courseSelect.options].some(o => o.value === snap.coursePath)) {
@@ -1010,6 +1033,7 @@ function applySnapshot(snap){
     courseSelect.value = snap.coursePath;
   }
 
+  // fields (normalize dates to ISO for <input type="date">)
   if (typeof snap.targetHours !== 'undefined') {
     targetHoursEl.value = String(snap.targetHours || '');
     targetTag.style.display = snap.targetHours ? 'inline-block' : 'none';
@@ -1017,9 +1041,10 @@ function applySnapshot(snap){
   }
   const startEl = document.getElementById('startDate');
   const endEl   = document.getElementById('endDate');
-  if (startEl) startEl.value = snap.startDate || '';
-  if (endEl)   endEl.value   = snap.endDate   || '';
+  if (startEl) startEl.value = normalizeToISODate(snap.startDate || '');
+  if (endEl)   endEl.value   = normalizeToISODate(snap.endDate   || '');
 
+  // deep state
   if (snap.times)      state.times = JSON.parse(JSON.stringify(snap.times));
   if (snap.overrides)  state.overrides = JSON.parse(JSON.stringify(snap.overrides));
 
@@ -1048,8 +1073,14 @@ function loadSnapshotFromUrl(){
   try{
     const snap = decodeFromUrl(s);
     applySnapshot(snap);
-    // Auto-generate after applying snapshot so viewer sees the schedule immediately
-    generate();
+
+    // Only auto-generate if both dates are valid ISO and range is correct
+    if (haveValidDateRangeFromInputs()) {
+      generate();
+    } else {
+      // Optional: gentle hint so users know what to do next
+      console.warn('Snapshot loaded, but dates were missing/invalid. Waiting for user to set a valid range.');
+    }
   } catch(err){
     console.error('Failed to load shared snapshot:', err);
     alert('This share link appears invalid or corrupted.');
