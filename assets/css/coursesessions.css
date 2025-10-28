@@ -96,3 +96,10 @@ tfoot{ background:#0f162b; }
 .dp-grid button.today{ outline:1px dashed var(--accent) }
 .dp-grid button.selected{ background:#1b2233; }
 .dp-actions{ margin-top:10px; display:flex; justify-content:flex-end }
+.dpicker-trigger{
+  border:1px solid #2a3246; background:#0f1320; color:var(--text);
+  padding:8px 10px; border-radius:12px; cursor:pointer; width:100%;
+  text-align:left;
+}
+.dpicker-trigger:hover{ filter:brightness(1.05) }
+.dpicker-display{ color:var(--muted); font-size:13px }

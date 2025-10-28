@@ -109,20 +109,17 @@ const state = {
   coursesCache: new Map(),
 };
 
-// ---- UI refs ----
-const programSelect = document.getElementById('programSelect');
-const courseSelect  = document.getElementById('courseSelect');
-const targetHoursEl = document.getElementById('targetHours');
-const targetTag     = document.getElementById('targetTag');
-const daysContainer = document.getElementById('daysContainer');
+// ---- UI refs (existing) ----
 const startDateEl   = document.getElementById('startDate');
 const endDateEl     = document.getElementById('endDate');
 const startDisp     = document.getElementById('startDateDisplay');
 const endDisp       = document.getElementById('endDateDisplay');
-const pickStartBtn  = document.getElementById('pickStart');
-const pickEndBtn    = document.getElementById('pickEnd');
 
-// ---- Date Picker ----
+// NEW: triggers
+const startTrigger  = document.getElementById('startTrigger');
+const endTrigger    = document.getElementById('endTrigger');
+
+// ---- Date Picker overlay refs (existing) ----
 const dpOverlay = document.getElementById('datepickerOverlay');
 const dpPrev = document.getElementById('dpPrev');
 const dpNext = document.getElementById('dpNext');
@@ -130,21 +127,25 @@ const dpMonthLabel = document.getElementById('dpMonthLabel');
 const dpGrid = document.getElementById('dpGrid');
 const dpCancel = document.getElementById('dpCancel');
 
-const dpState = {
-  target: null, // 'start' | 'end'
-  view: new Date(), // current month being viewed
-};
+const dpState = { target: null, view: new Date() };
 
 function openDatePicker(which){
   dpState.target = which;
-  // start from current value if set, else today
   const input = which === 'start' ? startDateEl : endDateEl;
   const current = parseDateISO(input.value) || new Date();
   dpState.view = new Date(current.getFullYear(), current.getMonth(), 1);
   renderDatePicker();
-  dpOverlay.hidden = false;
+  dpOverlay.hidden = true;  // ensure hidden first
+  dpOverlay.hidden = false; // then show (prevents any early flashes)
 }
 function closeDatePicker(){ dpOverlay.hidden = true; dpState.target = null; }
+
+// ... renderDatePicker(), dpPrev/dpNext/dpCancel/overlay click remain the same ...
+
+// NEW: only open on explicit user clicks
+startTrigger.addEventListener('click', () => openDatePicker('start'));
+endTrigger.addEventListener('click',   () => openDatePicker('end'));
+
 
 function renderDatePicker(){
   const y = dpState.view.getFullYear();

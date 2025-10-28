@@ -19,21 +19,25 @@
           <label>Course Clock Hours</label>
           <input id="targetHours" type="text" placeholder="e.g., 48" />
         </div>
-        <div>
-          <label>Start Date</label>
-          <div class="dpicker">
-            <button type="button" id="pickStart" class="btn secondary">Select date</button>
-            <span id="startDateDisplay" class="dpicker-display"></span>
-            <input id="startDate" type="date" style="display:none" />
-          </div>
-        </div>
-        <div>
-          <label>End Date</label>
-          <div class="dpicker">
-            <button type="button" id="pickEnd" class="btn secondary">Select date</button>
-            <span id="endDateDisplay" class="dpicker-display"></span>
-            <input id="endDate" type="date" style="display:none" />
-          </div>
+<div>
+  <label>Start Date</label>
+  <div class="dpicker">
+    <button type="button" id="startTrigger" class="dpicker-trigger">
+      <span id="startDateDisplay" class="dpicker-display">Select date…</span>
+    </button>
+    <input id="startDate" type="date" style="display:none" />
+  </div>
+</div>
+<div>
+  <label>End Date</label>
+  <div class="dpicker">
+    <button type="button" id="endTrigger" class="dpicker-trigger">
+      <span id="endDateDisplay" class="dpicker-display">Select date…</span>
+    </button>
+    <input id="endDate" type="date" style="display:none" />
+  </div>
+</div>
+
         </div>
       </div>
 
