@@ -1,5 +1,5 @@
 // assets/js/programcalendar.js
-import { listCourseSessions } from "./coursesessions.store.js";
+import { saveCourseSession } from "./coursesessions.store.js";
 
 // Helpers
 function safeDate(ts) {
