@@ -1,10 +1,10 @@
-// assets/js/coursesessions.js
-// ES Module with multiple time slots per day + Program/Course dropdowns + dynamic import of course files.
+// ES Module with multiple time slots per day + Program/Course dropdowns,
+// dynamic import of course files, and per-date Overrides (add/edit/remove).
 
 import { campusClosedDates } from "./baddates.js";
 
 const dayLabels = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; // UI-editable days
 const wkDays = new Set(DAYS);
 
 /** ---- Registries: update paths as needed for your repo ---- */
@@ -87,10 +87,6 @@ function timeToMinutes(str){
   return null;
 }
 function minutesToHrs(mins){ return Math.round((mins/60)*100)/100; }
-function minutesTo12h(mins){
-  let h = Math.floor(mins/60), m = mins%60; const ampm = h>=12? 'PM':'AM';
-  h = h%12; if(h===0) h=12; return `${h}:${pad(m)} ${ampm}`;
-}
 function eachDay(start,end){
   const days=[]; const d=new Date(start.getFullYear(), start.getMonth(), start.getDate());
   while(d<=end){ days.push(new Date(d)); d.setDate(d.getDate()+1); }
@@ -103,6 +99,8 @@ const state = {
   rows:[],
   total:0,
   coursesCache: new Map(),
+  // Overrides keyed by ISO date "YYYY-MM-DD": { type: 'add'|'edit'|'remove', slots?: [{start,end}] }
+  overrides: Object.create(null),
 };
 
 // ---- UI refs ----
@@ -111,8 +109,6 @@ const courseSelect  = document.getElementById('courseSelect');
 const targetHoursEl = document.getElementById('targetHours');
 const targetTag     = document.getElementById('targetTag');
 const daysContainer = document.getElementById('daysContainer');
-
-// ...imports and constants unchanged...
 
 // ---- Render Days with slot controls ----
 function renderDays(){
@@ -128,8 +124,12 @@ function renderDays(){
     </div>
   `).join('');
 
-  // seed one empty slot for each day
+  // seed one empty slot for each day (Saturday forced blank)
   DAYS.forEach(d => {
+    const shouldForceBlank = d === "Saturday";
+    if (shouldForceBlank) {
+      state.times[d] = [];
+    }
     if (!state.times[d] || state.times[d].length === 0) {
       addSlot(d, "", "");
     } else {
@@ -174,7 +174,7 @@ function addSlot(day, startVal, endVal){
   inputs[0].addEventListener('input', e => { slot.start = e.target.value; });
   inputs[1].addEventListener('input', e => { slot.end   = e.target.value;  });
 
-  // Note: Remove button eliminated per request. We keep at least one slot by default.
+  // No per-slot remove button (per earlier request). We keep at least one slot visible by default.
 
   slotsEl.appendChild(row);
 }
@@ -233,14 +233,6 @@ function setTargetHours(val){
   }
 }
 
-function setDateIfValid(inputEl, mmddyyyy){
-  const re = /^(\d{2})-(\d{2})-(\d{4})$/; // MM-DD-YYYY
-  if (re.test(mmddyyyy)){
-    const m = re.exec(mmddyyyy);
-    inputEl.value = `${m[3]}-${m[1]}-${m[2]}`; // -> yyyy-mm-dd
-  }
-}
-
 function applyCourseDefaults(course){
   // 1) clock hours
   setTargetHours(course?.courseClockHours);
@@ -248,29 +240,28 @@ function applyCourseDefaults(course){
   // 2) classroom hours block (times only — no date autofill)
   const ch = Array.isArray(course?.courseClassroomHours) ? course.courseClassroomHours[0] : null;
   if (ch){
-    // clear any prefilled date values
-    document.getElementById('startDate').value = '';
-    document.getElementById('endDate').value = '';
+    // clear any prefilled date values (we keep Start/End blank)
+    const startDateEl = document.getElementById('startDate');
+    const endDateEl   = document.getElementById('endDate');
+    if (startDateEl) startDateEl.value = '';
+    if (endDateEl)   endDateEl.value   = '';
 
     // For each day, if string like "9:00 AM - 5:00 PM", set a single slot.
-DAYS.forEach(d => {
-  if (d === "Saturday") {
-    // force Saturday to be blank, even if data includes it
-    state.times[d] = [];
-    return;
-  }
+    DAYS.forEach(d => {
+      if (d === "Saturday") {
+        state.times[d] = []; // force Saturday blank
+        return;
+      }
+      const v = ch[d];
+      if (typeof v === 'string' && v.includes('-')){
+        const [st, en] = v.split('-').map(s=>s.trim());
+        state.times[d] = [{ start: st, end: en }];
+      } else {
+        state.times[d] = [];
+      }
+    });
 
-  const v = ch[d];
-  if (typeof v === 'string' && v.includes('-')) {
-    const [st, en] = v.split('-').map(s => s.trim());
-    state.times[d] = [{ start: st, end: en }];
-  } else {
-    state.times[d] = [];
-  }
-});
-
-
-    renderDays();
+    renderDays(); // re-render UI with those defaults
   }
 }
 
@@ -301,6 +292,104 @@ targetHoursEl.addEventListener('input', ()=>{
   }
 });
 
+// ---- Overrides UI + helpers (safe if HTML controls are absent) ----
+
+function isoFromDateInput(v){
+  const d = parseDateISO(v);
+  if(!d) return null;
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function parseOverrideSlots(text){
+  // Accept multiple lines like: "9:00 AM - 12:00 PM"
+  const chunks = String(text||'').split(/\n|;/).map(s => s.trim()).filter(Boolean);
+  const slots = [];
+  for(const c of chunks){
+    if(!c.includes('-')) continue;
+    const [st,en] = c.split('-').map(s=>s.trim());
+    if(timeToMinutes(st) != null && timeToMinutes(en) != null){
+      slots.push({ start: st, end: en });
+    }
+  }
+  return slots;
+}
+
+function renderOverridesList(){
+  const el = document.getElementById('overridesList');
+  if(!el) return; // HTML not present
+  const keys = Object.keys(state.overrides).sort();
+  if(keys.length === 0){
+    el.innerHTML = `<div class="hint">No overrides added yet.</div>`;
+    return;
+  }
+  el.innerHTML = keys.map(k => {
+    const o = state.overrides[k];
+    const lines = (o.slots||[]).map(s => `${s.start} - ${s.end}`).join('\n');
+    return `
+      <div class="ovcard" data-ov="${k}">
+        <div class="ovmeta">${o.type.toUpperCase()} • ${formatDateHuman(parseDateISO(k))}</div>
+        ${o.type !== 'remove' ? `<pre class="ovtimes">${lines || '—'}</pre>` : ''}
+        <div class="ovactions">
+          <button class="smallbtn danger" data-del="${k}" type="button">Delete Override</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  el.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.addEventListener('click', () => {
+      const k = btn.getAttribute('data-del');
+      delete state.overrides[k];
+      renderOverridesList();
+    });
+  });
+}
+
+function setupOverridesUI(){
+  const typeSel = document.getElementById('overrideType');
+  const dateEl  = document.getElementById('overrideDate');
+  const timesEl = document.getElementById('overrideTimes');
+  const timesRow= document.getElementById('overrideTimesRow');
+  const addBtn  = document.getElementById('addOverrideBtn');
+
+  // If the overrides panel isn't present, skip wiring.
+  if(!typeSel || !dateEl || !addBtn){
+    return;
+  }
+
+  const syncTimesVisibility = () => {
+    const t = typeSel.value;
+    if(timesRow) timesRow.style.display = (t === 'remove') ? 'none' : '';
+  };
+  syncTimesVisibility();
+  typeSel.addEventListener('change', syncTimesVisibility);
+
+  addBtn.addEventListener('click', () => {
+    const t = typeSel.value;
+    const iso = isoFromDateInput(dateEl.value);
+    if(!t || !iso){
+      alert('Choose a type and a valid date.');
+      return;
+    }
+
+    if(t === 'remove'){
+      state.overrides[iso] = { type: 'remove' };
+    } else {
+      const slots = parseOverrideSlots(timesEl?.value);
+      if(!slots || slots.length === 0){
+        alert('Add at least one valid time slot like "9:00 AM - 12:00 PM".');
+        return;
+      }
+      state.overrides[iso] = { type: t, slots };
+    }
+
+    renderOverridesList();
+    // leave fields as-is; user may add several
+  });
+
+  renderOverridesList();
+}
+
 // ---- Generate / Export ----
 function generate(){
   const s = parseDateISO(document.getElementById('startDate').value);
@@ -323,8 +412,9 @@ function generate(){
 
   for (const d of days) {
     const dow = dayLabels[d.getDay()];
-    if (!wkDays.has(dow)) continue;
+    const iso = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 
+    // Campus closed always wins
     const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
     if (campusClosedDates.some(c => c.date === dStr)) {
       const cd = document.createElement('div');
@@ -338,17 +428,50 @@ function generate(){
       continue;
     }
 
-    const slots = state.times[dow] || [];
-    let totalMins = 0;
+    const ov = state.overrides[iso];
 
-    for (const { start, end } of slots) {
+    // Decide which slots to use:
+    // - remove: skip
+    // - edit: use override slots (even if it’s Sunday)
+    // - add: include date using override slots (even if not in wkDays)
+    // - default: if weekday allowed, use pattern for that weekday
+    let slotsToUse = [];
+    let useDay = false;
+
+    if (ov?.type === 'remove') {
+      const cd = document.createElement('div');
+      cd.className = 'calday closed';
+      cd.innerHTML = `
+        <div class="meta">Removed</div>
+        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+        <div class="meta">Removed by override</div>
+      `;
+      cal.appendChild(cd);
+      continue;
+    } else if (ov?.type === 'edit') {
+      slotsToUse = ov.slots || [];
+      useDay = slotsToUse.length > 0;
+    } else if (ov?.type === 'add') {
+      slotsToUse = ov.slots || [];
+      useDay = slotsToUse.length > 0;
+    } else if (wkDays.has(dow)) {
+      slotsToUse = state.times[dow] || [];
+      useDay = true;
+    } else {
+      continue; // non-weekday and no override
+    }
+
+    // Sum valid minutes
+    let totalMins = 0;
+    for (const { start, end } of slotsToUse) {
       const startM = timeToMinutes(start);
-      const endM = timeToMinutes(end);
+      const endM   = timeToMinutes(end);
       if (startM == null || endM == null || endM <= startM) continue;
       totalMins += (endM - startM);
     }
-
-    if (totalMins <= 0) continue;
+    if (!useDay || totalMins <= 0) {
+      continue; // nothing to render
+    }
 
     const hrs = minutesToHrs(totalMins);
     running = Math.round((running + hrs) * 100) / 100;
@@ -356,10 +479,11 @@ function generate(){
 
     state.rows.push({ day: dayNum, date: new Date(d), hours: hrs, running });
 
+    // Calendar card
     const cd = document.createElement('div');
     cd.className = 'calday';
     cd.innerHTML = `
-      <div class="meta">Day ${dayNum}</div>
+      <div class="meta">Day ${dayNum}${ov ? ` • ${ov.type.toUpperCase()}` : ''}</div>
       <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
       <div class="meta">${hrs} hrs • run: ${running}</div>
     `;
@@ -406,3 +530,4 @@ document.getElementById('exportBtn').addEventListener('click', exportCSV);
 // Boot
 renderDays();
 initPrograms();
+setupOverridesUI(); // safe if overrides panel is not present

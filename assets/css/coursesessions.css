@@ -66,3 +66,12 @@ textarea{ min-height:96px }
   opacity: 0.8;
 }
 
+.overrides h3 { font-size: 16px; color: var(--text); }
+#overridesList .ovcard {
+  border:1px solid #2a3246; border-radius:12px; padding:10px; margin-top:8px; background:#0f1320;
+}
+.ovmeta { font-size:12px; color:var(--muted); }
+.ovtimes { white-space:pre-line; margin-top:6px; }
+.ovactions { margin-top:8px; display:flex; gap:8px; }
+.smallbtn.danger { background:#2c1a1a; border-color:#4a2626; color:var(--bad); }
+.smallbtn.danger:hover{ filter:brightness(1.06); }
