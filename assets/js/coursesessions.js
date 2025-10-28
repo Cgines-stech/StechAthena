@@ -97,18 +97,6 @@ function eachDay(start,end){
   return days;
 }
 
-// Add near other helpers
-function mmddyyyy(d){
-  return `${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}-${d.getFullYear()}`;
-}
-
-function addBadDate(mmdd){
-  // prevent duplicates
-  if (!campusClosedDates.some(c => c.date === mmdd)) {
-    campusClosedDates.push({ date: mmdd, note: 'User-removed' });
-  }
-}
-
 // ---- State ----
 const state = {
   times: Object.fromEntries(DAYS.map(d => [d, [] /* array of {start,end} */])),
@@ -339,30 +327,16 @@ function generate(){
 
     const dStr = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}-${d.getFullYear()}`;
     if (campusClosedDates.some(c => c.date === dStr)) {
-      // Calendar card
-const cd = document.createElement('div');
-cd.className = 'calday';
-cd.innerHTML = `
-  <div class="meta">Day ${dayNum}</div>
-  <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-  <div class="meta">${hrs} hrs • run: ${running}</div>
-`;
-
-// Add the (Remove Date) button
-const removeBtn = document.createElement('button');
-removeBtn.type = 'button';
-removeBtn.className = 'smallbtn danger removedatebtn';
-removeBtn.setAttribute('aria-label', 'Remove this date from schedule');
-removeBtn.textContent = '(Remove Date)';
-removeBtn.addEventListener('click', () => {
-  const bad = mmddyyyy(d);
-  addBadDate(bad);
-  generate(); // re-render to show it as Closed and recalc totals
-});
-
-cd.appendChild(removeBtn);
-cal.appendChild(cd);
-
+      const cd = document.createElement('div');
+      cd.className = 'calday closed';
+      cd.innerHTML = `
+        <div class="meta">Closed</div>
+        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+        <div class="meta">Campus Closed</div>
+      `;
+      cal.appendChild(cd);
+      continue;
+    }
 
     const slots = state.times[dow] || [];
     let totalMins = 0;
