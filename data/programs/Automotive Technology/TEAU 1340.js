@@ -30,14 +30,14 @@ const TEAU1340 = [
     ],
 
     courseOutline: [
-      "Manual Drivetrain and Axle Theories",
-      "Clutches",
-      "Manual Transmissions, Transaxles, and Drive Axles",
-      "Drive Shafts, Universal Joints, and Drive Axles",
-      "Four-Wheel Drive Systems",
-      "Advanced Four-Wheel Drive Systems",
-      "Drivetrain Electrical and Electronic Systems",
-      "Electronically-Controlled and Automatic Trans",
+      { title: "Manual Drivetrain and Axle Theories", hours: 12 },
+      { title: "Clutches", hours: 12 },
+      { title: "Manual Transmissions, Transaxles, and Drive Axles", hours: 12 },
+      { title: "Drive Shafts, Universal Joints, and Drive Axles", hours: 12 },
+      { title: "Four-Wheel Drive Systems", hours: 12 },
+      { title: "Advanced Four-Wheel Drive Systems", hours: 6 },
+      { title: "Drivetrain Electrical and Electronic Systems", hours: 12 },
+      { title: "Electronically-Controlled and Automatic Trans", hours: 12 },
     ],
 
     courseBooks: [

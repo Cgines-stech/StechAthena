@@ -29,15 +29,15 @@ const TEAU1240 = [
     ],
 
     courseOutline: [
-      "Drivetrain Basics",
-      "Drivetrain Theory",
-      "General Theories of Operation",
-      "Electronic Controls",
-      "Transmission Design",
-      "Torque Converters and Pump",
-      "Hydraulic Circuits and Controls",
-      "Gears and Shafts",
-      "Common Transmissions Reaction and Friction Units",
+      { title: "Drivetrain Basics", hours: 12 },
+      { title: "Drivetrain Theory", hours: 12 },
+      { title: "General Theories of Operation", hours: 15 },
+      { title: "Electronic Controls", hours: 15 },
+      { title: "Transmission Design", hours: 15 },
+      { title: "Torque Converters and Pump", hours: 15 },
+      { title: "Hydraulic Circuits and Controls", hours: 15 },
+      { title: "Gears and Shafts", hours: 15 },
+      { title: "Common Transmissions Reaction and Friction Units", hours: 6 },
     ],
 
     courseBooks: [

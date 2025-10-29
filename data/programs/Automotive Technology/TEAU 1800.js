@@ -33,14 +33,14 @@ const TEAU1800 = [
     ],
 
     courseOutline: [
-      "Overview of Engine Performance and Basic Theories",
-      "Electricity and Electronics",
-      "Intake and Exhaust Systems",
-      "Input Sensors",
-      "Fuel Systems and Fuel Injection Operation",
-      "Ignition Systems",
-      "Emission Control, Computer Outputs, and Networks",
-      "On-Board Diagnostics and Related Systems",
+      { title: "Overview of Engine Performance and Basic Theories", hours: 15 },
+      { title: "Electricity and Electronics", hours: 15 },
+      { title: "Intake and Exhaust Systems", hours: 15 },
+      { title: "Input Sensors", hours: 15 },
+      { title: "Fuel Systems and Fuel Injection Operation", hours: 15 },
+      { title: "Ignition Systems", hours: 15 },
+      { title: "Emission Control, Computer Outputs, and Networks", hours: 15 },
+      { title: "On-Board Diagnostics and Related Systems", hours: 15 },
     ],
 
     courseBooks: [

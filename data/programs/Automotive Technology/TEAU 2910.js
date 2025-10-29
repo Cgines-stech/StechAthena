@@ -27,7 +27,8 @@ const TEAU2910 = [
     ],
 
     courseOutline: [
-      "General Motors",
+      { title: "General Motors", hours: 120 },
+      
     ],
 
     courseBooks: [

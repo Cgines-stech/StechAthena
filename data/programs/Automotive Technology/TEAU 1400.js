@@ -30,14 +30,14 @@ const TEAU1400 = [
     ],
 
     courseOutline: [
-      "Suspension and Steering Systems",
-      "Tires, Wheels, Wheel Bearing, and Shocks/Struts",
-      "Front and Rear Suspension Systems",
-      "Steering Columns and Steering Linkages",
-      "Four Wheel Alignment Primary Angles",
-      "Four Wheel Alignment Diagnostic Angles",
-      "Computer Controlled Suspension Systems",
-      "Power Steering Pumps, Gears, and Components",
+      { title: "Suspension and Steering Systems", hours: 15 },
+      { title: "Tires, Wheels, Wheel Bearing, and Shocks/Struts", hours: 15 },
+      { title: "Front and Rear Suspension Systems", hours: 15 },
+      { title: "Steering Columns and Steering Linkages", hours: 15 },
+      { title: "Four Wheel Alignment Primary Angles", hours: 15 },
+      { title: "Four Wheel Alignment Diagnostic Angles", hours: 15 },
+      { title: "Computer Controlled Suspension Systems", hours: 15 },
+      { title: "Power Steering Pumps, Gears, and Components", hours: 15 },
     ],
 
     courseBooks: [

@@ -33,14 +33,14 @@ const TEAU1740 = [
     ],
 
     courseOutline: [
-      "Heating and AC Temperature/Pressure Fundamentals",
-      "Engine Cooling and Comfort Heating Systems",
-      "Air Conditioning System Operating Principles",
-      "Refrigerant System Components",
-      "Refrigerant System Service and Testing",
-      "Diagnosis of the Refrigerant System",
-      "Compressors and Clutches",
-      "System Controls and Ducting Systems",
+      { title: "Heating and AC Temperature/Pressure Fundamentals", hours: 12 },
+      { title: "Engine Cooling and Comfort Heating Systems", hours: 12 },
+      { title: "Air Conditioning System Operating Principles", hours: 12 },
+      { title: "Refrigerant System Components", hours: 12 },
+      { title: "Refrigerant System Service and Testing", hours: 12 },
+      { title: "Diagnosis of the Refrigerant System", hours: 12 },
+      { title: "Compressors and Clutches", hours: 12 },
+      { title: "System Controls and Ducting Systems", hours: 6 },
     ],
 
     courseBooks: [

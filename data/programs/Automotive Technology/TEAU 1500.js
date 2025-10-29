@@ -31,14 +31,14 @@ const TEAU1500 = [
     ],
 
     courseOutline: [
-      "Brake System Fundamentals and Related Systems",
-      "Master Cylinders, Brake Fluid, and Hydraulic Comp.",
-      "Power Brake Systems",
-      "Disc Brakes",
-      "Drum Brakes",
-      "Parking Brakes",
-      "Electrical Braking Systems",
-      "Advanced Braking Systems",
+      { title: "Brake System Fundamentals and Related Systems", hours: 15 },
+      { title: "Master Cylinders, Brake Fluid, and Hydraulic Comp.", hours: 15 },
+      { title: "Power Brake Systems", hours: 15 },
+      { title: "Disc Brakes", hours: 15 },
+      { title: "Drum Brakes", hours: 15 },
+      { title: "Parking Brakes", hours: 15 },
+      { title: "Electrical Braking Systems", hours: 15 },
+      { title: "Advanced Braking Systems", hours: 15 },
     ],
 
     courseBooks: [

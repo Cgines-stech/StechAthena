@@ -27,7 +27,7 @@ const TEAU2912 = [
     ],
 
     courseOutline: [
-      "Mopar CAP",
+      { title: "Mopar CAP", hours: 60 },
     ],
 
     courseBooks: [

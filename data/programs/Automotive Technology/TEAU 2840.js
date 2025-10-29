@@ -30,14 +30,14 @@ const TEAU2840 = [
     ],
 
     courseOutline: [
-      "Overview, Safety, Tools and Theories",
-      "On-Board Diagnostics and Emission Testing",
-      "On-Board Diagnostic Scanners and Oscilloscopes",
-      "Computers and Input Sensors",
-      "Ignition System and Related Input/Output Sensors",
-      "Fuel System and Related Input/Output Actuators",
-      "Emission Control and Evaporative Systems",
-      "I/M Failure Diagnosis and Five-Gas Exhaust Analysis",
+      { title: "Overview, Safety, Tools and Theories", hours: 15 },
+      { title: "On-Board Diagnostics and Emission Testing", hours: 15 },
+      { title: "On-Board Diagnostic Scanners and Oscilloscopes", hours: 15 },
+      { title: "Computers and Input Sensors", hours: 15 },
+      { title: "Ignition System and Related Input/Output Sensors", hours: 15 },
+      { title: "Fuel System and Related Input/Output Actuators", hours: 15 },
+      { title: "Emission Control and Evaporative Systems", hours: 15 },
+      { title: "I/M Failure Diagnosis and Five-Gas Exhaust Analysis", hours: 15 },
     ],
 
     courseBooks: [

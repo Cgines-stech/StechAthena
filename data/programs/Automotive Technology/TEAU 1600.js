@@ -31,14 +31,14 @@ const TEAU1600 = [
     ],
 
     courseOutline: [
-      "Intro to Automotive Electricity and Electronic Systems",
-      "Electrical and Electronic Theories and Components",
-      "Wiring, Circuit Diagrams, Batteries, and Starting Systems",
-      "Charging, Lighting, and Intro to Body Computers",
-      "Computer Inputs, Sensor Diagnostics, and Communications",
-      "Advanced Lighting and Instrumentation",
-      "Electrical Accessories and Infotainment Systems",
-      "Passive Restraint and Alternative Power Vehicles",
+      { title: "Intro to Automotive Electricity and Electronic Systems", hours: 15 },
+      { title: "Electrical and Electronic Theories and Components", hours: 20 },
+      { title: "Wiring, Circuit Diagrams, Batteries, and Starting Systems", hours: 15 },
+      { title: "Charging, Lighting, and Intro to Body Computers", hours: 15 },
+      { title: "Computer Inputs, Sensor Diagnostics, and Communications", hours: 15 },
+      { title: "Advanced Lighting and Instrumentation", hours: 15 },
+      { title: "Electrical Accessories and Infotainment Systems", hours: 15 },
+      { title: "Passive Restraint and Alternative Power Vehicles", hours: 10 },
     ],
 
     courseBooks: [

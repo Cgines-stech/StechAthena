@@ -31,10 +31,10 @@ const TEAU1050 = [
     ],
 
     courseOutline: [
-      "Introduction to Safety",
-      "Basic Electrical Testing Tools and Equipment",
-      "Repair Information Systems",
-      "Computer Diagnostics Tools and Equipment",
+      { title: "Introduction to Safety", hours: 20 },
+      { title: "Basic Electrical Testing Tools and Equipment", hours: 4 },
+      { title: "Repair Information Systems", hours: 3 },
+      { title: "Computer Diagnostics Tools and Equipment", hours: 3 },
     ],
 
     courseBooks: [

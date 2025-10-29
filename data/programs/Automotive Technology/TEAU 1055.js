@@ -29,16 +29,16 @@ const TEAU1055 = [
     ],
 
     courseOutline: [
-      "Whole Numbers and Decimals",
-      "Fractions and Geometry",
-      "Integers, Signed Numbers, Ratios, Proportions, and Percent",
-      "Business, Statistics, and Repair Orders",
-      "The Automobile Engine and Systems",
-      "Automobile Electrical Systems",
-      "The Automobile Drive Train",
-      "The Automobile Chassis",
-      "Automobile Heating, Ventilation, and Air Conditioning",
-      "Measurement Tools",
+      { title: "Whole Numbers and Decimals", hours: 6 },
+      { title: "Fractions and Geometry", hours: 6 },
+      { title: "Integers, Signed Numbers, Ratios, Proportions, and Percent", hours: 6 },
+      { title: "Business, Statistics, and Repair Orders", hours: 6 },
+      { title: "The Automobile Engine and Systems", hours: 6 },
+      { title: "Automobile Electrical Systems", hours: 6 },
+      { title: "The Automobile Drive Train", hours: 6 },
+      { title: "The Automobile Chassis", hours: 6 },
+      { title: "Automobile Heating, Ventilation, and Air Conditioning", hours: 6 },
+      { title: "Measurement Tools", hours: 6 },
     ],
 
     courseBooks: [

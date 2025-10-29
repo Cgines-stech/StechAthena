@@ -29,15 +29,15 @@ const TEAU1140 = [
     ],
 
     courseOutline: [
-      "Automotive Engines and Rebuilding",
-      "Theory of Engine Operation and Operating Systems",
-      "Factors Affecting Engine Performance and Materials",
-      "Engine Configurations, Intake and Exhaust Systems",
-      "Cylinder Heads",
-      "Camshafts, Valvetrains, and Timing Mechanisms",
-      "Engine Block Construction",
-      "Pistons, Rings, Connecting Rods, and Bearings",
-      "Alternative Fuel and Advanced Tech Vehicles",
+      { title: "Automotive Engines and Rebuilding", hours: 5 },
+      { title: "Theory of Engine Operation and Operating Systems", hours: 20 },
+      { title: "Factors Affecting Engine Performance and Materials", hours: 20 },
+      { title: "Engine Configurations, Intake and Exhaust Systems", hours: 20 },
+      { title: "Cylinder Heads", hours: 20 },
+      { title: "Camshafts, Valvetrains, and Timing Mechanisms", hours: 20 },
+      { title: "Engine Block Construction", hours: 20 },
+      { title: "Pistons, Rings, Connecting Rods, and Bearings", hours: 20 },
+      { title: "Alternative Fuel and Advanced Tech Vehicles", hours: 5 },
     ],
 
     courseBooks: [
