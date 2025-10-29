@@ -6,7 +6,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Training Plan</title>
+
+  <!-- CSS (will be cache-busted below) -->
   <link id="trainingplan-css" rel="stylesheet" href="assets/css/trainingplan.css?v=1" />
+
+  <script>
+    // Simple cache-buster: override via ?v=abc on the page URL
+    (function(){
+      const v = new URLSearchParams(location.search).get('v')
+        || String(Math.floor(Date.now()/60000)); // changes every minute
+      window.__ASSET_VERSION__ = v;
+
+      // bump CSS href
+      const cssEl = document.getElementById('trainingplan-css');
+      if (cssEl) {
+        const base = cssEl.getAttribute('href').split('?')[0];
+        cssEl.setAttribute('href', `${base}?v=${v}`);
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="wrap">
@@ -24,32 +42,27 @@
 
     <main id="content">
       <h1 id="programTitle" class="program-title">Select a program…</h1>
+
+      <!-- Totals -->
       <section id="totalsBar" class="totals">
-        <div><span class="label">Program Hours:</span> <span id="programHoursTotal" class="value">—</span></div>
-        <div class="outline-total"><span class="label">Outline Hours (sum of outline):</span> <span id="outlineHoursTotal" class="value">—</span></div>
+        <div>
+          <span class="label">Program Hours:</span>
+          <span id="programHoursTotal" class="value">—</span>
+        </div>
+        <div class="outline-total">
+          <span class="label">Outline Hours (sum of included courses):</span>
+          <span id="outlineHoursTotal" class="value">—</span>
+        </div>
       </section>
+
+      <!-- Filled by JS -->
       <div id="courseList" class="course-list" aria-live="polite"></div>
     </main>
   </div>
 
-  <script>
-  // Shared version for all assets; override via URL like trainingplan.html?v=abc
-  window.__ASSET_VERSION__ =
-    new URLSearchParams(location.search).get('v') ||
-    String(Math.floor(Date.now() / 60000)); // updates once per minute
-  // Bump CSS href to bust cache
-  (function () {
-    const el = document.getElementById('trainingplan-css');
-    if (!el) return;
-    const base = el.getAttribute('href').split('?')[0];
-    el.setAttribute('href', `${base}?v=${window.__ASSET_VERSION__}`);
-  })();
-</script>
-
-<!-- Load the module with the same version -->
-<script type="module">
-  const v = window.__ASSET_VERSION__;
-  import('./assets/js/trainingplan.js?v=' + v);
-</script>
+  <!-- JS (cache-busted dynamic import) -->
+  <script type="module">
+    import('./assets/js/trainingplan.js?v=' + (window.__ASSET_VERSION__ || 'dev'));
+  </script>
 </body>
 </html>

@@ -1,16 +1,20 @@
 // assets/js/trainingplan.js
-// Training Plan page logic (with Back button + Totals + Elective disclaimer)
-// - Program dropdown from central registry
-// - Renders: Program name, each Course "number — name", and Outline items
-// - Totals:
-//    • Program Hours: from data/programs/{program}/program.js -> programClockHours
-//    • Outline Hours (label kept): SUM of courseClockHours where includeInProgramTotals === true
-// - Elective disclaimer:
-//    • Inserted BEFORE the first elective course (isElective === true)
-//    • Shows: "Electives (Credit Hours Required: X, Clock Hours Required: Y)"
-//      where X = programCreditHours − sum(non‑elective courseCredits)
-//            Y = programClockHours − sum(non‑elective courseClockHours)
-// - Print-friendly (controls hidden in print); outline total row is hidden in print via CSS
+// Training Plan (polished UI, landscape print, cache-busted modules)
+// Features:
+// - Program dropdown (from programs.registry.js)
+// - Program totals:
+//     • Program Hours -> program.js: programClockHours
+//     • Outline Hours -> SUM(courseClockHours) where includeInProgramTotals === true
+// - Elective disclaimer BEFORE first elective course:
+//     “Electives (Credit Hours Required: X, Clock Hours Required: Y)”
+//     X = programCreditHours - SUM(non-elective courseCredits)
+//     Y = programClockHours  - SUM(non-elective courseClockHours)
+// - Per-course layout shows:
+//     • CourseNumber — CourseName
+//     • Hours and Credits pills
+//     • Badges: statewideAlignment, instructionalType
+//     • Description and Objectives (if present)
+//     • Outline items (title — hours)
 
 import {
   listPrograms,
@@ -18,6 +22,10 @@ import {
   encodePath,
   PROGRAM_FILE_REGISTRY,
 } from "../../data/programs.registry.js";
+
+// Cache-busting helper matches ?v on HTML page
+const BUST = (window.__ASSET_VERSION__ || Date.now()).toString();
+const withBust = (url) => url + (url.includes('?') ? '&' : '?') + 'v=' + BUST;
 
 const els = {
   programSelect: document.getElementById("programSelect"),
@@ -28,11 +36,7 @@ const els = {
   outlineHoursTotal: document.getElementById("outlineHoursTotal"),
 };
 
-// -------- cache-busting helpers (ties into window.__ASSET_VERSION__) --------
-const BUST = (window.__ASSET_VERSION__ || Date.now()).toString();
-const withBust = (url) => url + (url.includes("?") ? "&" : "?") + "v=" + BUST;
-
-function htmlEscape(str = ""){
+function htmlEscape(str = "") {
   return String(str)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -41,10 +45,10 @@ function htmlEscape(str = ""){
     .replaceAll("'", "&#39;");
 }
 
-async function loadProgramCourses(programName){
+async function loadProgramCourses(programName) {
   const files = getCourseFiles(programName);
   const loaded = [];
-  for (const relPath of files){
+  for (const relPath of files) {
     try {
       const mod = await import(withBust(encodePath(relPath)));
       const arr = Array.isArray(mod.default) ? mod.default : (mod.default ? [mod.default] : []);
@@ -58,24 +62,24 @@ async function loadProgramCourses(programName){
   return loaded;
 }
 
-async function loadProgramMeta(programName){
+async function loadProgramMeta(programName) {
   try {
     const rel = PROGRAM_FILE_REGISTRY?.[programName];
     if (!rel) return null;
     const mod = await import(withBust(encodePath(rel)));
-    // Expecting default export to have programClockHours & programCreditHours
+    // Expect default export holding programClockHours & programCreditHours
     const meta = Array.isArray(mod.default) ? mod.default[0] : mod.default;
     return meta || null;
   } catch (e) {
-    console.warn("Program meta failed to load for:", programName, e);
+    console.warn("Program meta failed to load:", programName, e);
     return null;
   }
 }
 
-// NEW: Sum courseClockHours across courses where includeInProgramTotals === true
-function computeIncludedCourseClockHours(courses){
+// SUM courseClockHours across courses where includeInProgramTotals === true
+function computeIncludedCourseClockHours(courses) {
   let total = 0;
-  for (const c of courses){
+  for (const c of courses) {
     if (!c || c.__error) continue;
     if (c.includeInProgramTotals !== true) continue;
     const ch = Number(c.courseClockHours || 0);
@@ -84,10 +88,11 @@ function computeIncludedCourseClockHours(courses){
   return total;
 }
 
-function sumNonElectiveCreditsAndClock(courses){
+// Sums for non-elective courses
+function sumNonElectiveCreditsAndClock(courses) {
   let credits = 0;
   let clock = 0;
-  for (const c of courses){
+  for (const c of courses) {
     if (!c || c.__error) continue;
     if (c.isElective === true) continue;
     const cr = Number(c.courseCredits || 0);
@@ -98,18 +103,18 @@ function sumNonElectiveCreditsAndClock(courses){
   return { credits, clock };
 }
 
-function render(programName, courses, programMeta){
+function render(programName, courses, programMeta) {
   els.programTitle.textContent = programName || "Select a program…";
 
   // Totals
   const programHours = Number(programMeta?.programClockHours || 0) || 0;
-  const includedClockHours = computeIncludedCourseClockHours(courses || []); // replaces prior outline-hours logic
+  const includedClockHours = computeIncludedCourseClockHours(courses || []);
   if (els.programHoursTotal) els.programHoursTotal.textContent = `${programHours} hrs`;
   if (els.outlineHoursTotal) els.outlineHoursTotal.textContent = `${includedClockHours} hrs`;
 
   // No program selected / no courses
-  if (!programName){ els.courseList.innerHTML = ""; return; }
-  if (!courses || courses.length === 0){
+  if (!programName) { els.courseList.innerHTML = ""; return; }
+  if (!courses || courses.length === 0) {
     els.courseList.innerHTML = `<div class="hint">No courses found for this program.</div>`;
     return;
   }
@@ -126,8 +131,8 @@ function render(programName, courses, programMeta){
   // Build HTML
   let parts = [];
   courses.forEach((c, idx) => {
-    // Insert disclaimer just before the FIRST elective course
-    if (idx === firstElectiveIdx){
+    // Insert disclaimer just before first elective course
+    if (idx === firstElectiveIdx) {
       parts.push(`
         <div class="elective-disclaimer">
           <strong>Electives</strong> (Credit Hours Required: ${electiveCreditsNeeded}, Clock Hours Required: ${electiveClockNeeded})
@@ -135,7 +140,7 @@ function render(programName, courses, programMeta){
       `);
     }
 
-    if (!c || c.__error){
+    if (!c || c.__error) {
       const file = c?.relPath?.split("/").pop();
       parts.push(`<article class="course-card error"><h3>⚠ Error loading ${htmlEscape(file || "course")}</h3></article>`);
       return;
@@ -145,7 +150,13 @@ function render(programName, courses, programMeta){
     const name = c.courseName || "";
     const outline = Array.isArray(c.courseOutline) ? c.courseOutline : [];
     const courseClockHours = Number(c.courseClockHours || 0);
+    const courseCredits = Number(c.courseCredits || 0);
+    const instructionalType = c.instructionalType || "";
+    const statewideAlignment = c.statewideAlignment || "";
+    const description = c.courseDescription || "";
+    const objectives = Array.isArray(c.courseObjectives) ? c.courseObjectives : [];
 
+    // Outline list
     const outlineList = outline.length
       ? `<ol class="outline">${outline.map(i => `
             <li><span class="title">${htmlEscape(i.title || "Untitled")}</span>
@@ -153,12 +164,32 @@ function render(programName, courses, programMeta){
           `).join("")}</ol>`
       : `<div class="hint small">No outline available.</div>`;
 
+    // Pills + badges
     const hoursPill = `<span class="pill">${courseClockHours} hrs</span>`;
+    const creditPill = `<span class="pill pill-credits">${courseCredits} cr</span>`;
+    const metaBadges = [statewideAlignment, instructionalType]
+      .filter(Boolean)
+      .map(v => `<span class="badge">${htmlEscape(v)}</span>`)
+      .join(" ");
+
+    const descrBlock = description ? `<p class="descr">${htmlEscape(description)}</p>` : "";
+    const objBlock = objectives.length
+      ? `<div class="objectives">
+           <div class="section-title">Course Objectives</div>
+           <ul class="objective-list">${objectives.map(o => `<li>${htmlEscape(o)}</li>`).join("")}</ul>
+         </div>`
+      : "";
 
     parts.push(`
       <article class="course-card">
-        <h3 class="course-head">${htmlEscape(number)} — ${htmlEscape(name)} ${hoursPill}</h3>
+        <header class="course-head">
+          <h3 class="course-title">${htmlEscape(number)} — ${htmlEscape(name)}</h3>
+          <div class="meta-right">${hoursPill} ${creditPill}</div>
+        </header>
+        <div class="meta-row">${metaBadges}</div>
+        ${descrBlock}
         ${outlineList}
+        ${objBlock}
       </article>
     `);
   });
@@ -166,19 +197,19 @@ function render(programName, courses, programMeta){
   els.courseList.innerHTML = parts.join("");
 }
 
-function initProgramsDropdown(){
+function initProgramsDropdown() {
   const programs = listPrograms();
   els.programSelect.innerHTML = programs.map(p => `<option value="${p}">${p}</option>`).join("");
-  if (programs.length){
+  if (programs.length) {
     els.programSelect.value = programs[0];
     onProgramChange();
   }
 }
 
-async function onProgramChange(){
+async function onProgramChange() {
   const programName = els.programSelect.value || "";
   els.programTitle.textContent = programName || "Select a program…";
-  els.courseList.innerHTML = `<div class=\"hint\">Loading…</div>`;
+  els.courseList.innerHTML = `<div class="hint">Loading…</div>`;
   const [courses, programMeta] = await Promise.all([
     loadProgramCourses(programName),
     loadProgramMeta(programName)
@@ -186,7 +217,7 @@ async function onProgramChange(){
   render(programName, courses, programMeta);
 }
 
-function wire(){
+function wire() {
   els.programSelect.addEventListener("change", onProgramChange);
   els.printBtn?.addEventListener("click", () => window.print());
 }
