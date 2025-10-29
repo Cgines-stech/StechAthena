@@ -106,36 +106,30 @@ function sumNonElectiveCreditsAndClock(courses) {
 function render(programName, courses, programMeta) {
   els.programTitle.textContent = programName || "Select a program…";
 
-  // Totals
   const programHours = Number(programMeta?.programClockHours || 0) || 0;
   const includedClockHours = computeIncludedCourseClockHours(courses || []);
-  if (els.programHoursTotal) els.programHoursTotal.textContent = `${programHours} hrs`;
-  if (els.outlineHoursTotal) els.outlineHoursTotal.textContent = `${includedClockHours} hrs`;
+  els.programHoursTotal.textContent = `${programHours} hrs`;
+  els.outlineHoursTotal.textContent = `${includedClockHours} hrs`;
 
-  // No program selected / no courses
-  if (!programName) { els.courseList.innerHTML = ""; return; }
-  if (!courses || courses.length === 0) {
+  if (!programName || !courses?.length) {
     els.courseList.innerHTML = `<div class="hint">No courses found for this program.</div>`;
     return;
   }
 
-  // Elective disclaimer computations (before first elective)
   const { credits: reqCredits, clock: reqClock } = sumNonElectiveCreditsAndClock(courses);
   const programCreditHours = Number(programMeta?.programCreditHours || 0) || 0;
   const programClockHours  = Number(programMeta?.programClockHours || 0)  || 0;
   const electiveCreditsNeeded = Math.max(0, programCreditHours - reqCredits);
   const electiveClockNeeded   = Math.max(0, programClockHours  - reqClock);
-
   const firstElectiveIdx = courses.findIndex(c => c && !c.__error && c.isElective === true);
 
-  // Build HTML
   let parts = [];
   courses.forEach((c, idx) => {
-    // Insert disclaimer just before first elective course
     if (idx === firstElectiveIdx) {
       parts.push(`
         <div class="elective-disclaimer">
-          <strong>Electives</strong> (Credit Hours Required: ${electiveCreditsNeeded}, Clock Hours Required: ${electiveClockNeeded})
+          <strong>Electives</strong>
+          (Credit Hours Required: ${electiveCreditsNeeded}, Clock Hours Required: ${electiveClockNeeded})
         </div>
       `);
     }
@@ -156,15 +150,6 @@ function render(programName, courses, programMeta) {
     const description = c.courseDescription || "";
     const objectives = Array.isArray(c.courseObjectives) ? c.courseObjectives : [];
 
-    // Outline list
-    const outlineList = outline.length
-      ? `<ol class="outline">${outline.map(i => `
-            <li><span class="title">${htmlEscape(i.title || "Untitled")}</span>
-                <span class="hours">${Number(i.hours || 0)} hrs</span></li>
-          `).join("")}</ol>`
-      : `<div class="hint small">No outline available.</div>`;
-
-    // Pills + badges
     const hoursPill = `<span class="pill">${courseClockHours} hrs</span>`;
     const creditPill = `<span class="pill pill-credits">${courseCredits} cr</span>`;
     const metaBadges = [statewideAlignment, instructionalType]
@@ -172,13 +157,29 @@ function render(programName, courses, programMeta) {
       .map(v => `<span class="badge">${htmlEscape(v)}</span>`)
       .join(" ");
 
-    const descrBlock = description ? `<p class="descr">${htmlEscape(description)}</p>` : "";
+    const descrBlock = description
+      ? `<div class="descr">
+           <div class="section-title">Course Description</div>
+           <p>${htmlEscape(description)}</p>
+         </div>`
+      : "";
+
     const objBlock = objectives.length
       ? `<div class="objectives">
            <div class="section-title">Course Objectives</div>
            <ul class="objective-list">${objectives.map(o => `<li>${htmlEscape(o)}</li>`).join("")}</ul>
          </div>`
       : "";
+
+    const outlineBlock = outline.length
+      ? `<div class="outline-block">
+           <div class="section-title">Course Outline</div>
+           <ol class="outline">${outline.map(i => `
+             <li><span class="title">${htmlEscape(i.title || "Untitled")}</span>
+                 <span class="hours">${Number(i.hours || 0)} hrs</span></li>
+           `).join("")}</ol>
+         </div>`
+      : `<div class="hint small">No outline available.</div>`;
 
     parts.push(`
       <article class="course-card">
@@ -188,14 +189,15 @@ function render(programName, courses, programMeta) {
         </header>
         <div class="meta-row">${metaBadges}</div>
         ${descrBlock}
-        ${outlineList}
         ${objBlock}
+        ${outlineBlock}
       </article>
     `);
   });
 
   els.courseList.innerHTML = parts.join("");
 }
+
 
 function initProgramsDropdown() {
   const programs = listPrograms();
