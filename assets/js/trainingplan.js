@@ -11,6 +11,9 @@ import {
   encodePath,
 } from "../../data/programs.registry.js";
 
+const BUST = (window.__ASSET_VERSION__ || Date.now()).toString();
+const withBust = (url) => url + (url.includes('?') ? '&' : '?') + 'v=' + BUST;
+
 const els = {
   programSelect: document.getElementById("programSelect"),
   programTitle: document.getElementById("programTitle"),
@@ -34,7 +37,7 @@ async function loadProgramCourses(programName){
   const loaded = [];
   for (const relPath of files){
     try {
-      const mod = await import(encodePath(relPath));
+      const mod = await import(withBust(encodePath(relPath)));
       const arr = Array.isArray(mod.default) ? mod.default : (mod.default ? [mod.default] : []);
       const course = arr[0] || null;
       if (course) loaded.push(course);
