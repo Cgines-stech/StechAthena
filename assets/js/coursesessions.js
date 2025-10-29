@@ -2,7 +2,7 @@
 // ES Module with multiple time slots per day + Program/Course dropdowns,
 // dynamic import of course files, per-date Overrides (add/edit/remove),
 // Visual Month Calendar, instructor loader/editor, High School flag,
-// Notes, and Externship/Clinical preset with lockable UI.
+// Notes, Location, and Externship/Clinical preset with lockable UI.
 
 import { campusClosedDates } from "./baddates.js";
 import { saveCourseSession } from "./coursesessions.store.js";
@@ -327,7 +327,7 @@ async function onProgramChange(){
     const loaded = [];
     for (const relPath of files){
       try {
-        const mod = await import(encodePath(rel));
+        const mod = await import(encodePath(relPath));
         const arr = Array.isArray(mod.default) ? mod.default : [mod.default];
         const course = arr[0] || {};
         const label = [course.courseNumber, course.courseName]
