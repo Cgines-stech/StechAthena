@@ -12,55 +12,14 @@ const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; //
 const wkDays = new Set(DAYS);
 
 /** ---- Registries: update paths as needed for your repo ---- */
-const PROGRAM_FILE_REGISTRY = {
-  "Advanced Emergency Medical Technician":
-    "../../data/programs/Advanced Emergency Medical Technician/program.js",
-  "Automation Technology":
-    "../../data/programs/Automation Technology/program.js",
-  "Automotive Technology":
-    "../../data/programs/Automotive Technology/program.js",
-};
-
-const PROGRAM_COURSE_REGISTRY = {
-  "Advanced Emergency Medical Technician": [
-    "../../data/programs/Advanced Emergency Medical Technician/TEEM 1202.js",
-    "../../data/programs/Advanced Emergency Medical Technician/TEEM 1904.js",
-  ],
-  "Automation Technology": [
-    "../../data/programs/Automation Technology/TEAM 1010.js",
-    "../../data/programs/Automation Technology/TEAM 1040.js",
-    "../../data/programs/Automation Technology/TEAM 1050.js",
-    "../../data/programs/Automation Technology/TEAM 1060.js",
-    "../../data/programs/Automation Technology/TEAM 1070.js",
-    "../../data/programs/Automation Technology/TEAM 1030.js",
-    "../../data/programs/Automation Technology/TEAM 1020.js",
-    "../../data/programs/Automation Technology/TEAM 1080.js",
-    "../../data/programs/Automation Technology/TEAM 2005.js",
-    "../../data/programs/Automation Technology/TEAM 2210.js",
-    "../../data/programs/Automation Technology/TEAM 1510.js",
-    "../../data/programs/Automation Technology/TEAM 1640.js",
-  ],
-  "Automotive Technology": [
-    "../../data/programs/Automotive Technology/TEAU 1050.js",
-    "../../data/programs/Automotive Technology/TEAU 1600.js",
-    "../../data/programs/Automotive Technology/TEAU 1800.js",
-    "../../data/programs/Automotive Technology/TEAU 1055.js",
-    "../../data/programs/Automotive Technology/TEAU 2640.js",
-    "../../data/programs/Automotive Technology/TEAU 2840.js",
-    "../../data/programs/Automotive Technology/TEAU 1740.js",
-    "../../data/programs/Automotive Technology/TEAU 1500.js",
-    "../../data/programs/Automotive Technology/TEAU 1340.js",
-    "../../data/programs/Automotive Technology/TEAU 1400.js",
-    "../../data/programs/Automotive Technology/TEAU 1240.js",
-    "../../data/programs/Automotive Technology/TEAU 1140.js",
-    "../../data/programs/Automotive Technology/TEAU 2910.js",
-    "../../data/programs/Automotive Technology/TEAU 2911.js",
-    "../../data/programs/Automotive Technology/TEAU 2912.js",
-    "../../data/programs/Automotive Technology/TEAU 2913.js",
-    "../../data/programs/Automotive Technology/TEAU 2914.js",
-    "../../data/programs/Automotive Technology/TEAU 2915.js",
-  ],
-};
+import {
+  PROGRAM_FILE_REGISTRY,
+  PROGRAM_COURSE_REGISTRY,
+  listPrograms,
+  getCourseFiles,
+  getInstructorsModulePath,
+  encodePath
+} from "../../data/programs.registry.js";
 
 function encodePath(p){ return p.replace(/ /g, "%20"); }
 
@@ -227,7 +186,7 @@ async function loadInstructorsForProgram(programName){
     renderInstructors();
     return;
   }
-  const rel = `../../data/programs/${programName}/instructors.js`;
+  const rel = getInstructorsModulePath(programName);
   try {
     const mod = await import(encodePath(rel));
     const arr = Array.isArray(mod.default) ? mod.default : (mod.default ? [mod.default] : []);
@@ -362,7 +321,7 @@ async function onProgramChange(){
   const token = state._progToken;
 
   // UI pre-state
-  const files = PROGRAM_COURSE_REGISTRY[prog] || [];
+  const files = getCourseFiles(prog);
   courseSelect.disabled = true;
   courseSelect.innerHTML = `<option>Loading courses…</option>`;
 
@@ -370,7 +329,7 @@ async function onProgramChange(){
     const loaded = [];
     for (const relPath of files){
       try {
-        const mod = await import(encodePath(relPath));
+        const mod = await import(encodePath(rel));
         const arr = Array.isArray(mod.default) ? mod.default : [mod.default];
         const course = arr[0] || {};
         const label = [course.courseNumber, course.courseName]
@@ -906,7 +865,7 @@ saveBtn?.addEventListener('click', saveAfterGenerate);
 
 // Boot wiring
 function initPrograms(){
-  const programs = Object.keys(PROGRAM_COURSE_REGISTRY).sort();
+  const programs = listPrograms();
   programSelect.innerHTML = programs.map(p => `<option value="${p}">${p}</option>`).join('');
   programSelect.addEventListener('change', onProgramChange);
   onProgramChange();

@@ -3,55 +3,13 @@ import { outlineTitlesOnly } from "../../data/utils/helpers.js";
 import institutionalPolicy from "../../data/institutionalPolicy.js";
 
 /** ------------------------ Registries ------------------------ */
-const PROGRAM_FILE_REGISTRY = {
-  "Advanced Emergency Medical Technician":
-    "../../data/programs/Advanced Emergency Medical Technician/program.js",
-  "Automation Technology":
-    "../../data/programs/Automation Technology/program.js",
-  "Automotive Technology":
-    "../../data/programs/Automotive Technology/program.js",
-};
-
-const PROGRAM_COURSE_REGISTRY = {
-  "Advanced Emergency Medical Technician": [
-    "../../data/programs/Advanced Emergency Medical Technician/TEEM 1202.js",
-    "../../data/programs/Advanced Emergency Medical Technician/TEEM 1904.js",
-  ],
-  "Automation Technology": [
-    "../../data/programs/Automation Technology/TEAM 1010.js",
-    "../../data/programs/Automation Technology/TEAM 1040.js",
-    "../../data/programs/Automation Technology/TEAM 1050.js",
-    "../../data/programs/Automation Technology/TEAM 1060.js",
-    "../../data/programs/Automation Technology/TEAM 1070.js",
-    "../../data/programs/Automation Technology/TEAM 1030.js",
-    "../../data/programs/Automation Technology/TEAM 1020.js",
-    "../../data/programs/Automation Technology/TEAM 1080.js",
-    "../../data/programs/Automation Technology/TEAM 2005.js",
-    "../../data/programs/Automation Technology/TEAM 2210.js",
-    "../../data/programs/Automation Technology/TEAM 1510.js",
-    "../../data/programs/Automation Technology/TEAM 1640.js",
-  ],
-  "Automotive Technology": [
-    "../../data/programs/Automotive Technology/TEAU 1050.js",
-    "../../data/programs/Automotive Technology/TEAU 1600.js",
-    "../../data/programs/Automotive Technology/TEAU 1800.js",
-    "../../data/programs/Automotive Technology/TEAU 1055.js",
-    "../../data/programs/Automotive Technology/TEAU 2640.js",
-    "../../data/programs/Automotive Technology/TEAU 2840.js",
-    "../../data/programs/Automotive Technology/TEAU 1740.js",
-    "../../data/programs/Automotive Technology/TEAU 1500.js",
-    "../../data/programs/Automotive Technology/TEAU 1340.js",
-    "../../data/programs/Automotive Technology/TEAU 1400.js",
-    "../../data/programs/Automotive Technology/TEAU 1240.js",
-    "../../data/programs/Automotive Technology/TEAU 1140.js",
-    "../../data/programs/Automotive Technology/TEAU 2910.js",
-    "../../data/programs/Automotive Technology/TEAU 2911.js",
-    "../../data/programs/Automotive Technology/TEAU 2912.js",
-    "../../data/programs/Automotive Technology/TEAU 2913.js",
-    "../../data/programs/Automotive Technology/TEAU 2914.js",
-    "../../data/programs/Automotive Technology/TEAU 2915.js",
-  ],
-};
+import {
+  PROGRAM_FILE_REGISTRY,
+  PROGRAM_COURSE_REGISTRY,
+  getProgramFile,
+  getCourseFiles,
+  encodePath
+} from "../../data/programs.registry.js";
 
 // Program-level fallbacks
 const PROGRAM_INSTRUCTORS_REGISTRY = {
