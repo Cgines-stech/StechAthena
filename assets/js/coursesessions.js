@@ -107,6 +107,84 @@ function renderSlotLines(slots){
   const items = slots.map(s => `<li>${s.start} - ${s.end}</li>`).join('');
   return `<ul class="slotslist">${items}</ul>`;
 }
+function hasAnyOverrides(){
+  return Object.keys(state.overrides || {}).length > 0;
+}
+
+/** ---------------- Instructors: load + edit ---------------- */
+async function loadInstructorsForProgram(programName){
+  // Expect: "../../data/programs/{Program}/instructors.js"
+  // We compute the relative path from this file’s location.
+  if (!programName) {
+    state.instructors = [];
+    renderInstructors();
+    return;
+  }
+  const rel = `../../data/programs/${programName}/instructors.js`;
+  try {
+    const mod = await import(encodePath(rel));
+    const arr = Array.isArray(mod.default) ? mod.default : (mod.default ? [mod.default] : []);
+    // Normalize to {name,email,title}
+    state.instructors = arr.map(x => ({
+      name: x?.name || "",
+      email: x?.email || "",
+      title: x?.title || "",
+    }));
+  } catch (e) {
+    console.warn("No instructors.js or failed to load for program:", programName, e);
+    state.instructors = []; // allow manual entry
+  }
+  renderInstructors();
+}
+
+function renderInstructors(){
+  const wrap = document.getElementById("instructorList");
+  if (!wrap) return;
+  if (!Array.isArray(state.instructors) || state.instructors.length === 0){
+    wrap.innerHTML = `<div class="hint">No instructors loaded. Use “+ Add Instructor”.</div>`;
+    wireInstructorAddBtn();
+    return;
+  }
+
+  wrap.innerHTML = state.instructors.map((ins, idx) => `
+    <div class="row" data-ins-idx="${idx}" style="align-items:end; gap:10px; margin-bottom:8px">
+      <div><label class="tinylabel">Name</label><input type="text" value="${ins.name || ""}" placeholder="Jane Doe"></div>
+      <div><label class="tinylabel">Email</label><input type="text" value="${ins.email || ""}" placeholder="jdoe@stech.edu"></div>
+      <div><label class="tinylabel">Title</label><input type="text" value="${ins.title || ""}" placeholder="Instructor"></div>
+      <div><button class="smallbtn danger" type="button" data-del-ins="${idx}">Remove</button></div>
+    </div>
+  `).join("");
+
+  // wire inputs
+  wrap.querySelectorAll("[data-ins-idx]").forEach(row => {
+    const idx = Number(row.getAttribute("data-ins-idx"));
+    const inputs = row.querySelectorAll("input");
+    inputs[0]?.addEventListener("input", e => state.instructors[idx].name  = e.target.value);
+    inputs[1]?.addEventListener("input", e => state.instructors[idx].email = e.target.value);
+    inputs[2]?.addEventListener("input", e => state.instructors[idx].title = e.target.value);
+  });
+
+  // wire remove buttons
+  wrap.querySelectorAll("[data-del-ins]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = Number(btn.getAttribute("data-del-ins"));
+      state.instructors.splice(idx, 1);
+      renderInstructors();
+    });
+  });
+
+  wireInstructorAddBtn();
+}
+
+function wireInstructorAddBtn(){
+  const addBtn = document.getElementById("addInstructorBtn");
+  if (!addBtn) return;
+  addBtn.onclick = () => {
+    state.instructors.push({ name:"", email:"", title:"Instructor" });
+    renderInstructors();
+  };
+}
+
 function isoOf(d){
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 }
@@ -119,9 +197,11 @@ const state = {
   rows:[],
   total:0,
   coursesCache: new Map(),
-  // Overrides keyed by ISO date "YYYY-MM-DD": { type: 'add'|'edit'|'remove', slots?: [{start,end}] }
   overrides: Object.create(null),
+  // NEW: instructors loaded from program file, but editable before save
+  instructors: [], // [{ name, email, title }]
 };
+
 
 // ---- UI refs ----
 const programSelect = document.getElementById('programSelect');
@@ -207,6 +287,17 @@ function collectPayloadForFirestore() {
   const startISO = document.getElementById('startDate').value || '';
   const endISO   = document.getElementById('endDate').value || '';
 
+  // NEW: high school + notes
+  const isHighSchool = !!document.getElementById('isHighSchool')?.checked;
+  const notes = (document.getElementById('notes')?.value || '').trim() || null;
+
+  // NEW: instructors (keep only rows with at least a name or email)
+  const instructors = (state.instructors || []).map(x => ({
+    name: (x.name || '').trim(),
+    email: (x.email || '').trim(),
+    title: (x.title || '').trim(),
+  })).filter(x => x.name || x.email);
+
   return {
     program,
     course: courseLabel || coursePath,
@@ -214,17 +305,33 @@ function collectPayloadForFirestore() {
     startDate: startISO,
     endDate: endISO,
     displayName,
+
+    // NEW: flags + notes + instructors
+    highSchool: isHighSchool,
+    notes,
+    instructors,
+
+    // rows now carry overridden flag per day
     rows: state.rows.map(r => ({
       day: r.day,
       date: r.date.toISOString().split('T')[0],
       hours: r.hours,
       running: r.running,
+      overridden: !!r.overridden, // <-- true if override add/edit produced this row
       slots: (r.slots || []).map(s => ({ start: s.start, end: s.end }))
     })),
+
+    // summary totals
     total: state.total,
-    version: 2,
+
+    // NEW: easy overall override indicator + raw overrides map (optional but handy)
+    hasOverrides: hasAnyOverrides(),
+    overrides: state.overrides, // keeps { [iso]: { type, slots? } }
+
+    version: 3, // bump your payload version
   };
 }
+
 
 async function saveAfterGenerate() {
   try {
@@ -251,28 +358,52 @@ function initPrograms(){
   onProgramChange();
 }
 
+// Make sure encodePath and loadInstructorsForProgram are defined above this.
+// Also ensure `state` exists; we’ll stash a token on it.
 async function onProgramChange(){
   const prog = programSelect.value;
+
+  // token to avoid race conditions if user changes program quickly
+  state._progToken = (state._progToken || 0) + 1;
+  const token = state._progToken;
+
+  // UI pre-state
   const files = PROGRAM_COURSE_REGISTRY[prog] || [];
   courseSelect.disabled = true;
   courseSelect.innerHTML = `<option>Loading courses…</option>`;
 
-  const loaded = [];
-  for (const relPath of files){
-    try {
-      const mod = await import(encodePath(relPath));
-      const arr = Array.isArray(mod.default) ? mod.default : [mod.default];
-      const course = arr[0] || {};
-      const label = [course.courseNumber, course.courseName].filter(Boolean).join(' — ') || relPath.split('/').pop();
-      state.coursesCache.set(relPath, course);
-      loaded.push({ path: relPath, label });
-    } catch (e) {
-      const filename = relPath.split('/').pop();
-      loaded.push({ path: relPath, label: `⚠ ${filename} (load error)` });
-      console.error('Import failed:', relPath, e);
+  // Load instructors and courses concurrently
+  const loadCoursesPromise = (async () => {
+    const loaded = [];
+    for (const relPath of files){
+      try {
+        const mod = await import(encodePath(relPath));
+        const arr = Array.isArray(mod.default) ? mod.default : [mod.default];
+        const course = arr[0] || {};
+        const label = [course.courseNumber, course.courseName]
+          .filter(Boolean)
+          .join(' — ') || relPath.split('/').pop();
+        state.coursesCache.set(relPath, course);
+        loaded.push({ path: relPath, label });
+      } catch (e) {
+        const filename = relPath.split('/').pop();
+        loaded.push({ path: relPath, label: `⚠ ${filename} (load error)` });
+        console.error('Import failed:', relPath, e);
+      }
     }
-  }
+    return loaded;
+  })();
 
+  // Run both at once; we don't need the instructors result here—just ensure it's loaded
+  const [loaded /* courses */, _] = await Promise.all([
+    loadCoursesPromise,
+    loadInstructorsForProgram(prog)
+  ]);
+
+  // If a newer onProgramChange ran while we were loading, bail out
+  if (token !== state._progToken) return;
+
+  // Populate course select
   courseSelect.innerHTML = loaded.map(c => `<option value="${c.path}">${c.label}</option>`).join('');
   courseSelect.disabled = loaded.length === 0;
   courseSelect.onchange = onCourseChange;
@@ -284,6 +415,7 @@ async function onProgramChange(){
     setTargetHours(null);
   }
 }
+
 
 function setTargetHours(val){
   if(val == null || isNaN(Number(val))){
@@ -605,12 +737,14 @@ function generate(){
       dayNum += 1;
 
       state.rows.push({
-        day: dayNum,
-        date: new Date(d),
-        hours: hrs,
-        running,
-        slots: slotsToUse.map(s => ({ start: s.start, end: s.end }))
-      });
+  day: dayNum,
+  date: new Date(d),
+  hours: hrs,
+  running,
+  slots: slotsToUse.map(s => ({ start: s.start, end: s.end })),
+  overridden: true               // <-- NEW
+});
+
 
       const cd = document.createElement('div');
       cd.className = `calday override override-${ov.type}`;
@@ -660,12 +794,14 @@ function generate(){
     dayNum += 1;
 
     state.rows.push({
-      day: dayNum,
-      date: new Date(d),
-      hours: hrs,
-      running,
-      slots: slots.map(s => ({ start: s.start, end: s.end }))
-    });
+  day: dayNum,
+  date: new Date(d),
+  hours: hrs,
+  running,
+  slots: slots.map(s => ({ start: s.start, end: s.end })),
+  overridden: false              // <-- NEW
+});
+
 
     const cd = document.createElement('div');
     cd.className = 'calday';

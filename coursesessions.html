@@ -29,6 +29,24 @@
         </div>
       </div>
 
+      <!-- High School flag -->
+<div class="row" style="margin-top:8px">
+  <label class="tinylabel" style="display:flex;align-items:center;gap:8px">
+    <input id="isHighSchool" type="checkbox" />
+    High School
+  </label>
+</div>
+
+<!-- Instructors (auto-loaded; still editable) -->
+<div class="card pad" style="margin-top:12px">
+  <h3 style="margin:0 0 10px 0">Instructors</h3>
+  <div id="instructorList" class="instructors"></div>
+  <div class="actions" style="margin-top:10px">
+    <button class="smallbtn" id="addInstructorBtn" type="button">+ Add Instructor</button>
+  </div>
+  <div class="hint">Loaded from <code>data/programs/{Program}/instructors.js</code> when you pick a Program. You can edit before saving.</div>
+</div>
+
       <div style="height:14px"></div>
 
       <!-- Course hours / dates -->
@@ -94,6 +112,15 @@
           <input id="displayName" type="text" placeholder="e.g., John Smith" />
         </div>
       </div>
+
+      <!-- Notes -->
+<div class="row" style="margin-top:12px">
+  <div style="grid-column:1/-1">
+    <label>Notes (optional)</label>
+    <textarea id="notes" placeholder="Anything the reviewer or scheduler should know…"></textarea>
+  </div>
+</div>
+
 
       <div style="height:12px"></div>
 
