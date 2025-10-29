@@ -29,10 +29,10 @@ const TEAM1510 = [
     ],
 
     courseOutline: [
-      "Introduction to Process Control Systems and Components",
-      "Controllers and Measurements",
-      "Systems Analysis and Measurements",
-      "Pumps and Compressor Tear Down and Rebuild",
+      { title: "Introduction to Process Control Systems and Components", hours: 15 },
+      { title: "Controllers and Measurements", hours: 15 },
+      { title: "Systems Analysis and Measurements", hours: 15 },
+      { title: "Pumps and Compressor Tear Down and Rebuild", hours: 15 },
     ],
 
     courseBooks: [

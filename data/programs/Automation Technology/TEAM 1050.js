@@ -31,9 +31,9 @@ const TEAM1050 = [
     ],
 
     courseOutline: [
-      "Electrical Safety, Tools, Meters, and Components",
-      "AC/DC Electrical Systems and Intro to Ohm's Law",
-      "Circuits Design and Analysis"
+      { title: "Electrical Safety, Tools, Meters, and Components", hours: 15 },
+      { title: "AC/DC Electrical Systems and Intro to Ohm's Law", hours: 30 },
+      { title: "Circuits Design and Analysis", hours: 15 },
     ],
 
     courseBooks: [

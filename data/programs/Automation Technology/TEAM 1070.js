@@ -33,11 +33,11 @@ const TEAM1070 = [
     ],
 
     courseOutline: [
-      "Introduction to Programmable Controller Operations and Setup",
-      "PLC Programming and Applications",
-      "PLC Motor Controls",
-      "PLC Timers and Event Sequencing",
-      "Analog Inputs and Outputs",
+      { title: "Introduction to Programmable Controller Operations and Setup", hours: 30 },
+      { title: "PLC Programming and Applications", hours: 30 },
+      { title: "PLC Motor Controls", hours: 15 },
+      { title: "PLC Timers and Event Sequencing", hours: 30 },
+      { title: "Analog Inputs and Outputs", hours: 15 },
     ],
 
     courseBooks: [

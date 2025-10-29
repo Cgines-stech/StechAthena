@@ -31,9 +31,9 @@ const TEAM1030 = [
     ],
 
     courseOutline: [
-      "Fluid Power Systems: Safety, Tools, and Devices",
-      "Hydraulic Power System Principles and Applications",
-      "Hydraulic Systems Circuit Design and Diagnostics",
+      { title: "Fluid Power Systems: Safety, Tools, and Devices", hours: 15 },
+      { title: "Hydraulic Power System Principles and Applications", hours: 30 },
+      { title: "Hydraulic Systems Circuit Design and Diagnostics", hours: 15 },
     ],
 
     courseBooks: [

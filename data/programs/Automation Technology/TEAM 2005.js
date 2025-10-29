@@ -31,10 +31,10 @@ const TEAM2005 = [
     ],
 
     courseOutline: [
-      "Introduction to Advanced Programmable Logic Controller Programing, Operations & Setup",
-      "Automation Operations and Applications",
-      "Pick and Placing Operations",
-      "Indexing and Sorting Operations",
+      { title: "Introduction to Advanced Programmable Logic Controller Programing, Operations & Setup", hours: 30 },
+      { title: "Automation Operations and Applications", hours: 30 },
+      { title: "Pick and Placing Operations", hours: 15 },
+      { title: "Indexing and Sorting Operations", hours: 15 },
     ],
 
     courseBooks: [

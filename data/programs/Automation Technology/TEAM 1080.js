@@ -30,9 +30,9 @@ const TEAM1080 = [
     ],
 
     courseOutline: [
-      "Introduction to Applied Systems Diagnostics",
-      "Efficiency and Production",
-      "General Maintenance Processes",
+      { title: "Introduction to Applied Systems Diagnostics", hours: 15 },
+      { title: "Efficiency and Production", hours: 15 },
+      { title: "General Maintenance Processes", hours: 30 },
     ],
 
     courseBooks: [

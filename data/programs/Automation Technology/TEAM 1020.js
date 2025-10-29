@@ -31,9 +31,9 @@ const TEAM1020 = [
     ],
 
     courseOutline: [
-      "Fluid Power Systems: Safety, Tools, and Devices",
-      "Pneumatic Power System Principles and Applications",
-      "Pneumatic Systems Circuit Design and Diagnostics",
+      { title: "Fluid Power Systems: Safety, Tools, and Devices", hours: 15 },
+      { title: "Pneumatic Power System Principles and Applications", hours: 30 },
+      { title: "Pneumatic Systems Circuit Design and Diagnostics", hours: 15 },
     ],
 
     courseBooks: [

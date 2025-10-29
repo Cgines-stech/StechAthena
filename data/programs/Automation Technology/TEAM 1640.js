@@ -29,8 +29,8 @@ const TEAM1640 = [
     ],
 
     courseOutline: [
-      "Intro to Electrical Control Wiring, Print Reading, Tools, and Components",
-      "Electrical Panel Wiring and Systems Diagnostics",
+      { title: "Intro to Electrical Control Wiring, Print Reading, Tools, and Components", hours: 15 },
+      { title: "Electrical Panel Wiring and Systems Diagnostics", hours: 15 },
     ],
 
     courseBooks: [

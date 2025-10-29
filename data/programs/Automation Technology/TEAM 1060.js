@@ -31,11 +31,11 @@ const TEAM1060 = [
     ],
 
     courseOutline: [
-      "Introduction to Electric Motor Controls and Schematic Design",
-      "Electric Motor Control Component, Devices, and Applications",
-      "Manual and Automatic Motor Controls",
-      "Systems Diagnostics and Troubleshooting",
-      "Variable Frequency Drives",
+      { title: "Introduction to Electric Motor Controls and Schematic Design", hours: 15 },
+      { title: "Electric Motor Control Component, Devices, and Applications", hours: 15 },
+      { title: "Manual and Automatic Motor Controls", hours: 15 },
+      { title: "Systems Diagnostics and Troubleshooting", hours: 30 },
+      { title: "Variable Frequency Drives", hours: 15 },
     ],
 
     courseBooks: [

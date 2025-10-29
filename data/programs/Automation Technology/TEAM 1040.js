@@ -31,10 +31,10 @@ const TEAM1040 = [
     ],
 
     courseOutline: [
-      "Mechanical Drive System Safety, Tools, and Applications, and Measurements",
-      "Introduction to Power Transmission Systems",
-      "Introduction to V-Belt and Chain Drives",
-      "Introduction to Mechanical Drives (Spur Gear Drive)"
+      { title: "Mechanical Drive System Safety, Tools, and Applications, and Measurements", hours: 30 },
+      { title: "Introduction to Power Transmission Systems", hours: 15 },
+      { title: "Introduction to V-Belt and Chain Drives", hours: 30 },
+      { title: "Introduction to Mechanical Drives (Spur Gear Drive)", hours: 15 },
     ],
 
     courseBooks: [

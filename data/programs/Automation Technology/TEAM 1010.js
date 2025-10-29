@@ -31,9 +31,9 @@ const TEAM1010 = [
     ],
 
     courseOutline: [
-      "Industrial Safety Equipment, Practices, and Applications",
-      "Precision Measurement Equipment, Practices, and Applications",
-      "Essential Skills"
+      { title: "Industrial Safety Equipment, Practices, and Applications", hours: 30 },
+      { title: "Precision Measurement Equipment, Practices, and Applications", hours: 30 },
+      { title: "Essential Skills", hours: 30 },
     ],
 
     courseBooks: [

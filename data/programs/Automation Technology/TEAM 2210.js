@@ -31,9 +31,9 @@ const TEAM2210 = [
     ],
 
     courseOutline: [
-      "Introduction to Mechanical Fabrication, Print Reading, Tooling, and Applications",
-      "Turret Head Mills and Lathe Operations",
-      "Final Fabrication Project",
+      { title: "Introduction to Mechanical Fabrication, Print Reading, Tooling, and Applications", hours: 30 },
+      { title: "Turret Head Mills and Lathe Operations", hours: 30 },
+      { title: "Final Fabrication Project", hours: 30 },
     ],
 
     courseBooks: [
