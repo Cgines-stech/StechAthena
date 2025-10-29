@@ -1,0 +1,32 @@
+<!-- trainingplan.html -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Training Plan</title>
+  <link rel="stylesheet" href="assets/css/trainingplan.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="toolbar no-print">
+      <div class="controls">
+        <label for="programSelect">Program</label>
+        <select id="programSelect"></select>
+      </div>
+      <div class="spacer"></div>
+      <div class="actions">
+        <button id="printBtn" class="btn">Print</button>
+      </div>
+    </header>
+
+    <main id="content">
+      <h1 id="programTitle" class="program-title">Select a program…</h1>
+      <div id="courseList" class="course-list" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <script type="module" src="assets/js/trainingplan.js"></script>
+</body>
+</html>

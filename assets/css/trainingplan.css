@@ -1,0 +1,67 @@
+/* assets/css/trainingplan.css */
+:root {
+  --fg: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --bg: #f8fafc;
+  --border: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  color: var(--fg);
+  background: var(--bg);
+  font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
+}
+
+.wrap { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--bg);
+}
+.toolbar .controls { display: flex; gap: 8px; align-items: center; }
+.toolbar label { color: var(--muted); font-weight: 600; }
+.toolbar select { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+.toolbar .spacer { flex: 1; }
+.toolbar .btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; }
+.toolbar .btn:hover { background: #f3f4f6; }
+
+.program-title { font-size: 28px; margin: 20px 0; }
+
+.course-list { display: grid; gap: 14px; }
+
+.course-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  page-break-inside: avoid;
+}
+.course-card.error { border-color: #ef4444; }
+
+.course-head { margin: 0 0 8px; font-size: 18px; }
+
+.outline { margin: 0; padding-left: 20px; }
+.outline li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 3px 0; }
+.outline .title { font-weight: 500; }
+.outline .hours { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.hint { color: var(--muted); }
+.hint.small { font-size: 13px; }
+
+/* Print styles */
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .wrap { max-width: none; margin: 0; padding: 0 0; }
+  .program-title { margin: 0 0 8px; }
+  .course-card { border: none; border-bottom: 1px solid #ddd; border-radius: 0; }
+}
