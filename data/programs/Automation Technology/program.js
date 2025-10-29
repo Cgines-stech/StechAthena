@@ -20,6 +20,7 @@ const automationTechnologyProgram = [
 
     programCIP: 47.0303,
     programCreditHours: 30,
+    programClockHours: 900,
     certificate: 'Certificate of Completion - C1Y'
   }
 ]; 

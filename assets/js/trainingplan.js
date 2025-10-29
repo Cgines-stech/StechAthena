@@ -2,17 +2,17 @@
 // Training Plan page logic (with Back button + Totals)
 // - Program dropdown from central registry
 // - Renders: Program name, each Course "number — name", and Outline items
-// - Shows totals: Program Hours (sum of courseClockHours) and Outline Hours (sum of outline hours)
+// - Totals:
+//    • Program Hours: from data/programs/{program}/program.js -> programClockHours
+//    • Outline Hours: sum of outline.hours across NON‑elective courses (isElective === false)
 // - Print-friendly (controls hidden in print)
 
 import {
   listPrograms,
   getCourseFiles,
   encodePath,
+  PROGRAM_FILE_REGISTRY,
 } from "../../data/programs.registry.js";
-
-const BUST = (window.__ASSET_VERSION__ || Date.now()).toString();
-const withBust = (url) => url + (url.includes('?') ? '&' : '?') + 'v=' + BUST;
 
 const els = {
   programSelect: document.getElementById("programSelect"),
@@ -22,6 +22,10 @@ const els = {
   programHoursTotal: document.getElementById("programHoursTotal"),
   outlineHoursTotal: document.getElementById("outlineHoursTotal"),
 };
+
+// -------- cache-busting helpers (ties into window.__ASSET_VERSION__) --------
+const BUST = (window.__ASSET_VERSION__ || Date.now()).toString();
+const withBust = (url) => url + (url.includes("?") ? "&" : "?") + "v=" + BUST;
 
 function htmlEscape(str = ""){
   return String(str)
@@ -49,28 +53,42 @@ async function loadProgramCourses(programName){
   return loaded;
 }
 
-function computeTotals(courses){
-  let programHours = 0;
+async function loadProgramMeta(programName){
+  try {
+    const rel = PROGRAM_FILE_REGISTRY?.[programName];
+    if (!rel) return null;
+    const mod = await import(withBust(encodePath(rel)));
+    // Expecting default export to have programClockHours (and other meta)
+    const meta = Array.isArray(mod.default) ? mod.default[0] : mod.default;
+    return meta || null;
+  } catch (e) {
+    console.warn("Program meta failed to load for:", programName, e);
+    return null;
+  }
+}
+
+function computeOutlineHoursNonElective(courses){
   let outlineHours = 0;
   for (const c of courses){
     if (!c || c.__error) continue;
-    const ch = Number(c.courseClockHours || 0);
-    programHours += isNaN(ch) ? 0 : ch;
+    if (c.isElective === true) continue; // include only NON‑electives
     const outline = Array.isArray(c.courseOutline) ? c.courseOutline : [];
     outlineHours += outline.reduce((acc, i) => acc + (Number(i?.hours || 0) || 0), 0);
   }
-  return { programHours, outlineHours };
+  return outlineHours;
 }
 
-function render(programName, courses){
+function render(programName, courses, programMeta){
   els.programTitle.textContent = programName || "Select a program…";
 
-  // Totals
-  const { programHours, outlineHours } = computeTotals(courses || []);
+  // Totals: program hours from programMeta.programClockHours; outline hours from non‑electives only
+  const programHours = Number(programMeta?.programClockHours || 0) || 0;
+  const outlineHours = computeOutlineHoursNonElective(courses || []);
+
   if (els.programHoursTotal) els.programHoursTotal.textContent = `${programHours} hrs`;
   if (els.outlineHoursTotal) els.outlineHoursTotal.textContent = `${outlineHours} hrs`;
 
-  // Courses
+  // Courses list
   if (!programName){
     els.courseList.innerHTML = "";
     return;
@@ -101,13 +119,12 @@ function render(programName, courses){
 
     const hoursPill = `<span class="pill">${courseClockHours} hrs</span>`;
 
-return `
-  <article class="course-card">
-    <h3 class="course-head">${htmlEscape(number)} — ${htmlEscape(name)} ${hoursPill}</h3>
-    ${outlineList}
-  </article>
-`;
-
+    return `
+      <article class="course-card">
+        <h3 class="course-head">${htmlEscape(number)} — ${htmlEscape(name)} ${hoursPill}</h3>
+        ${outlineList}
+      </article>
+    `;
   }).join("");
 
   els.courseList.innerHTML = cards;
@@ -126,8 +143,11 @@ async function onProgramChange(){
   const programName = els.programSelect.value || "";
   els.programTitle.textContent = programName || "Select a program…";
   els.courseList.innerHTML = `<div class=\"hint\">Loading…</div>`;
-  const courses = await loadProgramCourses(programName);
-  render(programName, courses);
+  const [courses, programMeta] = await Promise.all([
+    loadProgramCourses(programName),
+    loadProgramMeta(programName)
+  ]);
+  render(programName, courses, programMeta);
 }
 
 function wire(){
