@@ -1,7 +1,8 @@
 /* assets/js/coursesessions.js */
 // ES Module with multiple time slots per day + Program/Course dropdowns,
 // dynamic import of course files, per-date Overrides (add/edit/remove),
-// and a Visual Month Calendar that mirrors the overview.
+// Visual Month Calendar, instructor loader/editor, High School flag,
+// Notes, and Externship/Clinical preset with lockable UI.
 
 import { campusClosedDates } from "./baddates.js";
 import { saveCourseSession } from "./coursesessions.store.js";
@@ -107,14 +108,119 @@ function renderSlotLines(slots){
   const items = slots.map(s => `<li>${s.start} - ${s.end}</li>`).join('');
   return `<ul class="slotslist">${items}</ul>`;
 }
-function hasAnyOverrides(){
-  return Object.keys(state.overrides || {}).length > 0;
+function isoOf(d){
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+function firstOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
+function lastOfMonth(d){ return new Date(d.getFullYear(), d.getMonth()+1, 0); }
+
+// ---- State ----
+const state = {
+  times: Object.fromEntries(DAYS.map(d => [d, [] /* array of {start,end} */])),
+  rows:[],
+  total:0,
+  coursesCache: new Map(),
+  // Overrides keyed by ISO date "YYYY-MM-DD": { type: 'add'|'edit'|'remove', slots?: [{start,end}] }
+  overrides: Object.create(null),
+  // Instructors loaded from program file, editable before save
+  instructors: [], // [{ name, email, title }]
+  // Flags
+  externshipClinical: false,
+  _savedTimesPattern: null,
+  _progToken: 0,
+};
+
+// ---- UI refs ----
+const programSelect = document.getElementById('programSelect');
+const courseSelect  = document.getElementById('courseSelect');
+const targetHoursEl = document.getElementById('targetHours');
+const targetTag     = document.getElementById('targetTag');
+const daysContainer = document.getElementById('daysContainer');
+const displayNameEl = document.getElementById('displayName');
+const isHighSchoolEl = document.getElementById('isHighSchool');
+const notesEl = document.getElementById('notes');
+const externshipEl = document.getElementById('externshipClinical');
+
+// ---- Small helpers ----
+function setDisabled(el, yes){
+  if(!el) return;
+  if(yes) el.setAttribute('disabled','disabled');
+  else el.removeAttribute('disabled');
+}
+
+// ---- Render Days with slot controls ----
+function renderDays(){
+  daysContainer.innerHTML = DAYS.map(d => `
+    <div class="daybox" data-daybox="${d}">
+      <div class="header">
+        <div class="tag">${d}</div>
+      </div>
+      <div class="slots" data-slots="${d}"></div>
+      <div class="addrow">
+        <button class="smallbtn addslot" data-add="${d}" type="button" ${state.externshipClinical ? 'disabled' : ''}>+Add Addition Time</button>
+      </div>
+    </div>
+  `).join('');
+
+  // seed UI
+  DAYS.forEach(d => {
+    const arr = state.times[d] || [];
+    if (arr.length === 0 && !state.externshipClinical){
+      // show an empty slot line for convenience when editable
+      addSlot(d, "", "");
+    } else if (arr.length){
+      const copy = arr.slice();
+      state.times[d] = [];
+      copy.forEach(s => addSlot(d, s.start || "", s.end || ""));
+    }
+  });
+
+  // add-slot buttons
+  daysContainer.querySelectorAll('[data-add]').forEach(btn=>{
+    btn.addEventListener('click', () => {
+      if (state.externshipClinical) return; // locked
+      const day = btn.getAttribute('data-add');
+      addSlot(day, "", "");
+    });
+  });
+}
+
+function addSlot(day, startVal, endVal){
+  const slotsEl = daysContainer.querySelector(`[data-slots="${day}"]`);
+  if(!slotsEl) return;
+
+  const slot = { start: startVal || "", end: endVal || "" };
+  state.times[day] = state.times[day] || [];
+  state.times[day].push(slot);
+
+  const row = document.createElement('div');
+  row.className = 'slotrow';
+  row.setAttribute('data-slot-day', day);
+  row.setAttribute('data-slot-idx', String(state.times[day].length - 1));
+  row.innerHTML = `
+    <div>
+      <label class="tinylabel">Start</label>
+      <input type="text" placeholder="9:00 AM" value="${slot.start}">
+    </div>
+    <div>
+      <label class="tinylabel">End</label>
+      <input type="text" placeholder="1:00 PM" value="${slot.end}">
+    </div>
+  `;
+
+  const inputs = row.querySelectorAll('input');
+  if (state.externshipClinical) {
+    inputs.forEach(i => i.setAttribute('disabled','disabled'));
+  } else {
+    inputs[0].addEventListener('input', e => { slot.start = e.target.value; });
+    inputs[1].addEventListener('input', e => { slot.end   = e.target.value;  });
+  }
+
+  slotsEl.appendChild(row);
 }
 
 /** ---------------- Instructors: load + edit ---------------- */
 async function loadInstructorsForProgram(programName){
-  // Expect: "../../data/programs/{Program}/instructors.js"
-  // We compute the relative path from this file’s location.
   if (!programName) {
     state.instructors = [];
     renderInstructors();
@@ -124,7 +230,6 @@ async function loadInstructorsForProgram(programName){
   try {
     const mod = await import(encodePath(rel));
     const arr = Array.isArray(mod.default) ? mod.default : (mod.default ? [mod.default] : []);
-    // Normalize to {name,email,title}
     state.instructors = arr.map(x => ({
       name: x?.name || "",
       email: x?.email || "",
@@ -185,238 +290,7 @@ function wireInstructorAddBtn(){
   };
 }
 
-function isoOf(d){
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-}
-function firstOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
-function lastOfMonth(d){ return new Date(d.getFullYear(), d.getMonth()+1, 0); }
-
-// ---- State ----
-const state = {
-  times: Object.fromEntries(DAYS.map(d => [d, [] /* array of {start,end} */])),
-  rows:[],
-  total:0,
-  coursesCache: new Map(),
-  overrides: Object.create(null),
-  // NEW: instructors loaded from program file, but editable before save
-  instructors: [], // [{ name, email, title }]
-};
-
-
-// ---- UI refs ----
-const programSelect = document.getElementById('programSelect');
-const courseSelect  = document.getElementById('courseSelect');
-const targetHoursEl = document.getElementById('targetHours');
-const targetTag     = document.getElementById('targetTag');
-const daysContainer = document.getElementById('daysContainer');
-
-// ---- Render Days with slot controls ----
-function renderDays(){
-  daysContainer.innerHTML = DAYS.map(d => `
-    <div class="daybox" data-daybox="${d}">
-      <div class="header">
-        <div class="tag">${d}</div>
-      </div>
-      <div class="slots" data-slots="${d}"></div>
-      <div class="addrow">
-        <button class="smallbtn addslot" data-add="${d}" type="button">+Add Addition Time</button>
-      </div>
-    </div>
-  `).join('');
-
-  // seed one empty slot for each day (Saturday forced blank)
-  DAYS.forEach(d => {
-    const shouldForceBlank = d === "Saturday";
-    if (shouldForceBlank) {
-      state.times[d] = [];
-    }
-    if (!state.times[d] || state.times[d].length === 0) {
-      addSlot(d, "", "");
-    } else {
-      const arr = state.times[d];
-      state.times[d] = [];
-      arr.forEach(s => addSlot(d, s.start || "", s.end || ""));
-    }
-  });
-
-  // add-slot buttons
-  daysContainer.querySelectorAll('[data-add]').forEach(btn=>{
-    btn.addEventListener('click', () => {
-      const day = btn.getAttribute('data-add');
-      addSlot(day, "", "");
-    });
-  });
-}
-
-function addSlot(day, startVal, endVal){
-  const slotsEl = daysContainer.querySelector(`[data-slots="${day}"]`);
-  if(!slotsEl) return;
-
-  const slot = { start: startVal || "", end: endVal || "" };
-  state.times[day].push(slot);
-
-  const row = document.createElement('div');
-  row.className = 'slotrow';
-  row.setAttribute('data-slot-day', day);
-  row.setAttribute('data-slot-idx', String(state.times[day].length - 1));
-  row.innerHTML = `
-    <div>
-      <label class="tinylabel">Start</label>
-      <input type="text" placeholder="9:00 AM" value="${slot.start}">
-    </div>
-    <div>
-      <label class="tinylabel">End</label>
-      <input type="text" placeholder="1:00 PM" value="${slot.end}">
-    </div>
-  `;
-
-  const inputs = row.querySelectorAll('input');
-  inputs[0].addEventListener('input', e => { slot.start = e.target.value; });
-  inputs[1].addEventListener('input', e => { slot.end   = e.target.value;  });
-
-  slotsEl.appendChild(row);
-}
-
-// ---- Payload for Firestore ----
-function collectPayloadForFirestore() {
-  const program = document.getElementById('programSelect').value || '';
-  const coursePath = document.getElementById('courseSelect').value || '';
-  const courseLabel = document.getElementById('courseSelect').selectedOptions?.[0]?.textContent || '';
-  const displayName = document.getElementById('displayName')?.value?.trim() || null;
-
-  const startISO = document.getElementById('startDate').value || '';
-  const endISO   = document.getElementById('endDate').value || '';
-
-  // NEW: high school + notes
-  const isHighSchool = !!document.getElementById('isHighSchool')?.checked;
-  const notes = (document.getElementById('notes')?.value || '').trim() || null;
-
-  // NEW: instructors (keep only rows with at least a name or email)
-  const instructors = (state.instructors || []).map(x => ({
-    name: (x.name || '').trim(),
-    email: (x.email || '').trim(),
-    title: (x.title || '').trim(),
-  })).filter(x => x.name || x.email);
-
-  return {
-    program,
-    course: courseLabel || coursePath,
-    targetHours: Number(document.getElementById('targetHours').value) || null,
-    startDate: startISO,
-    endDate: endISO,
-    displayName,
-
-    // NEW: flags + notes + instructors
-    highSchool: isHighSchool,
-    notes,
-    instructors,
-
-    // rows now carry overridden flag per day
-    rows: state.rows.map(r => ({
-      day: r.day,
-      date: r.date.toISOString().split('T')[0],
-      hours: r.hours,
-      running: r.running,
-      overridden: !!r.overridden, // <-- true if override add/edit produced this row
-      slots: (r.slots || []).map(s => ({ start: s.start, end: s.end }))
-    })),
-
-    // summary totals
-    total: state.total,
-
-    // NEW: easy overall override indicator + raw overrides map (optional but handy)
-    hasOverrides: hasAnyOverrides(),
-    overrides: state.overrides, // keeps { [iso]: { type, slots? } }
-
-    version: 3, // bump your payload version
-  };
-}
-
-
-async function saveAfterGenerate() {
-  try {
-    if (!state.rows.length) {
-      alert('Generate first so we have rows and totals to save.');
-      return;
-    }
-    const payload = collectPayloadForFirestore();
-    const id = await saveCourseSession(payload);
-    alert(`Saved! ID: ${id}`);
-  } catch (e) {
-    console.error(e);
-    alert(e.message || 'Failed to save. Are you signed in?');
-  }
-}
-
-document.getElementById('saveBtn').addEventListener('click', saveAfterGenerate);
-
 // ---- Program/Course dynamic import ----
-function initPrograms(){
-  const programs = Object.keys(PROGRAM_COURSE_REGISTRY).sort();
-  programSelect.innerHTML = programs.map(p => `<option value="${p}">${p}</option>`).join('');
-  programSelect.addEventListener('change', onProgramChange);
-  onProgramChange();
-}
-
-// Make sure encodePath and loadInstructorsForProgram are defined above this.
-// Also ensure `state` exists; we’ll stash a token on it.
-async function onProgramChange(){
-  const prog = programSelect.value;
-
-  // token to avoid race conditions if user changes program quickly
-  state._progToken = (state._progToken || 0) + 1;
-  const token = state._progToken;
-
-  // UI pre-state
-  const files = PROGRAM_COURSE_REGISTRY[prog] || [];
-  courseSelect.disabled = true;
-  courseSelect.innerHTML = `<option>Loading courses…</option>`;
-
-  // Load instructors and courses concurrently
-  const loadCoursesPromise = (async () => {
-    const loaded = [];
-    for (const relPath of files){
-      try {
-        const mod = await import(encodePath(relPath));
-        const arr = Array.isArray(mod.default) ? mod.default : [mod.default];
-        const course = arr[0] || {};
-        const label = [course.courseNumber, course.courseName]
-          .filter(Boolean)
-          .join(' — ') || relPath.split('/').pop();
-        state.coursesCache.set(relPath, course);
-        loaded.push({ path: relPath, label });
-      } catch (e) {
-        const filename = relPath.split('/').pop();
-        loaded.push({ path: relPath, label: `⚠ ${filename} (load error)` });
-        console.error('Import failed:', relPath, e);
-      }
-    }
-    return loaded;
-  })();
-
-  // Run both at once; we don't need the instructors result here—just ensure it's loaded
-  const [loaded /* courses */, _] = await Promise.all([
-    loadCoursesPromise,
-    loadInstructorsForProgram(prog)
-  ]);
-
-  // If a newer onProgramChange ran while we were loading, bail out
-  if (token !== state._progToken) return;
-
-  // Populate course select
-  courseSelect.innerHTML = loaded.map(c => `<option value="${c.path}">${c.label}</option>`).join('');
-  courseSelect.disabled = loaded.length === 0;
-  courseSelect.onchange = onCourseChange;
-
-  if (loaded.length > 0){
-    courseSelect.value = loaded[0].path;
-    onCourseChange();
-  } else {
-    setTargetHours(null);
-  }
-}
-
-
 function setTargetHours(val){
   if(val == null || isNaN(Number(val))){
     targetHoursEl.value = '';
@@ -429,6 +303,9 @@ function setTargetHours(val){
 }
 
 function applyCourseDefaults(course){
+  // Respect externship lock: do not overwrite preset times
+  if (state.externshipClinical) return;
+
   // 1) clock hours
   setTargetHours(course?.courseClockHours);
 
@@ -476,6 +353,58 @@ async function onCourseChange(){
   applyCourseDefaults(course);
 }
 
+async function onProgramChange(){
+  const prog = programSelect.value;
+
+  // token to avoid race conditions if user changes program quickly
+  state._progToken = (state._progToken || 0) + 1;
+  const token = state._progToken;
+
+  // UI pre-state
+  const files = PROGRAM_COURSE_REGISTRY[prog] || [];
+  courseSelect.disabled = true;
+  courseSelect.innerHTML = `<option>Loading courses…</option>`;
+
+  const loadCoursesPromise = (async () => {
+    const loaded = [];
+    for (const relPath of files){
+      try {
+        const mod = await import(encodePath(relPath));
+        const arr = Array.isArray(mod.default) ? mod.default : [mod.default];
+        const course = arr[0] || {};
+        const label = [course.courseNumber, course.courseName]
+          .filter(Boolean)
+          .join(' — ') || relPath.split('/').pop();
+        state.coursesCache.set(relPath, course);
+        loaded.push({ path: relPath, label });
+      } catch (e) {
+        const filename = relPath.split('/').pop();
+        loaded.push({ path: relPath, label: `⚠ ${filename} (load error)` });
+        console.error('Import failed:', relPath, e);
+      }
+    }
+    return loaded;
+  })();
+
+  const [loaded] = await Promise.all([
+    loadCoursesPromise,
+    loadInstructorsForProgram(prog)
+  ]);
+
+  if (token !== state._progToken) return; // stale
+
+  courseSelect.innerHTML = loaded.map(c => `<option value="${c.path}">${c.label}</option>`).join('');
+  courseSelect.disabled = loaded.length === 0;
+  courseSelect.onchange = onCourseChange;
+
+  if (loaded.length > 0){
+    courseSelect.value = loaded[0].path;
+    onCourseChange();
+  } else {
+    setTargetHours(null);
+  }
+}
+
 // Target hours tag live update
 targetHoursEl.addEventListener('input', ()=>{
   const t = Number(targetHoursEl.value);
@@ -495,7 +424,6 @@ function isoFromDateInput(v){
 }
 
 function parseOverrideSlots(text){
-  // Accept multiple lines like: "9:00 AM - 12:00 PM"
   const chunks = String(text||'').split(/\n|;/).map(s => s.trim()).filter(Boolean);
   const slots = [];
   for(const c of chunks){
@@ -546,9 +474,8 @@ function setupOverridesUI(){
   const timesRow= document.getElementById('overrideTimesRow');
   const addBtn  = document.getElementById('addOverrideBtn');
 
-  // If the overrides panel isn't present, skip wiring.
   if(!typeSel || !dateEl || !addBtn){
-    return;
+    return; // panel absent
   }
 
   const syncTimesVisibility = () => {
@@ -559,6 +486,8 @@ function setupOverridesUI(){
   typeSel.addEventListener('change', syncTimesVisibility);
 
   addBtn.addEventListener('click', () => {
+    if (state.externshipClinical) return; // locked
+
     const t = typeSel.value;
     const iso = isoFromDateInput(dateEl.value);
     if(!t || !iso){
@@ -571,7 +500,7 @@ function setupOverridesUI(){
     } else {
       const slots = parseOverrideSlots(timesEl?.value);
       if(!slots || slots.length === 0){
-        alert('Add at least one valid time slot like "9:00 AM - 12:00 PM".');
+        alert('Add at least one valid time slot like "12:00 PM - 8:00 PM".');
         return;
       }
       state.overrides[iso] = { type: t, slots };
@@ -583,13 +512,60 @@ function setupOverridesUI(){
   renderOverridesList();
 }
 
+// ---- Externship/Clinical preset ----
+function applyExternshipPreset(enabled){
+  state.externshipClinical = !!enabled;
+
+  const startDateEl = document.getElementById('startDate');
+  const endDateEl   = document.getElementById('endDate');
+
+  const typeSel = document.getElementById('overrideType');
+  const dateEl  = document.getElementById('overrideDate');
+  const timesEl = document.getElementById('overrideTimes');
+  const addBtn  = document.getElementById('addOverrideBtn');
+
+  if (enabled){
+    if (!state._savedTimesPattern){
+      state._savedTimesPattern = JSON.parse(JSON.stringify(state.times));
+    }
+    // Auto-fill Mon–Fri 12–8; Saturday blank
+    DAYS.forEach(d => {
+      if (["Monday","Tuesday","Wednesday","Thursday","Friday"].includes(d)){
+        state.times[d] = [{ start:"12:00 PM", end:"8:00 PM" }];
+      } else {
+        state.times[d] = [];
+      }
+    });
+
+    // Lock inputs
+    setDisabled(startDateEl, true);
+    setDisabled(endDateEl,   true);
+    setDisabled(typeSel,     true);
+    setDisabled(dateEl,      true);
+    setDisabled(timesEl,     true);
+    setDisabled(addBtn,      true);
+  } else {
+    if (state._savedTimesPattern){
+      state.times = state._savedTimesPattern;
+      state._savedTimesPattern = null;
+    }
+    setDisabled(startDateEl, false);
+    setDisabled(endDateEl,   false);
+    setDisabled(typeSel,     false);
+    setDisabled(dateEl,      false);
+    setDisabled(timesEl,     false);
+    setDisabled(addBtn,      false);
+  }
+
+  renderDays();
+}
+
 // ---- Visual Month Calendar ----
 function renderMonthCalendars(s, e, entriesByIso){
   const grid = document.getElementById('monthGrid');
   if(!grid) return;
   grid.innerHTML = '';
 
-  // Start at first of start month, end at last of end month
   const startMonth = new Date(s.getFullYear(), s.getMonth(), 1);
   const endMonth   = new Date(e.getFullYear(), e.getMonth(), 1);
 
@@ -600,7 +576,6 @@ function renderMonthCalendars(s, e, entriesByIso){
     const monthEl = document.createElement('div');
     monthEl.className = 'month';
 
-    // Header
     monthEl.innerHTML = `
       <div class="month-header">
         <div class="month-title">${monthYearLabel(first)}</div>
@@ -610,20 +585,17 @@ function renderMonthCalendars(s, e, entriesByIso){
       </div>
     `;
 
-    // Weeks container
     const weeksFrag = document.createDocumentFragment();
     let weekEl = document.createElement('div');
     weekEl.className = 'week';
 
-    // Leading blanks
-    const leadBlanks = first.getDay(); // 0=Sun..6=Sat
+    const leadBlanks = first.getDay();
     for(let i=0;i<leadBlanks;i++){
       const blank = document.createElement('div');
       blank.className = 'daycell inactive';
       weekEl.appendChild(blank);
     }
 
-    // Days of month
     for(let day=1; day<=last.getDate(); day++){
       const d = new Date(first.getFullYear(), first.getMonth(), day);
       const iso = isoOf(d);
@@ -651,7 +623,6 @@ function renderMonthCalendars(s, e, entriesByIso){
 
       weekEl.appendChild(cell);
 
-      // If Saturday, push week row and start a new one
       if (d.getDay() === 6) {
         weeksFrag.appendChild(weekEl);
         weekEl = document.createElement('div');
@@ -659,7 +630,6 @@ function renderMonthCalendars(s, e, entriesByIso){
       }
     }
 
-    // Trailing blanks to complete last week
     const lastDow = lastOfMonth(cur).getDay();
     if (lastDow !== 6) {
       for (let i=lastDow+1; i<=6; i++) {
@@ -689,8 +659,8 @@ function generate(){
   state.total = 0;
 
   if (!s || !e || e < s) {
-    cal.innerHTML = `<div class="calday closed">Enter a valid date range.</div>`;
-    document.getElementById('monthGrid')?.replaceChildren(); // clear month grid
+    cal.innerHTML = `<div class='calday closed'>Enter a valid date range.</div>`;
+    document.getElementById('monthGrid')?.replaceChildren();
     return;
   }
 
@@ -701,16 +671,16 @@ function generate(){
   for (const d of days) {
     const dow = dayLabels[d.getDay()];
     const iso = isoOf(d);
-    const ov = state.overrides[iso] || null;
+    const ov = state.externshipClinical ? null : (state.overrides[iso] || null);
 
     // 1) Override: remove
     if (ov?.type === 'remove') {
       const cd = document.createElement('div');
       cd.className = 'calday closed override override-remove';
       cd.innerHTML = `
-        <div class="meta">Removed</div>
-        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-        <div class="meta">Removed by override</div>
+        <div class='meta'>Removed</div>
+        <div class='date'>${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+        <div class='meta'>Removed by override</div>
       `;
       cal.appendChild(cd);
       monthEntries[iso] = { status:'override-remove' };
@@ -737,22 +707,21 @@ function generate(){
       dayNum += 1;
 
       state.rows.push({
-  day: dayNum,
-  date: new Date(d),
-  hours: hrs,
-  running,
-  slots: slotsToUse.map(s => ({ start: s.start, end: s.end })),
-  overridden: true               // <-- NEW
-});
-
+        day: dayNum,
+        date: new Date(d),
+        hours: hrs,
+        running,
+        slots: slotsToUse.map(s => ({ start: s.start, end: s.end })),
+        overridden: true
+      });
 
       const cd = document.createElement('div');
       cd.className = `calday override override-${ov.type}`;
       cd.innerHTML = `
-        <div class="meta">Day ${dayNum} • ${ov.type.toUpperCase()}</div>
-        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+        <div class='meta'>Day ${dayNum} • ${ov.type.toUpperCase()}</div>
+        <div class='date'>${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
         ${renderSlotLines(slotsToUse)}
-        <div class="meta">${hrs} hrs • run: ${running}</div>
+        <div class='meta'>${hrs} hrs • run: ${running}</div>
       `;
       cal.appendChild(cd);
 
@@ -765,9 +734,9 @@ function generate(){
       const cd = document.createElement('div');
       cd.className = 'calday closed';
       cd.innerHTML = `
-        <div class="meta">Closed</div>
-        <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-        <div class="meta">Campus Closed</div>
+        <div class='meta'>Closed</div>
+        <div class='date'>${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+        <div class='meta'>Campus Closed</div>
       `;
       cal.appendChild(cd);
       monthEntries[iso] = { status:'closed' };
@@ -794,21 +763,20 @@ function generate(){
     dayNum += 1;
 
     state.rows.push({
-  day: dayNum,
-  date: new Date(d),
-  hours: hrs,
-  running,
-  slots: slots.map(s => ({ start: s.start, end: s.end })),
-  overridden: false              // <-- NEW
-});
-
+      day: dayNum,
+      date: new Date(d),
+      hours: hrs,
+      running,
+      slots: slots.map(s => ({ start: s.start, end: s.end })),
+      overridden: false
+    });
 
     const cd = document.createElement('div');
     cd.className = 'calday';
     cd.innerHTML = `
-      <div class="meta">Day ${dayNum}</div>
-      <div class="date">${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
-      <div class="meta">${hrs} hrs • run: ${running}</div>
+      <div class='meta'>Day ${dayNum}</div>
+      <div class='date'>${d.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric'})}</div>
+      <div class='meta'>${hrs} hrs • run: ${running}</div>
     `;
     cal.appendChild(cd);
 
@@ -818,31 +786,30 @@ function generate(){
   state.total = running;
 
   if (state.rows.length === 0) {
-    cal.innerHTML = `<div class="calday closed">No sessions. Add times and try again.</div>`;
+    cal.innerHTML = `<div class='calday closed'>No sessions. Add times and try again.</div>`;
   }
 
   const t = Number(targetHoursEl.value);
   if (!isNaN(t) && t > 0) {
     const diff = Math.round((t - state.total) * 100) / 100;
     compareBlock.innerHTML = diff >= 0
-      ? `<span class="good">Remaining to target: ${diff} hrs</span>`
-      : `<span class="bad">Over target by: ${Math.abs(diff)} hrs</span>`;
+      ? `<span class='good'>Remaining to target: ${diff} hrs</span>`
+      : `<span class='bad'>Over target by: ${Math.abs(diff)} hrs</span>`;
   }
 
-  // Finally render the month-by-month grid
   renderMonthCalendars(s, e, monthEntries);
 }
 
 function exportCSV(){
   if(!state.rows.length){ alert('Nothing to export. Generate first.'); return; }
-  const headers = ['Day','Date','Start Time(s)','(unused)','Hours','Running Total'];
+  const headers = ['Day','Date','Start Time(s)','Overridden','Hours','Running Total'];
   const rows = state.rows.map(r=>{
     const startEndJoined = (r.slots || []).map(s => `${s.start} - ${s.end}`).join(' | ') || '—';
     return [
       r.day,
       formatDateHuman(r.date),
       startEndJoined,
-      '', // kept for compatibility; remove if not needed
+      r.overridden ? 'Yes' : 'No',
       r.hours,
       r.running
     ];
@@ -854,11 +821,105 @@ function exportCSV(){
   const a = document.createElement('a'); a.href = url; a.download = 'course_schedule.csv'; a.click(); URL.revokeObjectURL(url);
 }
 
-// Buttons
-document.getElementById('generateBtn').addEventListener('click', generate);
-document.getElementById('exportBtn').addEventListener('click', exportCSV);
+// ---- Payload for Firestore ----
+function hasAnyOverrides(){
+  return Object.keys(state.overrides || {}).length > 0;
+}
 
-// Boot
+function collectPayloadForFirestore() {
+  const program = document.getElementById('programSelect').value || '';
+  const coursePath = document.getElementById('courseSelect').value || '';
+  const courseLabel = document.getElementById('courseSelect').selectedOptions?.[0]?.textContent || '';
+  const displayName = displayNameEl?.value?.trim() || null;
+
+  const startISO = document.getElementById('startDate').value || '';
+  const endISO   = document.getElementById('endDate').value || '';
+
+  const isHighSchool = !!isHighSchoolEl?.checked;
+  const notes = (notesEl?.value || '').trim() || null;
+
+  const instructors = (state.instructors || []).map(x => ({
+    name: (x.name || '').trim(),
+    email: (x.email || '').trim(),
+    title: (x.title || '').trim(),
+  })).filter(x => x.name || x.email);
+
+  return {
+    program,
+    course: courseLabel || coursePath,
+    targetHours: Number(targetHoursEl.value) || null,
+    startDate: startISO,
+    endDate: endISO,
+    displayName,
+
+    // Flags & notes & instructors
+    highSchool: isHighSchool,
+    externshipClinical: !!state.externshipClinical,
+    notes,
+    instructors,
+
+    // rows now carry overridden flag per day
+    rows: state.rows.map(r => ({
+      day: r.day,
+      date: r.date.toISOString().split('T')[0],
+      hours: r.hours,
+      running: r.running,
+      overridden: !!r.overridden,
+      slots: (r.slots || []).map(s => ({ start: s.start, end: s.end }))
+    })),
+
+    total: state.total,
+
+    hasOverrides: hasAnyOverrides(),
+    overrides: state.overrides,
+
+    version: 3,
+  };
+}
+
+async function saveAfterGenerate() {
+  try {
+    if (!state.rows.length) {
+      alert('Generate first so we have rows and totals to save.');
+      return;
+    }
+    const payload = collectPayloadForFirestore();
+    const id = await saveCourseSession(payload);
+    alert(`Saved! ID: ${id}`);
+  } catch (e) {
+    console.error(e);
+    alert(e.message || 'Failed to save. Are you signed in?');
+  }
+}
+
+// Buttons
+const genBtn = document.getElementById('generateBtn');
+const exportBtn = document.getElementById('exportBtn');
+const saveBtn = document.getElementById('saveBtn');
+
+genBtn?.addEventListener('click', generate);
+exportBtn?.addEventListener('click', exportCSV);
+saveBtn?.addEventListener('click', saveAfterGenerate);
+
+// Boot wiring
+function initPrograms(){
+  const programs = Object.keys(PROGRAM_COURSE_REGISTRY).sort();
+  programSelect.innerHTML = programs.map(p => `<option value="${p}">${p}</option>`).join('');
+  programSelect.addEventListener('change', onProgramChange);
+  onProgramChange();
+}
+
+function setupOverridesUIWrapper(){
+  setupOverridesUI(); // safe if overrides panel is not present
+}
+
+// Externship checkbox wiring
+externshipEl?.addEventListener('change', (e) => {
+  applyExternshipPreset(!!e.target.checked);
+});
+
+// Initial renders
 renderDays();
 initPrograms();
-setupOverridesUI(); // safe if overrides panel is not present
+setupOverridesUIWrapper();
+applyExternshipPreset(!!externshipEl?.checked);
