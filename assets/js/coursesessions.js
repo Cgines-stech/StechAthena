@@ -139,6 +139,7 @@ const daysContainer = document.getElementById('daysContainer');
 const displayNameEl = document.getElementById('displayName');
 const isHighSchoolEl = document.getElementById('isHighSchool');
 const notesEl = document.getElementById('notes');
+const locationEl = document.getElementById('location');
 const externshipEl = document.getElementById('externshipClinical');
 
 // ---- Small helpers ----
@@ -831,6 +832,7 @@ function collectPayloadForFirestore() {
   const coursePath = document.getElementById('courseSelect').value || '';
   const courseLabel = document.getElementById('courseSelect').selectedOptions?.[0]?.textContent || '';
   const displayName = displayNameEl?.value?.trim() || null;
+  const location = (locationEl?.value || '').trim() || null;
 
   const startISO = document.getElementById('startDate').value || '';
   const endISO   = document.getElementById('endDate').value || '';
@@ -851,6 +853,7 @@ function collectPayloadForFirestore() {
     startDate: startISO,
     endDate: endISO,
     displayName,
+    location,
 
     // Flags & notes & instructors
     highSchool: isHighSchool,
