@@ -1,7 +1,8 @@
 // assets/js/trainingplan.js
-// Training Plan page logic
-// - Program dropdown sourced from central registry
-// - Shows: Program name, each Course "number — name", and Course Outline (title — hours)
+// Training Plan page logic (with Back button + Totals)
+// - Program dropdown from central registry
+// - Renders: Program name, each Course "number — name", and Outline items
+// - Shows totals: Program Hours (sum of courseClockHours) and Outline Hours (sum of outline hours)
 // - Print-friendly (controls hidden in print)
 
 import {
@@ -15,6 +16,8 @@ const els = {
   programTitle: document.getElementById("programTitle"),
   courseList: document.getElementById("courseList"),
   printBtn: document.getElementById("printBtn"),
+  programHoursTotal: document.getElementById("programHoursTotal"),
+  outlineHoursTotal: document.getElementById("outlineHoursTotal"),
 };
 
 function htmlEscape(str = ""){
@@ -43,9 +46,28 @@ async function loadProgramCourses(programName){
   return loaded;
 }
 
+function computeTotals(courses){
+  let programHours = 0;
+  let outlineHours = 0;
+  for (const c of courses){
+    if (!c || c.__error) continue;
+    const ch = Number(c.courseClockHours || 0);
+    programHours += isNaN(ch) ? 0 : ch;
+    const outline = Array.isArray(c.courseOutline) ? c.courseOutline : [];
+    outlineHours += outline.reduce((acc, i) => acc + (Number(i?.hours || 0) || 0), 0);
+  }
+  return { programHours, outlineHours };
+}
+
 function render(programName, courses){
   els.programTitle.textContent = programName || "Select a program…";
 
+  // Totals
+  const { programHours, outlineHours } = computeTotals(courses || []);
+  if (els.programHoursTotal) els.programHoursTotal.textContent = `${programHours} hrs`;
+  if (els.outlineHoursTotal) els.outlineHoursTotal.textContent = `${outlineHours} hrs`;
+
+  // Courses
   if (!programName){
     els.courseList.innerHTML = "";
     return;
@@ -65,6 +87,7 @@ function render(programName, courses){
     const number = c.courseNumber || "";
     const name = c.courseName || "";
     const outline = Array.isArray(c.courseOutline) ? c.courseOutline : [];
+    const courseClockHours = Number(c.courseClockHours || 0);
 
     const outlineList = outline.length
       ? `<ol class="outline">${outline.map(i => `
@@ -73,9 +96,11 @@ function render(programName, courses){
           `).join("")}</ol>`
       : `<div class="hint small">No outline available.</div>`;
 
+    const hoursPill = `<span class="pill">${courseClockHours} hrs</span>`;
+
     return `
       <article class="course-card">
-        <h3 class="course-head">${htmlEscape(number)} — ${htmlEscape(name)}</h3>
+        <h3 class="course-head">${htmlEscape(number)} — ${htmlEscape(name)} ${hoursPill}</h3>
         ${outlineList}
       </article>
     `;
@@ -96,7 +121,7 @@ function initProgramsDropdown(){
 async function onProgramChange(){
   const programName = els.programSelect.value || "";
   els.programTitle.textContent = programName || "Select a program…";
-  els.courseList.innerHTML = `<div class="hint">Loading…</div>`;
+  els.courseList.innerHTML = `<div class=\"hint\">Loading…</div>`;
   const courses = await loadProgramCourses(programName);
   render(programName, courses);
 }

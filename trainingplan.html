@@ -12,6 +12,7 @@
   <div class="wrap">
     <header class="toolbar no-print">
       <div class="controls">
+        <a class="btn back" href="index.html" id="backBtn">← Back To Home</a>
         <label for="programSelect">Program</label>
         <select id="programSelect"></select>
       </div>
@@ -23,6 +24,10 @@
 
     <main id="content">
       <h1 id="programTitle" class="program-title">Select a program…</h1>
+      <section id="totalsBar" class="totals">
+        <div><span class="label">Program Hours (courseClockHours):</span> <span id="programHoursTotal" class="value">—</span></div>
+        <div><span class="label">Outline Hours (sum of outline):</span> <span id="outlineHoursTotal" class="value">—</span></div>
+      </section>
       <div id="courseList" class="course-list" aria-live="polite"></div>
     </main>
   </div>
@@ -30,3 +35,4 @@
   <script type="module" src="assets/js/trainingplan.js"></script>
 </body>
 </html>
+
