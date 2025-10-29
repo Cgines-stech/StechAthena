@@ -81,5 +81,15 @@ body {
   font-size: 12px;
   margin-left: 6px;
 }
+.elective-disclaimer {
+  padding: 10px 12px;
+  margin: 8px 0 6px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.elective-disclaimer { border-style: solid; }
+
 
 }

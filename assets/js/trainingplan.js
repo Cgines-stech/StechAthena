@@ -1,11 +1,16 @@
 // assets/js/trainingplan.js
-// Training Plan page logic (with Back button + Totals)
+// Training Plan page logic (with Back button + Totals + Elective disclaimer)
 // - Program dropdown from central registry
 // - Renders: Program name, each Course "number — name", and Outline items
 // - Totals:
 //    • Program Hours: from data/programs/{program}/program.js -> programClockHours
-//    • Outline Hours: sum of outline.hours across NON‑elective courses (isElective === false)
-// - Print-friendly (controls hidden in print)
+//    • Outline Hours (label kept): SUM of courseClockHours where includeInProgramTotals === true
+// - Elective disclaimer:
+//    • Inserted BEFORE the first elective course (isElective === true)
+//    • Shows: "Electives (Credit Hours Required: X, Clock Hours Required: Y)"
+//      where X = programCreditHours − sum(non‑elective courseCredits)
+//            Y = programClockHours − sum(non‑elective courseClockHours)
+// - Print-friendly (controls hidden in print); outline total row is hidden in print via CSS
 
 import {
   listPrograms,
@@ -58,7 +63,7 @@ async function loadProgramMeta(programName){
     const rel = PROGRAM_FILE_REGISTRY?.[programName];
     if (!rel) return null;
     const mod = await import(withBust(encodePath(rel)));
-    // Expecting default export to have programClockHours (and other meta)
+    // Expecting default export to have programClockHours & programCreditHours
     const meta = Array.isArray(mod.default) ? mod.default[0] : mod.default;
     return meta || null;
   } catch (e) {
@@ -67,42 +72,73 @@ async function loadProgramMeta(programName){
   }
 }
 
-function computeOutlineHoursNonElective(courses){
-  let outlineHours = 0;
+// NEW: Sum courseClockHours across courses where includeInProgramTotals === true
+function computeIncludedCourseClockHours(courses){
+  let total = 0;
   for (const c of courses){
     if (!c || c.__error) continue;
-    if (c.isElective === true) continue; // include only NON‑electives
-    const outline = Array.isArray(c.courseOutline) ? c.courseOutline : [];
-    outlineHours += outline.reduce((acc, i) => acc + (Number(i?.hours || 0) || 0), 0);
+    if (c.includeInProgramTotals !== true) continue;
+    const ch = Number(c.courseClockHours || 0);
+    total += isNaN(ch) ? 0 : ch;
   }
-  return outlineHours;
+  return total;
+}
+
+function sumNonElectiveCreditsAndClock(courses){
+  let credits = 0;
+  let clock = 0;
+  for (const c of courses){
+    if (!c || c.__error) continue;
+    if (c.isElective === true) continue;
+    const cr = Number(c.courseCredits || 0);
+    const ch = Number(c.courseClockHours || 0);
+    credits += isNaN(cr) ? 0 : cr;
+    clock   += isNaN(ch) ? 0 : ch;
+  }
+  return { credits, clock };
 }
 
 function render(programName, courses, programMeta){
   els.programTitle.textContent = programName || "Select a program…";
 
-  // Totals: program hours from programMeta.programClockHours; outline hours from non‑electives only
+  // Totals
   const programHours = Number(programMeta?.programClockHours || 0) || 0;
-  const outlineHours = computeOutlineHoursNonElective(courses || []);
-
+  const includedClockHours = computeIncludedCourseClockHours(courses || []); // replaces prior outline-hours logic
   if (els.programHoursTotal) els.programHoursTotal.textContent = `${programHours} hrs`;
-  if (els.outlineHoursTotal) els.outlineHoursTotal.textContent = `${outlineHours} hrs`;
+  if (els.outlineHoursTotal) els.outlineHoursTotal.textContent = `${includedClockHours} hrs`;
 
-  // Courses list
-  if (!programName){
-    els.courseList.innerHTML = "";
-    return;
-  }
-
+  // No program selected / no courses
+  if (!programName){ els.courseList.innerHTML = ""; return; }
   if (!courses || courses.length === 0){
     els.courseList.innerHTML = `<div class="hint">No courses found for this program.</div>`;
     return;
   }
 
-  const cards = courses.map(c => {
-    if (c.__error){
-      const file = c.relPath?.split("/").pop();
-      return `<article class="course-card error"><h3>⚠ Error loading ${htmlEscape(file || "course")}</h3></article>`;
+  // Elective disclaimer computations (before first elective)
+  const { credits: reqCredits, clock: reqClock } = sumNonElectiveCreditsAndClock(courses);
+  const programCreditHours = Number(programMeta?.programCreditHours || 0) || 0;
+  const programClockHours  = Number(programMeta?.programClockHours || 0)  || 0;
+  const electiveCreditsNeeded = Math.max(0, programCreditHours - reqCredits);
+  const electiveClockNeeded   = Math.max(0, programClockHours  - reqClock);
+
+  const firstElectiveIdx = courses.findIndex(c => c && !c.__error && c.isElective === true);
+
+  // Build HTML
+  let parts = [];
+  courses.forEach((c, idx) => {
+    // Insert disclaimer just before the FIRST elective course
+    if (idx === firstElectiveIdx){
+      parts.push(`
+        <div class="elective-disclaimer">
+          <strong>Electives</strong> (Credit Hours Required: ${electiveCreditsNeeded}, Clock Hours Required: ${electiveClockNeeded})
+        </div>
+      `);
+    }
+
+    if (!c || c.__error){
+      const file = c?.relPath?.split("/").pop();
+      parts.push(`<article class="course-card error"><h3>⚠ Error loading ${htmlEscape(file || "course")}</h3></article>`);
+      return;
     }
 
     const number = c.courseNumber || "";
@@ -119,15 +155,15 @@ function render(programName, courses, programMeta){
 
     const hoursPill = `<span class="pill">${courseClockHours} hrs</span>`;
 
-    return `
+    parts.push(`
       <article class="course-card">
         <h3 class="course-head">${htmlEscape(number)} — ${htmlEscape(name)} ${hoursPill}</h3>
         ${outlineList}
       </article>
-    `;
-  }).join("");
+    `);
+  });
 
-  els.courseList.innerHTML = cards;
+  els.courseList.innerHTML = parts.join("");
 }
 
 function initProgramsDropdown(){
