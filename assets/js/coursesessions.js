@@ -21,8 +21,6 @@ import {
   encodePath
 } from "../../data/programs.registry.js";
 
-function encodePath(p){ return p.replace(/ /g, "%20"); }
-
 // ---- Date & time helpers ----
 function parseDateISO(v){
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v||"");
