@@ -70,4 +70,16 @@ body {
   .program-title { margin: 0 0 8px; }
   .course-card { border: none; border-bottom: 1px solid #ddd; border-radius: 0; }
   .outline-total { display: none !important; } /* hide sum of outline only */
+  /* Course hours pill style */
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 6px;
+}
+
 }

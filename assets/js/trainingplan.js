@@ -98,12 +98,13 @@ function render(programName, courses){
 
     const hoursPill = `<span class="pill">${courseClockHours} hrs</span>`;
 
-    return `
-      <article class="course-card">
-        <h3 class="course-head">${htmlEscape(number)} — ${htmlEscape(name)} ${hoursPill}</h3>
-        ${outlineList}
-      </article>
-    `;
+return `
+  <article class="course-card">
+    <h3 class="course-head">${htmlEscape(number)} — ${htmlEscape(name)} ${hoursPill}</h3>
+    ${outlineList}
+  </article>
+`;
+
   }).join("");
 
   els.courseList.innerHTML = cards;
