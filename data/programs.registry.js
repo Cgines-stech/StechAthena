@@ -52,7 +52,7 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Automotive Technology/TEAU 2915.js",
   ],
   "Paramedic": [
-    "../../data/programs/Automotive Technology/TEPA 1000.js",
+    "../../data/programs/Paramedic/TEPA 1000.js",
   ],
 };
 
