@@ -8,6 +8,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Automation Technology/program.js",
   "Automotive Technology":
     "../../data/programs/Automotive Technology/program.js",
+  "Paramedic":
+    "../../data/programs/Paramedic/program.js",
 };
 
 export const PROGRAM_COURSE_REGISTRY = {
@@ -48,6 +50,9 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Automotive Technology/TEAU 2913.js",
     "../../data/programs/Automotive Technology/TEAU 2914.js",
     "../../data/programs/Automotive Technology/TEAU 2915.js",
+  ],
+  "Paramedic": [
+    "../../data/programs/Automotive Technology/TEPA 1000.js",
   ],
 };
 
