@@ -42,42 +42,42 @@ const TEPA1110 = [
     ],
 
     courseBooks: [
-      {
-        name:
-          "Nancy Caroline's Emergency Care in the Streets, 9th edition FICTN Book Bundle",
-        price: 769.0,
-        isbn: "9781284256857",
-        note: ""
-      }
+      {}
     ],
 
     syllabiBooks: [
-      {
-        name:
-          "Nancy Caroline's Emergency Care in the Streets, 9th edition FICTN Book Bundle",
-        price: 769.0,
-        isbn: "9781284256857",
-        note: ""
-      }
+      {}
     ],
     
     courseTools: [
-      { name: "Digital Device (Chromebook)", price: 302.5, note: "Chromebook or comparable device - Available at STECH Bookstore, can be purchased elsewhere" },
-      { name: "BP cuff/stethoscope", price: 33.0, note: " Available at STECH Bookstore, can be purchased elsewhere" },
-      { name: "Pen light", price: 4.5, note: " Available at STECH Bookstore, can be purchased elsewhere" },
-      { name: "Shears", price: 16.5, note: " Available at STECH Bookstore, can be purchased elsewhere" },
-    ],
-
-    courseCertifications: [
       {},
     ],
 
-    otherAssociatedCosts: [
+    courseCertifications: [
       {
-        name: "Paramedic Written Exam", 
-        price: 175.0, 
-        note: "Paid to National Registry" 
-      }
+         name: "Advanced Cardiovascular Life Support (ACLS) Certification",
+         price: 150.0,
+         note: "Vendor - AHA"
+      },
+      {
+         name: "Pediatric Advanced Life Support (PALS) Certification",
+         price: 150.0,
+         note: "Vendor - AHA"
+      },
+      {
+         name: "Prehospital Trauma Life Support (PHTLS) Certification",
+         price: 30.0,
+         note: "Vendor - NAEMT"
+      },
+      {
+         name: "Advanced Medical Life Support (AMLS) Certification",
+         price: 30.0,
+         note: "Vendor - NAEMT"
+      },
+    ],
+
+    otherAssociatedCosts: [
+      {}
     ],
 
     courseClassroomHours: [
