@@ -73,7 +73,7 @@ const TEPA1110 = [
     ],
 
     otherAssociatedCosts: [
-      {}
+      { }
     ],
 
     courseClassroomHours: [

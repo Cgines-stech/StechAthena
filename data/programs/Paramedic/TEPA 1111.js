@@ -10,9 +10,9 @@ const TEPA1111 = [
     programId: 1,
     courseNumber: "TEPA 1111",
     courseName: "Paramedic Fundamentals Lab",
-    courseCredits: 3,
+    courseCredits: 4,
     statewideAlignment: "Aligned",
-    courseClockHours: 90,
+    courseClockHours: 120,
     courseTuition: 380.00,
     courseFee: 500.00,
     instructionalType: "LEL",
@@ -61,7 +61,7 @@ const TEPA1111 = [
     ],
 
     otherAssociatedCosts: [
-      {}
+      { }
     ],
 
     courseClassroomHours: [
