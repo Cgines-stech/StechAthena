@@ -11,7 +11,7 @@ const TEPA1000 = [
     courseNumber: "TEPA 1000",
     courseName: "Introduction to Paramedicine",
     courseCredits: 1,
-    statewideAlignment: "Aligned",
+    statewideAlignment: "Non-Aligned",
     courseClockHours: 30,
     courseTuition: 95.00,
     courseFee: 280.00,

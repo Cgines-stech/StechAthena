@@ -55,6 +55,12 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Paramedic/TEPA 1000.js",
     "../../data/programs/Paramedic/TEPA 1110.js",
     "../../data/programs/Paramedic/TEPA 1111.js",
+    "../../data/programs/Paramedic/TEPA 2993.js",
+    "../../data/programs/Paramedic/TEPA 1501.js",
+    "../../data/programs/Paramedic/TEPA 1511.js",
+    "../../data/programs/Paramedic/TEPA 2994.js",
+    "../../data/programs/Paramedic/TEPA 2121.js",
+    "../../data/programs/Paramedic/TEPA 2999.js",
   ],
 };
 

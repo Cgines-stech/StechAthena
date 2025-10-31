@@ -61,11 +61,7 @@ const TEPA1111 = [
     ],
 
     otherAssociatedCosts: [
-      {
-        name: "Paramedic Written Exam", 
-        price: 175.0, 
-        note: "Paid to National Registry" 
-      }
+      {}
     ],
 
     courseClassroomHours: [

@@ -1,41 +1,44 @@
-// TEPA 2121
+// TEPA 1511
 
 // imports
 import gradeScale from "../../gradescale.js";
 import { courseTotals, sum, money } from "../../utils/helpers.js";
 
-const TEPA2121 = [
+const TEPA1511 = [
   {
-    id: 11008,
+    id: 11006,
     programId: 1,
-    courseNumber: "TEPA 2121",
-    courseName: "Paramedic Capstone Experience",
+    courseNumber: "TEPA 1511",
+    courseName: "Advanced Skills Lab",
     courseCredits: 3,
     statewideAlignment: "Aligned",
     courseClockHours: 90,
     courseTuition: 285.00,
-    courseFee: 100.00,
-    instructionalType: "LEC",
+    courseFee: 500.00,
+    instructionalType: "LEL",
     isElective: false,
     includeInProgramTotals: true,
 
     courseDescription:
-      "The Paramedic Capstone Experience course provides students with hands-on practice of the entire spectrum of paramedic care.",
+      "The Advanced Skills Lab course provides practical learning of skills and National Registry competencies. These include cricothyrotomy, thoracotomy, childbirth (both normal and abnormal deliveries), trauma assessment, hemorrhage and shock management, bandaging, and splinting. Students show competency in the National Standard Curriculum.",
 
     courseObjectives: [
-      "Perform all duties as an entry-level paramedic using cognitive, affective, and psychomotor domains.",
-      "Perform patient assessment in trauma situations.",
-      "Demonstrate cardiac management skills.",
-      "Manage patient condition competently in out-of-hospital scenarios.",
-      "Demonstrate competency in airway, respiration, and ventilation, cardiology, resuscitation, trauma, medical, obstetrics and gynecology, and EMS operations for both adult and pediatric patients.",
-      "Complete the required National Registry capstone portfolio.",
+      "Demonstrate competency on National Standards in the entire spectrum of paramedic practice.",
+      "Demonstrate and record performance in the NREMT lab portfolio.",
+      "Illustrate how multisystem trauma and Mechanism of Injury (MOI) relate to patient assessment and scene management.",
+      "Differentiate the pathophysiology, assessment, and management of lung injuries, myocardial injuries, vascular injuries, and other chest-related injuries.",
+      "Integrate the pathophysiology, assessment, and critical decision-making skills indicated for patients in special populations.",
+      "Demonstrate patient management in simulated out-of-hospital scenarios of the medical and trauma patient.",
     ],
 
     courseOutline: [
-      { title: "EMS Operations", hours: 20},
-      { title: "Evidence-based Practice", hours: 10},
-      { title: "NREMT Exam Preparation", hours: 25},
-      { title: "Specific Certifications", hours: 35},
+      { title: "Medication Administration", hours: 12},
+      { title: "Cardiac Management", hours: 20},
+      { title: "Trauma Management", hours: 12},
+      { title: "Medical Emergencies", hours: 12},
+      { title: "Advanced Airways Techniques", hours: 8},
+      { title: "Integrated Simulations", hours: 22},
+      { title: "Hospital-based Skills", hours: 4},
     ],
 
     courseBooks: [
@@ -47,30 +50,11 @@ const TEPA2121 = [
     ],
     
     courseTools: [
-      {},
+      {}
     ],
 
     courseCertifications: [
-      {
-         name: "Advanced Cardiovascular Life Support (ACLS) Certification",
-         price: 150.0,
-         note: "Vendor - AHA"
-      },
-      {
-         name: "Pediatric Advanced Life Support (PALS) Certification",
-         price: 150.0,
-         note: "Vendor - AHA"
-      },
-      {
-         name: "Prehospital Trauma Life Support (PHTLS) Certification",
-         price: 30.0,
-         note: "Vendor - NAEMT"
-      },
-      {
-         name: "Advanced Medical Life Support (AMLS) Certification",
-         price: 30.0,
-         note: "Vendor - NAEMT"
-      },
+      {}
     ],
 
     otherAssociatedCosts: [
@@ -79,14 +63,14 @@ const TEPA2121 = [
 
     courseClassroomHours: [
         {
-          startDate: "09-28-2026",
-          endDate: "12-07-2026",
-          Monday: "9:00 AM - 1:00 PM, 2:00 PM - 6:00 PM",
-          Tuesday: "",
+          startDate: "06-05-2026",
+          endDate: "09-18-2026",
+          Monday: "",
+          Tuesday: "1:00 PM - 6:00 PM",
           Wednesday: "",
           Thursday: "",
-          Friday: "9:00 AM - 1:00 PM, 2:00 PM - 6:00 PM",
-          Saturday: "",
+          Friday: "1:00 PM - 6:00 PM",
+          Saturday: "8:00 AM - 3:00 PM",
         }
     ],
 
@@ -99,19 +83,40 @@ const TEPA2121 = [
     ],
 
     courseAssignmentsandAsssessments: [
-      "Professional Paramedic Presentations",
+      "Lab Day 1: Cardiac Monitoring, 12-Lead",
+      "Lab Day 3: Cardiac Sims, NREMT",
+      "Lab Day 4: Med Skill Drills",
+      "Lab Day 5: Neurological Sims",
+      "Lab Day 6: Environmental Sims",
+      "Lab Day 7: BMed, etc.",
+      "Lab Day 8: Hospital-Based Skills",
+      "Lab Day 9: Behavioral Simulations",
+      "Lab Day 10: Obstetric Simulations",
+      "Lab Day 1 1: Paramedic Day Care",
+      "Lab Day 12: Crazy Sim Day",
+      "Lab Day 13: Trauma Llama 1",
+      "Lab Day 14: Trauma Llama 2",
+      "Lab Day 15: Camping, Day 1",
+      "Lab Day 16: Camping, Day 2",
+      "2nd Term Psychomotor Exam",
+      "Evidence-Based Practice Toolkit for Nursing",
+      "Duke University- EBP Tutorial",
+      "PICOT_ Questions_ Template.pdf",
+      "PICO(T) Question Assignment",
+      "Johns Hopkins Nursing Evidence-Based Practice Evidence",
+      "Level and Quality Guide",
+      "Literature Review Outline Template.docx",
+      "Literature Review 1st Draft",
       "Evidence-Based Practice Paper, Draft 2",
-      "Evidence-Based Practice Paper - Final",
-      "Evidence-Based Practice Presentation",
-      "Fisdap Comprehensive Exam",
+      "End of Course Survey",
       "Instructor Resources",
       "Lesson Plan: Lesson 74",
       "Rescue Scene Awareness Handout: Lesson 74",
-      "Requi red Resources",
+      "Required Resources",
       "Lesson Guide: Lesson 74",
       "Chapter 47 Transport Operations",
-      "Chapter 49 Vehicle Extrication and Special Rescue",
-      "Watch t he following v ideos:",
+      "Chapter 49 Vehicle Ext rication and Special Rescue",
+      "Watch the following videos:",
       "Driving the Ambulance",
       "Mayo Clinic Landing Zone Training",
       "Vehicle Extrication: Size-up and Stabilization",
@@ -124,10 +129,10 @@ const TEPA2121 = [
       "Skill Drill s: Chapter 49",
       "Interactive Lecture: Chapter 47",
       "Interactive Lecture: Chapter 49",
-      "Student -Facilitated Scenario Handout: Lesson 74",
+      "Student-Facilitated Scenario Handout: Lesson 74",
       "Scenario Role Cards: Lesson 74",
       "Recommended Resources",
-      "Slides: Chapter 4 7",
+      "Slides: Chapter 47",
       "Slides: Chapter 49",
       "Lecture Outline: Chapter 47",
       "Lecture Outline: Chapter 49",
@@ -138,12 +143,12 @@ const TEPA2121 = [
       "Flashcards: Chapter 47",
       "Flashcards: Chapter 49",
       "Lesson 74 In-Class Quiz",
-      "Instructor Resou rces",
+      "Instructor Resources",
       "Lesson Plan: Lesson 71",
       "Patient Cards: Lesson 71",
-      "Required Resou rces",
+      "Required Resources",
       "Lesson Guide: Lesson 71",
-      "Student - Facilitated Scenario Handout: Lesson 71",
+      "Student -Facilitated Scenario Handout: Lesson 71",
       "Scenario Role Cards: Lesson 71",
       "Chapter 48 Incident Management and Mass-Casualty",
       "Incidents",
@@ -154,7 +159,6 @@ const TEPA2121 = [
       "Interactive Lecture: Chapter 52",
       "Recommended Resources",
       "Slides: Chapter 48",
-      "Slides: Chapter 52",
       "Lecture Outline: Chapter 48",
       "Lecture Outline: Chapter 52",
       "Case Studies: Chapter 48",
@@ -174,6 +178,7 @@ const TEPA2121 = [
       "Lesson Guide: Lesson 73",
       "Chapter 51 Terrorism Response",
       "Chapter 53 Crime Scene Awareness",
+      "Watch the Following Videos",
       "EMS Response to Crime Scenes",
       "What Are Chemical Weapons? (Lesson 1: Chemical",
       "Weapons)",
@@ -205,7 +210,7 @@ const TEPA2121 = [
       "Lesson Guide: Lesson 72",
       "Chapter 50 Hazardous Materials",
       "Watch the following videos:",
-      "Overview of the Emergency Response Guidebook (ERG)",
+      "Overview of t he Emergency Response Guidebook (ERG)",
       "Section 3: Hazardous Materials Awareness",
       "Firefighter Rehabilitation",
       "Skill Evaluation Sheets: Chapter SO",
@@ -215,7 +220,7 @@ const TEPA2121 = [
       "Recommended Resources",
       "Slides: Chapter SO",
       "Lecture Outline: Chapter SO",
-      "Case Studies: Chapter 50",
+      "Case Studies: Chapter SO",
       "Assessment in Action: Chapter SO",
       "Flashcards: Chapter SO",
       "Interactive Lecture: Chapter SO",
@@ -229,7 +234,6 @@ const TEPA2121 = [
       "Virtual Ride-Along Video: Assault",
       "Virtual Ride-Along Video: Attempted Suicide",
       "Virtual Ride-Along Video: Cardiac Arrest",
-      "Virtual Ride-Along Video: Difficulty Breathing",
       "Virtual Ride-Along Video: Fall in Apartment",
       "Virtual Ride-Along Video: Geriatric Altered Mental Status",
       "Virtual Ride-Along Video: GI Bleed",
@@ -249,7 +253,6 @@ const TEPA2121 = [
       "Skill Video: Epinephrine Auto-Injector",
       "Skill Video: Head Tilt-Chin Maneuver",
       "Skill Video: lntraosseous Access",
-      "Skill Video: Intravenous Access",
       "Skill Video: Jaw-Thrust Maneuver",
       "Skill Video: Long Bone Injury",
       "Skill Video: Mouth-to-Mask Ventilation",
@@ -261,7 +264,7 @@ const TEPA2121 = [
       "Skill Video: Orotracheal Intubation by Direct Laryngoscopy",
       "Skill Video: Oxygen Administration by Nonrebreathing Mask",
       "Skill Video: Patient Lifting",
-      "Skill Video: Recognition of an Airway Obst ruction",
+      "Skill Video: Recognition of an Airway Obstruction",
       "Skill Video: Seated Spinal Motion Restriction",
       "Skill Video: Spine Assessment",
       "Skill Video: Supine Spinal Motion Restriction",
@@ -271,4 +274,4 @@ const TEPA2121 = [
   }
 ]
 
-export default TEPA2121;
+export default TEPA1511;
