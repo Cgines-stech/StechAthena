@@ -53,6 +53,8 @@ export const PROGRAM_COURSE_REGISTRY = {
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
+    "../../data/programs/Paramedic/TEPA 1110.js",
+    "../../data/programs/Paramedic/TEPA 1111.js",
   ],
 };
 
