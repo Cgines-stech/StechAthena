@@ -8,6 +8,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Automation Technology/program.js",
   "Automotive Technology":
     "../../data/programs/Automotive Technology/program.js",
+  "Commercial Driver's License Class A":
+    "../../data/programs/Commercial Driver's License Class A/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
 };
