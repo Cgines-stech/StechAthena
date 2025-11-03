@@ -13,7 +13,7 @@ const TECA1920 = [
     courseCredits: 2,
     statewideAlignment: "Non-Aligned",
     courseClockHours: 90,
-    courseTuition: 95.00,
+    courseTuition: 190.00,
     courseFee: 0.00,
     instructionalType: "SUP",
     isElective: false,
