@@ -45,7 +45,24 @@ const TECD1100 = [
     ],
 
     courseBooks: [
-      {}
+      {
+        name: "Entry Level Driver Training Obtaining a CDL", 
+        price: 57.0,
+        isbn: "9781680084931",
+        note: ""
+      },
+      {
+        name: "Log Book Holder, Log Book, Ruler", 
+        price: 32.0,
+        isbn: "B083P53B8T",
+        note: ""
+      },
+      {
+        name: "Federal Motor Carrier Safety Regulations Pocketbool", 
+        price: 8.0,
+        isbn: "",
+        note: ""
+      },
     ],
 
     syllabiBooks: [
@@ -74,15 +91,15 @@ const TECD1100 = [
     ],
 
     courseCertifications: [
-      {}
-    ],
-
-    otherAssociatedCosts: [
       {
         name: "Driving Test", 
         price: 125.00, 
         note: "" 
       },
+    ],
+
+    otherAssociatedCosts: [
+      {}
     ],
 
     courseClassroomHours: [
