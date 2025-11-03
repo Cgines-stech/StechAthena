@@ -100,7 +100,7 @@ function normalizeItemsWithCourse(arr = [], courseNumber = "") {
 function renderItemRows3(tbodyEl, items) {
   if (!items.length) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td class="muted" colspan="3">No data provided</td>`;
+    tr.innerHTML = `<td class="muted" colspan="3"></td>`;
     tbodyEl.appendChild(tr);
     return 0;
   }

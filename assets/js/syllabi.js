@@ -274,7 +274,7 @@ function renderSyllabus(c) {
       const header = document.createElement("p");
       const sd = h.startDate || "";
       const ed = h.endDate || "";
-      header.textContent = (sd && ed) ? `${sd} – ${ed}` : (sd || ed || "Dates not specified");
+      header.textContent = (sd && ed) ? `${sd} – ${ed}` : (sd || ed || "Range of Dates");
       block.appendChild(header);
 
       const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
@@ -343,12 +343,12 @@ if (mats.length) {
       .join("");
 
     const li = document.createElement("li");
-    li.textContent = text || "Untitled material";
+    li.textContent = text || "No additional materials required";
     materialsList.appendChild(li);
   });
 } else {
   const li = document.createElement("li");
-  li.innerHTML = `<span class="muted">No additional materials required.</span>`;
+  li.innerHTML = `<span class="muted">No additional materials required</span>`;
   materialsList.appendChild(li);
 }
 
