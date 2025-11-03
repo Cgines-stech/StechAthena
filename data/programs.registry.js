@@ -51,6 +51,9 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Automotive Technology/TEAU 2914.js",
     "../../data/programs/Automotive Technology/TEAU 2915.js",
   ],
+  "Commercial Driver's License Clas A": [
+    "../../data/programs/Commercial Driver's License Clas A/TECD 1100.js",
+  ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
     "../../data/programs/Paramedic/TEPA 1110.js",
