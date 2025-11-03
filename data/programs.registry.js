@@ -10,6 +10,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Automotive Technology/program.js",
   "Commercial Driver's License Class A":
     "../../data/programs/Commercial Driver's License Class A/program.js",
+  "Culinary Arts":
+    "../../data/programs/Culinary Arts/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
 };
@@ -55,6 +57,9 @@ export const PROGRAM_COURSE_REGISTRY = {
   ],
   "Commercial Driver's License Class A": [
     "../../data/programs/Commercial Driver's License Class A/TECD 1100.js",
+  ],
+  "Culinary Arts": [
+    "../../data/programs/Culinary Arts/TECA 1000.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",

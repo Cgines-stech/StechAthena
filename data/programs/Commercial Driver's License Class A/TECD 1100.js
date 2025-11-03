@@ -58,7 +58,7 @@ const TECD1100 = [
         note: ""
       },
       {
-        name: "Federal Motor Carrier Safety Regulations Pocketbool", 
+        name: "Federal Motor Carrier Safety Regulations Pocketbook", 
         price: 8.0,
         isbn: "",
         note: ""
