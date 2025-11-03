@@ -60,6 +60,9 @@ export const PROGRAM_COURSE_REGISTRY = {
   ],
   "Culinary Arts": [
     "../../data/programs/Culinary Arts/TECA 1000.js",
+    "../../data/programs/Culinary Arts/TECA 1010.js",
+    "../../data/programs/Culinary Arts/TECA 1020.js",
+    "../../data/programs/Culinary Arts/TECA 1100.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
