@@ -23,11 +23,11 @@ const TECA1100 = [
       "The Culinary I course introduces students to knife skills, and the tools and common equipment used in the kitchen. Students practice knife skills and classical cuts. The course provides instruction and practice for mise en place and organizing a kitchen, as well preparing different vegetables, grains, and starches. Basic herbs, spices, seasonings, and cooking techniques are also covered.",
 
     courseObjectives: [
-"Identify tools and equipment used in a professional kitchen and demonstrate proper handling of these items to include safety, sanitation, and storage.",
-"Demonstrate knife proficiency to achieve quality results when producing classical knife cuts used in various food preparation and cooking.",
-"Identify, describe, and utilize herbs, spices, and seasonings.",
-"Explain Mise en Place and demonstrate a combination of organizational skills, preparedness, and timing when it comes to seasonings and flavors when preparing and cooking food.",
-"Evaluate and analyze the preparation of a variety of vegetables, legumes, grains, and starches using a variety of cooking methods.",
+      "Identify tools and equipment used in a professional kitchen and demonstrate proper handling of these items to include safety, sanitation, and storage.",
+      "Demonstrate knife proficiency to achieve quality results when producing classical knife cuts used in various food preparation and cooking.",
+      "Identify, describe, and utilize herbs, spices, and seasonings.",
+      "Explain Mise en Place and demonstrate a combination of organizational skills, preparedness, and timing when it comes to seasonings and flavors when preparing and cooking food.",
+      "Evaluate and analyze the preparation of a variety of vegetables, legumes, grains, and starches using a variety of cooking methods.",
     ],
 
     courseOutline: [
