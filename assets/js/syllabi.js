@@ -29,6 +29,8 @@ const PROGRAM_INSTRUCTORS_REGISTRY = {
     "../../data/programs/Emergency Medical Technician/instructors.js",
   "Firefighter":
     "../../data/programs/Firefighter/instructors.js",
+  "Information Technology":
+    "../../data/programs/Information Technology/instructors.js",
   "Paramedic":
     "../../data/programs/Paramedic/instructors.js",
 };
@@ -49,6 +51,8 @@ const PROGRAM_HOURS_REGISTRY = {
     "../../data/programs/Emergency Medical Technician/classRoomDates.js",
   "Firefighter":
     "../../data/programs/Firefighter/classRoomDates.js",
+  "Information Technology":
+    "../../data/programs/Information Technology/classRoomDates.js",
   "Paramedic":
     "../../data/programs/Paramedic/classRoomDates.js",
 };
@@ -69,6 +73,8 @@ const PROGRAM_POLICIES_REGISTRY = {
     "../../data/programs/Emergency Medical Technician/programPolicies.js",
   "Firefighter":
     "../../data/programs/Firefighter/programPolicies.js",
+  "Information Technology":
+    "../../data/programs/Information Technology/programPolicies.js",
   "Paramedic":
     "../../data/programs/Paramedic/programPolicies.js",
 };

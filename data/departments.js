@@ -5,4 +5,5 @@ export const DEPARTMENTS = [
   { id: 3, Program: 'Automotive Technology'},
   { id: 4, Program: 'Professional Truck Driving'},
   { id: 5, Program: 'Culinary Arts'},
+  { id: 6, Program: 'Information Technology'},
 ];

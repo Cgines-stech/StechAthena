@@ -18,6 +18,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Emergency Medical Technician/program.js",
   "Firefighter":
     "../../data/programs/Firefighter/program.js",
+  "Information Technology":
+    "../../data/programs/Information Technology/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
 };
@@ -98,6 +100,19 @@ export const PROGRAM_COURSE_REGISTRY = {
   "Firefighter": [
     "../../data/programs/Firefighter/TEFF 1100.js",
     "../../data/programs/Firefighter/TEFF 1200.js",
+  ],
+  "Information Technology": [
+    "../../data/programs/Information Technology/TEIT 1200.js",
+    "../../data/programs/Information Technology/TEIT 1210.js",
+    "../../data/programs/Information Technology/TEIT 1100.js",
+    "../../data/programs/Information Technology/TEIT 1170.js",
+    "../../data/programs/Information Technology/TEIT 2171.js",
+    "../../data/programs/Information Technology/TEIT 1300.js",
+    "../../data/programs/Information Technology/TEIT 2200.js",
+    "../../data/programs/Information Technology/TEIT 1050.js",
+    "../../data/programs/Information Technology/TEIT 2920.js",
+    "../../data/programs/Information Technology/TEIT 1800.js",
+    "../../data/programs/Information Technology/TEIT 1810.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
