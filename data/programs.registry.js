@@ -20,6 +20,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Firefighter/program.js",
   "Information Technology":
     "../../data/programs/Information Technology/program.js",
+  "Master Esthetician":
+    "../../data/programs/Master Esthetician/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
 };
@@ -113,6 +115,19 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Information Technology/TEIT 2920.js",
     "../../data/programs/Information Technology/TEIT 1800.js",
     "../../data/programs/Information Technology/TEIT 1810.js",
+  ],
+  "Master Esthetician": [
+    "../../data/programs/Master Esthetician/TEES 1010.js",
+    "../../data/programs/Master Esthetician/TEES 1020.js",
+    "../../data/programs/Master Esthetician/TEES 1030.js",
+    "../../data/programs/Master Esthetician/TEES 2991.js",
+    "../../data/programs/Master Esthetician/TEES 2992.js",
+    "../../data/programs/Master Esthetician/TEES 2993.js",
+    "../../data/programs/Master Esthetician/TEES 2010.js",
+    "../../data/programs/Master Esthetician/TEES 2020.js",
+    "../../data/programs/Master Esthetician/TEES 2030.js",
+    "../../data/programs/Master Esthetician/TEES 2994.js",
+    "../../data/programs/Master Esthetician/TEES 2995.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
