@@ -12,6 +12,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Commercial Driver's License Class A/program.js",
   "Culinary Arts":
     "../../data/programs/Culinary Arts/program.js",
+  "Electrical Apprenticeship":
+    "../../data/programs/Electrical Apprenticeship/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
 };
@@ -75,6 +77,16 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Culinary Arts/TECA 1800.js",
     "../../data/programs/Culinary Arts/TECA 1830.js",
     "../../data/programs/Culinary Arts/TECA 1920.js",
+  ],
+  "Electrical Apprenticeship": [
+    "../../data/programs/Electrical Apprenticeship/TEEL 1110.js",
+    "../../data/programs/Electrical Apprenticeship/TEEL 1120.js",
+    "../../data/programs/Electrical Apprenticeship/TEEL 1210.js",
+    "../../data/programs/Electrical Apprenticeship/TEEL 1220.js",
+    "../../data/programs/Electrical Apprenticeship/TEEL 1310.js",
+    "../../data/programs/Electrical Apprenticeship/TEEL 1320.js",
+    "../../data/programs/Electrical Apprenticeship/TEEL 1410.js",
+    "../../data/programs/Electrical Apprenticeship/TEEL 1420.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
