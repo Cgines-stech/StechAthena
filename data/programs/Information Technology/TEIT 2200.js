@@ -13,7 +13,7 @@ const TEIT2200 = [
     courseCredits: 4,
     statewideAlignment: "Non-Aligned",
     courseClockHours: 120,
-    courseTuition: 190.00,
+    courseTuition: 380.00,
     courseFee: 0.00,
     instructionalType: "LEL",
     isElective: false,
