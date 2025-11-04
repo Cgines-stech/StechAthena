@@ -14,6 +14,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Culinary Arts/program.js",
   "Electrical Apprenticeship":
     "../../data/programs/Electrical Apprenticeship/program.js",
+  "Emergency Medical Technician":
+    "../../data/programs/Emergency Medical Technician/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
 };
@@ -87,6 +89,9 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Electrical Apprenticeship/TEEL 1320.js",
     "../../data/programs/Electrical Apprenticeship/TEEL 1410.js",
     "../../data/programs/Electrical Apprenticeship/TEEL 1420.js",
+  ],
+  "Emergency Medical Technician": [
+    "../../data/programs/Emergency Medical Technician/TEEM 1011.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
