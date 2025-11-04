@@ -7,5 +7,6 @@ export const PROGRAMS = [
   { id: 500, department_id: 5, name: "Culinary Arts", program_credit_hours: 30, CIP: 12.0503},
   { id: 600, department_id: 2, name: "Electrical Apprenticeship", program_credit_hours: 24, CIP: 46.0302},
   { id: 120, department_id: 1, name: 'Emergency Medical Technician', program_credit_hours: 6, CIP: 51.0904},
+  { id: 130, department_id: 1, name: 'Firefighter', program_credit_hours: 12, CIP: 43.0203},
   { id: 110, department_id: 1, name: 'Paramedic', program_credit_hours: 34, CIP: 51.0904},
 ];
