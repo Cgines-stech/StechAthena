@@ -512,3 +512,32 @@ body{
     display: none !important;
   }
 }
+
+/* --- FINAL OVERRIDES: Assignments & Assessments must be block to respect breaks --- */
+@media print {
+  /* Make sure these beat the generic "#syllabus section { display:inline-block !important; }" */
+  .assignments-wrapper,
+  .assignments-page {
+    display: block !important;
+  }
+
+  /* Hard page break before and after the entire wrapper (the whole A&A section) */
+  .assignments-wrapper {
+    break-before: page !important;
+    page-break-before: always !important;
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  /* Each generated A&A page goes to its own sheet */
+  .assignments-page {
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+    break-after: always !important;
+    page-break-after: always !important;
+  }
+  .assignments-page:last-of-type {
+    break-after: auto !important;
+    page-break-after: auto !important;
+  }
+}
