@@ -1,5 +1,4 @@
 // assets/js/syllabi.js
-
 import { outlineTitlesOnly } from "../../data/utils/helpers.js";
 import institutionalPolicy from "../../data/institutionalPolicy.js";
 
@@ -37,7 +36,6 @@ const PROGRAM_INSTRUCTORS_REGISTRY = {
   "Paramedic":
     "../../data/programs/Paramedic/instructors.js",
 };
-
 const PROGRAM_HOURS_REGISTRY = {
   "Advanced Emergency Medical Technician":
     "../../data/programs/Advanced Emergency Medical Technician/classRoomDates.js",
@@ -62,7 +60,6 @@ const PROGRAM_HOURS_REGISTRY = {
   "Paramedic":
     "../../data/programs/Paramedic/classRoomDates.js",
 };
-
 const PROGRAM_POLICIES_REGISTRY = {
   "Advanced Emergency Medical Technician":
     "../../data/programs/Advanced Emergency Medical Technician/programPolicies.js",
@@ -89,24 +86,26 @@ const PROGRAM_POLICIES_REGISTRY = {
 };
 
 /** ------------------------ DOM ------------------------ */
-const programSelect       = document.getElementById("programSelect");
-const courseSelect        = document.getElementById("courseSelect");
-const printBtn            = document.getElementById("printBtn");
+const programSelect  = document.getElementById("programSelect");
+const courseSelect   = document.getElementById("courseSelect");
+const printBtn       = document.getElementById("printBtn");
 
-const syllabus            = document.getElementById("syllabus");
-const printHeaderTitle    = document.getElementById("printHeaderTitle");
-const syllabusMeta        = document.getElementById("syllabusMeta");
+const syllabus       = document.getElementById("syllabus");
+const printHeaderTitle = document.getElementById("printHeaderTitle");
+const syllabusMeta   = document.getElementById("syllabusMeta");
 
-const courseDescription   = document.getElementById("courseDescription");
-const courseObjectives    = document.getElementById("courseObjectives");
+const courseDescription = document.getElementById("courseDescription");
+const courseObjectives  = document.getElementById("courseObjectives");
 
-const instructorsList     = document.getElementById("instructorsList");
-const materialsList       = document.getElementById("materialsList");
-const policiesContainer   = document.getElementById("policiesContainer");
+const instructorsList   = document.getElementById("instructorsList");
+const materialsList     = document.getElementById("materialsList");
+const policiesContainer = document.getElementById("policiesContainer");
 
-const courseOutlineEl     = document.getElementById("courseOutline");
-const hoursContainer      = document.getElementById("hoursContainer");
+// Outline + Hours
+const courseOutlineEl   = document.getElementById("courseOutline");
+const hoursContainer    = document.getElementById("hoursContainer");
 
+// Institutional
 const institutionalPolicyContainer = document.getElementById("institutionalPolicyContainer");
 
 /** ------------------------ Helpers ------------------------ */
@@ -217,117 +216,49 @@ courseSelect.addEventListener("change", () => {
 
 printBtn.addEventListener("click", () => window.print());
 
-/** ------------------------ Section Renderers ------------------------ */
+/** ------------------------ Render ------------------------ */
+function renderSyllabus(c) {
+  // Page title for better PDF filenames
+  document.title = c?.courseNumber ? c.courseNumber : "Syllabus";
 
-// Assignments & Assessments (page break before/after; two columns; per-page footer)
-function renderAssignmentsAndAssessments(course) {
-  const wrapper = document.getElementById("assignmentsWrapper");
-  if (!wrapper) return;
-
-  // Reset between renders
-  wrapper.innerHTML = "";
-  wrapper.hidden = true;
-
-  // Support multiple possible key spellings
-  const aaRaw =
-    course.courseAssignmentsandAsssessments ||  // legacy misspelling
-    course.courseAssignmentsandAssessments ||
-    course.assignmentsAndAssessments ||
-    course.assignments ||
-    [];
-
-  const items = Array.isArray(aaRaw)
-    ? aaRaw.filter(x => typeof x === "string" && x.trim().length > 0)
-    : [];
-
-  if (!items.length) return; // keep hidden
-
-  wrapper.hidden = false;
-
-  // 12 per column -> 24 per page for tidy print layout
-  const PER_COL = 12;
-  const PER_PAGE = PER_COL * 2;
-
-  for (let i = 0; i < items.length; i += PER_PAGE) {
-    const pageItems = items.slice(i, i + PER_PAGE);
-    const left = pageItems.slice(0, PER_COL);
-    const right = pageItems.slice(PER_COL, PER_PAGE);
-
-    const page = document.createElement("section");
-    page.className = "assignments-page";
-
-    const h3 = document.createElement("h3");
-    h3.textContent = "Assignments & Assessments";
-    page.appendChild(h3);
-
-    const cols = document.createElement("div");
-    cols.className = "aa-columns";
-
-    const ulLeft = document.createElement("ul");
-    ulLeft.className = "aa-col";
-    left.forEach(txt => {
-      const li = document.createElement("li");
-      li.textContent = txt;
-      ulLeft.appendChild(li);
-    });
-
-    const ulRight = document.createElement("ul");
-    ulRight.className = "aa-col";
-    right.forEach(txt => {
-      const li = document.createElement("li");
-      li.textContent = txt;
-      ulRight.appendChild(li);
-    });
-
-    cols.appendChild(ulLeft);
-    cols.appendChild(ulRight);
-    page.appendChild(cols);
-
-    const footer = document.createElement("div");
-    footer.className = "aa-footer";
-    footer.innerHTML = "<em>Subject to change. Please consult your Canvas course for the most current instructions and updates</em>";
-    page.appendChild(footer);
-
-    wrapper.appendChild(page);
+  // Put the course title into the header stripe
+  if (printHeaderTitle) {
+    const label = [
+      c.courseNumber || "",
+      c.courseName ? " — " + c.courseName : ""
+    ].join("");
+    printHeaderTitle.textContent = label || "Course Syllabus";
   }
-}
 
-// Materials — syllabus-only books
-function renderMaterials(course) {
-  materialsList.innerHTML = "";
+  // Meta under the (now-removed) H2 stays:
+  syllabusMeta.textContent = [
+    c.courseCredits != null ? `${c.courseCredits} Credit${Number(c.courseCredits) === 1 ? "" : "s"}` : "",
+    c.instructionalType ? `Type: ${c.instructionalType}` : "",
+    c.statewideAlignment ? `Alignment: ${c.statewideAlignment}` : "",
+  ].filter(Boolean).join(" • ");
 
-  // Accept both spellings; prefer syllabiBooks if present
-  const mats = Array.isArray(course.syllabiBooks)
-    ? course.syllabiBooks
-    : (Array.isArray(course.syllabusBooks) ? course.syllabusBooks : []);
-
-  if (mats.length) {
-    mats.forEach(m => {
-      if (typeof m === "string") {
-        const li = document.createElement("li");
-        li.textContent = m;
-        materialsList.appendChild(li);
-        return;
-      }
-      const title  = m.title || m.name || "";
-      const author = m.author ? ` by ${m.author}` : "";
-      const isbn   = m.isbn ? ` (ISBN: ${m.isbn})` : "";
-      const text   = [title, author, isbn].filter(Boolean).join("");
-
-      const li = document.createElement("li");
-      li.textContent = text || "No additional materials required";
-      materialsList.appendChild(li);
-    });
-  } else {
+  // Description & Objectives
+  courseDescription.textContent = c.courseDescription || "";
+  courseObjectives.innerHTML = "";
+  const cos = Array.isArray(c.courseObjectives) ? c.courseObjectives : [];
+  (cos.length ? cos : ["No objectives provided."]).forEach(text => {
     const li = document.createElement("li");
-    li.innerHTML = `<span class="muted">No additional materials required</span>`;
-    materialsList.appendChild(li);
-  }
-}
+    li.innerHTML = text === "No objectives provided." ? `<span class="muted">${text}</span>` : text;
+    courseObjectives.appendChild(li);
+  });
 
-function renderInstructors(course) {
+  // Course Outline (titles only)
+  courseOutlineEl.innerHTML = "";
+  const outlineTitles = outlineTitlesOnly(c);
+  (outlineTitles.length ? outlineTitles : ["No outline provided."]).forEach(title => {
+    const li = document.createElement("li");
+    li.innerHTML = title === "No outline provided." ? `<span class="muted">${title}</span>` : title;
+    courseOutlineEl.appendChild(li);
+  });
+
+  // Instructors — course overrides if non-placeholder; else program default
   instructorsList.innerHTML = "";
-  const courseInstrRaw = Array.isArray(course.instructorContactInformation) ? course.instructorContactInformation : [];
+  const courseInstrRaw = Array.isArray(c.instructorContactInformation) ? c.instructorContactInformation : [];
   const courseHasRealInstructors =
     courseInstrRaw.length > 0 && !isPlaceholderArray(courseInstrRaw);
 
@@ -354,7 +285,7 @@ function renderInstructors(course) {
     instructorsList.appendChild(li);
   }
 
-  // Replace any existing notes, then add default instructor note
+  // Ensure previous instructor note is removed, then add it
   const oldNotes = instructorsList.parentElement.querySelectorAll(".instructor-note");
   oldNotes.forEach(n => n.remove());
   const instructorNote = document.createElement("p");
@@ -364,11 +295,10 @@ function renderInstructors(course) {
     <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
   `;
   instructorsList.parentElement.appendChild(instructorNote);
-}
 
-function renderHours(course) {
+  // Classroom Hours — course overrides if non-placeholder; else program default
   hoursContainer.innerHTML = "";
-  const courseHoursRaw = Array.isArray(course.courseClassroomHours) ? course.courseClassroomHours : [];
+  const courseHoursRaw = Array.isArray(c.courseClassroomHours) ? c.courseClassroomHours : [];
   const courseHasRealHours =
     courseHoursRaw.length > 0 && !isPlaceholderArray(courseHoursRaw);
 
@@ -410,6 +340,7 @@ function renderHours(course) {
     hoursContainer.appendChild(p);
   }
 
+  // Add link to full course schedule
   const scheduleNote = document.createElement("p");
   scheduleNote.className = "hours-note";
   scheduleNote.innerHTML = `For a full list of course hours visit:
@@ -417,11 +348,49 @@ function renderHours(course) {
       Course Schedule
     </a>`;
   hoursContainer.appendChild(scheduleNote);
+
+// Materials — syllabus-only books
+materialsList.innerHTML = "";
+
+// Accept both spellings; prefer syllabiBooks if present
+const mats = Array.isArray(c.syllabiBooks)
+  ? c.syllabiBooks
+  : (Array.isArray(c.syllabusBooks) ? c.syllabusBooks : []);
+
+if (mats.length) {
+  mats.forEach(m => {
+    // support strings or objects
+    if (typeof m === "string") {
+      const li = document.createElement("li");
+      li.textContent = m;
+      materialsList.appendChild(li);
+      return;
+    }
+
+    const title   = m.title || m.name || "";
+    const author  = m.author ? ` by ${m.author}` : "";
+    const isbn    = m.isbn ? ` (ISBN: ${m.isbn})` : "";
+    const price   = (typeof m.price === "number")
+      ? ` — $${m.price.toFixed(2)}`
+      : (m.price ? ` — ${m.price}` : "");
+
+    const text = [title, author, isbn]
+      .filter(Boolean)
+      .join("");
+
+    const li = document.createElement("li");
+    li.textContent = text || "No additional materials required";
+    materialsList.appendChild(li);
+  });
+} else {
+  const li = document.createElement("li");
+  li.innerHTML = `<span class="muted">No additional materials required</span>`;
+  materialsList.appendChild(li);
 }
 
-function renderPolicies(course) {
+  // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";
-  const coursePoliciesRaw = Array.isArray(course.course_Policies) ? course.course_Policies : [];
+  const coursePoliciesRaw = Array.isArray(c.course_Policies) ? c.course_Policies : [];
   const courseHasRealPolicies =
     coursePoliciesRaw.length > 0 && !isPlaceholderArray(coursePoliciesRaw);
 
@@ -485,9 +454,8 @@ function renderPolicies(course) {
       policiesContainer.appendChild(ul);
     }
   });
-}
 
-function renderInstitutionalPolicy() {
+  // Institutional Policy (static data file)
   institutionalPolicyContainer.innerHTML = "";
   if (Array.isArray(institutionalPolicy) && institutionalPolicy.length) {
     institutionalPolicy.forEach(section => {
@@ -502,63 +470,4 @@ function renderInstitutionalPolicy() {
       }
     });
   }
-}
-
-/** ------------------------ Main Render ------------------------ */
-function renderSyllabus(c) {
-  // Title (helps when saving as PDF)
-  document.title = c?.courseNumber ? c.courseNumber : "Syllabus";
-
-  // Header stripe text
-  if (printHeaderTitle) {
-    const label = [
-      c.courseNumber || "",
-      c.courseName ? " — " + c.courseName : ""
-    ].join("");
-    printHeaderTitle.textContent = label || "Course Syllabus";
-  }
-
-  // Meta under header
-  syllabusMeta.textContent = [
-    c.courseCredits != null ? `${c.courseCredits} Credit${Number(c.courseCredits) === 1 ? "" : "s"}` : "",
-    c.instructionalType ? `Type: ${c.instructionalType}` : "",
-    c.statewideAlignment ? `Alignment: ${c.statewideAlignment}` : "",
-  ].filter(Boolean).join(" • ");
-
-  // Description & Objectives
-  courseDescription.textContent = c.courseDescription || "";
-  courseObjectives.innerHTML = "";
-  const cos = Array.isArray(c.courseObjectives) ? c.courseObjectives : [];
-  (cos.length ? cos : ["No objectives provided."]).forEach(text => {
-    const li = document.createElement("li");
-    li.innerHTML = text === "No objectives provided." ? `<span class="muted">${text}</span>` : text;
-    courseObjectives.appendChild(li);
-  });
-
-  // Course Outline (titles only)
-  courseOutlineEl.innerHTML = "";
-  const outlineTitles = outlineTitlesOnly(c);
-  (outlineTitles.length ? outlineTitles : ["No outline provided."]).forEach(title => {
-    const li = document.createElement("li");
-    li.innerHTML = title === "No outline provided." ? `<span class="muted">${title}</span>` : title;
-    courseOutlineEl.appendChild(li);
-  });
-
-  // Instructors
-  renderInstructors(c);
-
-  // Hours
-  renderHours(c);
-
-  // Materials
-  renderMaterials(c);
-
-  // Assignments & Assessments (AFTER Materials)
-  renderAssignmentsAndAssessments(c);
-
-  // Policies
-  renderPolicies(c);
-
-  // Institutional (final page)
-  renderInstitutionalPolicy();
 }
