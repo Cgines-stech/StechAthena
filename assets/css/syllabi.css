@@ -109,6 +109,96 @@ body{
   print-color-adjust: exact;
 }
 
+/* ===== Assignments & Assessments (A&A) pages ===== */
+
+/* Wrapper always forces a page before and after (print) */
+.assignments-wrapper {
+  display: block;
+}
+
+/* Each generated page */
+.assignments-page {
+  padding-top: 6px;
+  padding-bottom: 8px;
+  /* keep each generated page self-contained on print */
+}
+
+.assignments-page h3 {
+  margin: 0 0 6px 0 !important;
+}
+
+/* Two-column layout for items */
+.aa-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+  align-items: start;
+}
+
+.aa-col {
+  list-style: disc outside;
+  padding-left: 18px;
+  margin: 0;
+}
+
+.aa-col li {
+  font-size: 13px !important;
+  margin: 0 0 4px 0;
+  break-inside: avoid;
+}
+
+/* Page-specific italic footer (only on A&A pages) */
+.aa-footer {
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+  font-size: 12px !important;
+  color: #000;
+}
+
+/* Hide the <hr> that used to sit between Materials and the next section, if present */
+#materialsSection + .section-sep {
+  display: none !important;
+}
+
+/* Print behavior */
+@media print {
+  /* Hard page break before and after the entire A&A wrapper */
+  .assignments-wrapper {
+    break-before: page;
+    page-break-before: always;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  /* Each generated A&A page prints on its own sheet */
+  .assignments-page {
+    break-after: always;
+    page-break-after: always;
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+  .assignments-page:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  /* Keep heading with content */
+  .assignments-page > h3 {
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Keep footer on the page */
+  .aa-footer {
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+  }
+}
+
+
 /* ---------- PRINT (PDF-focused) ---------- */
 @media print {
 

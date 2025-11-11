@@ -388,6 +388,89 @@ if (mats.length) {
   materialsList.appendChild(li);
 }
 
+// --- Assignments & Assessments renderer ---
+function renderAssignmentsAndAssessments(course) {
+  const wrapper = document.getElementById('assignmentsWrapper');
+  if (!wrapper) return;
+
+  // Support multiple possible key spellings
+  const aaRaw =
+    course.courseAssignmentsandAsssessments ||
+    course.courseAssignmentsandAssessments ||
+    course.assignmentsAndAssessments ||
+    course.assignments ||
+    [];
+
+  const items = Array.isArray(aaRaw)
+    ? aaRaw.filter(x => typeof x === 'string' && x.trim().length > 0)
+    : [];
+
+  if (!items.length) {
+    // Nothing to render; keep wrapper hidden
+    return;
+  }
+
+  // Show the wrapper so it prints
+  wrapper.hidden = false;
+
+  // Paginate so each print page gets its own footer.
+  // Choose a conservative per-page capacity so two columns look balanced.
+  // (12 items per column => 24 per page)
+  const PER_COL = 12;
+  const PER_PAGE = PER_COL * 2;
+
+  for (let i = 0; i < items.length; i += PER_PAGE) {
+    const pageItems = items.slice(i, i + PER_PAGE);
+
+    // Split into two columns
+    const left = pageItems.slice(0, PER_COL);
+    const right = pageItems.slice(PER_COL, PER_PAGE);
+
+    const page = document.createElement('section');
+    page.className = 'assignments-page';
+
+    // Heading
+    const h3 = document.createElement('h3');
+    h3.textContent = 'Assignments & Assessments';
+    page.appendChild(h3);
+
+    // Two-column lists
+    const cols = document.createElement('div');
+    cols.className = 'aa-columns';
+
+    const ulLeft = document.createElement('ul');
+    ulLeft.className = 'aa-col';
+    left.forEach(txt => {
+      const li = document.createElement('li');
+      li.textContent = txt;
+      ulLeft.appendChild(li);
+    });
+
+    const ulRight = document.createElement('ul');
+    ulRight.className = 'aa-col';
+    right.forEach(txt => {
+      const li = document.createElement('li');
+      li.textContent = txt;
+      ulRight.appendChild(li);
+    });
+
+    cols.appendChild(ulLeft);
+    cols.appendChild(ulRight);
+    page.appendChild(cols);
+
+    // Footer disclaimer (italic), only on A&A pages
+    const footer = document.createElement('div');
+    footer.className = 'aa-footer';
+    footer.innerHTML = '<em>Subject to change. Please consult your Canvas course for the most current instructions and updates</em>';
+    page.appendChild(footer);
+
+    wrapper.appendChild(page);
+  }
+}
+
+// After materials rendering:
+renderAssignmentsAndAssessments(course);
+
   // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";
   const coursePoliciesRaw = Array.isArray(c.course_Policies) ? c.course_Policies : [];
