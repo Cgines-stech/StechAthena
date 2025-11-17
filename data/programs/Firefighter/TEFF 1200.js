@@ -116,6 +116,8 @@ const TEFF1200 = [
         {
           startDate: "07-29-2025",
           endDate: "12-17-2025",
+          startDate: "01-29-2025",
+          endDate: "01-17-2025",
           Monday: "5:00 PM - 9:00 PM",
           Tuesday: "5:00 PM - 9:00 PM",
           Wednesday: "5:00 PM - 9:00 PM",
