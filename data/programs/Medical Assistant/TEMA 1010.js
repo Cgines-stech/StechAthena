@@ -54,7 +54,7 @@ const TEMA1010 = [
     ],
     
     courseTools: [
-      { name: "Digital Device (Chromebook)", price: 302.5, note: " Chromebook or comparable device - Available at STECH Bookstore, can be purchased elsewhere" },
+      { name: "Digital Device (Chromebook)", price: 302.5, note: "Chromebook or comparable device - Available at STECH Bookstore, can be purchased elsewhere" },
     ],
 
     courseCertifications: [

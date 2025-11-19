@@ -133,6 +133,18 @@ export const PROGRAM_COURSE_REGISTRY = {
   ],
   "Medical Assistant": [
     "../../data/programs/Medical Assistant/TEMA 1010.js",
+    "../../data/programs/Medical Assistant/TEMA 1080.js",
+    "../../data/programs/Medical Assistant/TEMA 1060.js",
+    "../../data/programs/Medical Assistant/TEMA 1065.js",
+    "../../data/programs/Medical Assistant/TEMA 1040.js",
+    "../../data/programs/Medical Assistant/TEMA 1230.js",
+    "../../data/programs/Medical Assistant/TEMA 1020.js",
+    "../../data/programs/Medical Assistant/TEMA 1241.js",
+    "../../data/programs/Medical Assistant/TEMA 1030.js",
+    "../../data/programs/Medical Assistant/TEMA 1250.js",
+    "../../data/programs/Medical Assistant/TEMA 1050.js",
+    "../../data/programs/Medical Assistant/TEMA 1900.js",
+    "../../data/programs/Medical Assistant/TEMA 1910.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
