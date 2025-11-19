@@ -406,6 +406,8 @@ if (mats.length) {
     // Grade scale block
     if (p && (p.type === "gradeScale" || Array.isArray(p.scale))) {
       const wrap = document.createElement("div");
+      wrap.className = "grade-scale-block"; // 
+      
       if (p.title) {
         const h = document.createElement("h4");
         h.textContent = p.title;

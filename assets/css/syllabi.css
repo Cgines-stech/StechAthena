@@ -422,3 +422,40 @@ body{
     display: none !important;
   }
 }
+
+/* The whole block (optional, just for spacing) */
+.grade-scale-block {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+/* Make the table span the content width and behave nicely */
+.grade-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;        /* even columns across the width */
+}
+
+/* Remove borders, add some breathing room */
+.grade-table td {
+  border: none;
+  padding: 0.4rem 0.6rem;
+  vertical-align: top;
+}
+
+/* Layout inside each cell */
+.grade-table .grade {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for the letter (e.g., A, B+) */
+.grade-table .grade-letter {
+  font-weight: 600;
+}
+
+/* Style for the range (e.g., 90–100%) */
+.grade-table .grade-range {
+  font-size: 0.9em;
+  opacity: 0.8;               /* or use a muted color if you have one */
+}
