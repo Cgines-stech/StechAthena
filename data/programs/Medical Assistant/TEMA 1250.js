@@ -14,7 +14,7 @@ const TEMA1250 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 90,
     courseTuition: 285.00,
-    courseFee: 86.00,
+    courseFee: 134.00,
     instructionalType: "LEL",
     isElective: false,
     includeInProgramTotals: true,
