@@ -1,4 +1,4 @@
-// data/programs/Emergency Medical Technician/programPolicies.js
+// data/programs/Medical Assistant/programPolicies.js
 import gradeScale from "../../gradescale.js";
 
 const GS = Array.isArray(gradeScale) ? gradeScale[0] : gradeScale;
