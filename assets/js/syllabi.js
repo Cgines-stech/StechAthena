@@ -229,11 +229,17 @@ function renderSyllabus(c) {
 
   // Put the course title into the header stripe
   if (printHeaderTitle) {
+    const credits =
+      c.courseCredits != null
+        ? ` (${c.courseCredits} Credit${Number(c.courseCredits) === 1 ? "" : "s"})`
+        : "";
+
     const label = [
       c.courseNumber || "",
       c.courseName ? " — " + c.courseName : "",
-      " (" + c.courseCredits != null ? `${c.courseCredits} Credit${Number(c.courseCredits) === 1 ? "" : "s)"}` : ")",
+      credits,
     ].join("");
+
     printHeaderTitle.textContent = label || "Course Syllabus";
   }
 
