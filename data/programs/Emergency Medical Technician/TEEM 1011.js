@@ -93,24 +93,24 @@ const TEEM1011 = [
     ],
 
     courseClassroomHours: [
-        {
-          startDate: "08-27-2025",
-          endDate: "12-11-2025",
-          Monday: "",
-          Tuesday: "5:00 PM - 9:00 PM",
-          Wednesday: "5:00 PM - 9:00 PM",
-          Thursday: "5:00 PM - 9:00 PM",
-          Friday: "",
-          Saturday: "",
-        }
+      {
+        startDate: "08-27-2025",
+        endDate: "12-11-2025",
+        Monday: "",
+        Tuesday: "5:00 PM - 9:00 PM",
+        Wednesday: "5:00 PM - 9:00 PM",
+        Thursday: "5:00 PM - 9:00 PM",
+        Friday: "",
+        Saturday: "",
+      }
     ],
 
     instructorContactInformation: [
-        {}
+      {}
     ],
 
     course_Policies: [
-        {}
+      {}
     ],
 
     courseAssignmentsandAsssessments: [

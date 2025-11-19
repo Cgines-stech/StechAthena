@@ -22,6 +22,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Information Technology/program.js",
   "Master Esthetician":
     "../../data/programs/Master Esthetician/program.js",
+  "Medical Assistant":
+    "../../data/programs/Medical Assistant/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
 };
@@ -128,6 +130,9 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Master Esthetician/TEES 2030.js",
     "../../data/programs/Master Esthetician/TEES 2994.js",
     "../../data/programs/Master Esthetician/TEES 2995.js",
+  ],
+  "Medical Assistant": [
+    "../../data/programs/Medical Assistant/TEMA 1010.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
