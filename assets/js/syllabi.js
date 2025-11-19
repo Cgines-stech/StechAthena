@@ -243,13 +243,6 @@ function renderSyllabus(c) {
     printHeaderTitle.textContent = label || "Course Syllabus";
   }
 
-  // Meta under the (now-removed) H2 stays:
-  syllabusMeta.textContent = [
-    c.courseCredits != null ? `${c.courseCredits} Credit${Number(c.courseCredits) === 1 ? "" : "s"}` : "",
-    c.instructionalType ? `Type: ${c.instructionalType}` : "",
-    c.statewideAlignment ? `Alignment: ${c.statewideAlignment}` : "",
-  ].filter(Boolean).join(" • ");
-
   // Description & Objectives
   courseDescription.textContent = c.courseDescription || "";
   courseObjectives.innerHTML = "";
