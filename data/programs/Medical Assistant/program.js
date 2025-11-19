@@ -15,9 +15,9 @@ const medicalAssistantProgram = [
     ],
 
     programCIP: 51.0904,
-    programCreditHours: 6,
-    programClockHours: 180,
-    certificate: 'Certificate'
+    programCreditHours: 31,
+    programClockHours: 990,
+    certificate: 'Certificate of Completion - C1Y'
   }
 ];
 
