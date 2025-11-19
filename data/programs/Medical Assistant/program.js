@@ -14,7 +14,7 @@ const medicalAssistantProgram = [
       "Demonstrate competencies and skills in preparation for taking a medical assistant national certification examination.",
     ],
 
-    programCIP: 51.0904,
+    programCIP: 51.0801,
     programCreditHours: 31,
     programClockHours: 990,
     certificate: 'Certificate of Completion - C1Y'
