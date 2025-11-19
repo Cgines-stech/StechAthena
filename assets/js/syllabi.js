@@ -231,7 +231,8 @@ function renderSyllabus(c) {
   if (printHeaderTitle) {
     const label = [
       c.courseNumber || "",
-      c.courseName ? " — " + c.courseName : ""
+      c.courseName ? " — " + c.courseName : "",
+      c.courseCredits != null ? `${c.courseCredits} (Credit${Number(c.courseCredits) === 1 ? "" : "s"}` : ")",
     ].join("");
     printHeaderTitle.textContent = label || "Course Syllabus";
   }
