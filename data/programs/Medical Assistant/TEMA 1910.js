@@ -4,7 +4,7 @@
 import gradeScale from "../../gradescale.js";
 import { courseTotals, sum, money } from "../../utils/helpers.js";
 
-const TEMA1900 = [
+const TEMA1910 = [
   {
     id: 14013,
     programId: 1,
