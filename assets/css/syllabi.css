@@ -433,29 +433,32 @@ body{
 .grade-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;        /* even columns across the width */
+  table-layout: fixed;  /* even columns across the width */
 }
 
-/* Remove borders, add some breathing room */
+/* Remove borders, add comfortable spacing */
 .grade-table td {
   border: none;
   padding: 0.4rem 0.6rem;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
-/* Layout inside each cell */
+/* Put grade letter and range on ONE LINE */
 .grade-table .grade {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;   /* horizontal layout */
+  align-items: center;
+  gap: 0.4rem;           /* space between "A" and "94–100%" */
+  white-space: nowrap;   /* prevents wrapping */
 }
 
-/* Style for the letter (e.g., A, B+) */
+/* Bold for letter */
 .grade-table .grade-letter {
   font-weight: 600;
 }
 
-/* Style for the range (e.g., 90–100%) */
+/* Slightly muted percent range */
 .grade-table .grade-range {
+  opacity: 0.8;
   font-size: 0.9em;
-  opacity: 0.8;               /* or use a muted color if you have one */
 }
