@@ -204,7 +204,10 @@ programSelect.addEventListener("change", async () => {
 
   // load program-level fallbacks
   const imod = await safeImport(PROGRAM_INSTRUCTORS_REGISTRY[currentProgramName]);
-  if (imod) currentProgramInstructors = decodeInstructors(imod);
+  if (imod) {
+    currentProgramInstructors = decodeInstructors(imod);
+    currentProgramInstructorNote = imod.instructorNote || "";   // ⬅ add this
+  }
 
   const hmod = await safeImport(PROGRAM_HOURS_REGISTRY[currentProgramName]);
   if (hmod) currentProgramHours = hmod.default || [];
@@ -310,21 +313,29 @@ oldNotes.forEach(n => n.remove());
 // Look for note in instructor files first
 let noteHTML = "";
 
-// Check if any instructor object includes a "note"
-for (const instr of useInstructors) {
-  if (instr.note) {
-    noteHTML = instr.note;
-    break;
+// Check program-level note first
+if (currentProgramInstructorNote) {
+  noteHTML = currentProgramInstructorNote;
+}
+
+// If no program-level note, check instructor-level notes
+if (!noteHTML) {
+  for (const instr of useInstructors) {
+    if (instr.note) {
+      noteHTML = instr.note;
+      break;
+    }
   }
 }
 
-// If no custom note found, use fallback default
+// Fallback default if nothing provided
 if (!noteHTML) {
   noteHTML = `
     Office Hours: By appointment<br>
     <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
   `;
 }
+
 
 // Render the note
 const instructorNote = document.createElement("p");
