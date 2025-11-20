@@ -14,4 +14,11 @@ export const PROGRAMS = [
   { id: 150, department_id: 1, name: 'Medical Office Receptionist', program_credit_hours: 12, CIP: 51.0712},
   { id: 160, department_id: 1, name: 'Nursing Assistant', program_credit_hours: 3, CIP: 51.3902},
   { id: 110, department_id: 1, name: 'Paramedic', program_credit_hours: 34, CIP: 51.0904},
+  { id: 170, department_id: 1, name: 'Pharmacy Technician', program_credit_hours: 17, CIP: 51.0805},
+  { id: 180, department_id: 1, name: 'Phlebotomy', program_credit_hours: 3, CIP: 51.1009},
+  { id: 220, department_id: 2, name: 'Plumbing Apprenticeship', program_credit_hours: 24, CIP: 46.0503},
+  { id: 800, department_id: 7, name: 'Practical Nursing', program_credit_hours: 27, CIP: 51.3901},
+  { id: 900, department_id: 8, name: 'Software Development', program_credit_hours: 30, CIP: 15.1204},
+  { id: 190, department_id: 1, name: 'Surgical Technology', program_credit_hours: 26, CIP: 51.0909},
+  { id: 950, department_id: 9, name: 'Welding Technology', program_credit_hours: 24, CIP: 48.0508},
 ];

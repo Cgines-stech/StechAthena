@@ -41,6 +41,8 @@ const PROGRAM_INSTRUCTORS_REGISTRY = {
     "../../data/programs/Nursing Assistant/instructors.js",
   "Paramedic":
     "../../data/programs/Paramedic/instructors.js",
+  "Pharmacy Technician":
+    "../../data/programs/Pharmacy Technician/instructors.js",
 };
 const PROGRAM_HOURS_REGISTRY = {
   "Advanced Emergency Medical Technician":
@@ -71,6 +73,8 @@ const PROGRAM_HOURS_REGISTRY = {
     "../../data/programs/Nursing Assistant/classRoomDates.js",
   "Paramedic":
     "../../data/programs/Paramedic/classRoomDates.js",
+  "Pharmacy Technician":
+    "../../data/programs/Pharmacy Technician/classRoomDates.js",
 };
 const PROGRAM_POLICIES_REGISTRY = {
   "Advanced Emergency Medical Technician":
@@ -101,6 +105,8 @@ const PROGRAM_POLICIES_REGISTRY = {
     "../../data/programs/Nursing Assistant/programPolicies.js",
   "Paramedic":
     "../../data/programs/Paramedic/programPolicies.js",
+  "Pharmacy Technician":
+    "../../data/programs/Pharmacy Technician/programPolicies.js",
 };
 
 /** ------------------------ DOM ------------------------ */

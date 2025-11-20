@@ -30,6 +30,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Nursing Assistant/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
+  "Pharmacy Technician":
+    "../../data/programs/Pharmacy Technician/program.js",
 };
 
 export const PROGRAM_COURSE_REGISTRY = {
@@ -171,6 +173,15 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Paramedic/TEPA 2994.js",
     "../../data/programs/Paramedic/TEPA 2121.js",
     "../../data/programs/Paramedic/TEPA 2999.js",
+  ],
+  "Pharmacy Technician": [
+    "../../data/programs/Pharmacy Technician/TEPT 1010.js",
+    "../../data/programs/Pharmacy Technician/TEPT 1522.js",
+    "../../data/programs/Pharmacy Technician/TEPT 1100.js",
+    "../../data/programs/Pharmacy Technician/TEPT 1110.js",
+    "../../data/programs/Pharmacy Technician/TEPT 1220.js",
+    "../../data/programs/Pharmacy Technician/TEPT 1610.js",
+    "../../data/programs/Pharmacy Technician/TEPT 1900.js",
   ],
 };
 
