@@ -509,3 +509,52 @@ body{
     page-break-inside: avoid !important;
   }
 }
+
+/* FINAL OVERRIDES: hard page breaks for Assignments & Hours */
+@media print {
+
+  /* Invisible block that forces a new page before Assignments */
+  #assignmentsSection::before {
+    content: "";
+    display: block;
+    height: 0;
+    margin: 0;
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  /* Keep Assignments itself allowed to span multiple pages */
+  #syllabus #assignmentsSection {
+    display: block !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Hard 2-column layout for the list */
+  #syllabus #assignmentsSection .assignments-multicol {
+    column-count: 2;
+    column-gap: 2rem;
+  }
+
+  #syllabus #assignmentsSection .assignments-multicol li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Invisible block that forces a new page before Hours */
+  #hoursSection::before {
+    content: "";
+    display: block;
+    height: 0;
+    margin: 0;
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  /* Keep Hours together on its page if possible */
+  #hoursSection {
+    display: block !important;
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+  }
+}
