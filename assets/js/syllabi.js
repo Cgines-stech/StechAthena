@@ -466,10 +466,11 @@ if (mats.length) {
       const ul = document.createElement("ul");
       ul.className = "bullets";
       p.content.forEach(line => {
-        const li = document.createElement("li");
-        li.textContent = line;
-        ul.appendChild(li);
-      });
+  const li = document.createElement("li");
+  li.innerHTML = line;  // allow <strong> and other HTML
+  ul.appendChild(li);
+});
+
       policiesContainer.appendChild(h);
       policiesContainer.appendChild(ul);
     }
