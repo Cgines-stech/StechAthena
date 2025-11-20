@@ -469,15 +469,14 @@ body{
     page-break-before: always;
   }
 }
-/* Default on-screen: single column */
-.two-col {
-  column-count: 1;
-}
-
-/* Print: use two columns */
 @media print {
-  .two-col {
+  #assignmentsList.two-col {
     column-count: 2;
     column-gap: 2rem;
+  }
+
+  #assignmentsList.two-col li {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
