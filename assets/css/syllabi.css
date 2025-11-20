@@ -469,14 +469,21 @@ body{
     page-break-before: always;
   }
 }
-@media print {
-  #assignmentsList.two-col {
-    column-count: 2;
-    column-gap: 2rem;
-  }
+/* Two-column layout for assignments using flexbox */
+.assignments-columns {
+  display: flex;
+  gap: 2rem;
+}
 
-  #assignmentsList.two-col li {
-    break-inside: avoid;
+/* Each column shares the width */
+.assignments-columns ul {
+  flex: 1 1 0;
+}
+
+/* Avoid breaking inside individual items when printing */
+@media print {
+  .assignments-columns li {
     page-break-inside: avoid;
+    break-inside: avoid;
   }
 }

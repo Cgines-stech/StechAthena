@@ -123,7 +123,8 @@ const courseObjectives  = document.getElementById("courseObjectives");
 
 const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
-const assignmentsList   = document.getElementById("assignmentsList");
+const assignmentsListLeft  = document.getElementById("assignmentsListLeft");
+const assignmentsListRight = document.getElementById("assignmentsListRight");
 const policiesContainer = document.getElementById("policiesContainer");
 
 // Outline + Hours
@@ -414,9 +415,9 @@ if (mats.length) {
 }
 
   // Assignments & Assessments
-  assignmentsList.innerHTML = "";
+  assignmentsListLeft.innerHTML  = "";
+  assignmentsListRight.innerHTML = "";
 
-  // Handle your current property name (typo included) and a couple of safer fallbacks
   const assignmentsRaw =
     Array.isArray(c.courseAssignmentsandAsssessments)
       ? c.courseAssignmentsandAsssessments
@@ -427,17 +428,26 @@ if (mats.length) {
               : []));
 
   if (assignmentsRaw.length) {
-    assignmentsRaw.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      assignmentsList.appendChild(li);
-    });
+    // Split roughly in half for two columns
+    const mid = Math.ceil(assignmentsRaw.length / 2);
+    const leftItems  = assignmentsRaw.slice(0, mid);
+    const rightItems = assignmentsRaw.slice(mid);
+
+    const addItems = (items, ul) => {
+      items.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+    };
+
+    addItems(leftItems, assignmentsListLeft);
+    addItems(rightItems, assignmentsListRight);
   } else {
     const li = document.createElement("li");
     li.innerHTML = `<span class="muted">Assignments and assessments will be provided in Canvas or by the instructor.</span>`;
-    assignmentsList.appendChild(li);
+    assignmentsListLeft.appendChild(li);
   }
-
 
   // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";
