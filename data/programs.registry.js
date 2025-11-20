@@ -149,11 +149,11 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Medical Assistant/TEMA 1910.js",
   ],
   "Medical Office Receptionist": [
-    "../../data/programs/Medical Assistant/TEMA 1000.js",
-    "../../data/programs/Medical Assistant/TEMA 1040.js",
-    "../../data/programs/Medical Assistant/TEMA 1080.js",
-    "../../data/programs/Medical Assistant/TEMA 1020.js",
-    "../../data/programs/Medical Assistant/TEMA 1030.js",
+    "../../data/programs/Medical Office Receptionist/TEMA 1000.js",
+    "../../data/programs/Medical Office Receptionist/TEMA 1040.js",
+    "../../data/programs/Medical Office Receptionist/TEMA 1080.js",
+    "../../data/programs/Medical Office Receptionist/TEMA 1020.js",
+    "../../data/programs/Medical Office Receptionist/TEMA 1030.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
