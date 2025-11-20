@@ -303,16 +303,35 @@ function renderSyllabus(c) {
     instructorsList.appendChild(li);
   }
 
-  // Ensure previous instructor note is removed, then add it
-  const oldNotes = instructorsList.parentElement.querySelectorAll(".instructor-note");
-  oldNotes.forEach(n => n.remove());
-  const instructorNote = document.createElement("p");
-  instructorNote.className = "instructor-note";
-  instructorNote.innerHTML = `
+// Remove old instructor note
+const oldNotes = instructorsList.parentElement.querySelectorAll(".instructor-note");
+oldNotes.forEach(n => n.remove());
+
+// Look for note in instructor files first
+let noteHTML = "";
+
+// Check if any instructor object includes a "note"
+for (const instr of useInstructors) {
+  if (instr.note) {
+    noteHTML = instr.note;
+    break;
+  }
+}
+
+// If no custom note found, use fallback default
+if (!noteHTML) {
+  noteHTML = `
     Office Hours: By appointment<br>
     <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
   `;
-  instructorsList.parentElement.appendChild(instructorNote);
+}
+
+// Render the note
+const instructorNote = document.createElement("p");
+instructorNote.className = "instructor-note";
+instructorNote.innerHTML = noteHTML;
+instructorsList.parentElement.appendChild(instructorNote);
+
 
   // Classroom Hours — course overrides if non-placeholder; else program default
   hoursContainer.innerHTML = "";
