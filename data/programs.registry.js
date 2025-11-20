@@ -24,7 +24,7 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Master Esthetician/program.js",
   "Medical Assistant":
     "../../data/programs/Medical Assistant/program.js",
-  "Medical Office Recepionist":
+  "Medical Office Receptionist":
     "../../data/programs/Medical Office Receptionist/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
