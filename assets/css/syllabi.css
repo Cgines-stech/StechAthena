@@ -185,7 +185,7 @@ button:hover{ filter:brightness(.96); }
   font-size: 18px !important;
   text-align: center !important;
   display: inline-block !important;
-  border: 2px solid #ffffff;       /* white border instead of blue */
+  border: .5px solid #ffffff;       /* white border instead of blue */
 }
 
 /* =========================================
