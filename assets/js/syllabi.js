@@ -346,7 +346,7 @@ function renderSyllabus(c) {
       });
       if (!any) {
         const li = document.createElement("li");
-        li.innerHTML = `<span class="muted">No weekly meeting times listed.</span>`;
+        li.innerHTML = `<span class="muted">Hours Vary</span>`;
         dayList.appendChild(li);
       }
       block.appendChild(dayList);
