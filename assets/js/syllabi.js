@@ -35,6 +35,8 @@ const PROGRAM_INSTRUCTORS_REGISTRY = {
     "../../data/programs/Master Esthetician/instructors.js",
   "Medical Assistant":
     "../../data/programs/Medical Assistant/instructors.js",
+  "Medical Office Receptionist":
+    "../../data/programs/Medical Office Receptionist/instructors.js",
   "Paramedic":
     "../../data/programs/Paramedic/instructors.js",
 };
@@ -61,6 +63,8 @@ const PROGRAM_HOURS_REGISTRY = {
     "../../data/programs/Master Esthetician/classRoomDates.js",
   "Medical Assistant":
     "../../data/programs/Medical Assistant/classRoomDates.js",
+  "Medical Office Receptionist":
+    "../../data/programs/Medical Office Receptionist/classRoomDates.js",
   "Paramedic":
     "../../data/programs/Paramedic/classRoomDates.js",
 };
@@ -87,6 +91,8 @@ const PROGRAM_POLICIES_REGISTRY = {
     "../../data/programs/Master Esthetician/programPolicies.js",
   "Medical Assistant":
     "../../data/programs/Medical Assistant/programPolicies.js",
+  "Medical Office Receptionist":
+    "../../data/programs/Medical Office Receptionist/programPolicies.js",
   "Paramedic":
     "../../data/programs/Paramedic/programPolicies.js",
 };

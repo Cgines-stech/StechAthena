@@ -57,6 +57,7 @@ const decodeModule = (mod) => {
     mod?.informationTechnologyProgram,
     mod?.masterEstheticianProgram,
     mod?.medicalAssistantProgram,
+    mod?.medicalOfficeReceptionistProgram,
     mod?.paramedicProgram,
   ];
   const data = candidates.find(Boolean);
