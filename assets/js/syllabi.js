@@ -123,8 +123,7 @@ const courseObjectives  = document.getElementById("courseObjectives");
 
 const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
-const assignmentsListLeft  = document.getElementById("assignmentsListLeft");
-const assignmentsListRight = document.getElementById("assignmentsListRight");
+const assignmentsList = document.getElementById("assignmentsList");
 const policiesContainer = document.getElementById("policiesContainer");
 
 // Outline + Hours
@@ -415,8 +414,7 @@ if (mats.length) {
 }
 
   // Assignments & Assessments
-  assignmentsListLeft.innerHTML  = "";
-  assignmentsListRight.innerHTML = "";
+  assignmentsList.innerHTML = "";
 
   const assignmentsRaw =
     Array.isArray(c.courseAssignmentsandAsssessments)
@@ -428,26 +426,17 @@ if (mats.length) {
               : []));
 
   if (assignmentsRaw.length) {
-    // Split roughly in half for two columns
-    const mid = Math.ceil(assignmentsRaw.length / 2);
-    const leftItems  = assignmentsRaw.slice(0, mid);
-    const rightItems = assignmentsRaw.slice(mid);
-
-    const addItems = (items, ul) => {
-      items.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        ul.appendChild(li);
-      });
-    };
-
-    addItems(leftItems, assignmentsListLeft);
-    addItems(rightItems, assignmentsListRight);
+    assignmentsRaw.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      assignmentsList.appendChild(li);
+    });
   } else {
     const li = document.createElement("li");
     li.innerHTML = `<span class="muted">Assignments and assessments will be provided in Canvas or by the instructor.</span>`;
-    assignmentsListLeft.appendChild(li);
+    assignmentsList.appendChild(li);
   }
+
 
   // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";

@@ -502,3 +502,30 @@ body{
     break-inside: avoid;
   }
 }
+
+/* Screen: either 1 column or 2, your choice */
+.assignments-multicol {
+  column-count: 1;
+}
+
+/* PRINT: real 2-column flow, filling page1 col1 → page1 col2 → page2 col1 → ... */
+@media print {
+  /* Let this section split across pages normally */
+  #syllabus #assignmentsSection {
+    display: block !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Two columns for the assignments list in print */
+  #syllabus #assignmentsSection .assignments-multicol {
+    column-count: 2;
+    column-gap: 2rem;
+  }
+
+  /* Try to keep individual items intact */
+  #syllabus #assignmentsSection .assignments-multicol li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
