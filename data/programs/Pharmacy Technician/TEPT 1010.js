@@ -67,7 +67,7 @@ const TEPT1010 = [
     ],
     
     courseTools: [
-      { name: "Chrome Book", price: 302.5, note: "" },
+      { name: "Chrome Book", price: 302.5, note: "Optional" },
     ],
 
     courseCertifications: [
