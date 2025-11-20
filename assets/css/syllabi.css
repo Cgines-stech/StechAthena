@@ -413,4 +413,14 @@ button:hover{ filter:brightness(.96); }
     page-break-inside: avoid;
   }
 
+  /* Make disclaimer always appear below the two-column list */
+  #assignmentsDisclaimer {
+    column-span: all;              /* NEW: full page width in multi-column context */
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-top: 10px;
+    font-size: 12px !important;
+    font-style: italic;
+  }
+
 }
