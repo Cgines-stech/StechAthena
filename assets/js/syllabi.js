@@ -204,10 +204,7 @@ programSelect.addEventListener("change", async () => {
 
   // load program-level fallbacks
   const imod = await safeImport(PROGRAM_INSTRUCTORS_REGISTRY[currentProgramName]);
-  if (imod) {
-    currentProgramInstructors = decodeInstructors(imod);
-    currentProgramInstructorNote = imod.instructorNote || "";   // ⬅ add this
-  }
+  if (imod) currentProgramInstructors = decodeInstructors(imod);
 
   const hmod = await safeImport(PROGRAM_HOURS_REGISTRY[currentProgramName]);
   if (hmod) currentProgramHours = hmod.default || [];
@@ -306,43 +303,16 @@ function renderSyllabus(c) {
     instructorsList.appendChild(li);
   }
 
-// Remove old instructor note
-const oldNotes = instructorsList.parentElement.querySelectorAll(".instructor-note");
-oldNotes.forEach(n => n.remove());
-
-// Look for note in instructor files first
-let noteHTML = "";
-
-// Check program-level note first
-if (currentProgramInstructorNote) {
-  noteHTML = currentProgramInstructorNote;
-}
-
-// If no program-level note, check instructor-level notes
-if (!noteHTML) {
-  for (const instr of useInstructors) {
-    if (instr.note) {
-      noteHTML = instr.note;
-      break;
-    }
-  }
-}
-
-// Fallback default if nothing provided
-if (!noteHTML) {
-  noteHTML = `
+  // Ensure previous instructor note is removed, then add it
+  const oldNotes = instructorsList.parentElement.querySelectorAll(".instructor-note");
+  oldNotes.forEach(n => n.remove());
+  const instructorNote = document.createElement("p");
+  instructorNote.className = "instructor-note";
+  instructorNote.innerHTML = `
     Office Hours: By appointment<br>
     <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
   `;
-}
-
-
-// Render the note
-const instructorNote = document.createElement("p");
-instructorNote.className = "instructor-note";
-instructorNote.innerHTML = noteHTML;
-instructorsList.parentElement.appendChild(instructorNote);
-
+  instructorsList.parentElement.appendChild(instructorNote);
 
   // Classroom Hours — course overrides if non-placeholder; else program default
   hoursContainer.innerHTML = "";
@@ -496,10 +466,10 @@ if (mats.length) {
       const ul = document.createElement("ul");
       ul.className = "bullets";
       p.content.forEach(line => {
-  const li = document.createElement("li");
-  li.innerHTML = line;  // allow <strong> and other HTML
-  ul.appendChild(li);
-});
+        const li = document.createElement("li");
+        li.innerHTML = line;  // allow <strong> and other HTML
+        ul.appendChild(li);
+      });
 
       policiesContainer.appendChild(h);
       policiesContainer.appendChild(ul);
