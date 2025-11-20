@@ -37,6 +37,8 @@ const PROGRAM_INSTRUCTORS_REGISTRY = {
     "../../data/programs/Medical Assistant/instructors.js",
   "Medical Office Receptionist":
     "../../data/programs/Medical Office Receptionist/instructors.js",
+  "Nursing Assistant":
+    "../../data/programs/Nursing Assistant/instructors.js",
   "Paramedic":
     "../../data/programs/Paramedic/instructors.js",
 };
@@ -65,6 +67,8 @@ const PROGRAM_HOURS_REGISTRY = {
     "../../data/programs/Medical Assistant/classRoomDates.js",
   "Medical Office Receptionist":
     "../../data/programs/Medical Office Receptionist/classRoomDates.js",
+  "Nursing Assistant":
+    "../../data/programs/Nursing Assistant/classRoomDates.js",
   "Paramedic":
     "../../data/programs/Paramedic/classRoomDates.js",
 };
@@ -93,6 +97,8 @@ const PROGRAM_POLICIES_REGISTRY = {
     "../../data/programs/Medical Assistant/programPolicies.js",
   "Medical Office Receptionist":
     "../../data/programs/Medical Office Receptionist/programPolicies.js",
+  "Nursing Assistant":
+    "../../data/programs/Nursing Assistant/programPolicies.js",
   "Paramedic":
     "../../data/programs/Paramedic/programPolicies.js",
 };

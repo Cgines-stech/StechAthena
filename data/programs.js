@@ -12,5 +12,6 @@ export const PROGRAMS = [
   { id: 210, department_id: 2, name: 'Master Esthetician', program_credit_hours: 32, CIP: 12.0409},
   { id: 140, department_id: 1, name: 'Medical Assistant', program_credit_hours: 31, CIP: 51.0801},
   { id: 150, department_id: 1, name: 'Medical Office Receptionist', program_credit_hours: 12, CIP: 51.0712},
+  { id: 160, department_id: 1, name: 'Nursing Assistant', program_credit_hours: 3, CIP: 51.3902},
   { id: 110, department_id: 1, name: 'Paramedic', program_credit_hours: 34, CIP: 51.0904},
 ];

@@ -26,6 +26,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Medical Assistant/program.js",
   "Medical Office Receptionist":
     "../../data/programs/Medical Office Receptionist/program.js",
+  "Nursing Assistant":
+    "../../data/programs/Nursing Assistant/program.js",
   "Paramedic":
     "../../data/programs/Paramedic/program.js",
 };
@@ -154,6 +156,10 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Medical Office Receptionist/TEMA 1080.js",
     "../../data/programs/Medical Office Receptionist/TEMA 1020.js",
     "../../data/programs/Medical Office Receptionist/TEMA 1030.js",
+  ],
+  "Nursing Assistant": [
+    "../../data/programs/Nursing Assistant/TENA 1110.js",
+    "../../data/programs/Nursing Assistant/TENA 1900.js",
   ],
   "Paramedic": [
     "../../data/programs/Paramedic/TEPA 1000.js",
