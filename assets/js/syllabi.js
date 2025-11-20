@@ -123,6 +123,7 @@ const courseObjectives  = document.getElementById("courseObjectives");
 
 const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
+const assignmentsList   = document.getElementById("assignmentsList");
 const policiesContainer = document.getElementById("policiesContainer");
 
 // Outline + Hours
@@ -411,6 +412,32 @@ if (mats.length) {
   li.innerHTML = `<span class="muted">No additional materials required</span>`;
   materialsList.appendChild(li);
 }
+
+  // Assignments & Assessments
+  assignmentsList.innerHTML = "";
+
+  // Handle your current property name (typo included) and a couple of safer fallbacks
+  const assignmentsRaw =
+    Array.isArray(c.courseAssignmentsandAsssessments)
+      ? c.courseAssignmentsandAsssessments
+      : (Array.isArray(c.courseAssignmentsAndAssessments)
+          ? c.courseAssignmentsAndAssessments
+          : (Array.isArray(c.assignmentsAndAssessments)
+              ? c.assignmentsAndAssessments
+              : []));
+
+  if (assignmentsRaw.length) {
+    assignmentsRaw.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      assignmentsList.appendChild(li);
+    });
+  } else {
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="muted">Assignments and assessments will be provided in Canvas or by the instructor.</span>`;
+    assignmentsList.appendChild(li);
+  }
+
 
   // Policies — course overrides if non-placeholder; else program default
   policiesContainer.innerHTML = "";
