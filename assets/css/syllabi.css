@@ -469,50 +469,22 @@ body{
     page-break-before: always;
   }
 }
-/* Two-column layout for assignments using flexbox */
-.assignments-columns {
-  display: flex;
-  gap: 2rem;
-}
-
-/* Each column shares the width */
-.assignments-columns ul {
-  flex: 1 1 0;
-}
-
-/* Avoid breaking inside individual items when printing */
-@media print {
-  .assignments-columns li {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-}
-
-/* Allow the Assignments section to break naturally across pages */
-@media print {
-  #syllabus #assignmentsSection {
-    display: block !important;
-    break-inside: auto !important;
-    page-break-inside: auto !important;
-  }
-
-  /* Still try to keep each list item intact */
-  #assignmentsSection .assignments-columns li {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-}
 
 /* Screen: either 1 column or 2, your choice */
 .assignments-multicol {
   column-count: 1;
 }
 
-/* PRINT: real 2-column flow, filling page1 col1 → page1 col2 → page2 col1 → ... */
+/* PRINT: control page breaks for Assignments and Hours + 2-column assignments */
 @media print {
-  /* Let this section split across pages normally */
+
+  /* Assignments: always start a new page, but can span multiple pages */
   #syllabus #assignmentsSection {
     display: block !important;
+    break-before: page;
+    page-break-before: always;
+
+    /* allow it to split across pages */
     break-inside: auto !important;
     page-break-inside: auto !important;
   }
@@ -523,9 +495,17 @@ body{
     column-gap: 2rem;
   }
 
-  /* Try to keep individual items intact */
+  /* Try to keep individual items together */
   #syllabus #assignmentsSection .assignments-multicol li {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  /* Hours: always start on a new page, kept together as one section */
+  #hoursSection {
+    break-before: page;
+    page-break-before: always;
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
   }
 }
