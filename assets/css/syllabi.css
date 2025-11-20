@@ -487,3 +487,18 @@ body{
     break-inside: avoid;
   }
 }
+
+/* Allow the Assignments section to break naturally across pages */
+@media print {
+  #syllabus #assignmentsSection {
+    display: block !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Still try to keep each list item intact */
+  #assignmentsSection .assignments-columns li {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
