@@ -67,11 +67,11 @@ button:hover{ filter:brightness(.96); }
 
 /* Card-style container for the syllabus */
 .card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:.9rem 1rem;
+  background:#fff;
+  border:0;          /* no border */
+  border-radius:0;   /* no rounded corners */
+  box-shadow:none;   /* no shadow */
+  padding:0;         /* let sections control their own spacing */
   margin:0 1rem 0.9rem;
   max-width:100%;
 }
@@ -260,12 +260,13 @@ button:hover{ filter:brightness(.96); }
   }
 
   /* Card: remove shadow, keep light border */
-  .card{
+    .card{
     box-shadow:none !important;
-    border:1px solid #ccc;
+    border:0 !important;      /* remove border in print too */
     margin:0;
     border-radius:0;
   }
+
 
   /* Keep print header off margins; show only once */
   .print-header {
@@ -401,5 +402,15 @@ button:hover{ filter:brightness(.96); }
   }
 
   /* Institutional page already forced to new page above */
+
+    /* Policies: try hard to keep entire section on one page */
+  #policiesSection{
+    page-break-inside: avoid;
+  }
+
+  /* Also avoid splitting its immediate children */
+  #policiesSection > *{
+    page-break-inside: avoid;
+  }
 
 }
