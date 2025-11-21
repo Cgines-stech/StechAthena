@@ -150,7 +150,7 @@ const TEPL1110 = [
     ],
 
     instructorContactInformation: [
-      {}
+      {},
     ],
 
     course_Policies: [
