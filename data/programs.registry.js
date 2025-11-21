@@ -32,6 +32,10 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Paramedic/program.js",
   "Pharmacy Technician":
     "../../data/programs/Pharmacy Technician/program.js",
+  "Phlebotomy":
+    "../../data/programs/Phlebotomy/program.js",
+  "Plumbing Apprenticeship":
+    "../../data/programs/Plumbing Apprenticeship/program.js",
 };
 
 export const PROGRAM_COURSE_REGISTRY = {
@@ -186,6 +190,16 @@ export const PROGRAM_COURSE_REGISTRY = {
   "Phlebotomy": [
     "../../data/programs/Phlebotomy/TEPH 1010.js",
     "../../data/programs/Phlebotomy/TEPH 1020.js",
+  ],
+  "Plumbing Apprenticeship": [
+    "../../data/programs/Electrical Apprenticeship/TEPL 1110.js",
+    "../../data/programs/Electrical Apprenticeship/TEPL 1120.js",
+    "../../data/programs/Electrical Apprenticeship/TEPL 1210.js",
+    "../../data/programs/Electrical Apprenticeship/TEPL 1220.js",
+    "../../data/programs/Electrical Apprenticeship/TEPL 1310.js",
+    "../../data/programs/Electrical Apprenticeship/TEPL 1320.js",
+    "../../data/programs/Electrical Apprenticeship/TEPL 1410.js",
+    "../../data/programs/Electrical Apprenticeship/TEPL 1420.js",
   ],
 };
 
