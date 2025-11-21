@@ -190,6 +190,7 @@ let currentProgramCourses = [];
 let currentProgramInstructors = [];
 let currentProgramHours = [];
 let currentProgramPolicies = [];
+let currentInstructorNote = "";   // NEW
 
 /** ------------------------ Events ------------------------ */
 programSelect.addEventListener("change", async () => {
@@ -211,7 +212,15 @@ programSelect.addEventListener("change", async () => {
 
   // load program-level fallbacks
   const imod = await safeImport(PROGRAM_INSTRUCTORS_REGISTRY[currentProgramName]);
-  if (imod) currentProgramInstructors = decodeInstructors(imod);
+if (imod) {
+  currentProgramInstructors = decodeInstructors(imod);
+
+  // NEW: pull optional note from module, or leave blank
+  currentInstructorNote =
+    imod.instructorNote ||
+    imod.default?.instructorNote ||
+    "";
+}
 
   const hmod = await safeImport(PROGRAM_HOURS_REGISTRY[currentProgramName]);
   if (hmod) currentProgramHours = hmod.default || [];
@@ -310,16 +319,27 @@ function renderSyllabus(c) {
     instructorsList.appendChild(li);
   }
 
-  // Ensure previous instructor note is removed, then add it
-  const oldNotes = instructorsList.parentElement.querySelectorAll(".instructor-note");
-  oldNotes.forEach(n => n.remove());
-  const instructorNote = document.createElement("p");
-  instructorNote.className = "instructor-note";
-  instructorNote.innerHTML = `
+// Ensure previous instructor note is removed, then add it
+const oldNotes = instructorsList.parentElement.querySelectorAll(".instructor-note");
+oldNotes.forEach(n => n.remove());
+
+const instructorNote = document.createElement("p");
+instructorNote.className = "instructor-note";
+
+// Allow course-level override (optional) via the course data object
+const courseLevelNote = c.instructorNote;
+
+// Choose best available note
+const noteHtml =
+  courseLevelNote ||
+  currentInstructorNote ||
+  `
     Office Hours: By appointment<br>
     <em>Email is the preferred method of communication; you will receive a response within 24 hours during regular business hours.</em>
   `;
-  instructorsList.parentElement.appendChild(instructorNote);
+
+instructorNote.innerHTML = noteHtml;
+instructorsList.parentElement.appendChild(instructorNote);
 
   // Classroom Hours — course overrides if non-placeholder; else program default
   hoursContainer.innerHTML = "";
