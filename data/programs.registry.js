@@ -183,6 +183,10 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Pharmacy Technician/TEPT 1610.js",
     "../../data/programs/Pharmacy Technician/TEPT 1900.js",
   ],
+  "Phlebotomy": [
+    "../../data/programs/Phlebotomy/TEPH 1010.js",
+    "../../data/programs/Phlebotomy/TEPH 1020.js",
+  ],
 };
 
 // Optional: if you keep an instructors.js per program, this returns the expected path.

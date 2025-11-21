@@ -1,4 +1,4 @@
-// data/programs/Pharmacy Technician/classRoomDates.js
+// data/programs/Phlebotomy/classRoomDates.js
 
 export default [
   {
