@@ -123,7 +123,7 @@ button:hover{ filter:brightness(.96); }
 }
 .bullets li,
 .bulleted-list li{
-  font-size: 10px;
+  font-size: 13px;
 }
 
 /* Small text helpers */
@@ -299,13 +299,13 @@ button:hover{ filter:brightness(.96); }
     page-break-after: avoid;
   }
   h4{
-    font-size:12px !important;
+    font-size:13px !important;
     margin:8px 0 6px;
   }
 
   /* General text */
   div, p, li, table{
-    font-size:12px !important;
+    font-size:13px !important;
     font-family: Roboto, Arial, sans-serif !important;
     color:#000 !important;
     padding:0;
@@ -349,8 +349,10 @@ button:hover{ filter:brightness(.96); }
   }
 
   /* Canvas & similar blocks should not split across pages if possible */
-  .canvas-section{
+  .canvas-section,
+  .no-split {
     page-break-inside: avoid;
+    break-inside: avoid-page; /* helps newer browsers */
   }
 
   /* Institutional policy page – always on a new page */
@@ -379,10 +381,9 @@ button:hover{ filter:brightness(.96); }
   ====================================== */
 
   /* Assignments: ALWAYS start on a new page */
-  #assignmentsSection{
+  #assignmentsSection {
     page-break-before: always;
-    /* allow content to span multiple pages */
-    page-break-inside: auto;
+    page-break-inside: auto;  /* important: DO NOT set this to avoid */
   }
 
   /* Assignments list: two columns in print, flowing:
@@ -396,7 +397,7 @@ button:hover{ filter:brightness(.96); }
   }
 
   /* Hours: ALWAYS start on a new page after assignments */
-  #hoursSection{
+  #hoursSection {
     page-break-before: always;
     page-break-inside: avoid;
   }
@@ -418,8 +419,8 @@ button:hover{ filter:brightness(.96); }
     column-span: all;              /* NEW: full page width in multi-column context */
     break-inside: avoid;
     page-break-inside: avoid;
-    margin-top: 4px;
-    font-size: 10px !important;
+    margin-top: 10px;
+    font-size: 12px !important;
     font-style: italic;
   }
 
@@ -428,7 +429,7 @@ button:hover{ filter:brightness(.96); }
     column-span: all;
     border: 0;
     border-top: 1px solid #ccc;
-    margin: 4px 0;
+    margin: 10px 0;
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -438,8 +439,8 @@ button:hover{ filter:brightness(.96); }
     column-span: all;
     break-inside: avoid;
     page-break-inside: avoid;
-    margin-top: 4px;
-    font-size: 10px !important;
+    margin-top: 6px;
+    font-size: 12px !important;
     font-style: italic;
   }
 
@@ -448,5 +449,5 @@ button:hover{ filter:brightness(.96); }
 .assignments-hr {
   border: 0;
   border-top: 1px solid #ccc;
-  margin: 4px 0;
+  margin: 10px 0;
 }
