@@ -1,8 +1,8 @@
 // data/programs/Plumbing Apprenticeship/instructors.js
 
-const emergencyMedicalTechnicianInstructors = [
-  { name: "Adam Scott",          email: "ascott@stech.edu",     title: "Instructor" },
-  { name: "Christopher Crispin", email: "ccrispin@stech.edu",   title: "Instructor" },
+const plumbingApprenticeshipInstructors = [
+  { name: "Jason parsons", email: "jparsons@stech.edu", title: "Instructor" },
+  { name: "Wade Esplin", email: "wesplin@stech.edu", title: "Instructor" },
 ];
 
-export default emergencyMedicalTechnicianInstructors;
+export default plumbingApprenticeshipInstructors;
