@@ -78,7 +78,7 @@ const TEPL1220 = [
     ],
 
     courseAssignmentsandAsssessments: [
-      {}
+
     ]
   }
 ]
