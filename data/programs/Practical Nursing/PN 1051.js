@@ -102,12 +102,7 @@ const PN1051 = [
     ],
 
     course_Policies: [
-      {
-        title: "Course Policy",
-        content: [
-          "See Student Policy and Orientation Manual.",
-        ]  
-      },
+      {},
     ],
 
     courseAssignmentsandAsssessments: [

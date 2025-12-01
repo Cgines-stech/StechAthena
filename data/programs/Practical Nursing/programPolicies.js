@@ -5,7 +5,7 @@ const GS = Array.isArray(gradeScale) ? gradeScale[0] : gradeScale;
 
 export default [
   {
-    title: "Course Grading",
+    title: "General Course Policies",
     content: [
       "See Student Policy and Orientation Manual",
     ]

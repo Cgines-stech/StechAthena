@@ -112,7 +112,7 @@ const PN1038 = [
 
     course_Policies: [
       {
-        title: "Course Policy",
+        title: "General Course Policies",
         content: [
           "See Student Policy and Orientation Manual.",
           "Absense will recieve 0 score for the day."

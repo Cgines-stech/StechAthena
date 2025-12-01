@@ -97,12 +97,7 @@ const PN1040X = [
     ],
 
     course_Policies: [
-      {
-        title: "Course Policy",
-        content: [
-          "See Student Policy and Orientation Manual.",
-        ]  
-      },
+      {},
     ],
 
     courseAssignmentsandAsssessments: [
