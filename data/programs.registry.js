@@ -36,6 +36,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Phlebotomy/program.js",
   "Plumbing Apprenticeship":
     "../../data/programs/Plumbing Apprenticeship/program.js",
+  "Practical Nursing":
+    "../../data/programs/Practical Nursing/program.js",
 };
 
 export const PROGRAM_COURSE_REGISTRY = {
@@ -200,6 +202,19 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Plumbing Apprenticeship/TEPL 1320.js",
     "../../data/programs/Plumbing Apprenticeship/TEPL 1410.js",
     "../../data/programs/Plumbing Apprenticeship/TEPL 1420.js",
+  ],
+  "Practical Nursing": [
+    "../../data/programs/Practical Nursing/PN 1011.js",
+    "../../data/programs/Practical Nursing/PN 1021.js",
+    "../../data/programs/Practical Nursing/PN 1063.js",
+    "../../data/programs/Practical Nursing/PN 1073.js",
+    "../../data/programs/Practical Nursing/PN 1038.js",
+    "../../data/programs/Practical Nursing/PN 1040X.js",
+    "../../data/programs/Practical Nursing/PN 1051.js",
+    "../../data/programs/Practical Nursing/PN 1031.js",
+    "../../data/programs/Practical Nursing/PN 1084.js",
+    "../../data/programs/Practical Nursing/PN 1086X.js",
+    "../../data/programs/Practical Nursing/PN 1090.js",
   ],
 };
 

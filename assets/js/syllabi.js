@@ -47,6 +47,8 @@ const PROGRAM_INSTRUCTORS_REGISTRY = {
     "../../data/programs/Phlebotomy/instructors.js",
   "Plumbing Apprenticeship":
     "../../data/programs/Plumbing Apprenticeship/instructors.js",
+  "Practical Nursing":
+    "../../data/programs/Practical Nursing/instructors.js",
 };
 const PROGRAM_HOURS_REGISTRY = {
   "Advanced Emergency Medical Technician":
@@ -83,6 +85,8 @@ const PROGRAM_HOURS_REGISTRY = {
     "../../data/programs/Phlebotomy/classRoomDates.js",
   "Plumbing Apprenticeship":
     "../../data/programs/Plumbing Apprenticeship/classRoomDates.js",
+  "Practical Nursing":
+    "../../data/programs/Practical Nursing/classRoomDates.js",
 };
 const PROGRAM_POLICIES_REGISTRY = {
   "Advanced Emergency Medical Technician":
@@ -119,6 +123,8 @@ const PROGRAM_POLICIES_REGISTRY = {
     "../../data/programs/Phlebotomy/programPolicies.js",
   "Plumbing Apprenticeship":
     "../../data/programs/Plumbing Apprenticeship/programPolicies.js",
+  "Practical Nursing":
+    "../../data/programs/Practical Nursing/programPolicies.js",
 };
 
 /** ------------------------ DOM ------------------------ */
