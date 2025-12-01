@@ -314,6 +314,12 @@ function renderSyllabus(c) {
   const courseHasRealInstructors =
     courseInstrRaw.length > 0 && !isPlaceholderArray(courseInstrRaw);
 
+  // Look for an instructorNote on any course-level instructor
+  const embeddedInstructorNote =
+    Array.isArray(courseInstrRaw)
+      ? (courseInstrRaw.find(i => i && typeof i === "object" && i.instructorNote)?.instructorNote || "")
+      : "";
+
   const useInstructors = courseHasRealInstructors
     ? courseInstrRaw.map(line => {
         if (typeof line === "string") return { display: line };
@@ -345,7 +351,7 @@ const instructorNote = document.createElement("p");
 instructorNote.className = "instructor-note";
 
 // Allow course-level override (optional) via the course data object
-const courseLevelNote = c.instructorNote;
+const courseLevelNote = c.instructorNote || embeddedInstructorNote;
 
 // Choose best available note
 const noteHtml =

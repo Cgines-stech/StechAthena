@@ -101,7 +101,7 @@ const PN1011 = [
         Tuesday: "",
         Wednesday: "",
         Thursday: "",
-        Friday: "9:00 AM - 1:00 PM<br>",
+        Friday: "9:00 AM - 1:00 PM",
         Saturday: "",
       },
       {
@@ -117,7 +117,12 @@ const PN1011 = [
     ],
 
     instructorContactInformation: [
-      { name: "Preston Dye",          email: "pdye@stech.edu",     title: "Instructor" },
+      { 
+        name: "Preston Dye",          
+        email: "pdye@stech.edu",     
+        title: "Instructor", 
+        instructorNote: "", 
+      },
     ],
 
     course_Policies: [
