@@ -118,10 +118,12 @@ const PN1011 = [
 
     instructorContactInformation: [
       { 
-        name: "Preston Dye",          
-        email: "pdye@stech.edu",     
-        title: "Instructor", 
-        instructorNote: "", 
+        name: "Preston Dye",   
+        title: "",        
+        email: "pdye@stech.edu",
+        phone: "",
+        office: "",
+        instructorNote: ``, 
       },
     ],
 

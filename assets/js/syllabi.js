@@ -168,7 +168,7 @@ const decodeInstructors = (mod) => {
     const title = i?.title || "";
     const phone = i?.phone || "";
     const office = i?.office || "";
-    const display = [name, title && `(${title})`, email && `— ${email}`].filter(Boolean).join(" ");
+    const display = [name, title && `(${title})`, email && `— ${email}`, phone && `— ${phone}`, office && `— ${office}`].filter(Boolean).join(" ");
     return { name, email, title, phone, office, display: display || "" };
   });
 };
@@ -326,8 +326,10 @@ function renderSyllabus(c) {
         const name  = line?.name || "";
         const email = line?.email || "";
         const title = line?.title || "";
-        const display = [name, title && `(${title})`, email && `— ${email}`].filter(Boolean).join(" ");
-        return { name, email, title, display: display || "" };
+        const phone = line?.phone || "";
+        const office = line?.office || "";
+        const display = [name, title && `(${title})`, email && `— ${email}`, phone && `— ${phone}`, office && `— ${office}`].filter(Boolean).join(" ");
+        return { name, email, title, phone, office, display: display || "" };
       })
     : currentProgramInstructors;
 

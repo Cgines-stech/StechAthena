@@ -91,9 +91,11 @@ const PN1063 = [
     ],
 
     instructorContactInformation: [
-      { name: "Preston Dye",          
-        email: "pdye@stech.edu",     
-        title: "Instructor", 
+      { name: "Preston Dye",
+        title: "Instructor",
+        email: "pdye@stech.edu",
+        phone: "(435) 865-6703",
+        office: "",
         instructorNote: `
         Office Location: Health Professions and Trades Building, 211L<br>
         Office Hours: Monday, Tuesday, Thursday, and Friday by appointment while the program is in session.<br>

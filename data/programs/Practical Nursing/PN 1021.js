@@ -125,7 +125,14 @@ const PN1021 = [
     ],
 
     instructorContactInformation: [
-      { name: "Kylee McBride",          email: "kmcbride@stech.edu",     title: "Instructor" },
+      { 
+        name: "Kylee McBride",  
+        title: "",        
+        email: "kmcbride@stech.edu",     
+        phone: "",
+        office: "",
+        instructorNote: ``,
+       },
     ],
 
     course_Policies: [
