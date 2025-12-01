@@ -14,7 +14,7 @@ const PN1063 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 120,
     courseTuition: 380.00,
-    courseFee: 2.00,
+    courseFee: 20.00,
     instructionalType: "LEC",
     isElective: false,
     includeInProgramTotals: true,
@@ -91,7 +91,8 @@ const PN1063 = [
     ],
 
     instructorContactInformation: [
-      { name: "Preston Dye",
+      { 
+        name: "Preston Dye",
         title: "Instructor",
         email: "pdye@stech.edu",
         phone: "(435) 865-6703",
