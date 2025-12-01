@@ -49,18 +49,42 @@ const PN1038 = [
 
     courseBooks: [
       {
+        name: "vSim for Medical Surgical", 
+        price: 75.0,
+        isbn: "9781469857312",
+        note: ""
+      },
+      {
         name: "Simulation Learning System for LPN", 
         price: 120.0,
         isbn: "9781455700127",
+        note: ""
+      },
+      {
+        name: "Lippincott Skills ", 
+        price: 140.0,
+        isbn: "9781975182519",
         note: ""
       },
     ],
 
     syllabiBooks: [
       {
+        name: "vSim for Medical Surgical", 
+        price: 75.0,
+        isbn: "9781469857312",
+        note: ""
+      },
+      {
         name: "Simulation Learning System for LPN", 
         price: 120.0,
         isbn: "9781455700127",
+        note: ""
+      },
+      {
+        name: "Lippincott Skills ", 
+        price: 140.0,
+        isbn: "9781975182519",
         note: ""
       },
     ],
