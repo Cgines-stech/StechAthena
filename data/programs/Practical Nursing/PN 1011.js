@@ -101,17 +101,7 @@ const PN1011 = [
         Tuesday: "",
         Wednesday: "",
         Thursday: "",
-        Friday: "9:00 AM - 1:00 PM",
-        Saturday: "",
-      },
-      {
-        startDate: " ",
-        endDate: " ",
-        Monday: "",
-        Tuesday: "",
-        Wednesday: "",
-        Thursday: "",
-        Friday: "",
+        Friday: "9:00 AM - 1:00 PM<br>",
         Saturday: "",
       },
       {
