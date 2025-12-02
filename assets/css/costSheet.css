@@ -282,7 +282,7 @@ button:hover { filter: brightness(0.97); }
 
 #summarySection .data-table th:nth-child(2),
 #summarySection .data-table td:nth-child(2) {
-  width: 31%;  /* Course Name - nice and wide */
+  width: 33%;  /* Course Name - nice and wide */
 }
 
 #summarySection .data-table th:nth-child(3),
@@ -322,7 +322,7 @@ button:hover { filter: brightness(0.97); }
 
 #summarySection .data-table th:nth-child(10),
 #summarySection .data-table td:nth-child(10) {
-  width: 10%;  /* Total */
+  width: 8%;  /* Total */
 }
 
 /* Back button */
