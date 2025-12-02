@@ -20,7 +20,7 @@ const TEAM1050 = [
     includeInProgramTotals: true,
 
     courseDescription:
-      "The Electrical Systems course teaches students to troubleshoot most electrical circuits they encounter in everyday life. Our world runs on electrical power and is fundamental  to all work being done in automation. Students in this course gain relevant working knowledge in both AC &amp; DC electrical systems. Competencies include basic electrical  circuit design, analysis, troubleshooting, instrumentation, schematic and component identification, physics of electricity and applicable math.",
+      "The Electrical Systems course teaches students to troubleshoot most electrical circuits they encounter in everyday life. Our world runs on electrical power and is fundamental  to all work being done in automation. Students in this course gain relevant working knowledge in both AC & DC electrical systems. Competencies include basic electrical  circuit design, analysis, troubleshooting, instrumentation, schematic and component identification, physics of electricity and applicable math.",
 
     courseObjectives: [
       "Demonstrate a working knowledge of safety practices and procedures of basic electrical systems.",
