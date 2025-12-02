@@ -73,7 +73,7 @@ const PN1038 = [
         name: "vSim for Medical Surgical", 
         price: 75.0,
         isbn: "9781469857312",
-        note: ""
+        note: "",
       },
       {
         name: "Simulation Learning System for LPN", 

@@ -92,19 +92,27 @@ function normalizeItemsWithCourse(arr = [], courseNumber = "") {
     .map(x => {
       if (x == null) return null;
 
-      if (typeof x === "number") return { courseNumber, title: "", price: x };
+      if (typeof x === "number") {
+        return { courseNumber, title: "", price: x, optional: false };
+      }
 
       if (typeof x === "string") {
-        return { courseNumber, title: x.trim(), price: parsePriceFromString(x) };
+        return { 
+          courseNumber, 
+          title: x.trim(), 
+          price: parsePriceFromString(x),
+          optional: false
+        };
       }
 
       const title = x.title ?? x.name ?? x.book ?? x.item ?? x.description ?? "";
       const rawPrice = x.price ?? x.cost ?? x.amount ?? x.value ?? 0;
       const price = Number(rawPrice) || 0;
+      const optional = !!x.optional;
 
       if (!title && price === 0) return null;
 
-      return { courseNumber, title, price };
+      return { courseNumber, title, price, optional };
     })
     .filter(Boolean);
 }
@@ -123,7 +131,9 @@ function renderItemRows3(tbodyEl, items) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td class="col-course">${it.courseNumber || "-"}</td>
-      <td class="col-item">${it.title || "-"}</td>
+      <td class="col-item">
+        ${it.title || "-"}${it.optional ? ' <span class="muted">(Optional)</span>' : ""}
+      </td>
       <td class="price">${money(it.price || 0)}</td>
     `;
     tbodyEl.appendChild(tr);
@@ -258,17 +268,24 @@ let coreCreditsCounted = 0;
 let firstElectiveRow = null;
 let hasAnyElectives = false;
 
-  for (const course of allCourses) {
-  const books   = sum(course.courseBooks);
-  const tools   = sum(course.courseTools);
-  const certs   = sum(course.courseCertifications);
+for (const course of allCourses) {
+  // Only count NON-optional items in totals:
+  const books = sum((course.courseBooks || []).filter(
+    x => !(x && typeof x === "object" && x.optional)
+  ));
+  const tools = sum((course.courseTools || []).filter(
+    x => !(x && typeof x === "object" && x.optional)
+  ));
+  const certs = sum((course.courseCertifications || []).filter(
+    x => !(x && typeof x === "object" && x.optional)
+  ));
+
   const tuition = course.courseTuition || 0;
   const fee     = course.courseFee || 0;
 
   // summary table excludes "Other" by design
   const rowTotal = tuition + fee + books + tools + certs;
 
-  // Include rule: explicit flag wins; otherwise non-electives are included
   const include = (course.includeInProgramTotals ?? !course.isElective);
 
   if (include) {
@@ -279,7 +296,7 @@ let hasAnyElectives = false;
     totalBooks   += books;
     totalTools   += tools;
     totalCerts   += certs;
-    totalGrand   += rowTotal;   // (you already seeded totalGrand with the $25 grad fee)
+    totalGrand   += rowTotal;
   }
 // count core credits that are included in totals
 if (include && !course.isElective) {
