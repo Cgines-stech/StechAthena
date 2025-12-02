@@ -426,3 +426,26 @@ button:hover { filter: brightness(0.97); }
     background-color: #ffffff !important;   /* white */
   }
 }
+/* Row holding program title + top-right label */
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+/* The new top-right label */
+.program-meta {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Print version (darker for readability) */
+@media print {
+  .program-meta {
+    color: #000;
+    font-size: 9.5pt;
+  }
+}
