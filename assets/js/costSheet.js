@@ -92,31 +92,44 @@ function normalizeItemsWithCourse(arr = [], courseNumber = "") {
     .map(x => {
       if (x == null) return null;
 
+      // Pure numbers (rare in your data, but be safe)
       if (typeof x === "number") {
-        return { courseNumber, title: "", price: x, optional: false, note: "" };
-      }
-
-      if (typeof x === "string") {
+        const price = Number(x) || 0;
+        if (price <= 0) return null;  // ignore zeros
         return {
           courseNumber,
-          title: x.trim(),
-          price: parsePriceFromString(x),
+          title: "",
+          price,
           optional: false,
           note: ""
         };
       }
 
-      const title  = x.title ?? x.name ?? x.book ?? x.item ?? x.description ?? "";
+      // Strings — treat as title, try to extract a number
+      if (typeof x === "string") {
+        const title = x.trim();
+        const price = parsePriceFromString(x);
+        if (!title && price <= 0) return null;
+        return {
+          courseNumber,
+          title,
+          price,
+          optional: false,
+          note: ""
+        };
+      }
+
+      // Objects (your main case)
+      const title = x.title ?? x.name ?? x.book ?? x.item ?? x.description ?? "";
       const rawPrice = x.price ?? x.cost ?? x.amount ?? x.value ?? 0;
       const price = Number(rawPrice) || 0;
+      const optional = !!x.optional;
+      const note = x.note || "";
 
-      return { 
-        courseNumber,
-        title,
-        price,
-        optional: !!x.optional,
-        note: x.note || ""
-      };
+      // If no title AND no price, treat as placeholder → skip
+      if (!title && price <= 0) return null;
+
+      return { courseNumber, title, price, optional, note };
     })
     .filter(Boolean);
 }
@@ -413,22 +426,42 @@ summaryBody.appendChild(totalRow);
 
 
   /* ---------- Item tables: Course # | Title | Price (Other included here) ---------- */
+// Books
+if (itemsBooks.length) {
   booksSection.hidden = false;
   booksBody.innerHTML = "";
   renderItemRows3(booksBody, itemsBooks);
+} else {
+  booksSection.hidden = true;
+}
 
+// Tools
+if (itemsTools.length) {
   toolsSection.hidden = false;
   toolsBody.innerHTML = "";
   renderItemRows3(toolsBody, itemsTools);
+} else {
+  toolsSection.hidden = true;
+}
 
+// Certs
+if (itemsCerts.length) {
   certsSection.hidden = false;
   certsBody.innerHTML = "";
   renderItemRows3(certsBody, itemsCerts);
+} else {
+  certsSection.hidden = true;
+}
 
+// Other
+if (itemsOther.length) {
   otherSection.hidden = false;
   otherBody.innerHTML = "";
   renderItemRows3(otherBody, itemsOther);
-});
+} else {
+  otherSection.hidden = true;
+}
+
 
 /* ---------- Print ---------- */
 printBtn.addEventListener("click", () => window.print());
