@@ -6,7 +6,7 @@ import { courseTotals, sum, money } from "../../utils/helpers.js";
 
 const PN1084 = [
   {
-    id: 80008,
+    id: 80009,
     programId: 1,
     courseNumber: "PN 1084",
     courseName: "Introductory Mental Health Nursing",
