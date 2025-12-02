@@ -163,8 +163,8 @@ button:hover { filter: brightness(0.97); }
   font-weight: 600;
 }
 
-.data-table .col-course { width: 12%; }
-.data-table .col-item   { width: 74%; }
+.data-table .col-course { width: 12%; text-align: left;}
+.data-table .col-item   { width: 74%; text-align: left;}
 .data-table .col-price  { width: 14%; text-align: right; }
 
 /* ---------- PRINT ---------- */
