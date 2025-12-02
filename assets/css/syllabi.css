@@ -65,7 +65,7 @@ button{ cursor:pointer; transition:filter .2s; }
 button:hover{ filter:brightness(.96); }
 .muted{ color:var(--muted); }
 
-/* Card-style container for the syllabus / cost sheet */
+/* Card-style container for the syllabus */
 .card{
   background:#fff;
   border:0;          /* no border */
@@ -135,88 +135,6 @@ button:hover{ filter:brightness(.96); }
 
 /* Used to hide things in print */
 .no-print{ display: block; }
-
-/* =========================================
-   COST SHEET – DENSER TABLES & VISIBILITY
-   (summary + item grid tables)
-========================================= */
-
-/* Tighten vertical spacing between cost sheet sections */
-#summarySection,
-.item-grid section {
-  margin: 0 0 4px 0;
-  padding: 0;
-}
-
-/* Generic subsection margin kept small so tables sit closer */
-.subsection {
-  margin: 0 0 4px 0;
-}
-
-/* Headings above cost tables: small, tight margins */
-#summarySection h3,
-.item-grid h3 {
-  margin: 4px 0 2px 0;
-}
-
-/* Tables themselves should not add extra gaps */
-#summarySection table,
-.item-grid table {
-  margin: 0;
-  border-collapse: collapse;
-}
-
-/* Base dense table padding */
-.data-table.dense th,
-.data-table.dense td {
-  padding: 2px 4px;
-}
-
-/* ----- Column headers (all data tables) ----- */
-.data-table thead th {
-  background: #007cbc;
-  color: #fff;
-  font-weight: 600;
-  padding: 6px 8px;
-  border: none;
-  text-align: left;
-  font-size: 0.85rem;
-}
-
-/* ----- Zebra striping for body rows ----- */
-.data-table tbody tr:nth-child(odd) {
-  background: #fafafa;
-}
-.data-table tbody tr:nth-child(even) {
-  background: #ffffff;
-}
-
-/* Subtle hover effect (screen only) */
-@media screen {
-  .data-table tbody tr:hover {
-    background: #e8f4ff;
-  }
-}
-
-/* Slight row separators for clarity */
-.data-table td {
-  border-bottom: 1px solid #ddd;
-}
-
-/* ----- Totals row (program totals line) ----- */
-/* Preferred: add class "totals-row" in JS */
-.data-table .totals-row {
-  background: #e2f2ff;
-  font-weight: 700;
-  border-top: 2px solid #007cbc;
-}
-
-/* Fallback: if totals is the last row in summaryBody */
-#summaryBody tr:last-child {
-  background: #e2f2ff;
-  font-weight: 700;
-  border-top: 2px solid #007cbc;
-}
 
 /* =========================================
    SYLLABUS HEADER STRIPE (SCREEN + PRINT)
@@ -342,12 +260,13 @@ button:hover{ filter:brightness(.96); }
   }
 
   /* Card: remove shadow, keep light border */
-  .card{
+    .card{
     box-shadow:none !important;
     border:0 !important;      /* remove border in print too */
     margin:0;
     border-radius:0;
   }
+
 
   /* Keep print header off margins; show only once */
   .print-header {
@@ -485,7 +404,7 @@ button:hover{ filter:brightness(.96); }
 
   /* Institutional page already forced to new page above */
 
-  /* Policies: try hard to keep entire section on one page */
+    /* Policies: try hard to keep entire section on one page */
   #policiesSection{
     page-break-inside: avoid;
   }
@@ -525,35 +444,7 @@ button:hover{ filter:brightness(.96); }
     font-style: italic;
   }
 
-  /* ======================================
-     COST SHEET – PRINT DENSITY TWEAKS
-  ====================================== */
-
-  /* Even tighter rows on print */
-  .data-table.dense th,
-  .data-table.dense td {
-    padding: 1px 3px;
-  }
-
-  /* Slightly slimmer headers in print */
-  .data-table thead th {
-    padding: 3px 4px !important;
-  }
-
-  /* Tight margins between stacked tables/sections in print */
-  #summarySection,
-  .item-grid section,
-  .subsection {
-    margin-bottom: 2px !important;
-  }
-
-  #summarySection h3,
-  .item-grid h3 {
-    margin: 2px 0 0 0 !important;
-  }
-
 }
-
 /* Screen HR appearance */
 .assignments-hr {
   border: 0;
