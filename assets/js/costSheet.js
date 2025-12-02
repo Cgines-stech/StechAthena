@@ -125,30 +125,61 @@ function renderItemRows3(tbodyEl, items) {
     tbodyEl.appendChild(tr);
     return 0;
   }
-  let total = 0;
+
+  let requiredTotal = 0;
+  let optionalTotal = 0;
+
   items.forEach(it => {
-    total += it.price || 0;
+    const price = it.price || 0;
+    if (it.optional) {
+      optionalTotal += price;
+    } else {
+      requiredTotal += price;
+    }
+
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td class="col-course">${it.courseNumber || "-"}</td>
       <td class="col-item">
         ${it.title || "-"}${it.optional ? ' <span class="muted">(Optional)</span>' : ""}
       </td>
-      <td class="price">${money(it.price || 0)}</td>
+      <td class="price">${money(price)}</td>
     `;
     tbodyEl.appendChild(tr);
   });
 
-  const trTotal = document.createElement("tr");
-  trTotal.className = "subtotal-row";
-  trTotal.innerHTML = `
-    <td colspan="2" class="text-right">Subtotal</td>
-    <td class="price">${money(total)}</td>
-  `;
-  tbodyEl.appendChild(trTotal);
-  return total;
-}
+  const colSpan = 2;
 
+  // Required subtotal row
+  const reqRow = document.createElement("tr");
+  reqRow.className = "subtotal-row";
+  reqRow.innerHTML = `
+    <td colspan="${colSpan}" class="text-right">Required Subtotal</td>
+    <td class="price">${money(requiredTotal)}</td>
+  `;
+  tbodyEl.appendChild(reqRow);
+
+  // If any optional items exist, show their subtotal + combined total
+  if (optionalTotal > 0) {
+    const optRow = document.createElement("tr");
+    optRow.className = "subtotal-row optional-subtotal";
+    optRow.innerHTML = `
+      <td colspan="${colSpan}" class="text-right">Optional Subtotal</td>
+      <td class="price">${money(optionalTotal)}</td>
+    `;
+    tbodyEl.appendChild(optRow);
+
+    const totalRow = document.createElement("tr");
+    totalRow.className = "subtotal-row grand-subtotal";
+    totalRow.innerHTML = `
+      <td colspan="${colSpan}" class="text-right">Total (Required + Optional)</td>
+      <td class="price">${money(requiredTotal + optionalTotal)}</td>
+    `;
+    tbodyEl.appendChild(totalRow);
+  }
+
+  return requiredTotal + optionalTotal;
+}
 
 /* ---------- Main: program selection ---------- */
 programSelect.addEventListener("change", async () => {

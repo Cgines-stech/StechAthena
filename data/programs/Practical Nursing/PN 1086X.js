@@ -14,7 +14,7 @@ const PN1086X = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 120,
     courseTuition: 190.00,
-    courseFee: 240.00,
+    courseFee: 10.00,
     instructionalType: "SUP",
     isElective: false,
     includeInProgramTotals: true,
