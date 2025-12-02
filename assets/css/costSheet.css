@@ -410,4 +410,19 @@ button:hover { filter: brightness(0.97); }
 }
 @media print {
   .back-btn { display: none !important; }
+
+  /* Make sure zebra rows try to keep their background colors in print */
+  .data-table tbody tr:nth-child(odd),
+  .data-table tbody tr:nth-child(even) {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .data-table tbody tr:nth-child(odd) {
+    background-color: #f0f0f0 !important;   /* light grey that prints well */
+  }
+
+  .data-table tbody tr:nth-child(even) {
+    background-color: #ffffff !important;   /* white */
+  }
 }
