@@ -453,15 +453,15 @@ if (itemsCerts.length) {
   certsSection.hidden = true;
 }
 
-// Other
-if (itemsOther.length) {
-  otherSection.hidden = false;
-  otherBody.innerHTML = "";
-  renderItemRows3(otherBody, itemsOther);
-} else {
-  otherSection.hidden = true;
-}
-
+  // Other
+  if (itemsOther.length) {
+    otherSection.hidden = false;
+    otherBody.innerHTML = "";
+    renderItemRows3(otherBody, itemsOther);
+  } else {
+    otherSection.hidden = true;
+  }
+});  // <-- close programSelect change handler
 
 /* ---------- Print ---------- */
 printBtn.addEventListener("click", () => window.print());
