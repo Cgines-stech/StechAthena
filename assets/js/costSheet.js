@@ -93,26 +93,30 @@ function normalizeItemsWithCourse(arr = [], courseNumber = "") {
       if (x == null) return null;
 
       if (typeof x === "number") {
-        return { courseNumber, title: "", price: x, optional: false };
+        return { courseNumber, title: "", price: x, optional: false, note: "" };
       }
 
       if (typeof x === "string") {
-        return { 
-          courseNumber, 
-          title: x.trim(), 
+        return {
+          courseNumber,
+          title: x.trim(),
           price: parsePriceFromString(x),
-          optional: false
+          optional: false,
+          note: ""
         };
       }
 
-      const title = x.title ?? x.name ?? x.book ?? x.item ?? x.description ?? "";
+      const title  = x.title ?? x.name ?? x.book ?? x.item ?? x.description ?? "";
       const rawPrice = x.price ?? x.cost ?? x.amount ?? x.value ?? 0;
       const price = Number(rawPrice) || 0;
-      const optional = !!x.optional;
 
-      if (!title && price === 0) return null;
-
-      return { courseNumber, title, price, optional };
+      return { 
+        courseNumber,
+        title,
+        price,
+        optional: !!x.optional,
+        note: x.note || ""
+      };
     })
     .filter(Boolean);
 }
@@ -141,7 +145,11 @@ function renderItemRows3(tbodyEl, items) {
     tr.innerHTML = `
       <td class="col-course">${it.courseNumber || "-"}</td>
       <td class="col-item">
-        ${it.title || "-"}${it.optional ? ' <span class="muted">(Optional)</span>' : ""}
+        <div>
+          ${it.title || "-"}
+          ${it.optional ? ' <span class="muted">(Optional)</span>' : ""}
+        </div>
+        ${it.note ? `<div class="muted" style="font-size:0.72em; margin-top:2px;">${it.note}</div>` : ""}
       </td>
       <td class="price">${money(price)}</td>
     `;

@@ -282,7 +282,7 @@ button:hover { filter: brightness(0.97); }
 
 #summarySection .data-table th:nth-child(2),
 #summarySection .data-table td:nth-child(2) {
-  width: 30%;  /* Course Name - nice and wide */
+  width: 31%;  /* Course Name - nice and wide */
 }
 
 #summarySection .data-table th:nth-child(3),
@@ -302,7 +302,7 @@ button:hover { filter: brightness(0.97); }
 
 #summarySection .data-table th:nth-child(6),
 #summarySection .data-table td:nth-child(6) {
-  width: 7%;   /* Fee */
+  width: 8%;   /* Fee */
 }
 
 #summarySection .data-table th:nth-child(7),
@@ -322,7 +322,7 @@ button:hover { filter: brightness(0.97); }
 
 #summarySection .data-table th:nth-child(10),
 #summarySection .data-table td:nth-child(10) {
-  width: 12%;  /* Total */
+  width: 10%;  /* Total */
 }
 
 /* Back button */
