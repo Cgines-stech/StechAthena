@@ -80,10 +80,10 @@ button:hover { filter: brightness(0.97); }
 
 /* ---------- SECTION HEADERS ---------- */
 .subsection{
-  /* remove vertical margins so grid gap is the only spacer */
+  /* tighter internal padding so tables sit closer */
   margin: 0;
-  padding: 0.6rem 0.7rem;   /* uniform internal padding for all blocks */
-  border-radius: 8px;       /* keeps a consistent shape whether tinted or not */
+  padding: 0.45rem 0.55rem;
+  border-radius: 8px;
 }
 
 /* section headings */
@@ -91,12 +91,12 @@ button:hover { filter: brightness(0.97); }
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--primary);
-  margin: 0 0 0.35rem;      /* no top margin = consistent top edge */
-  padding-bottom: 0.25rem;
+  margin: 0 0 0.3rem;
+  padding-bottom: 0.2rem;
   border-bottom: 2px solid var(--primary);
 }
 
-/* optional: keep the alternating tint, but DO NOT change padding anymore */
+/* alternating tint on screen for blocks */
 .subsection:nth-child(odd){
   background: var(--accent);
 }
@@ -104,16 +104,16 @@ button:hover { filter: brightness(0.97); }
 /* subtle divider before tables; consistent for all */
 .subsection .data-table{
   border-top: 1px solid #ddd;
-  margin-top: 0.35rem;
-  padding-top: 0.25rem;
+  margin-top: 0.25rem;
+  padding-top: 0.2rem;
 }
 
 /* ---------- TABLES ---------- */
 .item-grid{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.7rem;              /* handles all spacing between blocks */
-  align-items: start;       /* ensure each column starts at the same top */
+  gap: 0.5rem;              /* slightly tighter gap between blocks */
+  align-items: start;
 }
 
 .data-table {
@@ -124,7 +124,7 @@ button:hover { filter: brightness(0.97); }
 .data-table th,
 .data-table td {
   border-bottom: 1px solid #eee;
-  padding: 0.3rem 0.35rem;
+  padding: 0.28rem 0.32rem;
   vertical-align: top;
 }
 .data-table th {
@@ -141,15 +141,70 @@ button:hover { filter: brightness(0.97); }
   text-align: right;
 }
 
-/* Subtle divider line before tables */
+/* Subtle divider line before tables (duplicate kept for safety) */
 .subsection .data-table {
   border-top: 1px solid #ddd;
-  margin-top: 0.35rem;
-  padding-top: 0.25rem;
+  margin-top: 0.25rem;
+  padding-top: 0.2rem;
 }
-@media print{
-  .subsection .data-table{ border-top-color: #ccc; }
-  .subsection:nth-child(odd){ background: none; } /* clean paper */
+
+/* ---------- TABLE VISIBILITY ENHANCEMENTS ---------- */
+
+/* Header row: colored band for all data tables */
+.data-table thead th {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+}
+
+/* Zebra striping for visibility */
+.data-table tbody tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+.data-table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+/* Slight row separators for clarity */
+.data-table td {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+/* Hover effect (screen only) */
+@media screen {
+  .data-table tbody tr:hover {
+    background-color: #e8f4ff;
+  }
+}
+
+/* Program totals / subtotal highlight */
+.subtotal-row td,
+.summary-totals td {
+  font-weight: 700;
+  background: #e2f2ff;
+  border-top: 2px solid var(--primary);
+}
+
+/* Fallback: if summary totals are the last row in the summary body */
+#summarySection .data-table tbody tr:last-child td {
+  font-weight: 700;
+  background: #e2f2ff;
+  border-top: 2px solid var(--primary);
+}
+
+/* Underlines still visible on print even if printer ignores color */
+@media print {
+  .data-table thead th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .subtotal-row td,
+  .summary-totals td,
+  #summarySection .data-table tbody tr:last-child td {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
 
 /* ---------- UTILITIES ---------- */
@@ -174,6 +229,11 @@ button:hover { filter: brightness(0.97); }
   page-break-inside: avoid;
 }
 
+@media print{
+  .subsection .data-table{ border-top-color: #ccc; }
+  .subsection:nth-child(odd){ background: none; } /* remove block tint, keep zebra rows */
+}
+
 @media print {
   body {
     background: #fff;
@@ -186,14 +246,14 @@ button:hover { filter: brightness(0.97); }
     border: 1px solid #ccc;
   }
   .subsection:nth-child(odd) {
-    background: none; /* remove tint for clean PDF look */
+    background: none; /* remove block tint for clean PDF look */
   }
   .data-table th,
   .data-table td {
     font-size: 9pt;
   }
-  .item-grid { gap: 0.4rem; }
-  .subsection { margin: 0.35rem 0; }
+  .item-grid { gap: 0.25rem; }   /* reduced gap for print */
+  .subsection { margin: 0.2rem 0; }
 }
 
 /* Keep whole tables together across page breaks */
@@ -227,8 +287,8 @@ button:hover { filter: brightness(0.97); }
 
 .elective-disclaimer td {
   text-align: left !important;
-  white-space: nowrap;         /* keep it on one line */
-  word-break: keep-all;        /* don't break words */
+  white-space: nowrap;
+  word-break: keep-all;
   padding-top: .4rem;
   padding-bottom: .4rem;
   border-top: 2px solid #ddd;
@@ -248,7 +308,7 @@ button:hover { filter: brightness(0.97); }
   /* keep the program title with whatever follows it */
   .program-title {
     break-after: avoid;
-    page-break-after: avoid;        /* legacy */
+    page-break-after: avoid;
   }
 
   /* allow ONLY the summary table to split across pages */
@@ -258,14 +318,14 @@ button:hover { filter: brightness(0.97); }
   #summarySection tbody,
   #summarySection tr {
     break-inside: auto !important;
-    page-break-inside: auto !important;  /* legacy */
+    page-break-inside: auto !important;
   }
 
   /* keep the other tables whole (books/tools/certs/other) */
   .item-grid .subsection,
   .item-grid .subsection .data-table {
     break-inside: avoid;
-    page-break-inside: avoid;            /* legacy */
+    page-break-inside: avoid;
   }
 
   /* ensure header repeats on new page breaks (some browsers need this) */
@@ -282,7 +342,7 @@ button:hover { filter: brightness(0.97); }
 
 #summarySection .data-table th:nth-child(2),
 #summarySection .data-table td:nth-child(2) {
-  width: 33%;  /* Course Name - nice and wide */
+  width: 33%;  /* Course Name */
 }
 
 #summarySection .data-table th:nth-child(3),
