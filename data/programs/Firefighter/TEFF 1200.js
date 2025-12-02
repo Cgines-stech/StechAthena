@@ -51,7 +51,7 @@ const TEFF1200 = [
       { title: "Haz-Mat Monitoring, Personal Protective Equipment, and Decontamination", hours: 16},
       { title: "Haz-Mat Rescue & Recovery and Product Control", hours: 18},
       { title: "State Certification Testing Haz-Mat Awareness and Operations", hours: 18},
-      { title: "Graduation", hours: 16},
+      { title: "Graduation", hours: 10},
     ],
 
     courseBooks: [
