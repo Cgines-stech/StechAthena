@@ -273,6 +273,58 @@ button:hover { filter: brightness(0.97); }
   tfoot { display: table-footer-group; }
 }
 
+/* ---------- Summary table column widths ---------- */
+/* Target only the first (summary) table */
+#summarySection .data-table th:nth-child(1),
+#summarySection .data-table td:nth-child(1) {
+  width: 8%;   /* Course # */
+}
+
+#summarySection .data-table th:nth-child(2),
+#summarySection .data-table td:nth-child(2) {
+  width: 30%;  /* Course Name - nice and wide */
+}
+
+#summarySection .data-table th:nth-child(3),
+#summarySection .data-table td:nth-child(3) {
+  width: 6%;   /* Credit Hrs */
+}
+
+#summarySection .data-table th:nth-child(4),
+#summarySection .data-table td:nth-child(4) {
+  width: 7%;   /* Clock Hrs */
+}
+
+#summarySection .data-table th:nth-child(5),
+#summarySection .data-table td:nth-child(5) {
+  width: 9%;   /* Tuition */
+}
+
+#summarySection .data-table th:nth-child(6),
+#summarySection .data-table td:nth-child(6) {
+  width: 7%;   /* Fee */
+}
+
+#summarySection .data-table th:nth-child(7),
+#summarySection .data-table td:nth-child(7) {
+  width: 7%;   /* Book */
+}
+
+#summarySection .data-table th:nth-child(8),
+#summarySection .data-table td:nth-child(8) {
+  width: 7%;   /* Tool */
+}
+
+#summarySection .data-table th:nth-child(9),
+#summarySection .data-table td:nth-child(9) {
+  width: 7%;   /* Cert */
+}
+
+#summarySection .data-table th:nth-child(10),
+#summarySection .data-table td:nth-child(10) {
+  width: 12%;  /* Total */
+}
+
 /* Back button */
 .back-btn {
   display: inline-block;
