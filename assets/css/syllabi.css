@@ -65,7 +65,7 @@ button{ cursor:pointer; transition:filter .2s; }
 button:hover{ filter:brightness(.96); }
 .muted{ color:var(--muted); }
 
-/* Card-style container for the syllabus */
+/* Card-style container for the syllabus / cost sheet */
 .card{
   background:#fff;
   border:0;          /* no border */
@@ -137,8 +137,8 @@ button:hover{ filter:brightness(.96); }
 .no-print{ display: block; }
 
 /* =========================================
-   COST SHEET – DENSER TABLE & SECTION SPACING
-   (affects summary + item grid)
+   COST SHEET – DENSER TABLES & VISIBILITY
+   (summary + item grid tables)
 ========================================= */
 
 /* Tighten vertical spacing between cost sheet sections */
@@ -148,12 +148,12 @@ button:hover{ filter:brightness(.96); }
   padding: 0;
 }
 
-/* Generic subsection margin (kept small so tables sit closer) */
+/* Generic subsection margin kept small so tables sit closer */
 .subsection {
   margin: 0 0 4px 0;
 }
 
-/* Headings above cost tables: smaller margins */
+/* Headings above cost tables: small, tight margins */
 #summarySection h3,
 .item-grid h3 {
   margin: 4px 0 2px 0;
@@ -166,10 +166,56 @@ button:hover{ filter:brightness(.96); }
   border-collapse: collapse;
 }
 
-/* Denser table rows overall */
+/* Base dense table padding */
 .data-table.dense th,
 .data-table.dense td {
   padding: 2px 4px;
+}
+
+/* ----- Column headers (all data tables) ----- */
+.data-table thead th {
+  background: #007cbc;
+  color: #fff;
+  font-weight: 600;
+  padding: 6px 8px;
+  border: none;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+/* ----- Zebra striping for body rows ----- */
+.data-table tbody tr:nth-child(odd) {
+  background: #fafafa;
+}
+.data-table tbody tr:nth-child(even) {
+  background: #ffffff;
+}
+
+/* Subtle hover effect (screen only) */
+@media screen {
+  .data-table tbody tr:hover {
+    background: #e8f4ff;
+  }
+}
+
+/* Slight row separators for clarity */
+.data-table td {
+  border-bottom: 1px solid #ddd;
+}
+
+/* ----- Totals row (program totals line) ----- */
+/* Preferred: add class "totals-row" in JS */
+.data-table .totals-row {
+  background: #e2f2ff;
+  font-weight: 700;
+  border-top: 2px solid #007cbc;
+}
+
+/* Fallback: if totals is the last row in summaryBody */
+#summaryBody tr:last-child {
+  background: #e2f2ff;
+  font-weight: 700;
+  border-top: 2px solid #007cbc;
 }
 
 /* =========================================
@@ -487,6 +533,11 @@ button:hover{ filter:brightness(.96); }
   .data-table.dense th,
   .data-table.dense td {
     padding: 1px 3px;
+  }
+
+  /* Slightly slimmer headers in print */
+  .data-table thead th {
+    padding: 3px 4px !important;
   }
 
   /* Tight margins between stacked tables/sections in print */
