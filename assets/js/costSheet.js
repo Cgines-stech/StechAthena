@@ -164,7 +164,7 @@ function renderItemRows3(tbodyEl, items) {
         </div>
         ${it.note ? `<div class="muted" style="font-size:0.72em; margin-top:2px;">${it.note}</div>` : ""}
       </td>
-      <td class="price">${money(price)}</td>
+      <td class="col-price price">${money(price)}</td>
     `;
     tbodyEl.appendChild(tr);
   });
