@@ -287,7 +287,7 @@ button:hover { filter: brightness(0.97); }
 
 #summarySection .data-table th:nth-child(3),
 #summarySection .data-table td:nth-child(3) {
-  width: 6%;   /* Credit Hrs */
+  width: 7%;   /* Credit Hrs */
 }
 
 #summarySection .data-table th:nth-child(4),
@@ -297,7 +297,7 @@ button:hover { filter: brightness(0.97); }
 
 #summarySection .data-table th:nth-child(5),
 #summarySection .data-table td:nth-child(5) {
-  width: 9%;   /* Tuition */
+  width: 8%;   /* Tuition */
 }
 
 #summarySection .data-table th:nth-child(6),
