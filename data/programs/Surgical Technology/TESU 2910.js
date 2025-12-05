@@ -117,7 +117,7 @@ const TESU2900 = [
       "Week S",
       "Week 6",
       "Week 7",
-      "Experience Essay ",
+      "Experience Essay",
       "Week 8",
       "Week 9",
       "Week 10",
