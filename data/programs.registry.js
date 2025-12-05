@@ -40,6 +40,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Practical Nursing/program.js",
   "Software Development":
     "../../data/programs/Software Development/program.js",
+  "Surgical Technology":
+    "../../data/programs/Surgical Technology/program.js",
 };
 
 export const PROGRAM_COURSE_REGISTRY = {
@@ -232,6 +234,18 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Software Development/TESD 1430.js",
     "../../data/programs/Software Development/TESD 1620.js",
     "../../data/programs/Software Development/TESD 2860.js",
+  ],
+  "Surgical Technology": [
+    "../../data/programs/Surgical Technology/TESU 1010.js",
+    "../../data/programs/Surgical Technology/TESU 1020.js",
+    "../../data/programs/Surgical Technology/TESU 1030.js",
+    "../../data/programs/Surgical Technology/TESU 1040.js",
+    "../../data/programs/Surgical Technology/TESU 1050.js",
+    "../../data/programs/Surgical Technology/TESU 1060.js",
+    "../../data/programs/Surgical Technology/TESU 1070.js",
+    "../../data/programs/Surgical Technology/TESU 2900.js",
+    "../../data/programs/Surgical Technology/TESU 2910.js",
+    "../../data/programs/Surgical Technology/TESU 1221.js",
   ],
 };
 
