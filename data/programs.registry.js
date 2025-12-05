@@ -38,6 +38,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Plumbing Apprenticeship/program.js",
   "Practical Nursing":
     "../../data/programs/Practical Nursing/program.js",
+  "Software Development":
+    "../../data/programs/Software Development/program.js",
 };
 
 export const PROGRAM_COURSE_REGISTRY = {
@@ -215,6 +217,21 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Practical Nursing/PN 1084.js",
     "../../data/programs/Practical Nursing/PN 1086X.js",
     "../../data/programs/Practical Nursing/PN 1090.js",
+  ],
+  "Software Development": [
+    "../../data/programs/Software Development/TESD 1400.js",
+    "../../data/programs/Software Development/TESD 1800.js",
+    "../../data/programs/Software Development/TESD 1100.js",
+    "../../data/programs/Software Development/TESD 1500.js",
+    "../../data/programs/Software Development/TESD 1700.js",
+    "../../data/programs/Software Development/TESD 1050.js",
+    "../../data/programs/Software Development/TESD 1180.js",
+    "../../data/programs/Software Development/TESD 1600.js",
+    "../../data/programs/Software Development/TESD 1610.js",
+    "../../data/programs/Software Development/TESD 1420.js",
+    "../../data/programs/Software Development/TESD 1430.js",
+    "../../data/programs/Software Development/TESD 1620.js",
+    "../../data/programs/Software Development/TESD 2860.js",
   ],
 };
 

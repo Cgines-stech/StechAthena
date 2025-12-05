@@ -64,6 +64,7 @@ const decodeModule = (mod) => {
     mod?.phlebotomyProgram,
     mod?.plumbingApprenticeshipProgram,
     mod?.practicalNursingProgram,
+    mod?.softwareDevelopmentProgram,
   ];
   const data = candidates.find(Boolean);
   return Array.isArray(data) ? data : (data ? [data] : []);
