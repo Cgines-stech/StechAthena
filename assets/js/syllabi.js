@@ -381,76 +381,39 @@ instructorsList.parentElement.appendChild(instructorNote);
 
   // Classroom Hours — course overrides if non-placeholder; else program default
   hoursContainer.innerHTML = "";
-
-  const courseHoursRaw = Array.isArray(c.courseClassroomHours)
-    ? c.courseClassroomHours
-    : [];
+  const courseHoursRaw = Array.isArray(c.courseClassroomHours) ? c.courseClassroomHours : [];
   const courseHasRealHours =
     courseHoursRaw.length > 0 && !isPlaceholderArray(courseHoursRaw);
 
   const hours = courseHasRealHours ? courseHoursRaw : currentProgramHours;
 
-  // Helper: normalize day values (string or array) into a nice display string
-  const formatDayHours = (val) => {
-    if (!val) return "";
-    if (Array.isArray(val)) {
-      if (!val.length) return "";
-      return val.join(" / "); // e.g. "8–11 / 12–3 / 4–7"
-    }
-    // already a string
-    return String(val);
-  };
-
   if (Array.isArray(hours) && hours.length) {
     hours.forEach(h => {
       const block = document.createElement("div");
-      block.className = "hours-block";
-
-      // Header: "Classroom Hours" + Range of Dates
       const header = document.createElement("p");
-      header.className = "hours-header";
-
       const sd = h.startDate || "";
       const ed = h.endDate || "";
-
-      const rangeLabel =
-        sd && ed
-          ? `Range of Dates: ${sd} – ${ed}`
-          : (sd || ed || "Range of Dates");
-
-      header.textContent = rangeLabel;
+      header.textContent = (sd && ed) ? `${sd} – ${ed}` : (sd || ed || "Range of Dates");
       block.appendChild(header);
 
-      const days = [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ];
-
+      const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
       const dayList = document.createElement("ul");
       dayList.className = "bullets";
-
       let any = false;
       days.forEach(d => {
-        const formatted = formatDayHours(h[d]);
-        if (formatted) {
+        const val = h[d];
+        if (val) {
           any = true;
           const li = document.createElement("li");
-          li.textContent = `${d}: ${formatted}`;
+          li.textContent = `${d}: ${val}`;
           dayList.appendChild(li);
         }
       });
-
       if (!any) {
         const li = document.createElement("li");
         li.innerHTML = `<span class="muted">Hours Vary</span>`;
         dayList.appendChild(li);
       }
-
       block.appendChild(dayList);
       hoursContainer.appendChild(block);
     });
