@@ -9,7 +9,7 @@ const TESD1430 = [
     id: 90011,
     programId: 1,
     courseNumber: "TESD 1430",
-    courseName: "Advanced Java Programming",
+    courseName: "Python Programming",
     courseCredits: 4,
     statewideAlignment: "Non-Aligned",
     courseClockHours: 120,
