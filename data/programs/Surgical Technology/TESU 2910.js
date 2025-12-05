@@ -4,6 +4,8 @@
 import gradeScale from "../../gradescale.js";
 import { courseTotals, sum, money } from "../../utils/helpers.js";
 
+const GS = Array.isArray(gradeScale) ? gradeScale[0] : gradeScale;
+
 const TESU2910 = [
   {
     id: 19009,
