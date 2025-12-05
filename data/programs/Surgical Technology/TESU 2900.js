@@ -81,7 +81,18 @@ const TESU2900 = [
     ],
 
     course_Policies: [
-      {},
+      {
+        title: "Course Grading",
+        content: [
+          "A clinical evaluation document must be submitted for each clinical day to count towards your overall hours and grades. Clinical evaluation documents will be graded according to how much of the document is completed and that the information is accurate. Students must maintain 80% in this course."
+        ]  
+      },
+      {
+        type: "gradeScale",
+        title: GS?.title || "Grading Scale",
+         description: GS?.description || "",
+        scale: GS?.scale || []   // expecting 12 items with { letter, range }
+      },
     ],
 
     courseAssignmentsandAsssessments: [
