@@ -207,7 +207,7 @@ button:hover{ filter:brightness(.96); }
 }
 .grade-table td {
   border: none;
-  padding: 0.2rem 0.3rem;
+  padding: 0.1rem 0.2rem;
   vertical-align: middle;
 }
 
