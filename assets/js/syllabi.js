@@ -630,7 +630,27 @@ if (mats.length) {
       ul.className = "bullets";
       p.content.forEach(line => {
         const li = document.createElement("li");
-        li.innerHTML = line;  // allow <strong> and other HTML
+
+        // Detect lines that start with <strong>Label:</strong> ...
+        const match = line.match(/^<strong>([^<]+)<\/strong>\s*(.*)$/i);
+
+        if (match) {
+          const labelText = match[1];   // e.g. "Course Policies:"
+          const restText  = match[2];   // e.g. "You are required to keep your progress..."
+
+          const labelSpan = document.createElement("span");
+          labelSpan.className = "policy-label";
+          labelSpan.textContent = labelText;
+
+          li.appendChild(labelSpan);
+          if (restText) {
+            li.appendChild(document.createTextNode(" " + restText));
+          }
+        } else {
+          // Fallback: if it doesn't match that pattern, just allow HTML as before
+          li.innerHTML = line;
+        }
+
         ul.appendChild(li);
       });
 
