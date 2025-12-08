@@ -107,6 +107,10 @@ button:hover{ filter:brightness(.96); }
   box-sizing: border-box;
 }
 
+#institutionalPolicySection.page {
+  padding: 0 !important;
+}
+
 /* Section separators (screen + print) */
 .section-sep{
   border: 0;
