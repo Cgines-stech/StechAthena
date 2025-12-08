@@ -393,13 +393,10 @@ h3, h4 {
 
   /* Keep some more complex blocks together */
   .grade-table,
-  #hoursContainer > div {
+  #hoursContainer > div,
+  #policiesContainer > div{
     page-break-inside: avoid;
   }
-
-  /* TEMP: do NOT force this on policies container children */
-  /* #policiesContainer > div { page-break-inside: avoid; } */
-
 
   /* Canvas & similar blocks should not split across pages if possible */
   .canvas-section,
@@ -472,18 +469,15 @@ h3, h4 {
 
   /* Institutional page already forced to new page above */
 
-    /* TEMP: let policies split normally so the PDF engine
-     stops trying to treat it as an indivisible block */
-    /*
-    #policiesSection{
-      page-break-inside: avoid;
-    }
+    /* Policies: try hard to keep entire section on one page */
+  #policiesSection{
+    page-break-inside: avoid;
+  }
 
-    #policiesSection > *{
-      page-break-inside: avoid;
-    }
-    */
-
+  /* Also avoid splitting its immediate children */
+  #policiesSection > *{
+    page-break-inside: avoid;
+  }
 
   /* Make disclaimer always appear below the two-column list */
   #assignmentsDisclaimer {
