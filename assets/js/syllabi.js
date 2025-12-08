@@ -396,10 +396,22 @@ instructorsList.parentElement.appendChild(instructorNote);
   if (Array.isArray(hours) && hours.length) {
     hours.forEach(h => {
       const block = document.createElement("div");
-      const header = document.createElement("p");
+      const header = document.createElement("div");
       const sd = h.startDate || "";
       const ed = h.endDate || "";
-      header.textContent = (sd && ed) ? `${sd} – ${ed}` : (sd || ed || "Range of Dates");
+
+      // If both Start & End exist → show two rows
+      if (sd && ed) {
+        header.innerHTML = `
+          <p><strong>Start:</strong> ${sd}</p>
+          <p><strong>End:</strong> ${ed}</p>
+        `;
+      } else {
+        // Otherwise use normal behavior
+        const single = sd || ed || "Range of Dates";
+        header.innerHTML = `<p>${single}</p>`;
+      }
+
       block.appendChild(header);
 
       const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
