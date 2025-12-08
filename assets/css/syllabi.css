@@ -250,6 +250,23 @@ button:hover{ filter:brightness(.96); }
   margin-bottom: 2px;
 }
 
+/* Normalize Policies Section font so it matches other sections */
+#policiesContainer,
+#policiesContainer * {
+  font-weight: normal !important;
+  font-size: 13px !important;
+  font-family: Roboto, Arial, sans-serif !important;
+  color: #000 !important;
+}
+
+/* Remove bullets from policies */
+#policiesContainer ul,
+#policiesContainer ul li {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
 /* =========================================
    PRINT STYLES (ONE COHERENT BLOCK)
 ========================================= */
@@ -407,6 +424,10 @@ button:hover{ filter:brightness(.96); }
     margin-left: 0 !important;
   }
 
+  #hoursContainer .hours-date {
+    margin-bottom: 6px; /* adjust to taste */
+  }
+
   /* ======================================
      SPECIAL PAGE BREAK LOGIC
      – Assignments & Hours
@@ -519,6 +540,27 @@ button:hover{ filter:brightness(.96); }
   /* Start / End lines: no extra spacing between them */
   #hoursContainer .hours-date p {
     margin: 0;
+  }
+
+  #hoursContainer .hours-date {
+    margin-bottom: 6px !important;
+  }
+
+  /* Normalize Policies Section for print */
+  #policiesContainer,
+  #policiesContainer * {
+    font-weight: normal !important;
+    font-size: 13px !important;
+    font-family: Roboto, Arial, sans-serif !important;
+    color: #000 !important;
+  }
+
+  /* Remove bullets from policies */
+  #policiesContainer ul,
+  #policiesContainer ul li {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
   }
 
 } /* end of @media print */
