@@ -250,21 +250,25 @@ button:hover{ filter:brightness(.96); }
   margin-bottom: 2px;
 }
 
-/* Normalize Policies Section font so it matches other sections */
-#policiesContainer,
-#policiesContainer * {
-  font-weight: normal !important;
-  font-size: 13px !important;
-  font-family: Roboto, Arial, sans-serif !important;
-  color: #000 !important;
+/* Policies: body text only (keep headings bold) */
+#policiesContainer p,
+#policiesContainer li {
+  font-weight: 400;
+  font-size: 13px;
+  font-family: Roboto, Arial, sans-serif;
+  color: #000;
 }
 
 /* Remove bullets from policies */
 #policiesContainer ul,
 #policiesContainer ul li {
-  list-style: none !important;
-  padding-left: 0 !important;
-  margin-left: 0 !important;
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+h3, h4 {
+  font-weight: 700;
 }
 
 /* =========================================
@@ -546,22 +550,27 @@ button:hover{ filter:brightness(.96); }
     margin-bottom: 6px !important;
   }
 
-  /* Normalize Policies Section for print */
-  #policiesContainer,
-  #policiesContainer * {
-    font-weight: normal !important;
+  /* Policies body text in print */
+  #policiesContainer p,
+  #policiesContainer li {
+    font-weight: 400 !important;
     font-size: 13px !important;
     font-family: Roboto, Arial, sans-serif !important;
     color: #000 !important;
   }
 
-  /* Remove bullets from policies */
+  /* Remove bullets from policies (print) */
   #policiesContainer ul,
   #policiesContainer ul li {
     list-style: none !important;
     padding-left: 0 !important;
     margin-left: 0 !important;
   }
+
+  h3, h4 {
+    font-weight: 700 !important;
+  }
+
 
 } /* end of @media print */
 
