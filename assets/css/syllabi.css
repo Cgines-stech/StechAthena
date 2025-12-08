@@ -172,8 +172,8 @@ button:hover{ filter:brightness(.96); }
   align-items: center;
   font-family: Roboto, sans-serif !important;
   font-size: 18px !important;
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
 }
 
 .centered-text-box {
@@ -442,6 +442,20 @@ button:hover{ filter:brightness(.96); }
     margin-top: 6px;
     font-size: 12px !important;
     font-style: italic;
+
+  .full-width-container {
+  background-color: #007cbc !important;
+  background-image: linear-gradient(
+    to bottom,
+    #007cbc 0%,
+    #007cbc 47.5%,
+    #ffffff 47.5%,
+    #ffffff 52.5%,
+    #007cbc 52.5%,
+    #007cbc 100%
+  ) !important;
+}
+
   }
 
 }
