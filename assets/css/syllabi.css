@@ -267,7 +267,6 @@ button:hover{ filter:brightness(.96); }
     border-radius:0;
   }
 
-
   /* Keep print header off margins; show only once */
   .print-header {
     break-inside: avoid;
@@ -462,6 +461,16 @@ button:hover{ filter:brightness(.96); }
     ) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+  }
+
+  /* Remove bullets from instructors and hours */
+  #instructorsList,
+  #instructorsList li,
+  #hoursContainer ul,
+  #hoursContainer ul li {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
   }
 
 } /* end of @media print */
