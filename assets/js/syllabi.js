@@ -284,7 +284,31 @@ courseSelect.addEventListener("change", () => {
   syllabus.hidden = false;
 });
 
-printBtn.addEventListener("click", () => window.print());
+const policiesSection = document.getElementById("policiesSection");
+
+function preparePoliciesPageBreak() {
+  if (!policiesSection) return;
+
+  // Remove any previous flag
+  policiesSection.classList.remove("force-page-break-before");
+
+  // Measure where the policies section starts in the viewport
+  const rect = policiesSection.getBoundingClientRect();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+  // Heuristic: if the section would start in the bottom 40% of the page,
+  // force it to the next page when printing
+  const startTooLow = rect.top > viewportHeight * 0.6;
+
+  if (startTooLow) {
+    policiesSection.classList.add("force-page-break-before");
+  }
+}
+
+printBtn.addEventListener("click", () => {
+  preparePoliciesPageBreak();
+  window.print();
+});
 
 /** ------------------------ Render ------------------------ */
 function renderSyllabus(c) {
