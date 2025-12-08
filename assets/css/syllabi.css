@@ -304,13 +304,17 @@ button:hover{ filter:brightness(.96); }
   }
 
   /* General text */
-  div, p, li, table{
-    font-size:13px !important;
+  p, li, table {
+    font-size: 13px !important;
     font-family: Roboto, Arial, sans-serif !important;
     color:#000 !important;
-    padding:0;
-    margin:0;
     line-height:1.35;
+  }
+
+  div {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    color: inherit !important;
   }
 
   /* Lists */
