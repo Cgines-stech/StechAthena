@@ -42,6 +42,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Software Development/program.js",
   "Surgical Technology":
     "../../data/programs/Surgical Technology/program.js",
+  "Welding Technology":
+    "../../data/programs/Welding Technology/program.js",
 };
 
 export const PROGRAM_COURSE_REGISTRY = {
@@ -246,6 +248,22 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Surgical Technology/TESU 2900.js",
     "../../data/programs/Surgical Technology/TESU 2910.js",
     "../../data/programs/Surgical Technology/TESU 1221.js",
+  ],
+  "Welding Technology": [
+    "../../data/programs/Welding Technology/TEWT 1000.js",
+    "../../data/programs/Welding Technology/TEWT 1045.js",
+    "../../data/programs/Welding Technology/TEWT 1004.js",
+    "../../data/programs/Welding Technology/TEWT 1010.js",
+    "../../data/programs/Welding Technology/TEWT 1111.js",
+    "../../data/programs/Welding Technology/TEWT 1311.js",
+    "../../data/programs/Welding Technology/TEWT 1112.js",
+    "../../data/programs/Welding Technology/TEWT 1312.js",
+    "../../data/programs/Welding Technology/TEWT 1211.js",
+    "../../data/programs/Welding Technology/TEWT 1620.js",
+    "../../data/programs/Welding Technology/TEWT 1212.js",
+    "../../data/programs/Welding Technology/TEWT 1411.js",
+    "../../data/programs/Welding Technology/TEWT 1450.js",
+    "../../data/programs/Welding Technology/TEWT 1135.js",
   ],
 };
 

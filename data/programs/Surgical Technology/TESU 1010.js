@@ -53,7 +53,7 @@ const TESU1010 = [
       {
         name: "Cengage Unlimited Subscription", 
         price: 150.0,
-        isbn: "Syllabus",
+        isbn: "",
         note: "Cengage Unlimited Subscription 1 year"
       },
     ],

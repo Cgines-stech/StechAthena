@@ -53,6 +53,8 @@ const PROGRAM_INSTRUCTORS_REGISTRY = {
     "../../data/programs/Software Development/instructors.js",
   "Surgical Technology":
     "../../data/programs/Surgical Technology/instructors.js",
+  "Welding Technology":
+    "../../data/programs/Welding Technology/instructors.js",
 };
 const PROGRAM_HOURS_REGISTRY = {
   "Advanced Emergency Medical Technician":
@@ -95,6 +97,8 @@ const PROGRAM_HOURS_REGISTRY = {
     "../../data/programs/Software Development/classRoomDates.js",
   "Surgical Technology":
     "../../data/programs/Surgical Technology/classRoomDates.js",
+  "Welding Technology":
+    "../../data/programs/Welding Technology/classRoomDates.js",
 };
 const PROGRAM_POLICIES_REGISTRY = {
   "Advanced Emergency Medical Technician":
@@ -137,6 +141,8 @@ const PROGRAM_POLICIES_REGISTRY = {
     "../../data/programs/Software Development/programPolicies.js",
   "Surgical Technology":
     "../../data/programs/Surgical Technology/programPolicies.js",
+  "Welding Technology":
+    "../../data/programs/Welding Technology/programPolicies.js",
 };
 
 /** ------------------------ DOM ------------------------ */

@@ -47,6 +47,12 @@ const TESU1070 = [
 
     syllabiBooks: [
       {
+        name: "Cengage Unlimited Subscription", 
+        price: 150.0,
+        isbn: "",
+        note: "Cengage Unlimited Subscription 1 year"
+      },
+      {
         name: "NCCT Interactive Review", 
         price: 69.95,
         isbn: "",

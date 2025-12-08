@@ -38,7 +38,12 @@ const TESU1221 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Cengage Unlimited Subscription", 
+        price: 150.0,
+        isbn: "",
+        note: "Cengage Unlimited Subscription 1 year"
+      },
     ],
     
     courseTools: [
