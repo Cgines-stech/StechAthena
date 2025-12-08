@@ -393,10 +393,10 @@ h3, h4 {
 
   /* Keep some more complex blocks together */
   .grade-table,
-  #hoursContainer > div,
-  #policiesContainer > div{
+  #hoursContainer > div {
     page-break-inside: avoid;
   }
+
 
   /* Canvas & similar blocks should not split across pages if possible */
   .canvas-section,
@@ -563,7 +563,7 @@ h3, h4 {
     color: #000 !important;
   }
 
-  /* Remove bullets from policies (print) */
+  /* Policies: remove bullets in print */
   #policiesContainer ul,
   #policiesContainer ul li {
     list-style: none !important;
@@ -571,17 +571,7 @@ h3, h4 {
     margin-left: 0 !important;
   }
 
-  h3, h4 {
-    font-weight: 700 !important;
-  }
-
-  /* In print, neutralize strong/b in policies so they don't look heavier
-   than the rest of the syllabus in the final PDF */
-  #policiesContainer strong,
-  #policiesContainer b {
-    font-weight: 400 !important;
-  }
-
+  /* Clamp all policies text to the same font/weight/size */
   #policiesContainer,
   #policiesContainer * {
     font-family: Roboto, Arial, sans-serif !important;
@@ -597,13 +587,13 @@ h3, h4 {
     font-weight: 700 !important;
   }
 
-  /* Slight emphasis on labels, but same font */
+  /* Slight emphasis on labels, but same font family */
   #policiesContainer .policy-label {
-    font-weight: 600 !important;
+    font-weight: 400 !important;
     margin-right: 0.25rem;
   }
 
-  /* Kill any leftover strong/b weight differences */
+  /* Neutralize any leftover strong/b in policies */
   #policiesContainer strong,
   #policiesContainer b {
     font-weight: 400 !important;
