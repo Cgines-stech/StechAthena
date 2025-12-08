@@ -401,13 +401,15 @@ instructorsList.parentElement.appendChild(instructorNote);
 
       // --- Date header (Start / End on separate lines) ---
       const header = document.createElement("div");
+      header.className = "hours-date";
+
       const sd = h.startDate || "";
       const ed = h.endDate || "";
 
       if (sd && ed) {
         header.innerHTML = `
-          <p><strong>Start:</strong> ${sd}</p>
-          <p><strong>End:</strong> ${ed}</p>
+          <p>Start: ${sd}</p>
+          <p>End: ${ed}</p>
         `;
       } else {
         const single = sd || ed || "Range of Dates";

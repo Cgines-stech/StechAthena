@@ -232,6 +232,24 @@ button:hover{ filter:brightness(.96); }
   column-count: 1;
 }
 
+/* Remove bullets from materials, assignments, and policies */
+#materialsList,
+#materialsList li,
+#assignmentsList,
+#assignmentsList li,
+#policiesContainer ul,
+#policiesContainer ul li {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+#materialsList li,
+#assignmentsList li,
+#policiesContainer ul li {
+  margin-bottom: 2px;
+}
+
 /* =========================================
    PRINT STYLES (ONE COHERENT BLOCK)
 ========================================= */
@@ -378,6 +396,17 @@ button:hover{ filter:brightness(.96); }
   }
   a:hover{ text-decoration: underline; }
 
+  #materialsList,
+  #materialsList li,
+  #assignmentsList,
+  #assignmentsList li,
+  #policiesContainer ul,
+  #policiesContainer ul li {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
   /* ======================================
      SPECIAL PAGE BREAK LOGIC
      – Assignments & Hours
@@ -473,17 +502,25 @@ button:hover{ filter:brightness(.96); }
     margin-left: 0 !important;
   }
   #hoursContainer .hours-block {
-  margin-bottom: 6px;
+    margin-bottom: 6px;
   }
 
+  /* Day label: no bold */
   #hoursContainer .hours-days {
-    font-weight: 600;
+    font-weight: normal;
     margin: 0;
   }
 
+  /* Time lines */
   #hoursContainer .hours-time {
     margin: 0;
   }
+
+  /* Start / End lines: no extra spacing between them */
+  #hoursContainer .hours-date p {
+    margin: 0;
+  }
+
 } /* end of @media print */
 
 /* Screen HR appearance */
