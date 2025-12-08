@@ -271,6 +271,12 @@ h3, h4 {
   font-weight: 700;
 }
 
+#policiesContainer .policy-label {
+    font-weight: 600;
+    font-family: "Roboto Condensed", sans-serif;
+    letter-spacing: 0.01em;
+}
+
 /* =========================================
    PRINT STYLES (ONE COHERENT BLOCK)
 ========================================= */
@@ -571,10 +577,19 @@ h3, h4 {
     font-weight: 700 !important;
   }
 
+  /* Screen + print policy labels */
   #policiesContainer .policy-label {
     font-weight: 600;
     font-family: "Roboto Condensed", sans-serif;
     letter-spacing: 0.01em;
+    margin-right: 0.25rem; /* optional spacing */
+  }
+
+  /* In print, neutralize strong/b in policies so they don't look heavier
+   than the rest of the syllabus in the final PDF */
+  #policiesContainer strong,
+  #policiesContainer b {
+    font-weight: 400 !important;
   }
 
 } /* end of @media print */
