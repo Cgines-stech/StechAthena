@@ -20,7 +20,7 @@ const TESU1022 = [
     includeInProgramTotals: true,
 
     courseDescription:
-      "In the Microbiology and Infection Control course students will learn microbiology and the relationship to the practice of sterile technique, infection control, and aseptic principles in the operative setting.",
+      "The Microbiology and Infection Control course will introduce students to microbiology, infection control, and aseptic principles.",
 
     courseObjectives: [
       "Correlate infection control in relation to microbiology, the diseases they cause, and procedures used to treat infections",
