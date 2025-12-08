@@ -472,7 +472,18 @@ button:hover{ filter:brightness(.96); }
     padding-left: 0 !important;
     margin-left: 0 !important;
   }
+  #hoursContainer .hours-block {
+  margin-bottom: 6px;
+  }
 
+  #hoursContainer .hours-days {
+    font-weight: 600;
+    margin: 0;
+  }
+
+  #hoursContainer .hours-time {
+    margin: 0;
+  }
 } /* end of @media print */
 
 /* Screen HR appearance */

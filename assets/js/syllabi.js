@@ -414,25 +414,77 @@ instructorsList.parentElement.appendChild(instructorNote);
 
       block.appendChild(header);
 
-      const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-      const dayList = document.createElement("ul");
-      dayList.className = "bullets";
-      let any = false;
-      days.forEach(d => {
-        const val = h[d];
-        if (val) {
-          any = true;
-          const li = document.createElement("li");
-          li.textContent = `${d}: ${val}`;
-          dayList.appendChild(li);
-        }
-      });
-      if (!any) {
-        const li = document.createElement("li");
-        li.innerHTML = `<span class="muted">Hours Vary</span>`;
-        dayList.appendChild(li);
-      }
-      block.appendChild(dayList);
+const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+const dayAbbr = {
+  Monday: "Mo",
+  Tuesday: "Tu",
+  Wednesday: "W",
+  Thursday: "Th",
+  Friday: "Fr",
+  Saturday: "Sat",
+  Sunday: "Sun",
+};
+
+// Group days by their hours string
+const hoursMap = new Map(); // key: hours string, value: array of day names
+days.forEach(d => {
+  const val = h[d];
+  if (!val) return;
+
+  const key = String(val).trim();
+  if (!hoursMap.has(key)) hoursMap.set(key, []);
+  hoursMap.get(key).push(d);
+});
+
+// Helper: split a raw hours string into separate time lines
+const splitHours = (val) => {
+  const s = String(val);
+  // Prefer explicit separators if present
+  if (s.includes("\n")) return s.split(/\r?\n/).map(t => t.trim()).filter(Boolean);
+  if (s.includes("|"))  return s.split("|").map(t => t.trim()).filter(Boolean);
+  if (s.includes(";"))  return s.split(";").map(t => t.trim()).filter(Boolean);
+  // Fallback: treat as single line
+  return [s.trim()];
+};
+
+if (hoursMap.size === 0) {
+  const p = document.createElement("p");
+  p.innerHTML = `<span class="muted">Hours Vary</span>`;
+  block.appendChild(p);
+} else {
+  hoursMap.forEach((hoursString, dayListArr) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "hours-block";
+
+    // If multiple days share the same hours → use abbreviations
+    let dayLabel;
+    if (dayListArr.length > 1) {
+      dayLabel = dayListArr
+        .map(d => dayAbbr[d] || d)
+        .join(", ");
+    } else {
+      // Single day → spell it out
+      dayLabel = dayListArr[0];
+    }
+
+    // Day line
+    const dayLine = document.createElement("p");
+    dayLine.className = "hours-days";
+    dayLine.textContent = dayLabel;
+    wrapper.appendChild(dayLine);
+
+    // Time lines (each on its own row)
+    splitHours(hoursString).forEach(t => {
+      const timeP = document.createElement("p");
+      timeP.className = "hours-time";
+      timeP.textContent = t;
+      wrapper.appendChild(timeP);
+    });
+
+    block.appendChild(wrapper);
+  });
+}
+
       hoursContainer.appendChild(block);
     });
   } else {
