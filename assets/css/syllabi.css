@@ -562,6 +562,8 @@ h3, h4 {
   #policiesContainer li {
     font-weight: 400 !important;
     font-size: 13px !important;
+    margin: 0 0 6px 0 !important;   /* ensure print spacing */
+    line-height: 1.35;
     font-family: Roboto, Arial, sans-serif !important;
     color: #000 !important;
   }
