@@ -101,9 +101,9 @@ const TESU2900 = [
         scale: GS?.scale || []   // expecting 12 items with { letter, range }
       },
       {
-        title: "General Course Policies",
+        title: "Course Policies",
         content: [
-          "Course Policies: Student must adhere to the Program Safety, Performance Standards, and code of conduct outlined in the Surgical Technology Policies and Procedures. Student must wear royal blue embroidered scrubs and close-toed shoes and adhere to facility policies and standards.",
+          "Student must adhere to the Program Safety, Performance Standards, and code of conduct outlined in the Surgical Technology Policies and Procedures. Student must wear royal blue embroidered scrubs and close-toed shoes and adhere to facility policies and standards.",
           "Students must complete all required hours and surgical cases to be eligible for the certification exam. Students must complete all of their clinical hours in a timely manner. Each student is required to complete approximately 16 hours of clinicals per week. If you are going to be absent, communication with your instructor will be required to help you set up time to make up clinical hours. It is your responsibility to ask for more clinical days if you do not have enough hours. Make-up days will be provided towards the end of the course. If clinical hours are not completed before the end date, you may be dismissed from the program. You may use cell phones at your own discretion. We highly recommend that you avoid taking your cell phone with you into the operating room.",
           "You may be required to stand for a long amount of hours without a break. You may need to lift heavy items such as instrument pans or transferring a patient.",
         ]  

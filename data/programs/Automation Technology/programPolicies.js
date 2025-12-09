@@ -15,15 +15,15 @@ export default [
   // Special, typed block for the grade scale
   {
     type: "gradeScale",
-    title: GS?.title || "Grading Scale",
+    title: GS?.title || "",
     description: GS?.description || "",
     scale: GS?.scale || []   // expecting 12 items with { letter, range }
   },
 
   {
-    title: "General Course Policies",
+    title: "Course Policies",
     content: [
-      "Course Policies: In alignment with industry standards, students shall not be permitted to use cell phones in the lab area, except when researching information pertinent to coursework. Safety Glasses must be worn in the lab. No Loose Clothing when operating Equipment, No Shorts, flip flops, or sandals. Possession or use of controlled substances or their imitations in the lab, which can impair judgment or emergency response, is a severe safety violation. This disregard for safety may result in immediate withdrawal from the program. No one may work in the lab with any substance, legal or otherwise, that may impair them in any way."
+      "In alignment with industry standards, students shall not be permitted to use cell phones in the lab area, except when researching information pertinent to coursework. Safety Glasses must be worn in the lab. No Loose Clothing when operating Equipment, No Shorts, flip flops, or sandals. Possession or use of controlled substances or their imitations in the lab, which can impair judgment or emergency response, is a severe safety violation. This disregard for safety may result in immediate withdrawal from the program. No one may work in the lab with any substance, legal or otherwise, that may impair them in any way."
     ]
   }
 ];

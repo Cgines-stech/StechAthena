@@ -15,13 +15,13 @@ export default [
   // Special, typed block for the grade scale
   {
     type: "gradeScale",
-    title: GS?.title || "Grading Scale",
+    title: GS?.title || "",
     description: GS?.description || "",
     scale: GS?.scale || []   // expecting 12 items with { letter, range }
   },
 
   {
-    title: "General Course Policies",
+    title: "Course Policies",
     content: [
       "<strong>Attendance:</strong> Students are expected to follow their schedule. Absences, tardiness, and early departures will affect your record. Maintain at least 80% attendance. If below 80%, work with the instructor to improve. Take a 10-minute break per hour; inform the instructor if you need longer. Notify the instructor ASAP if you'll be late or absent.",
       "<strong>Cell Phone / Electronics:</strong> Limit phone use to coursework. Put away devices if used for non-coursework. Headphones are allowed for music. In the welding lab, keep one ear free and when needed, use OSHA-approved hearing protection; consumer headphones are not acceptable. Take calls or check messages outside the lab and welding booths to maintain a focused work environment.",

@@ -14,15 +14,15 @@ export default [
   // Special, typed block for the grade scale
   {
     type: "gradeScale",
-    title: GS?.title || "Grading Scale",
+    title: GS?.title || "",
     description: GS?.description || "",
     scale: GS?.scale || []   // expecting 12 items with { letter, range }
   },
 
   {
-    title: "General Course Policies",
+    title: "Course Policies",
     content: [
-      "Course Policies: If at any time a student falls below the 80% course minimum, a meeting will be scheduled with the student and instructor/s to discuss make-up opportunities or actions the student may take to improve their grades. Students are expected to attend all scheduled courses at the provided time. Each student must maintain a minimum of 80% attendance in the program. If you are going to be absent, communication with the instructor is required to set up time to make up the time missed. This make up time will be scheduled at the convenience of the instructors. Failure to meet the required attendance standards will result in program dismissal. You may use your cell phones at your own discretion. NO USING CELL PHONES DURING CLASS PRESENTATIONS OR QUIZZES/EXAMS. CELL PHONES ARE NOT ALLOWED IN THE LAB.",
+      "If at any time a student falls below the 80% course minimum, a meeting will be scheduled with the student and instructor/s to discuss make-up opportunities or actions the student may take to improve their grades. Students are expected to attend all scheduled courses at the provided time. Each student must maintain a minimum of 80% attendance in the program. If you are going to be absent, communication with the instructor is required to set up time to make up the time missed. This make up time will be scheduled at the convenience of the instructors. Failure to meet the required attendance standards will result in program dismissal. You may use your cell phones at your own discretion. NO USING CELL PHONES DURING CLASS PRESENTATIONS OR QUIZZES/EXAMS. CELL PHONES ARE NOT ALLOWED IN THE LAB.",
     ]
   }
 ];

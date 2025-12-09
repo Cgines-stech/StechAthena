@@ -15,13 +15,13 @@ export default [
   // Special, typed block for the grade scale
   {
     type: "gradeScale",
-    title: GS?.title || "Grading Scale",
+    title: GS?.title || "",
     description: GS?.description || "",
     scale: GS?.scale || []   // expecting 12 items with { letter, range }
   },
 
   {
-    title: "General Course Policies",
+    title: "Course Policies",
     content: [
       "<strong>Prerequisites:</strong> Students must be 16 years old on the first day of class. Students must have a current CPR certification (The CPR course must have a hands on portion- Online only courses are not accepted) or ability to complete a course which is provided as part of the NA program Testing and Vaccine Requirements: Two PPD screenings (TB skin test) or Quantiferon Gold blood test; Hepatitis B (3 doses or a positive titer), Tdap immunization (within 10 years), 2 Varicella doses or positive titer, 2 MMR doses or positive titers; current season influenza vaccination (flu shot if clinicals are between October 1st and March 31), complete COVID-19 vaccination (Boosters not required) or signed exemption form. Documentation must be provided on Verified Credentials before attending clinicals or the end of the first term (if in high school) to remain in the course. Background Check through Verified Credentials Drug Screen submitted through Verified Credentials and completed at Workmed.",
       "<strong>Attendance:</strong> When students signed up for this class, they committed to a schedule and it is expected to be followed. Southwest Tech requires 90 hours of in class attendance to complete this program. Students will need to come in and make up any hours they have missed. This can be arranged with the instructor. If a student has an issue with their schedule, they must contact an instructor as soon as possible. Students are required to attend 24 hours of clinical experiences at a long term care facility after completing the course material. These will be set up by the instructor and students will need to sign up for them.",
