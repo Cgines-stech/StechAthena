@@ -76,16 +76,16 @@ const TEEM1904 = [
 
     course_Policies: [
       {
-        title: "Course Grading",
+        title: "",
         content: [
-          "Chapter tests may be attempted up to THREE times and will remain open until the posted due date. Each exam must be passed with a minimum of 80%. If quizzes are attempted multiple times, the highest score will be saved.",
+          "Course Grading: Chapter tests may be attempted up to THREE times and will remain open until the posted due date. Each exam must be passed with a minimum of 80%. If quizzes are attempted multiple times, the highest score will be saved.",
           "Hands-on skills are a demanding and integral part of the learning experience. All skills must be demonstrated (physically & verbally) with 100% accuracy to prove competency. No exceptions.",
           "High School Power School Grades: Quarter student grades will be determined by student progress percentage. Faculty will use the higher percentage of either 1) quarter progress, or 2) cumulative progress for the current training plan year."
         ]  
       },
       {
         type: "gradeScale",
-        title: GS?.title || "Grading Scale",
+        title: GS?.title || "",
          description: GS?.description || "",
         scale: GS?.scale || []   // expecting 12 items with { letter, range }
       },

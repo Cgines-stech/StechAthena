@@ -5,9 +5,9 @@ const GS = Array.isArray(gradeScale) ? gradeScale[0] : gradeScale;
 
 export default [
   {
-    title: "Course Grading",
+    title: "",
     content: [
-      "Students must achieve 80% (B-) or higher to pass graded work. Incomplete assignments must be redone to meet the required standards. Guidelines, rules, and expectations for completing assignments are provided in each course.",
+      "Course Grading: Students must achieve 80% (B-) or higher to pass graded work. Incomplete assignments must be redone to meet the required standards. Guidelines, rules, and expectations for completing assignments are provided in each course.",
       "High School Power School Grades: Quarter student grades will be determined by student progress percentage. Faculty will use the higher percentage of either 1) quarter progress, or 2) cumulative progress for the current training plan year.",
     ]
   },
@@ -15,14 +15,15 @@ export default [
   // Special, typed block for the grade scale
   {
     type: "gradeScale",
-    title: GS?.title || "Grading Scale",
+    title: GS?.title || "",
     description: GS?.description || "",
     scale: GS?.scale || []   // expecting 12 items with { letter, range }
   },
 
   {
-    title: "General Course Policies",
+    title: "",
     content: [
+      "Course Policies",
       "<strong>Attendance:</strong> Students are expected to follow their schedule. Absences, tardiness, and early departures will affect your record. Maintain at least 80% attendance. If below 80%, work with the instructor to improve. Take a 10-minute break per hour; inform the instructor if you need longer. Notify the instructor ASAP if you'll be late or absent.",
       "<strong>Cell Phone / Electronics:</strong> Limit phone use to coursework. Put away devices if used for non-coursework. Headphones are allowed for music. In the welding lab, keep one ear free and when needed, use OSHA-approved hearing protection; consumer headphones are not acceptable. Take calls or check messages outside the lab and welding booths to maintain a focused work environment.",
       "<strong>Prerequisites:</strong> Follow the course order in the welding program's sequence unless changed by instructors. Lab courses require a demonstration of skills. Skills Upgrade and Personal Interest students must show prerequisite knowledge through tests or skill demonstrations before enrolling. All students must complete the Welding Safety course before entering the welding lab.",

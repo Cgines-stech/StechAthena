@@ -5,7 +5,7 @@ const GS = Array.isArray(gradeScale) ? gradeScale[0] : gradeScale;
 
 export default [
   {
-    title: "Course Grading",
+    title: "",
     content: [
       "Course Grading: Students must have a minimum of 80% on each module to pass off the module. All modules must be passed off before students move on to the next class. All tests, assignments, quizzes, and labs can be resubmitted if the total module score is below 80%. Any grade below a B- will result in a withdrawal/incomplete. Each assignment is awarded points according to how well the submission follows the directions. Written submissions will be graded on but not limited to spelling, grammar, and punctuation. At the end of each module, students are asked to submit a 'Student Acknowledgement Statement' showing completion of all module requirements. End of Course grades are based off the average module grades on Canvas and the number of enrollments in said course.",
       "High School Power School Grades: Quarter student grades will be determined by student progress percentage. Faculty will use the higher percentage of either 1) quarter progress, or 2) cumulative progress for the current training plan year.",
@@ -15,13 +15,13 @@ export default [
   // Special, typed block for the grade scale
   {
     type: "gradeScale",
-    title: GS?.title || "Grading Scale",
+    title: GS?.title || "",
     description: GS?.description || "",
     scale: GS?.scale || []   // expecting 12 items with { letter, range }
   },
 
   {
-    title: "General Course Policies",
+    title: "",
     content: [
       "Course Policies: Students must have a minimum of 80% on each module to pass that module. All assignments must be submitted during your scheduled in-class time. All tests will be taken during your scheduled in-class time, either in the classroom or at the Testing Center. The student is required to keep their attendance above 80%. Please come to class well groomed, appropriately dressed (pharmacy workplace appropriate), and ready to learn! Students are expected to be patients, pharmacists, managers, etc. for each other during simulations and labs. Students must sign up for one lab at a time so that all students can progress during lab-based modules. All students must become CPR certified, complete the Wellbeing Promotion and Disease Prevention Project, obtain a Pharmacy Tech Trainee License, and complete/upload all required items on Verified Credentials before the end of TEPT 1100. Please refer to the Pharmacy Technician Program Handbook for more specific information.",
       "<strong>Attendance:</strong> When a student signs up for this class, the student commits to a schedule that is expected to be followed. The student required to keep their attendance at an 80% minimum. If the student is below 80% at the weekly check, we will put the student on a Student Improvement Plan (SIP). An example of SIP can be found in the Pharmacy Technician Program Handbook. The student will need to come in and make up the hours they have missed. Each student may take a 10-minute break for every 60 minutes scheduled. Please email your instructor immediately if the student needs help with their schedule.",
