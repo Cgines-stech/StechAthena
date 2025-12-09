@@ -644,9 +644,14 @@ if (mats.length) {
       if (Array.isArray(section.content)) {
         const div = document.createElement("div");
         section.content.forEach(pText => {
-          const p = document.createElement("p");
-          p.innerHTML = pText; // includes <a> and <br> tags
-          div.appendChild(p);
+          // Split on <br> or <br><br> and remove empties
+          const lines = pText.split(/<br\s*\/?>/gi).map(l => l.trim()).filter(Boolean);
+
+          lines.forEach(line => {
+            const p = document.createElement("p");
+            p.innerHTML = line;
+            div.appendChild(p);
+          });
         });
         institutionalPolicyContainer.appendChild(div);
       }

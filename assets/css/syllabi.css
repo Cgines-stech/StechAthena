@@ -222,6 +222,12 @@ button:hover{ filter:brightness(.96); }
   font-size: 0.9em;
 }
 
+/* Institutional Policy paragraph spacing */
+#institutionalPolicyContainer p {
+  margin: 8px 0 !important;
+  line-height: 1.45;
+}
+
 /* =========================================
    ASSIGNMENTS – SCREEN BASE
 ========================================= */
