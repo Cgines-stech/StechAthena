@@ -370,13 +370,6 @@ button:hover{ filter:brightness(.96); }
     page-break-inside: avoid;
   }
 
-  /* Links in print */
-  a{
-    color:#007cbc !important;
-    text-decoration:none;
-  }
-  a:hover{ text-decoration: underline; }
-
   /* ======================================
      SPECIAL PAGE BREAK LOGIC
      – Assignments & Hours
