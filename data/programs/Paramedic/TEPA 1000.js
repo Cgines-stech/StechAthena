@@ -64,10 +64,10 @@ const TEPA1000 = [
         {
           startDate: "12-15-2025",
           endDate: "12-18-2025",
-          Monday: "9:00 AM - 1:00 PM, 1:30 PM - 5:00 PM",
-          Tuesday: "9:00 AM - 1:00 PM, 1:30 PM - 5:00 PM",
-          Wednesday: "9:00 AM - 1:00 PM, 1:30 PM - 5:00 PM",
-          Thursday: "9:00 AM - 1:00 PM, 1:30 PM - 5:00 PM",
+          Monday: "9:00 AM - 1:00 PM\n1:30 PM - 5:00 PM",
+          Tuesday: "9:00 AM - 1:00 PM\n1:30 PM - 5:00 PM",
+          Wednesday: "9:00 AM - 1:00 PM\n1:30 PM - 5:00 PM",
+          Thursday: "9:00 AM - 1:00 PM\n1:30 PM - 5:00 PM",
           Friday: "",
           Saturday: "",
         }

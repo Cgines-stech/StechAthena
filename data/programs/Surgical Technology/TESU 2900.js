@@ -96,7 +96,7 @@ const TESU2900 = [
       },
       {
         type: "gradeScale",
-        title: GS?.title || "Grading Scale",
+        title: GS?.title || "",
          description: GS?.description || "",
         scale: GS?.scale || []   // expecting 12 items with { letter, range }
       },

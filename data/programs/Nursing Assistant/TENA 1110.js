@@ -98,11 +98,11 @@ const TENA1110 = [
       {
         startDate: "",
         endDate: "",
-        Monday: "8:00 AM - 11:00 AM, 12:00 PM - 3:00 PM, 5:30 PM - 8:30 PM",
-        Tuesday: "8:00 AM - 11:00 AM, 12:00 PM - 3:00 PM, 5:30 PM - 8:30 PM",
-        Wednesday: "8:00 AM - 11:00 AM, 12:00 PM - 3:00 PM, 5:30 PM - 8:30 PM",
-        Thursday: "8:00 AM - 11:00 AM, 12:00 PM - 3:00 PM, 5:30 PM - 8:30 PM",
-        Friday: "8:00 AM - 11:00 AM, 12:00 PM - 3:00 PM, 5:30 PM - 8:30 PM",
+        Monday: "8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM\n5:30 PM - 8:30 PM",
+        Tuesday: "8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM\n5:30 PM - 8:30 PM",
+        Wednesday: "8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM\n5:30 PM - 8:30 PM",
+        Thursday: "8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM\n5:30 PM - 8:30 PM",
+        Friday: "8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM\n5:30 PM - 8:30 PM",
         Saturday: "",
       }
     ],
