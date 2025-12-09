@@ -523,6 +523,10 @@ button:hover{ filter:brightness(.96); }
     padding: 0 !important;
   }
 
+  #institutionalPolicyContainer .address-block {
+    font-size: 13px !important;
+  }
+
 } /* end of @media print */
 
 /* Screen HR appearance */
