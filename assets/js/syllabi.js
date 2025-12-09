@@ -523,45 +523,44 @@ if (!hasRealMaterials) {
   // Hide section + hr completely if no *real* additional materials
   if (materialsSection) materialsSection.hidden = true;
   if (materialsHr) materialsHr.hidden = true;
-  return; // nothing else to render for materials
-}
+} else {
+  // If we get here, we DO have real materials
+  if (materialsSection) materialsSection.hidden = false;
+  if (materialsHr) materialsHr.hidden = false;
 
-// If we get here, we DO have real materials
-if (materialsSection) materialsSection.hidden = false;
-if (materialsHr) materialsHr.hidden = false;
+  rawMats.forEach(m => {
+    // support strings or objects
+    if (typeof m === "string") {
+      const trimmed = m.trim();
+      if (!trimmed) return; // skip blank strings
+      const li = document.createElement("li");
+      li.textContent = trimmed;
+      materialsList.appendChild(li);
+      return;
+    }
 
-rawMats.forEach(m => {
-  // support strings or objects
-  if (typeof m === "string") {
-    const trimmed = m.trim();
-    if (!trimmed) return; // skip blank strings
+    if (!m || typeof m !== "object" || !Object.keys(m).length) {
+      // skip empty objects like {}
+      return;
+    }
+
+    const title  = m.title || m.name || "";
+    const author = m.author ? ` by ${m.author}` : "";
+    const isbn   = m.isbn ? ` (ISBN: ${m.isbn})` : "";
+    const price  =
+      typeof m.price === "number"
+        ? ` — $${m.price.toFixed(2)}`
+        : (m.price ? ` — ${m.price}` : "");
+
+    const text = [title, author, isbn].filter(Boolean).join("");
+
+    if (!text && !price) return; // nothing meaningful to show
+
     const li = document.createElement("li");
-    li.textContent = trimmed;
+    li.textContent = text + price;
     materialsList.appendChild(li);
-    return;
-  }
-
-  if (!m || typeof m !== "object" || !Object.keys(m).length) {
-    // skip empty objects like {}
-    return;
-  }
-
-  const title  = m.title || m.name || "";
-  const author = m.author ? ` by ${m.author}` : "";
-  const isbn   = m.isbn ? ` (ISBN: ${m.isbn})` : "";
-  const price  =
-    typeof m.price === "number"
-      ? ` — $${m.price.toFixed(2)}`
-      : (m.price ? ` — ${m.price}` : "");
-
-  const text = [title, author, isbn].filter(Boolean).join("");
-
-  if (!text && !price) return; // nothing meaningful to show
-
-  const li = document.createElement("li");
-  li.textContent = text + price;
-  materialsList.appendChild(li);
-});
+  });
+}
 
   // Assignments & Assessments
   assignmentsList.innerHTML = "";
