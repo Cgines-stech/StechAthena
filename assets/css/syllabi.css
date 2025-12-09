@@ -415,11 +415,17 @@ h3, h4 {
     margin-top: 0 !important;
     padding-top: 0 !important;
   }
-  #institutionalPolicyContainer p{
-    margin: 0px 0;
-    line-height:1.45;
+
+  #institutionalPolicyContainer p {
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+    font-size: 10px;
     page-break-inside: avoid;
-    font-size: 11px;
+  }
+
+  /* If you want a bit more space only BETWEEN paragraphs: */
+  #institutionalPolicyContainer p + p {
+    margin-top: 0px;
   }
 
   /* Links in print */
