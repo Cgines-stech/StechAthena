@@ -20,7 +20,7 @@ export default [
         Cedar City, UT 84720<br>
         info@stech.edu<br>
         (435) 586-2899
-      </div>`,
+      </div>`
     ]
   }
 ];
