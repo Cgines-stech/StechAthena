@@ -228,6 +228,17 @@ button:hover{ filter:brightness(.96); }
   line-height: 1.45;
 }
 
+/* Address block inside institutional policy */
+#institutionalPolicyContainer .address-block {
+  line-height: 1.1;     /* tight spacing */
+  margin: 0 !important; /* remove paragraph spacing */
+  padding: 0 !important;
+}
+
+#institutionalPolicyContainer .address-block br {
+  line-height: 1;       /* keep lines close together */
+}
+
 /* =========================================
    ASSIGNMENTS – SCREEN BASE
 ========================================= */
