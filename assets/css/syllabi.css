@@ -500,6 +500,11 @@ button:hover{ filter:brightness(.96); }
     margin-left: 0 !important;
   }
 
+  /* Fix institutional policy page spacing overrides */
+  #institutionalPolicySection {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
 } /* end of @media print */
 
