@@ -528,38 +528,35 @@ if (!hasRealMaterials) {
   if (materialsSection) materialsSection.hidden = false;
   if (materialsHr) materialsHr.hidden = false;
 
-  rawMats.forEach(m => {
-    // support strings or objects
-    if (typeof m === "string") {
-      const trimmed = m.trim();
-      if (!trimmed) return; // skip blank strings
-      const li = document.createElement("li");
-      li.textContent = trimmed;
-      materialsList.appendChild(li);
-      return;
-    }
-
-    if (!m || typeof m !== "object" || !Object.keys(m).length) {
-      // skip empty objects like {}
-      return;
-    }
-
-    const title  = m.title || m.name || "";
-    const author = m.author ? ` by ${m.author}` : "";
-    const isbn   = m.isbn ? ` (ISBN: ${m.isbn})` : "";
-    const price  =
-      typeof m.price === "number"
-        ? ` — $${m.price.toFixed(2)}`
-        : (m.price ? ` — ${m.price}` : "");
-
-    const text = [title, author, isbn].filter(Boolean).join("");
-
-    if (!text && !price) return; // nothing meaningful to show
-
+rawMats.forEach(m => {
+  // support strings or objects
+  if (typeof m === "string") {
+    const trimmed = m.trim();
+    if (!trimmed) return; // skip blank strings
     const li = document.createElement("li");
-    li.textContent = text + price;
+    li.textContent = trimmed;
     materialsList.appendChild(li);
-  });
+    return;
+  }
+
+  if (!m || typeof m !== "object" || !Object.keys(m).length) {
+    // skip empty objects like {}
+    return;
+  }
+
+  const title  = m.title || m.name || "";
+  const author = m.author ? ` by ${m.author}` : "";
+  const isbn   = m.isbn ? ` (ISBN: ${m.isbn})` : "";
+
+  // Build text WITHOUT price
+  const text = [title, author, isbn].filter(Boolean).join("");
+
+  if (!text) return; // nothing meaningful to show
+
+  const li = document.createElement("li");
+  li.textContent = text;
+  materialsList.appendChild(li);
+});
 }
 
   // Assignments & Assessments
