@@ -643,16 +643,21 @@ if (mats.length) {
     institutionalPolicy.forEach(section => {
       if (Array.isArray(section.content)) {
         const div = document.createElement("div");
-        section.content.forEach(pText => {
-          // Split on <br> or <br><br> and remove empties
-          const lines = pText.split(/<br\s*\/?>/gi).map(l => l.trim()).filter(Boolean);
 
-          lines.forEach(line => {
+        section.content.forEach(pText => {
+          // If this item is the address block, inject it directly
+          if (pText.includes('class="address-block"')) {
+            const wrapper = document.createElement("div");
+            wrapper.innerHTML = pText.trim();
+            const addr = wrapper.firstElementChild; // <div class="address-block">
+            if (addr) div.appendChild(addr);
+          } else {
             const p = document.createElement("p");
-            p.innerHTML = line;
+            p.innerHTML = pText;
             div.appendChild(p);
-          });
+          }
         });
+
         institutionalPolicyContainer.appendChild(div);
       }
     });
