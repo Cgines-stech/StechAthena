@@ -76,9 +76,12 @@ const PN1084 = [
       {
         startDate: "08-13-2025",
         endDate: "11-19-2025",
+
         Monday: "",
         Tuesday: "",
+
         Wednesday: "9:00 AM - 1:00 PM",
+
         Thursday: "",
         Friday: "",
         Saturday: "",
@@ -86,9 +89,12 @@ const PN1084 = [
       {
         startDate: "01-07-2026",
         endDate: "04-22-2026",
+
         Monday: "",
         Tuesday: "",
+
         Wednesday: "9:00 AM - 1:00 PM",
+        
         Thursday: "",
         Friday: "",
         Saturday: "",

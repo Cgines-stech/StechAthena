@@ -67,6 +67,7 @@ const TEPA2994 = [
         {
           startDate: "06-01-2026",
           endDate: "09-27-2026",
+          
           Monday: "",
           Tuesday: "",
           Wednesday: "",

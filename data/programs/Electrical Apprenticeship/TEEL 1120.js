@@ -60,10 +60,14 @@ const TEEL1120 = [
         {
           startDate: "01-05-2026",
           endDate: "04-30-2026",
+
           Monday: "6:00 PM - 9:00 PM",
+
           Tuesday: "",
           Wednesday: "",
+
           Thursday: "6:00 PM - 9:00 PM",
+          
           Friday: "",
           Saturday: "",
         }

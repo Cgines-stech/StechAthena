@@ -140,9 +140,12 @@ const TEPL1110 = [
       {
         startDate: "09-02-2025",
         endDate: "12-16-2025",
+
         Monday: "",
+
         Tuesday: "6:00 PM - 9:00 PM",
         Wednesday: "6:00 PM - 9:00 PM",
+        
         Thursday: "",
         Friday: "",
         Saturday: "",

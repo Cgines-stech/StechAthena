@@ -66,9 +66,12 @@ const TESU1051 = [
       {
         startDate: "06/17/2026",
         endDate: "08/12/2026",
+
         Monday: "",
         Tuesday: "",
+
         Wednesday: "8:00 AM - 3:00 PM",
+        
         Thursday: "",
         Friday: "",
         Saturday: "",

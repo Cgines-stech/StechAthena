@@ -106,11 +106,13 @@ const TECD1100 = [
         {
           startDate: "",
           endDate: "",
+
           Monday: "7:00 AM - 6:00 PM",
           Tuesday: "7:00 AM - 6:00 PM",
           Wednesday: "7:00 AM - 6:00 PM",
           Thursday: "7:00 AM - 6:00 PM",
           Friday: "7:00 AM - 6:00 PM",
+          
           Saturday: "",
         }
     ],

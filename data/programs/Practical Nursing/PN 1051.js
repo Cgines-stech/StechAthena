@@ -72,21 +72,27 @@ const PN1051 = [
       {
         startDate: "08-15-2025",
         endDate: "12-05-2025",
+
         Monday: "",
         Tuesday: "",
         Wednesday: "",
         Thursday: "",
+
         Friday: "9:00 AM - 3:00 PM",
+
         Saturday: "",
       },
       {
         startDate: "01-09-2026",
         endDate: "05-01-2026",
+
         Monday: "",
         Tuesday: "",
         Wednesday: "",
         Thursday: "",
+
         Friday: "9:00 AM - 3:00 PM",
+        
         Saturday: "",
       },
     ],

@@ -65,10 +65,14 @@ const TEPA1511 = [
         {
           startDate: "06-05-2026",
           endDate: "09-18-2026",
+          
           Monday: "",
+
           Tuesday: "1:00 PM - 6:00 PM",
+
           Wednesday: "",
           Thursday: "",
+
           Friday: "1:00 PM - 6:00 PM",
           Saturday: "8:00 AM - 3:00 PM",
         }
