@@ -423,9 +423,9 @@ instructorsList.parentElement.appendChild(instructorNote);
         Tuesday: "Tu",
         Wednesday: "W",
         Thursday: "Th",
-        Friday: "Friday",  // full when grouped still looks nice
-        Saturday: "Saturday",
-        Sunday: "Sunday",
+        Friday: "Fr",  // full when grouped still looks nice
+        Saturday: "Sat",
+        Sunday: "Sun",
       };
 
       // Group days by identical hours string
