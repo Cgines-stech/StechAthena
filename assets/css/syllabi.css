@@ -494,6 +494,15 @@ button:hover{ filter:brightness(.96); }
     margin-left: 0 !important;
   }
 
+  /* Remove bullets in Policies (print) */
+  #policiesContainer ul,
+  #policiesContainer ul li {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+
 } /* end of @media print */
 
 /* Screen HR appearance */
