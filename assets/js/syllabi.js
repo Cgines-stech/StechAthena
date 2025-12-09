@@ -159,15 +159,17 @@ const courseObjectives  = document.getElementById("courseObjectives");
 
 const instructorsList   = document.getElementById("instructorsList");
 const materialsList     = document.getElementById("materialsList");
-const assignmentsList = document.getElementById("assignmentsList");
+const assignmentsList   = document.getElementById("assignmentsList");
 const policiesContainer = document.getElementById("policiesContainer");
 
-// Outline + Hours
 const courseOutlineEl   = document.getElementById("courseOutline");
 const hoursContainer    = document.getElementById("hoursContainer");
 
-// Institutional
 const institutionalPolicyContainer = document.getElementById("institutionalPolicyContainer");
+
+// NEW
+const materialsSection  = document.getElementById("materialsSection");
+const materialsHr       = document.getElementById("materialsHr");
 
 /** ------------------------ Helpers ------------------------ */
 const decodeDefaultArray = (mod) => {
@@ -511,7 +513,17 @@ const mats = Array.isArray(c.syllabiBooks)
   ? c.syllabiBooks
   : (Array.isArray(c.syllabusBooks) ? c.syllabusBooks : []);
 
-if (mats.length) {
+const hasMaterials = Array.isArray(mats) && mats.length > 0;
+
+if (!hasMaterials) {
+  // Hide section + hr completely if no additional materials
+  if (materialsSection) materialsSection.hidden = true;
+  if (materialsHr) materialsHr.hidden = true;
+} else {
+  // Show section + hr when materials exist
+  if (materialsSection) materialsSection.hidden = false;
+  if (materialsHr) materialsHr.hidden = false;
+
   mats.forEach(m => {
     // support strings or objects
     if (typeof m === "string") {
@@ -521,12 +533,13 @@ if (mats.length) {
       return;
     }
 
-    const title   = m.title || m.name || "";
-    const author  = m.author ? ` by ${m.author}` : "";
-    const isbn    = m.isbn ? ` (ISBN: ${m.isbn})` : "";
-    const price   = (typeof m.price === "number")
-      ? ` — $${m.price.toFixed(2)}`
-      : (m.price ? ` — ${m.price}` : "");
+    const title  = m.title || m.name || "";
+    const author = m.author ? ` by ${m.author}` : "";
+    const isbn   = m.isbn ? ` (ISBN: ${m.isbn})` : "";
+    const price  =
+      typeof m.price === "number"
+        ? ` — $${m.price.toFixed(2)}`
+        : (m.price ? ` — ${m.price}` : "");
 
     const text = [title, author, isbn]
       .filter(Boolean)
@@ -536,10 +549,6 @@ if (mats.length) {
     li.textContent = text || "No additional materials required";
     materialsList.appendChild(li);
   });
-} else {
-  const li = document.createElement("li");
-  li.innerHTML = `<span class="muted">No additional materials required</span>`;
-  materialsList.appendChild(li);
 }
 
   // Assignments & Assessments
