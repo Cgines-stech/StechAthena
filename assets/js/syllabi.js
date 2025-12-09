@@ -406,8 +406,8 @@ instructorsList.parentElement.appendChild(instructorNote);
 
       if (sd && ed) {
         header.innerHTML = `
-          <p><strong>Start:</strong> ${sd}</p>
-          <p><strong>End:</strong> ${ed}</p>
+          <p>Start: ${sd}</p>
+          <p>End: ${ed}</p>
         `;
       } else {
         const single = sd || ed || "Range of Dates";

@@ -483,6 +483,17 @@ button:hover{ filter:brightness(.96); }
   #hoursContainer .hours-time {
     margin: 0;
   }
+
+  /* Remove bullets from textbooks/materials and assignments in print */
+  #materialsList,
+  #materialsList li,
+  #assignmentsList,
+  #assignmentsList li {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
 } /* end of @media print */
 
 /* Screen HR appearance */
