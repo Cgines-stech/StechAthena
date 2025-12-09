@@ -509,47 +509,59 @@ instructorsList.parentElement.appendChild(instructorNote);
 materialsList.innerHTML = "";
 
 // Accept both spellings; prefer syllabiBooks if present
-const mats = Array.isArray(c.syllabiBooks)
+const rawMats = Array.isArray(c.syllabiBooks)
   ? c.syllabiBooks
   : (Array.isArray(c.syllabusBooks) ? c.syllabusBooks : []);
 
-const hasMaterials = Array.isArray(mats) && mats.length > 0;
+// Treat [ {} ] or [{}, {}] as "no real data" using existing helper
+const hasRealMaterials =
+  Array.isArray(rawMats) &&
+  rawMats.length > 0 &&
+  !isPlaceholderArray(rawMats);
 
-if (!hasMaterials) {
-  // Hide section + hr completely if no additional materials
+if (!hasRealMaterials) {
+  // Hide section + hr completely if no *real* additional materials
   if (materialsSection) materialsSection.hidden = true;
   if (materialsHr) materialsHr.hidden = true;
-} else {
-  // Show section + hr when materials exist
-  if (materialsSection) materialsSection.hidden = false;
-  if (materialsHr) materialsHr.hidden = false;
-
-  mats.forEach(m => {
-    // support strings or objects
-    if (typeof m === "string") {
-      const li = document.createElement("li");
-      li.textContent = m;
-      materialsList.appendChild(li);
-      return;
-    }
-
-    const title  = m.title || m.name || "";
-    const author = m.author ? ` by ${m.author}` : "";
-    const isbn   = m.isbn ? ` (ISBN: ${m.isbn})` : "";
-    const price  =
-      typeof m.price === "number"
-        ? ` — $${m.price.toFixed(2)}`
-        : (m.price ? ` — ${m.price}` : "");
-
-    const text = [title, author, isbn]
-      .filter(Boolean)
-      .join("");
-
-    const li = document.createElement("li");
-    li.textContent = text || "No additional materials required";
-    materialsList.appendChild(li);
-  });
+  return; // nothing else to render for materials
 }
+
+// If we get here, we DO have real materials
+if (materialsSection) materialsSection.hidden = false;
+if (materialsHr) materialsHr.hidden = false;
+
+rawMats.forEach(m => {
+  // support strings or objects
+  if (typeof m === "string") {
+    const trimmed = m.trim();
+    if (!trimmed) return; // skip blank strings
+    const li = document.createElement("li");
+    li.textContent = trimmed;
+    materialsList.appendChild(li);
+    return;
+  }
+
+  if (!m || typeof m !== "object" || !Object.keys(m).length) {
+    // skip empty objects like {}
+    return;
+  }
+
+  const title  = m.title || m.name || "";
+  const author = m.author ? ` by ${m.author}` : "";
+  const isbn   = m.isbn ? ` (ISBN: ${m.isbn})` : "";
+  const price  =
+    typeof m.price === "number"
+      ? ` — $${m.price.toFixed(2)}`
+      : (m.price ? ` — ${m.price}` : "");
+
+  const text = [title, author, isbn].filter(Boolean).join("");
+
+  if (!text && !price) return; // nothing meaningful to show
+
+  const li = document.createElement("li");
+  li.textContent = text + price;
+  materialsList.appendChild(li);
+});
 
   // Assignments & Assessments
   assignmentsList.innerHTML = "";
