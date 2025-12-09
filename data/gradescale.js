@@ -2,8 +2,8 @@
 
 const gradeScale = [
   {
-    title: "Grade Scale",
-    description: "The following grading scale will be used to determine a letter grade.",
+    title: "",
+    description: "Grade Scale: The following grading scale will be used to determine a letter grade.",
     scale: [
       { letter: "A :",  range: "94 - 100%" },
       { letter: "A-:", range: "90 - 93%" },
