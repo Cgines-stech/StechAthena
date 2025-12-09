@@ -484,6 +484,11 @@ button:hover{ filter:brightness(.96); }
     margin: 0;
   }
 
+  #hoursContainer > div > div p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
   /* Remove bullets from textbooks/materials and assignments in print */
   #materialsList,
   #materialsList li,
