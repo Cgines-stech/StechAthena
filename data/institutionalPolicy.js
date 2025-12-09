@@ -10,17 +10,17 @@ export default [
       `Safety and Building Maintenance: The College has developed and follows a variety of plans to ensure the safe and effective operation of its facilities and programs. The following plans are available online: 1) Facilities Operations and Maintenance Plan; 2) Technical Infrastructure Plan; and 3) Health and Safety Plan.`,
       `Withdrawals and Refunds: Please refer to the Southwest Technical College Refund Policy at: <a href="https://stech.edu/students/policies/">https://stech.edu/students/policies/</a>`,
       `Any high school or adult student, who declares a technical training objective is eligible for admission at Southwest Technical College (Southwest Tech). Program-specific admissions requirements may exist and will be listed on the Southwest Tech website. A high school diploma or equivalent is not required for admission but is mandatory for students seeking Title IV Federal Financial Aid.`,
-      `Non-Discriminatory Policy: Southwest Technical College affirms its commitment to promote the goals of fairness and equity in all aspects of the educational enterprise, and bases its policies on the idea of global human dignity.`
-      `Southwest Tech is committed to a policy of nondiscrimination. No otherwise qualified person may be excluded from participation in or be subjected to discrimination in any course, program or activity because of race, age, color, religion, sex, pregnancy, national origin or disability. Southwest Technical College does not discriminate on the basis of sex in the education programs or activities that it operates, as required by Title IX and 34 CFR part 106. The requirement not to discriminate in education programs or activities extends to admission and employment. Inquiries about Title IX and its regulations to STECH may be referred to the Title IX Coordinator, to the Department of Education, and/or to the Office for Civil rights.`
-      `If you believe you have experienced discrimination or harassment on our campus, please contact the Title IX Coordinator, Cory Estes: cestes@stech.edu, (435) 865-3938.`
-      `For special accommodations, please contact the ADA Coordinator, Cyndie Tracy: ctracy@stech.edu, (435) 865-3944.`
+      `Non-Discriminatory Policy: Southwest Technical College affirms its commitment to promote the goals of fairness and equity in all aspects of the educational enterprise, and bases its policies on the idea of global human dignity.`,
+      `Southwest Tech is committed to a policy of nondiscrimination. No otherwise qualified person may be excluded from participation in or be subjected to discrimination in any course, program or activity because of race, age, color, religion, sex, pregnancy, national origin or disability. Southwest Technical College does not discriminate on the basis of sex in the education programs or activities that it operates, as required by Title IX and 34 CFR part 106. The requirement not to discriminate in education programs or activities extends to admission and employment. Inquiries about Title IX and its regulations to STECH may be referred to the Title IX Coordinator, to the Department of Education, and/or to the Office for Civil rights.`,
+      `If you believe you have experienced discrimination or harassment on our campus, please contact the Title IX Coordinator, Cory Estes: cestes@stech.edu, (435) 865-3938.`,
+      `For special accommodations, please contact the ADA Coordinator, Cyndie Tracy: ctracy@stech.edu, (435) 865-3944.`,
       `<div class="address-block">
         Southwest Technical College<br>
         757 West 800 South<br>
         Cedar City, UT 84720<br>
         info@stech.edu<br>
         (435) 586-2899
-      </div>`
+      </div>`,
     ]
   }
 ];
