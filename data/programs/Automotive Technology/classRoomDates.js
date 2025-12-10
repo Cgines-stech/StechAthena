@@ -1,6 +1,7 @@
 // data/programs/Automotive Technology/classRoomDates.js
 export default [
   {
+    termLabel: "",
     startDate: "",
     endDate: "",
     Monday: ["8:00 AM - 12:00 AM\n1:00 PM - 5:00 PM"],

@@ -96,6 +96,7 @@ const TENA1110 = [
 
     courseClassroomHours: [
       {
+        termLabel: "",
         startDate: "",
         endDate: "",
         Monday: "8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM\n5:30 PM - 8:30 PM",

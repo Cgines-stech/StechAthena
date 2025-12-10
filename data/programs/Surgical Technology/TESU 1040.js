@@ -64,6 +64,7 @@ const TESU1040 = [
 
     courseClassroomHours: [
       {
+        termLabel: "",
         startDate: "04/30/2026",
         endDate: "06/11/2026",
         Monday: "",

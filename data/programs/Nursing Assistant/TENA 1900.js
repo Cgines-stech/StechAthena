@@ -52,7 +52,17 @@ const TENA1900 = [
     ],
 
     courseClassroomHours: [
-      {}
+      {
+        termLabel: "",
+        startDate: "",
+        endDate: "",
+        Monday: "",
+        Tuesday: "",
+        Wednesday: "",
+        Thursday: "",
+        Friday: "",
+        Saturday: "",
+      }
     ],
 
     instructorContactInformation: [

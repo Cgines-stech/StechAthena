@@ -59,6 +59,7 @@ const TEEM1904 = [
 
     courseClassroomHours: [
         {
+          termLabel: "",
           startDate: "08-10-2025",
           endDate: "12-21-2025",
           Monday: "",

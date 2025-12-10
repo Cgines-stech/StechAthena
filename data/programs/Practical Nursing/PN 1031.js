@@ -64,6 +64,7 @@ const PN1031 = [
 
     courseClassroomHours: [
       {
+        termLabel: "",
         startDate: "10-10-2025",
         endDate: "12-12-2025",
         Monday: "",
@@ -74,6 +75,7 @@ const PN1031 = [
         Saturday: "",
       },
       {
+        termLabel: "",
         startDate: "03-06-2026",
         endDate: "05-08-2026",
         Monday: "",

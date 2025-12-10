@@ -60,6 +60,7 @@ const TEPL1310 = [
 
     courseClassroomHours: [
       {
+        termLabel: "",
         startDate: "01-06-2026",
         endDate: "04-22-2026",
         Monday: "",

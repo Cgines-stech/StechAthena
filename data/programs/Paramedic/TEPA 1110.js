@@ -78,6 +78,7 @@ const TEPA1110 = [
 
     courseClassroomHours: [
         {
+          termLabel: "",
           startDate: "01-09-2026",
           endDate: "05-18-2026",
           Monday: "9:00 AM - 1:00 PM\n2:00 PM - 6:00 PM",
