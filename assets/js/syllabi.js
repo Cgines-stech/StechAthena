@@ -416,94 +416,102 @@ if (sd || ed || label) {
   const header = document.createElement("div");
   header.className = "hours-date-header";   // 👈 keeps the spacing you liked
 
-  if (sd && ed) {
-    header.innerHTML = `
-      <p>Start: ${sd}</p>
-      <p>End: ${ed}</p>
-    `;
-  } else if (sd || ed) {
-    // Only one date provided (start OR end)
-    header.innerHTML = `<p>${sd || ed}</p>`;
-  } else if (label) {
-    // No dates, just a label like "Spring Semester"
-    header.innerHTML = `<p>${label}</p>`;
+// 1) Term label line (if present)
+    if (label) {
+      const labelP = document.createElement("p");
+      labelP.className = "hours-term-label";
+      labelP.textContent = label;
+      header.appendChild(labelP);
+    }
+
+    // 2) Dates (if present)
+    if (sd && ed) {
+      const startP = document.createElement("p");
+      startP.textContent = `Start: ${sd}`;
+      header.appendChild(startP);
+
+      const endP = document.createElement("p");
+      endP.textContent = `End: ${ed}`;
+      header.appendChild(endP);
+    } else if (sd || ed) {
+      const singleP = document.createElement("p");
+      singleP.textContent = sd || ed;
+      header.appendChild(singleP);
+    }
+
+    // If we had *at least* one thing (label or dates), append header
+    if (header.children.length > 0) {
+      block.appendChild(header);
+    }
   }
 
-  block.appendChild(header);
-}
+  // --- Days & hours grouping (unchanged) ---
+  const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+  const dayAbbr = {
+    Monday: "Mo",
+    Tuesday: "Tu",
+    Wednesday: "W",
+    Thursday: "Th",
+    Friday: "Fr",
+    Saturday: "Sat",
+    Sunday: "Sun",
+  };
 
-      // --- Days & hours grouping ---
-      const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-      const dayAbbr = {
-        Monday: "Mo",
-        Tuesday: "Tu",
-        Wednesday: "W",
-        Thursday: "Th",
-        Friday: "Fr",  // full when grouped still looks nice
-        Saturday: "Sat",
-        Sunday: "Sun",
-      };
+  const hoursMap = new Map();
+  days.forEach(d => {
+    const val = h[d];
+    if (!val) return;
+    const key = String(val).trim();
+    if (!key) return;
 
-      // Group days by identical hours string
-      const hoursMap = new Map(); // key: hours string, value: array of day names
-      days.forEach(d => {
-        const val = h[d];
-        if (!val) return;
-        const key = String(val).trim();
-        if (!key) return;
+    if (!hoursMap.has(key)) hoursMap.set(key, []);
+    hoursMap.get(key).push(d);
+  });
 
-        if (!hoursMap.has(key)) hoursMap.set(key, []);
-        hoursMap.get(key).push(d);
-      });
+  const splitHours = (val) => {
+    const s = String(val);
+    if (s.includes("\n")) return s.split(/\r?\n/).map(t => t.trim()).filter(Boolean);
+    if (s.includes("|"))  return s.split("|").map(t => t.trim()).filter(Boolean);
+    if (s.includes(";"))  return s.split(";").map(t => t.trim()).filter(Boolean);
+    return [s.trim()];
+  };
 
-      // Split a raw hours string into separate time lines
-      const splitHours = (val) => {
-        const s = String(val);
-        if (s.includes("\n")) return s.split(/\r?\n/).map(t => t.trim()).filter(Boolean);
-        if (s.includes("|"))  return s.split("|").map(t => t.trim()).filter(Boolean);
-        if (s.includes(";"))  return s.split(";").map(t => t.trim()).filter(Boolean);
-        return [s.trim()];
-      };
+  if (hoursMap.size === 0) {
+    const p = document.createElement("p");
+    p.innerHTML = `<span class="muted">Hours Vary</span>`;
+    block.appendChild(p);
+  } else {
+    hoursMap.forEach((dayListArr, hoursString) => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "hours-block";
 
-      if (hoursMap.size === 0) {
-        const p = document.createElement("p");
-        p.innerHTML = `<span class="muted">Hours Vary</span>`;
-        block.appendChild(p);
+      let dayLabel;
+      if (dayListArr.length > 1) {
+        dayLabel = dayListArr
+          .map(d => dayAbbr[d] || d)
+          .join(", ");
       } else {
-        // Map.forEach passes (value, key)
-        hoursMap.forEach((dayListArr, hoursString) => {
-          const wrapper = document.createElement("div");
-          wrapper.className = "hours-block";
-
-          // Label for the days
-          let dayLabel;
-          if (dayListArr.length > 1) {
-            dayLabel = dayListArr
-              .map(d => dayAbbr[d] || d)
-              .join(", ");
-          } else {
-            dayLabel = dayListArr[0];
-          }
-
-          const dayLine = document.createElement("p");
-          dayLine.className = "hours-days";
-          dayLine.textContent = dayLabel;
-          wrapper.appendChild(dayLine);
-
-          // One line per time range
-          splitHours(hoursString).forEach(t => {
-            const timeP = document.createElement("p");
-            timeP.className = "hours-time";
-            timeP.textContent = t;
-            wrapper.appendChild(timeP);
-          });
-
-          block.appendChild(wrapper);
-        });
+        dayLabel = dayListArr[0];
       }
 
-      hoursContainer.appendChild(block);
+      const dayLine = document.createElement("p");
+      dayLine.className = "hours-days";
+      dayLine.textContent = dayLabel;
+      wrapper.appendChild(dayLine);
+
+      splitHours(hoursString).forEach(t => {
+        const timeP = document.createElement("p");
+        timeP.className = "hours-time";
+        timeP.textContent = t;
+        wrapper.appendChild(timeP);
+      });
+
+      block.appendChild(wrapper);
     });
+  }
+
+  hoursContainer.appendChild(block);
+});
   } else {
     const p = document.createElement("p");
     p.innerHTML = `<span class="muted">No classroom hours available.</span>`;
