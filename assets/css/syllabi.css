@@ -253,6 +253,27 @@ button:hover{ filter:brightness(.96); }
   margin-bottom: 6px;
 }
 
+.hours-term-label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 3px;
+}
+
+/* Only indent days/time when there is a term/date header */
+.hours-with-header .hours-block {
+  margin-left: 10px;
+}
+
+/* Optional: make the term label stand out a bit */
+.hours-term-label {
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+#hoursContainer > div {
+  margin-bottom: 12px;
+}
+
 /* =========================================
    PRINT STYLES (ONE COHERENT BLOCK)
 ========================================= */

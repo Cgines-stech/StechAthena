@@ -396,27 +396,28 @@ instructorsList.parentElement.appendChild(instructorNote);
   const hours = courseHasRealHours ? courseHoursRaw : currentProgramHours;
 
   if (Array.isArray(hours) && hours.length) {
-    hours.forEach(h => {
-      if (!h || typeof h !== "object") return;
+hours.forEach(h => {
+  if (!h || typeof h !== "object") return;
 
-const block = document.createElement("div");
+  const block = document.createElement("div");
 
-// --- Date / Term header (optional) ---
-const sd = h.startDate || "";
-const ed = h.endDate || "";
+  // --- Date / Term header (optional) ---
+  const sd = h.startDate || "";
+  const ed = h.endDate || "";
 
-// NEW: optional label for term/semester
-const label =
-  h.termLabel ||      // preferred
-  h.dateLabel ||      // alt name if you want
-  h.label || "";      // generic fallback key
+  // Optional label for term/semester
+  const label =
+    h.termLabel ||      // preferred
+    h.dateLabel ||      // alt name if you want
+    h.label || "";      // generic fallback key
 
-// Only create a header if we actually have something to show
-if (sd || ed || label) {
-  const header = document.createElement("div");
-  header.className = "hours-date-header";   // 👈 keeps the spacing you liked
+  let hasHeader = false;
 
-// 1) Term label line (if present)
+  if (sd || ed || label) {
+    const header = document.createElement("div");
+    header.className = "hours-date-header";
+
+    // 1) Term label (if present)
     if (label) {
       const labelP = document.createElement("p");
       labelP.className = "hours-term-label";
@@ -439,13 +440,14 @@ if (sd || ed || label) {
       header.appendChild(singleP);
     }
 
-    // If we had *at least* one thing (label or dates), append header
     if (header.children.length > 0) {
       block.appendChild(header);
+      hasHeader = true;                         // 👈 mark that this block has a header
+      block.classList.add("hours-with-header"); // 👈 used for conditional indent
     }
   }
 
-  // --- Days & hours grouping (unchanged) ---
+  // --- Days & hours grouping (your existing code) ---
   const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
   const dayAbbr = {
     Monday: "Mo",
@@ -512,6 +514,7 @@ if (sd || ed || label) {
 
   hoursContainer.appendChild(block);
 });
+
   } else {
     const p = document.createElement("p");
     p.innerHTML = `<span class="muted">No classroom hours available.</span>`;
