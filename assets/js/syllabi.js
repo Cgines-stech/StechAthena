@@ -403,6 +403,8 @@ instructorsList.parentElement.appendChild(instructorNote);
 
       // --- Date header (Start / End on separate lines) ---
       const header = document.createElement("div");
+      header.className = "hours-date-header"; 
+
       const sd = h.startDate || "";
       const ed = h.endDate || "";
 

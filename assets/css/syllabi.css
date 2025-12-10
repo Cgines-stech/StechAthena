@@ -248,6 +248,11 @@ button:hover{ filter:brightness(.96); }
   column-count: 1;
 }
 
+/* Classroom hours date header spacing (screen) */
+#hoursContainer .hours-date-header {
+  margin-bottom: 6px;
+}
+
 /* =========================================
    PRINT STYLES (ONE COHERENT BLOCK)
 ========================================= */
@@ -498,6 +503,11 @@ button:hover{ filter:brightness(.96); }
   margin: 0 !important;
   padding: 0 !important;
 }
+
+  /* Classroom hours date header spacing (print) */
+  #hoursContainer .hours-date-header {
+    margin-bottom: 4px !important;
+  }
 
   /* Remove bullets from textbooks/materials and assignments in print */
   #materialsList,
