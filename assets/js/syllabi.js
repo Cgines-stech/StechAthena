@@ -399,26 +399,38 @@ instructorsList.parentElement.appendChild(instructorNote);
     hours.forEach(h => {
       if (!h || typeof h !== "object") return;
 
-      const block = document.createElement("div");
+const block = document.createElement("div");
 
-      // --- Date header (Start / End on separate lines) ---
-      const header = document.createElement("div");
-      header.className = "hours-date-header"; 
+// --- Date / Term header (optional) ---
+const sd = h.startDate || "";
+const ed = h.endDate || "";
 
-      const sd = h.startDate || "";
-      const ed = h.endDate || "";
+// NEW: optional label for term/semester
+const label =
+  h.termLabel ||      // preferred
+  h.dateLabel ||      // alt name if you want
+  h.label || "";      // generic fallback key
 
-      if (sd && ed) {
-        header.innerHTML = `
-          <p>Start: ${sd}</p>
-          <p>End: ${ed}</p>
-        `;
-      } else {
-        const single = sd || ed || "Range of Dates";
-        header.innerHTML = `<p>${single}</p>`;
-      }
+// Only create a header if we actually have something to show
+if (sd || ed || label) {
+  const header = document.createElement("div");
+  header.className = "hours-date-header";   // 👈 keeps the spacing you liked
 
-      block.appendChild(header);
+  if (sd && ed) {
+    header.innerHTML = `
+      <p>Start: ${sd}</p>
+      <p>End: ${ed}</p>
+    `;
+  } else if (sd || ed) {
+    // Only one date provided (start OR end)
+    header.innerHTML = `<p>${sd || ed}</p>`;
+  } else if (label) {
+    // No dates, just a label like "Spring Semester"
+    header.innerHTML = `<p>${label}</p>`;
+  }
+
+  block.appendChild(header);
+}
 
       // --- Days & hours grouping ---
       const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];

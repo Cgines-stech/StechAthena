@@ -2,6 +2,7 @@
 
 export default [
   {
+    termLabel: "",
     startDate: "",
     endDate: "",
     Monday: ["8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM"],
