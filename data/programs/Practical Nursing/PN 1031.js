@@ -47,7 +47,18 @@ const PN1031 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Docucare, Lippincott", 
+        isbn: "9781451185171",
+      },
+      {
+        name: "NCLEX-Passpoint", 
+        isbn: "9781496309327",
+      },
+      {
+        name: "Introductory Mental Health Nursing, 4th Edition", 
+        isbn: "9781975103781",
+      },
     ],
     
     courseTools: [

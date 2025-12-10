@@ -52,7 +52,10 @@ const PN1063 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Introductory Medical-Surgical Nursing, 13th Edition", 
+        isbn: "9781975172237",
+      },
     ],
     
     courseTools: [

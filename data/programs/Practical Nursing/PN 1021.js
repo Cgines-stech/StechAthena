@@ -71,21 +71,19 @@ const PN1021 = [
     syllabiBooks: [
       {
         name: "vSim for Fundamentals", 
-        price: 75.0,
         isbn: "9781469894188",
-        note: "Exclusive to this course"
       },
       {
         name: "NCLEX-Passpoint", 
-        price: 160.0,
         isbn: "9781496309327",
-        note: "This learning resource will be used in all courses throughout both semesters"
       },
       {
         name: "CoursePoint for Henke's Med-Math, 10e", 
-        price: 110.0,
         isbn: "9781975200206",
-        note: ""
+      },
+      {
+        name: "Lippincott course Point for Nursing Concepts-LPN/LVN", 
+        isbn: "9781496362995",
       },
     ],
     

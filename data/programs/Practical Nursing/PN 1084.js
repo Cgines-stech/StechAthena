@@ -57,7 +57,18 @@ const PN1084 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Docucare, Lippincott", 
+        isbn: "9781451185171",
+      },
+      {
+        name: "NCLEX-Passpoint, Lippincott", 
+        isbn: "9781496309327",
+      },
+      {
+        name: "Simulation Learning System for LPN", 
+        isbn: "9781455700127",
+      },
     ],
     
     courseTools: [

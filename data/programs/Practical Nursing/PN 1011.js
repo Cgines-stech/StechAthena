@@ -61,15 +61,11 @@ const PN1011 = [
     syllabiBooks: [
       {
         name: "Lippincott course Point for Nursing Concepts-LPN/LVN", 
-        price: 600.0,
         isbn: "9781496362995",
-        note: "Course Text Books and Multple Learning resources are bundled in this product"
       },
       {
-        name: "Docucare", 
-        price: 105.0,
+        name: "Docucare, Lippincott", 
         isbn: "9781451185171",
-        note: "This learning resource will be used in all courses throughout both semesters"
       },
     ],
     

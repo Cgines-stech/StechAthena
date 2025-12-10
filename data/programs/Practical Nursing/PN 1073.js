@@ -60,10 +60,8 @@ const PN1073 = [
 
     syllabiBooks: [
       {
-        name: "vSim for Pharmacology", 
-        price: 75.0,
-        isbn: "9781469894362",
-        note: "Exclusive to the two Pharmacology courses"
+        name: "Introductory Clinical Pharmacology, Twelfth Edition", 
+        isbn: "9781975163730",
       },
     ],
     

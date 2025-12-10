@@ -70,22 +70,36 @@ const PN1038 = [
 
     syllabiBooks: [
       {
-        name: "vSim for Medical Surgical", 
-        price: 75.0,
-        isbn: "9781469857312",
-        note: "",
+        name: "Docucare, Lippincott", 
+        isbn: "9781451185171",
       },
       {
-        name: "Simulation Learning System for LPN", 
-        price: 120.0,
-        isbn: "9781455700127",
-        note: ""
+        name: "NCLEX-Passpoint", 
+        isbn: "9781496309327",
       },
       {
         name: "Lippincott Skills ", 
-        price: 140.0,
         isbn: "9781975182519",
-        note: ""
+      },
+      {
+        name: "Fundamental Nursing Skills and Concepts", 
+        isbn: "9781975141769",
+      },
+      {
+        name: "VSIM for Nursing Fundamentals", 
+        isbn: "9781975192464",
+      },
+      {
+        name: "VSIM for Nursing Pharmacology", 
+        isbn: "9781975198121",
+      },
+      {
+        name: "Henke's Med-Math: Dosage Calculation, Preparation & Administration", 
+        isbn: "9781975106522",
+      },
+      {
+        name: "Lippincott Skills ", 
+        isbn: "9781975182519",
       },
     ],
     
