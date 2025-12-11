@@ -105,7 +105,7 @@ const PN1051 = [
     instructorContactInformation: [
       { 
         name: "Vicki Swasey",
-        title: "Instructor",
+        title: "",
         email: "vswasey@stech.edu",
         phone: "",
         office: "",

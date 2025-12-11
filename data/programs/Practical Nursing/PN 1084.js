@@ -113,7 +113,7 @@ const PN1084 = [
     instructorContactInformation: [
       { 
         name: "Marie Smack",
-        title: "Instructor",
+        title: "",
         email: "msmack@stech.edu",
         phone: "",
         office: "",
@@ -121,7 +121,7 @@ const PN1084 = [
       },
       { 
         name: "Preston Dye",
-        title: "Instructor",
+        title: "",
         email: "pdye@stech.edu",
         phone: "",
         office: "",

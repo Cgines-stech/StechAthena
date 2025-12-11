@@ -103,7 +103,7 @@ const PN1031 = [
     instructorContactInformation: [
       { 
         name: "Preston Dye",
-        title: "Instructor",
+        title: "",
         email: "pdye@stech.edu",
         phone: "",
         office: "",

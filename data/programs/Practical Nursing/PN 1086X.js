@@ -93,7 +93,7 @@ const PN1086X = [
     instructorContactInformation: [
       { 
         name: "Patricia Weller",
-        title: "Instructor",
+        title: "",
         email: "pweller@stech.edu",
         phone: "",
         office: "",

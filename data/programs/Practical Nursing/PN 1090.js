@@ -84,7 +84,7 @@ const PN1090 = [
     instructorContactInformation: [
       { 
         name: "Kylee McBride",
-        title: "Instructor",
+        title: "",
         email: "kmcbride@stech.edu",
         phone: "",
         office: "",

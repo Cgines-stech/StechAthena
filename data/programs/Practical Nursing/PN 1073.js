@@ -107,7 +107,7 @@ const PN1073 = [
     instructorContactInformation: [
       { 
         name: "Marie Smack",
-        title: "Instructor",
+        title: "",
         email: "msmack@stech.edu",
         phone: "",
         office: "",
