@@ -95,20 +95,21 @@ function normalizeItemsWithCourse(arr = [], courseNumber = "") {
     .map(x => {
       if (x == null) return null;
 
-      // Pure numbers (rare in your data, but be safe)
+      // Pure numbers
       if (typeof x === "number") {
         const price = Number(x) || 0;
-        if (price <= 0) return null;  // ignore zeros
+        if (price <= 0) return null;
         return {
           courseNumber,
           title: "",
           price,
           optional: false,
-          note: ""
+          note: "",
+          isbn: ""          // no isbn in this case
         };
       }
 
-      // Strings — treat as title, try to extract a number
+      // Strings — treat as title
       if (typeof x === "string") {
         const title = x.trim();
         const price = parsePriceFromString(x);
@@ -118,21 +119,24 @@ function normalizeItemsWithCourse(arr = [], courseNumber = "") {
           title,
           price,
           optional: false,
-          note: ""
+          note: "",
+          isbn: ""          // no isbn in this case
         };
       }
 
-      // Objects (your main case)
+      // Objects (main case)
       const title = x.title ?? x.name ?? x.book ?? x.item ?? x.description ?? "";
       const rawPrice = x.price ?? x.cost ?? x.amount ?? x.value ?? 0;
       const price = Number(rawPrice) || 0;
       const optional = !!x.optional;
       const note = x.note || "";
 
-      // If no title AND no price, treat as placeholder → skip
+      // 👇 Pull ISBN if present (case-insensitive-ish)
+      const isbn = x.isbn || x.ISBN || "";
+
       if (!title && price <= 0) return null;
 
-      return { courseNumber, title, price, optional, note };
+      return { courseNumber, title, price, optional, note, isbn };
     })
     .filter(Boolean);
 }
@@ -157,7 +161,17 @@ function renderItemRows3(tbodyEl, items) {
       requiredTotal += price;
     }
 
-    const tr = document.createElement("tr");
+        const tr = document.createElement("tr");
+
+    // Build the combined meta line: ISBN + note on one line
+    const metaParts = [];
+    if (it.isbn) {
+      metaParts.push(`ISBN: ${it.isbn}`);
+    }
+    if (it.note) {
+      metaParts.push(it.note);
+    }
+    const metaLine = metaParts.join(" — ");
     tr.innerHTML = `
       <td class="col-course">${it.courseNumber || "-"}</td>
       <td class="col-item">
@@ -165,7 +179,7 @@ function renderItemRows3(tbodyEl, items) {
           ${it.title || "-"}
           ${it.optional ? ' <span class="muted">(Optional)</span>' : ""}
         </div>
-        ${it.note ? `<div class="muted" style="font-size:0.72em; margin-top:2px;">${it.note}</div>` : ""}
+        ${metaLine ? `<div class="muted" style="font-size:0.72em; margin-top:2px;">${metaLine}</div>` : ""}
       </td>
       <td class="col-price price">${money(price)}</td>
     `;
