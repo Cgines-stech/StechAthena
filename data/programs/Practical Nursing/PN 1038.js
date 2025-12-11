@@ -176,9 +176,9 @@ const PN1038 = [
         content: [
           "Arriving late, leaving early, or frequently exiting the classroom during class disrupts the instructor and classmates. In order to mirror professional workplace standards, punctuality will be tracked. Tardiness is defined as missing 1 to 14 minutes of class time after the class has started. The determination of tardiness will be made at the discretion of the faculty.",
           "Habitual tardiness in the didactic setting will prompt the implementation of an academic intervention plan, which will be structured according to the following scale:",
-          " • 2 tardies/course = verbal warning, each subsequent tardy will result in a 2% reduction in the student's overall theory grade.",
-          " • 3 tardies/course = academic intervention plan and a 2% deduction to their overall grade ",
-          " • 5 tardies/course = dismissal from program",
+          "• 2 tardies/course = verbal warning, each subsequent tardy will result in a 2% reduction in the student's overall theory grade.",
+          "• 3 tardies/course = academic intervention plan and a 2% deduction to their overall grade ",
+          "• 5 tardies/course = dismissal from program",
           "Students who are late or absent on the day of a practical exam will be required to complete their exam within 24-hours, or when an instructor is available. If a practical exam is not passed on the first attempt, a remediation assignment must be completed prior to completing a remedial practical exam. The remedial practical exam must be completed within 7 days of the original exam date. Any remedial exam completed after the initial 7 day window will incur a 5% deduction per day for up to 7 days, after which no remediation will be available. ",
         ]  
       },
