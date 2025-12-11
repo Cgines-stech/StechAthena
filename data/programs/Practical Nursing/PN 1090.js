@@ -116,9 +116,9 @@ const PN1090 = [
         content: [
           "Arriving late, leaving early, or frequently exiting the classroom during class disrupts the instructor and classmates. In order to mirror professional workplace standards, punctuality will be tracked. Tardiness is defined as missing 1 to 14 minutes of class time after the class has started. The determination of tardiness will be made at the discretion of the faculty.",
           "Habitual tardiness in the didactic setting will prompt the implementation of an academic intervention plan, which will be structured according to the following scale:",
-          " • 2 tardies/course = verbal warning, each subsequent tardy will result in a 2% reduction in the student's overall theory grade.",
-          " • 3 tardies/course = academic intervention plan and a 2% deduction to their overall grade ",
-          " • 5 tardies/course = dismissal from program",
+          "&nbsp;&nbsp;• 2 tardies/course = verbal warning, each subsequent tardy will result in a 2% reduction in the student's overall theory grade.",
+          "&nbsp;&nbsp;• 3 tardies/course = academic intervention plan and a 2% deduction to their overall grade ",
+          "&nbsp;&nbsp;• 5 tardies/course = dismissal from program",
           "Students who are late or absent on the day of an exam will be required to take the examination within a 24-hour window. Failure to do so within this timeframe will result in a 5% deduction per day, up to a maximum of 7 days, with no opportunity for remediation.",
         ]  
       },
