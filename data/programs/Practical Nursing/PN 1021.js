@@ -142,12 +142,12 @@ const PN1021 = [
         title: "Course Policies",
         content: [
           "<strong>Instructor Information and Course Requirements:</strong> The instructor will be available for more individualized questions during class breaks and by appointment. Students are expected to arrive on time to class ready to learn, having completed pre-class assignments and the required reading.",
-          "Grading: A cumulative average 80% or better is expected on all course requirements. Evaluation methods will include: Tickets to class (10%), Tests and quizzes (40%), Assignments (25%), and Class participation/professional behavior (25%). If a student's grade falls below 80%, an Academic Intervention Plan will be initiated, requiring remediation for successful course completion. A cumulative test average of 80% is required to pass the course.",
-          "Remediation: Remediation, if available, must be requested within 24 hours of the original assignment/test completion.",
-          "Artificial Intelligence: The use of generative AI (ChatGPT etc.) is not banned for this course. AI may be used as a tool to assist with the generation of ideas, but it may not be used to replace student work and is not an approved source for cited information",
-          "Attendance: It is expected students will attend all scheduled classes. In the event of an absence, the student is responsible for content discussed in class. Habitual tardiness or absences will be handled on a case by case basis.",
-          "Cell Phone / Electronics: See Practical Nursing Orientation Guide.",
-          "Industry Environment: The environment is a classroom setting with varied methods of instruction. Group projects and presentations are part of the curriculum. Laptop computers are required to access the electronic library and a host of other learning modalities. The majority of the time spent in the classroom will be sitting, with scheduled breaks as the lesson plan allows.",
+          "<strong>Grading:</strong> A cumulative average 80% or better is expected on all course requirements. Evaluation methods will include: Tickets to class (10%), Tests and quizzes (40%), Assignments (25%), and Class participation/professional behavior (25%). If a student's grade falls below 80%, an Academic Intervention Plan will be initiated, requiring remediation for successful course completion. A cumulative test average of 80% is required to pass the course.",
+          "<strong>Remediation:</strong> Remediation, if available, must be requested within 24 hours of the original assignment/test completion.",
+          "<strong>Artificial Intelligence:</strong> The use of generative AI (ChatGPT etc.) is not banned for this course. AI may be used as a tool to assist with the generation of ideas, but it may not be used to replace student work and is not an approved source for cited information",
+          "<strong>Attendance:</strong> It is expected students will attend all scheduled classes. In the event of an absence, the student is responsible for content discussed in class. Habitual tardiness or absences will be handled on a case by case basis.",
+          "<strong>Cell Phone / Electronics:</strong> See Practical Nursing Orientation Guide.",
+          "<strong>Industry Environment:</strong> The environment is a classroom setting with varied methods of instruction. Group projects and presentations are part of the curriculum. Laptop computers are required to access the electronic library and a host of other learning modalities. The majority of the time spent in the classroom will be sitting, with scheduled breaks as the lesson plan allows.",
         ]  
       },
       {
