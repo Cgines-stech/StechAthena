@@ -13,7 +13,7 @@ const TEWT1135 = [
     courseCredits: 2,
     statewideAlignment: "Non-Aligned",
     courseClockHours: 60,
-    courseTuition: 195.00,
+    courseTuition: 190.00,
     courseFee: 210.00,
     instructionalType: "LEL",
     isElective: false,
