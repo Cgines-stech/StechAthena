@@ -113,7 +113,35 @@ const PN1051 = [
     ],
 
     course_Policies: [
-      {},
+      {
+        title: "Course Policies",
+        content: [
+          "<strong>Instructor Information and Course Requirements:</strong> The instructor will be available for more individualized questions during class breaks and by appointment. Students are expected to arrive on time to class ready to learn, having completed pre-class assignments and the required reading.",
+          "<strong>Grading:</strong> A cumulative average 80% or better is expected on all course requirements. Evaluation methods will include: Tickets to class (10%), Tests and quizzes (40%), Assignments (25%), and Class participation/professional behavior (25%). If a student's grade falls below 80%, an Academic Intervention Plan will be initiated, requiring remediation for successful course completion. A cumulative test average of 80% is required to pass the course.",
+          "<strong>Remediation:</strong> Remediation, if available, must be requested within 24 hours of the original assignment/test completion.",
+          "<strong>Artificial Intelligence:</strong> The use of generative AI (ChatGPT etc.) is not banned for this course. AI may be used as a tool to assist with the generation of ideas, but it may not be used to replace student work and is not an approved source for cited information",
+          "<strong>Attendance:</strong> It is expected students will attend all scheduled classes. In the event of an absence, the student is responsible for content discussed in class. Habitual tardiness or absences will be handled on a case by case basis.",
+          "<strong>Cell Phone / Electronics:</strong> See Practical Nursing Orientation Guide.",
+          "<strong>Industry Environment:</strong> The environment is a classroom setting with varied methods of instruction. Group projects and presentations are part of the curriculum. Laptop computers are required to access the electronic library and a host of other learning modalities. The majority of the time spent in the classroom will be sitting, with scheduled breaks as the lesson plan allows.",
+        ]  
+      },
+      {
+        title: "Attendance: Didactic Class",
+        content: [
+          "The didactic curriculum will be covered over two semesters. Students who are not in class will be unable to learn and miss needed information; therefore, attendance is mandatory. If an absence is unavoidable, the student must notify the instructor prior to the absence when possible. An absence is defined as more than 15 minutes of missed class time, regardless of whether missed time occurs at the beginning, middle, or end of a scheduled class. Following the second absence, each subsequent absence will result in a 5% reduction in the student's overall theory grade. Breaks will be provided at specified intervals throughout the class sessions to attend to personal needs. Mobile phones and other electronic devices must remain in silent mode throughout the duration of the class. Please do not disrupt the class by receiving calls, being paged, or leaving inappropriately. Excessive text messaging/social media during class will not be tolerated. Use of the technologies, as mentioned above, during class will result in students being asked to leave for the remainder of the class with an absence recorded on their attendance record. Should any specific issues arise, students should discuss them with the instructor.",
+        ]  
+      },
+      {
+        title: "Punctuality: Didactic Class",
+        content: [
+          "Arriving late, leaving early, or frequently exiting the classroom during class disrupts the instructor and classmates. In order to mirror professional workplace standards, punctuality will be tracked. Tardiness is defined as missing 1 to 14 minutes of class time after the class has started. The determination of tardiness will be made at the discretion of the faculty.",
+          "Habitual tardiness in the didactic setting will prompt the implementation of an academic intervention plan, which will be structured according to the following scale:",
+          "• 2 tardies/course = verbal warning, each subsequent tardy will result in a 2% reduction in the student's overall theory grade.",
+          "• 3 tardies/course = academic intervention plan and a 2% deduction to their overall grade ",
+          "• 5 tardies/course = dismissal from program",
+          "Students who are late or absent on the day of an exam will be required to take the examination within a 24-hour window. Failure to do so within this timeframe will result in a 5% deduction per day, up to a maximum of 7 days, with no opportunity for remediation.",
+        ]  
+      },
     ],
 
     courseAssignmentsandAsssessments: [

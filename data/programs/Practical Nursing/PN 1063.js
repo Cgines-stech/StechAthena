@@ -112,7 +112,24 @@ const PN1063 = [
     ],
 
     course_Policies: [
-      {}
+      {
+        title: "Course Policies",
+        content: [
+          "<strong>Instructor Information and Course Requirements:</strong> The instructor will be available for more individualized questions during class breaks and by appointment. Students are expected to arrive on time to class ready to learn, having completed pre-class assignments and the required reading.",
+          "",
+          "<strong>Grading:</strong> A cumulative average of 80% or better is expected on all course requirements. Evaluation methods will include tests and quizzes (50%), Assignments (35%), and Class participation/professional behavior (15%). Grading Scale: A 93-100% A-90-92 B+87-89 B 83-86 B-80-82% Failure 79.99% or below. An 80% cumulative test average is required to pass the course.",
+          "*If a student's grade falls below 80%, an Academic Intervention Plan will be initiated, requiring remediation for successful course completion. Late assignments receive a 5% deduction per day and are not accepted seven days after the submission deadline.",
+          "<strong>Remediation:</strong> Remediation, if available, must be requested within 24 hours of the original assignment/test completion.",
+          "<strong>Artificial Intelligence:</strong> The use of generative AI (ChatGPT etc.) is not banned for this course. AI may be used as a tool to assist with the generation of ideas, but it may not be used to replace student work and is not an approved source for cited information",
+          "<strong>Attendance:</strong> The didactic curriculum will be covered over two semesters. Students who are not in class will be unable to learn and miss needed information; therefore, attendance is mandatory. If an absence is unavoidable, the student must notify the instructor before the absence when possible. An absence is defined as more than 15 minutes of missed class time, regardless of whether missed time occurs at the beginning, middle, or end of a scheduled class. Following the second absence, each subsequent absence will result in a 5% reduction in the student's overall grade. Students who are late or absent on the day of an exam will be required to take the examination OR contact the instructor within 24 hours. Failure to do so within this timeframe will result in a 5% deduction per day, up to a maximum of 7 days, with no opportunity for remediation.",
+          "<strong>Punctuality:</strong> Arriving late, leaving early, or frequently exiting the classroom during class disrupts the instructor and classmates. To mirror professional workplace standards, punctuality will be tracked. Tardiness is missing 1 to 14 minutes of class time after the class has started. The determination of tardiness will be made at the discretion of the faculty. Habitual tardiness in the didactic setting will prompt the implementation of an academic intervention plan, which will be structured according to the following scale:",
+          "Habitual tardiness in the didactic setting will prompt the implementation of an academic intervention plan, which will be structured according to the following scale:",
+          "• 2 tardies/course = verbal warning; each subsequent tardy will result in a 2% reduction in the student's overall theory grade.",
+          "• 3 tardies/course = academic intervention plan and a 2% deduction to their overall grade ",
+          "• 5 tardies/course = dismissal from program",
+          "<strong>Cell Phone / Electronics:</strong> See Practical Nursing Orientation Guide.",
+        ]  
+      },
     ],
 
     courseAssignmentsandAsssessments: [

@@ -101,7 +101,19 @@ const PN1040X = [
     ],
 
     course_Policies: [
-      {},
+      {
+        title: "Course Policies",
+        content: [
+          "<strong>Instructor Information and Course Requirements:</strong> Professionalism, client confidentiality, and eagerness to learn are key aspects for success in this course. A positive professional attitude is essential. Students are expected to protect the health information of the clients they observe or to whom they provide care. Client situations are to be discussed in a private area with the appropriate nurse, health care provider, or PN faculty member. Assignments for each clinical rotation are to be completed by the due date, and electronically submitted via the Canvas portal. The student must obtain a score of 80% or better on all assignments. This Clinical Learning course requires 135 hours of work-based learning. The hours will be documented and signed off by the clinical coordinator.",
+          "<strong>Grading:</strong> A cumulative average of 80% or better is required on all course requirements. Evaluation methods include assignments (50%), participation (25%), and clinical performance evaluations (25%). Late assignments receive a 5% deduction per day. I have my Canvas settings to automatically deduct the late points. Late assignments are not accepted seven days after the submission deadline. Grading Scale: A 93-100% A-90-92 B+87-89 B 83-86 B-80-82% Failure 79% or below",
+          "<strong>Attendance:</strong> The exact hours and dates of your clinical courses may vary depending on which site or hospital you are assigned, but they are typically 8-12 hours long and are both A.M. and P.M. shifts. Students are not allowed to work 8 hours prior to any clinical shift.",
+          "Within each academic term, students are required to fulfill the 90-hour clinical hour requirement. Students are allowed to reschedule a maximum of two clinical shifts: Rescheduling clinical hours is dependent on the clinical site availability. Please note that clinical site availability is becoming increasingly difficult to obtain; every effort should be made to attend each scheduled shift.",
+          "Exceeding this limit by requesting additional rescheduled shifts will not be accommodated, resulting in the inability to meet the mandatory 90-hour clinical requirement and, consequently, course failure.",
+          "In the event of an absence, the student is responsible for contacting the clinical faculty member assigned to that shift and Patricia Weller {Clinical Coordinator} to arrange a clinical makeup. Note: clinical makeups are increasingly hard to schedule and dependent on clinical faculty and facility availability. Therefore, alternative learning assignments may be assigned.",
+          "<strong>Cell Phone / Electronics:</strong> See Practical Nursing Orientation Guide.",
+          "<strong>Industry Environment:</strong> The environment is a classroom setting with varied methods of instruction. Group projects and presentations are part of the curriculum. Laptop computers are required to access the electronic library and a host of other learning modalities. The majority of the time spent in the classroom will be sitting, with scheduled breaks as the lesson plan allows.",
+        ]  
+      },
     ],
 
     courseAssignmentsandAsssessments: [
