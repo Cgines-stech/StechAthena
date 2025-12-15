@@ -62,9 +62,30 @@ body {
 }
 .course-card.error { border-color: #ef4444; }
 
-.course-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0 0 8px; }
-.course-title { margin: 0; font-size: 18px; font-weight: 800; }
-.meta-right { display: flex; gap: 8px; align-items: center; }
+.course-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 8px;
+}
+
+.course-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  flex: 1;              /* let title take remaining space */
+  min-width: 0;         /* allows wrapping instead of pushing pills off */
+}
+
+.meta-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;      /* allows 4 pills to wrap if needed */
+  max-width: 45%;       /* keeps corner cluster contained */
+}
 
 /* Pills + badges (unified “pill” look) */
 .pill,
@@ -122,8 +143,27 @@ body {
 
 .descr { margin: 8px 0 10px; color: var(--fg); }
 
-.outline { margin: 0; padding-left: 22px; }
-.outline li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 3px 0; }
+.outline {
+  margin: 0;
+  padding-left: 0;     /* remove default indent */
+  list-style: none;    /* remove numbers (optional) */
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.outline li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 6px 10px;
+}
+
+.outline li:nth-child(odd) {
+  background: #f8fafc;
+}
+
 .outline .title { font-weight: 600; }
 .outline .hours { color: var(--muted); font-variant-numeric: tabular-nums; }
 
@@ -134,8 +174,24 @@ body {
   color: var(--muted);
   margin-bottom: 6px;
 }
-.objective-list { margin: 0; padding-left: 20px; }
-.objective-list li { margin: 2px 0; }
+
+.objective-list {
+  margin: 0;
+  padding-left: 0;     /* remove default indent */
+  list-style: none;    /* remove bullets */
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.objective-list li {
+  margin: 0;
+  padding: 6px 10px;
+}
+
+.objective-list li:nth-child(odd) {
+  background: #f8fafc;
+}
 
 .hint { color: var(--muted); }
 .hint.small { font-size: 13px; }

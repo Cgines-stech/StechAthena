@@ -181,18 +181,22 @@ function render(programName, courses, programMeta) {
          </div>`
       : `<div class="hint small">No outline available.</div>`;
 
-    parts.push(`
-      <article class="course-card">
-        <header class="course-head">
-          <h3 class="course-title">${htmlEscape(number)} — ${htmlEscape(name)}</h3>
-          <div class="meta-right">${hoursPill} ${creditPill}</div>
-        </header>
-        <div class="meta-row">${metaBadges}</div>
-        ${descrBlock}
-        ${objBlock}
-        ${outlineBlock}
-      </article>
-    `);
+parts.push(`
+  <article class="course-card">
+    <header class="course-head">
+      <h3 class="course-title">${htmlEscape(number)} — ${htmlEscape(name)}</h3>
+      <div class="meta-right">
+        ${hoursPill}
+        ${creditPill}
+        ${metaBadges}
+      </div>
+    </header>
+    ${descrBlock}
+    ${objBlock}
+    ${outlineBlock}
+  </article>
+`);
+
   });
 
   els.courseList.innerHTML = parts.join("");
