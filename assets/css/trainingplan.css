@@ -1,4 +1,5 @@
 /* assets/css/trainingplan.css */
+
 /* Training Plan styles - professional look, landscape print */
 :root {
   --fg: #0f172a;           /* slate-900 */
@@ -7,26 +8,36 @@
   --bg: #f6f7fb;           /* subtle canvas */
   --border: #e5e7eb;       /* gray-200 */
   --accent: #0ea5e9;       /* sky-500 */
+  --row: #f8fafc;          /* alternating row */
 }
 
 * { box-sizing: border-box; }
 html, body { height: 100%; }
+
 body {
   margin: 0;
   color: var(--fg);
   background: var(--bg);
-  font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
+  font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+        Cantarell, Noto Sans, "Helvetica Neue", Arial;
 }
 
 .wrap { max-width: 1100px; margin: 28px auto; padding: 0 18px; }
 
 /* Toolbar */
 .toolbar {
-  display: flex; gap: 12px; align-items: center;
-  padding: 12px 0 16px; margin-bottom: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0 16px;
+  margin-bottom: 10px;
   border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; background: var(--bg); z-index: 10;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
 }
+
 .toolbar .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .toolbar label { color: var(--muted); font-weight: 600; }
 .toolbar select { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
@@ -35,19 +46,26 @@ body {
 .toolbar .btn:hover { background: #f3f4f6; }
 .toolbar .btn.back { font-weight: 600; }
 
-.program-title { font-size: 28px; margin: 14px 0 10px; font-weight: 800; letter-spacing: -0.01em; }
+.program-title {
+  font-size: 28px;
+  margin: 14px 0 10px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
 
 /* Totals bar */
 .totals {
-  display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 8px 16px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 12px 14px; margin: 8px 0 18px;
+  padding: 12px 14px;
+  margin: 8px 0 18px;
 }
 .totals .label { color: var(--muted); margin-right: 6px; font-weight: 600; }
 .totals .value { font-weight: 800; }
-/* Outline total styling (red on screen, hidden in print) */
 .outline-total { color: #dc2626; }
 
 .course-list { display: grid; gap: 16px; }
@@ -57,11 +75,13 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 16px 18px;
-  page-break-inside: avoid;
   box-shadow: 0 1px 0 rgba(15,23,42,.03);
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 .course-card.error { border-color: #ef4444; }
 
+/* Header row (title left, pills right) */
 .course-head {
   display: flex;
   justify-content: space-between;
@@ -74,22 +94,22 @@ body {
   margin: 0;
   font-size: 18px;
   font-weight: 800;
-  flex: 1;              /* let title take remaining space */
-  min-width: 0;         /* allows wrapping instead of pushing pills off */
+  flex: 1;
+  min-width: 0;
 }
 
+/* Right side pills cluster */
 .meta-right {
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: flex-end;
-  flex-wrap: wrap;      /* allows 4 pills to wrap if needed */
-  max-width: 45%;       /* keeps corner cluster contained */
+  flex-wrap: wrap;
+  max-width: 46%;
 }
 
-/* Pills + badges (unified “pill” look) */
-.pill,
-.badge {
+/* Pills + badges (all pill-shaped) */
+.pill, .badge {
   display: inline-block;
   padding: 2px 10px;
   border-radius: 999px;
@@ -101,71 +121,19 @@ body {
   white-space: nowrap;
 }
 
-/* Keep credits slightly distinguished */
 .pill-credits {
   background: #f0f9ff;
   border-color: #bae6fd;
   color: #0369a1;
 }
 
-/* Give “badges” a subtle tint so they’re still distinguishable */
 .badge {
-  background: #f8fafc;      /* slate-50-ish */
-  border-color: #e2e8f0;    /* slate-200-ish */
-  color: #334155;           /* slate-700-ish */
-}
-
-/* Meta layout */
-.course-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* <-- was baseline; helps prevent “floating” feel */
-  gap: 12px;
-  margin: 0 0 8px;
-}
-
-.meta-right {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;         /* <-- lets pills wrap instead of squeezing */
-  justify-content: flex-end;
-}
-
-.meta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-  justify-content: flex-start;
-  align-items: center;
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
 }
 
 .descr { margin: 8px 0 10px; color: var(--fg); }
-
-.outline {
-  margin: 0;
-  padding-left: 0;     /* remove default indent */
-  list-style: none;    /* remove numbers (optional) */
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.outline li {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding: 6px 10px;
-}
-
-.outline li:nth-child(odd) {
-  background: #f8fafc;
-}
-
-.outline .title { font-weight: 600; }
-.outline .hours { color: var(--muted); font-variant-numeric: tabular-nums; }
 
 .section-title {
   font-size: 15px;
@@ -175,31 +143,49 @@ body {
   margin-bottom: 6px;
 }
 
+/* Outline + Objectives: alternating rows */
+.outline,
 .objective-list {
   margin: 0;
-  padding-left: 0;     /* remove default indent */
-  list-style: none;    /* remove bullets */
+  padding-left: 0;
+  list-style: none;
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
 }
 
+.outline li,
 .objective-list li {
   margin: 0;
   padding: 6px 10px;
 }
 
-.objective-list li:nth-child(odd) {
-  background: #f8fafc;
+.outline li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
 }
+
+.outline li:nth-child(odd),
+.objective-list li:nth-child(odd) {
+  background: var(--row);
+}
+
+.outline .title { font-weight: 600; }
+.outline .hours { color: var(--muted); font-variant-numeric: tabular-nums; }
 
 .hint { color: var(--muted); }
 .hint.small { font-size: 13px; }
 
 .elective-disclaimer {
-  padding: 10px 12px; margin: 8px 0 6px;
-  border: 1px dashed var(--border); border-radius: 12px; background: #fff;
+  padding: 10px 12px;
+  margin: 8px 0 6px;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: #fff;
 }
+
 .descr, .objectives, .outline-block {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -209,10 +195,12 @@ body {
 @media print {
   @page { size: landscape; margin: 0.5in; }
 
+  html, body { height: auto; }
   body {
     background: #fff;
-    font-size: 12px;     /* tighter */
-    line-height: 1.35;   /* tighter */
+    font-size: 12px;
+    line-height: 1.35;
+    color: #000;
   }
 
   .no-print { display: none !important; }
@@ -228,39 +216,64 @@ body {
     border: none;
     border-bottom: 1px solid #ddd;
     border-radius: 0;
-    padding: 6px 0;
+    padding: 6px 0 8px;
     margin: 0 0 10px;
+    background: transparent;
   }
   .totals .outline-total { display: none !important; }
 
-  .course-list { gap: 10px; }
+  .course-list { gap: 8px; }
 
   .course-card {
     border: none;
     border-bottom: 1px solid #ddd;
     border-radius: 0;
     box-shadow: none;
-    padding: 10px 0;                 /* tighter */
+    padding: 8px 0;
+    background: transparent;
     break-inside: avoid;
     page-break-inside: avoid;
   }
 
-  .course-title { font-size: 14px; }
+  /* Keep header compact and prevent ugly wrapping */
+  .course-title { font-size: 13.5px; }
+  .meta-right { max-width: 50%; gap: 6px; }
 
-  .meta-row { margin-bottom: 6px; }
+  .pill, .badge {
+    font-size: 10.5px;
+    padding: 1px 8px;
+    border-color: #d1d5db;
+    color: #111827;
+    background: transparent; /* prints cleaner */
+  }
+  .pill-credits {
+    background: transparent;
+    border-color: #d1d5db;
+    color: #111827;
+  }
 
   .section-title {
-    font-size: 11px;
-    margin-bottom: 4px;
+    font-size: 10.5px;
+    margin-bottom: 3px;
+  }
+
+  /* Remove heavy “boxed list” look in print, but keep readability */
+  .outline, .objective-list {
+    border: none;
+    border-radius: 0;
+  }
+
+  .outline li, .objective-list li {
+    padding: 2px 0;
+  }
+
+  .outline li:nth-child(odd),
+  .objective-list li:nth-child(odd) {
+    background: transparent;  /* avoids gray blocks printing */
   }
 
   .descr, .objectives, .outline-block {
-    margin-top: 6px;
-    margin-bottom: 6px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
-
-  .outline li { padding: 1px 0; }
-  .objective-list li { margin: 1px 0; }
 }
-
-
