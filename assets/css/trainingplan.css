@@ -9,6 +9,8 @@
   --border: #e5e7eb;       /* gray-200 */
   --accent: #0ea5e9;       /* sky-500 */
   --row: #f8fafc;          /* alternating row */
+  --print-row: #f2f4f7;      /* extremely light gray for print zebra */
+  --print-border: #d1d5db;  /* neutral divider */
 }
 
 * { box-sizing: border-box; }
@@ -257,19 +259,34 @@ body {
     margin-bottom: 3px;
   }
 
-  /* Remove heavy “boxed list” look in print, but keep readability */
-  .outline, .objective-list {
-    border: none;
+  /* Professional table-style lists in print */
+  .outline,
+  .objective-list {
+    border: 1px solid var(--print-border);
     border-radius: 0;
+    border-collapse: collapse;
   }
 
-  .outline li, .objective-list li {
-    padding: 2px 0;
+  .outline li,
+  .objective-list li {
+    padding: 4px 6px;
   }
 
+  /* Light zebra striping that prints cleanly */
   .outline li:nth-child(odd),
   .objective-list li:nth-child(odd) {
-    background: transparent;  /* avoids gray blocks printing */
+    background: var(--print-row);
+  }
+
+  /* Optional: subtle row separators */
+  .outline li + li,
+  .objective-list li + li {
+    border-top: 1px solid var(--print-border);
+  }
+
+  .outline .hours {
+    min-width: 60px;
+    text-align: right;
   }
 
   .descr, .objectives, .outline-block {
