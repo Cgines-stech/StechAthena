@@ -193,6 +193,20 @@ body {
   margin-bottom: 10px;
 }
 
+.program-title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.print-brand {
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  display: none; /* screen-hidden */
+}
+
 /* Print styles */
 @media print {
   @page { size: landscape; margin: 0.5in; }
@@ -309,5 +323,26 @@ body {
   .descr, .objectives, .outline-block {
     margin-top: 5px;
     margin-bottom: 5px;
+  }
+
+  /* Show brand only on first page */
+  .print-brand {
+    display: inline;
+    font-size: 11px;
+    font-weight: 600;
+    color: #111827;
+    white-space: nowrap;
+  }
+
+  /* Keep title + brand on same line */
+  .program-title-wrap {
+    margin-bottom: 6px;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Hide the brand after the first page */
+  .course-card ~ .print-brand {
+    display: none;
   }
 }
