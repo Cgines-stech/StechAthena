@@ -18,7 +18,6 @@ const els = {
   programMetaInline: document.getElementById("programMetaInline"),
   courseList: document.getElementById("courseList"),
   printBtn: document.getElementById("printBtn"),
-  programHoursTotal: document.getElementById("programHoursTotal"),
   outlineHoursTotal: document.getElementById("outlineHoursTotal"),
 };
 
@@ -119,9 +118,7 @@ function render(programName, courses, programMeta) {
       ? `(Credit Hours Required: ${credit}, Clock Hours Required: ${clock}${cip ? `, CIP: ${cip}` : ""})`
       : "";
 
-  const programHours = Number(programMeta?.programClockHours || 0) || 0;
   const includedClockHours = computeIncludedCourseClockHours(courses || []);
-  els.programHoursTotal.textContent = `${programHours} hrs`;
   els.outlineHoursTotal.textContent = `${includedClockHours} hrs`;
 
   if (!programName || !courses?.length) {
