@@ -237,7 +237,7 @@ body {
 
 /* Print styles */
 @media print {
-  @page { size: landscape; margin: 0.5in; }
+  @page { size: portrait; margin: 0.5in; }
 
   html, body { height: auto; }
   body {
