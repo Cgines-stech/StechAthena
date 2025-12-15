@@ -141,8 +141,13 @@ body {
   font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  color: var(--muted);
+  color: #0b3b5a;                 /* darker blue text */
   margin-bottom: 6px;
+
+  /* subtle blue header background */
+  background: rgba(36, 160, 214, 0.12); /* #24a0d6 @ 12% */
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
 /* Outline + Objectives: alternating rows */
