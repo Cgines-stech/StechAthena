@@ -235,6 +235,36 @@ body {
   white-space: nowrap;
 }
 
+/* Program header: 2-row layout */
+.program-title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin: 0 0 4px;
+}
+
+.program-title {
+  margin: 0;
+  flex: 1 1 auto;     /* row 1 left */
+  min-width: 240px;
+}
+
+.print-brand {
+  margin-left: auto;  /* row 1 right */
+  white-space: nowrap;
+  display: none;      /* shown in print rules */
+}
+
+.program-meta-inline {
+  flex: 1 1 100%;     /* forces row 2 */
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: normal; /* allow wrap in portrait */
+}
+
 /* Print styles */
 @media print {
   @page { size: portrait; margin: 0.5in; }
@@ -382,4 +412,21 @@ body {
 
   .program-title-wrap { margin: 0 0 2px !important; }
   .program-title { margin: 0 !important; }
+
+  .print-brand {
+    display: inline;
+    font-size: 11px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .program-meta-inline {
+    font-size: 11px;
+    color: #111827;
+    margin-top: 2px;
+  }
+
+  .program-title-wrap {
+    margin: 0 0 2px !important;
+  }
 }

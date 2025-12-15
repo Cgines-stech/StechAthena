@@ -113,10 +113,10 @@ function render(programName, courses, programMeta) {
   const clock  = Number(programMeta?.programClockHours || 0);
   const cip    = programMeta?.programCIP;
 
-  els.programMetaInline.textContent =
-    credit || clock || cip
-      ? `(Credit Hours Required: ${credit}, Clock Hours Required: ${clock}${cip ? `, CIP: ${cip}` : ""})`
-      : "";
+els.programMetaInline.textContent =
+  credit || clock || cip
+    ? `Credit Hours Required: ${credit}, Clock Hours Required: ${clock}${cip ? `, CIP: ${cip}` : ""}`
+    : "";
 
   const includedClockHours = computeIncludedCourseClockHours(courses || []);
   els.outlineHoursTotal.textContent = `${includedClockHours} hrs`;
