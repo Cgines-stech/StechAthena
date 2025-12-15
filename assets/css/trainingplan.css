@@ -66,19 +66,60 @@ body {
 .course-title { margin: 0; font-size: 18px; font-weight: 800; }
 .meta-right { display: flex; gap: 8px; align-items: center; }
 
-/* Pills + badges */
-.pill {
-  display: inline-block; padding: 2px 10px; border-radius: 999px;
-  border: 1px solid var(--border); background: #fff; color: var(--muted);
-  font-size: 12px; font-weight: 600; white-space: nowrap;
-}
-.pill-credits { background: #f0f9ff; border-color: #bae6fd; color: #0369a1; }
+/* Pills + badges (unified “pill” look) */
+.pill,
 .badge {
-  display: inline-block; padding: 2px 8px; border-radius: 8px; border: 1px solid var(--border);
-  background: #fbfdff; color: var(--muted); font-size: 12px; margin-right: 6px; white-space: nowrap;
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.meta-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+/* Keep credits slightly distinguished */
+.pill-credits {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+  color: #0369a1;
+}
+
+/* Give “badges” a subtle tint so they’re still distinguishable */
+.badge {
+  background: #f8fafc;      /* slate-50-ish */
+  border-color: #e2e8f0;    /* slate-200-ish */
+  color: #334155;           /* slate-700-ish */
+}
+
+/* Meta layout */
+.course-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* <-- was baseline; helps prevent “floating” feel */
+  gap: 12px;
+  margin: 0 0 8px;
+}
+
+.meta-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;         /* <-- lets pills wrap instead of squeezing */
+  justify-content: flex-end;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .descr { margin: 8px 0 10px; color: var(--fg); }
 
 .outline { margin: 0; padding-left: 22px; }
@@ -111,13 +152,59 @@ body {
 /* Print styles */
 @media print {
   @page { size: landscape; margin: 0.5in; }
-  body { background: #fff; }
+
+  body {
+    background: #fff;
+    font-size: 12px;     /* tighter */
+    line-height: 1.35;   /* tighter */
+  }
+
   .no-print { display: none !important; }
+
   .wrap { max-width: none; margin: 0; padding: 0; }
-  .program-title { margin: 0 0 8px; }
-  .totals { border: none; border-bottom: 1px solid #ddd; border-radius: 0; }
-  .totals .outline-total { display: none !important; } /* hide sum of outline only */
-  .course-card { border: none; border-bottom: 1px solid #ddd; border-radius: 0; box-shadow: none; }
+
+  .program-title {
+    margin: 0 0 6px;
+    font-size: 18px;
+  }
+
+  .totals {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    padding: 6px 0;
+    margin: 0 0 10px;
+  }
+  .totals .outline-total { display: none !important; }
+
+  .course-list { gap: 10px; }
+
+  .course-card {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 10px 0;                 /* tighter */
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .course-title { font-size: 14px; }
+
+  .meta-row { margin-bottom: 6px; }
+
+  .section-title {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .descr, .objectives, .outline-block {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  .outline li { padding: 1px 0; }
+  .objective-list li { margin: 1px 0; }
 }
 
 
