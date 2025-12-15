@@ -250,6 +250,10 @@ body {
     page-break-inside: auto !important;
   }
 
+  .course-list > .course-card:last-of-type {
+    border-bottom: none !important;
+  }
+
   /* Keep header compact and prevent ugly wrapping */
   .course-title { font-size: 13.5px; }
   .meta-right { max-width: 50%; gap: 6px; }
