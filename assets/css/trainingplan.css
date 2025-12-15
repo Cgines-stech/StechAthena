@@ -237,6 +237,19 @@ body {
     page-break-inside: avoid;
   }
 
+  /* Keep the program header/totals with the first course when possible */
+  .program-title,
+  .totals {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Allow ONLY the first course card to break across pages so it doesn't get bumped to a fresh page and strand the header */
+  .course-list > .course-card:first-of-type {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
   /* Keep header compact and prevent ugly wrapping */
   .course-title { font-size: 13.5px; }
   .meta-right { max-width: 50%; gap: 6px; }
