@@ -1,20 +1,5 @@
 // assets/js/trainingplan.js
 // Training Plan (polished UI, landscape print, cache-busted modules)
-// Features:
-// - Program dropdown (from programs.registry.js)
-// - Program totals:
-//     • Program Hours -> program.js: programClockHours
-//     • Outline Hours -> SUM(courseClockHours) where includeInProgramTotals === true
-// - Elective disclaimer BEFORE first elective course:
-//     “Electives (Credit Hours Required: X, Clock Hours Required: Y)”
-//     X = programCreditHours - SUM(non-elective courseCredits)
-//     Y = programClockHours  - SUM(non-elective courseClockHours)
-// - Per-course layout shows:
-//     • CourseNumber — CourseName
-//     • Hours and Credits pills
-//     • Badges: statewideAlignment, instructionalType
-//     • Description and Objectives (if present)
-//     • Outline items (title — hours)
 
 import {
   listPrograms,
@@ -25,7 +10,7 @@ import {
 
 // Cache-busting helper matches ?v on HTML page
 const BUST = (window.__ASSET_VERSION__ || Date.now()).toString();
-const withBust = (url) => url + (url.includes('?') ? '&' : '?') + 'v=' + BUST;
+const withBust = (url) => url + (url.includes("?") ? "&" : "?") + "v=" + BUST;
 
 const els = {
   programSelect: document.getElementById("programSelect"),
@@ -35,6 +20,14 @@ const els = {
   programHoursTotal: document.getElementById("programHoursTotal"),
   outlineHoursTotal: document.getElementById("outlineHoursTotal"),
 };
+
+// Preserve original document title for after printing
+const ORIGINAL_TITLE = document.title;
+
+function setPrintTitle(programName) {
+  const safe = (programName || "Program").replace(/\s+/g, " ").trim();
+  document.title = `Training Plan — ${safe}`;
+}
 
 function htmlEscape(str = "") {
   return String(str)
@@ -48,10 +41,15 @@ function htmlEscape(str = "") {
 async function loadProgramCourses(programName) {
   const files = getCourseFiles(programName);
   const loaded = [];
+
   for (const relPath of files) {
     try {
       const mod = await import(withBust(encodePath(relPath)));
-      const arr = Array.isArray(mod.default) ? mod.default : (mod.default ? [mod.default] : []);
+      const arr = Array.isArray(mod.default)
+        ? mod.default
+        : mod.default
+          ? [mod.default]
+          : [];
       const course = arr[0] || null;
       if (course) loaded.push(course);
     } catch (e) {
@@ -59,6 +57,7 @@ async function loadProgramCourses(programName) {
       loaded.push({ __error: true, relPath });
     }
   }
+
   return loaded;
 }
 
@@ -66,8 +65,8 @@ async function loadProgramMeta(programName) {
   try {
     const rel = PROGRAM_FILE_REGISTRY?.[programName];
     if (!rel) return null;
+
     const mod = await import(withBust(encodePath(rel)));
-    // Expect default export holding programClockHours & programCreditHours
     const meta = Array.isArray(mod.default) ? mod.default[0] : mod.default;
     return meta || null;
   } catch (e) {
@@ -92,14 +91,18 @@ function computeIncludedCourseClockHours(courses) {
 function sumNonElectiveCreditsAndClock(courses) {
   let credits = 0;
   let clock = 0;
+
   for (const c of courses) {
     if (!c || c.__error) continue;
     if (c.isElective === true) continue;
+
     const cr = Number(c.courseCredits || 0);
     const ch = Number(c.courseClockHours || 0);
+
     credits += isNaN(cr) ? 0 : cr;
-    clock   += isNaN(ch) ? 0 : ch;
+    clock += isNaN(ch) ? 0 : ch;
   }
+
   return { credits, clock };
 }
 
@@ -118,12 +121,17 @@ function render(programName, courses, programMeta) {
 
   const { credits: reqCredits, clock: reqClock } = sumNonElectiveCreditsAndClock(courses);
   const programCreditHours = Number(programMeta?.programCreditHours || 0) || 0;
-  const programClockHours  = Number(programMeta?.programClockHours || 0)  || 0;
-  const electiveCreditsNeeded = Math.max(0, programCreditHours - reqCredits);
-  const electiveClockNeeded   = Math.max(0, programClockHours  - reqClock);
-  const firstElectiveIdx = courses.findIndex(c => c && !c.__error && c.isElective === true);
+  const programClockHours = Number(programMeta?.programClockHours || 0) || 0;
 
-  let parts = [];
+  const electiveCreditsNeeded = Math.max(0, programCreditHours - reqCredits);
+  const electiveClockNeeded = Math.max(0, programClockHours - reqClock);
+
+  const firstElectiveIdx = courses.findIndex(
+    (c) => c && !c.__error && c.isElective === true
+  );
+
+  const parts = [];
+
   courses.forEach((c, idx) => {
     if (idx === firstElectiveIdx) {
       parts.push(`
@@ -136,7 +144,11 @@ function render(programName, courses, programMeta) {
 
     if (!c || c.__error) {
       const file = c?.relPath?.split("/").pop();
-      parts.push(`<article class="course-card error"><h3>⚠ Error loading ${htmlEscape(file || "course")}</h3></article>`);
+      parts.push(`
+        <article class="course-card error">
+          <h3>⚠ Error loading ${htmlEscape(file || "course")}</h3>
+        </article>
+      `);
       return;
     }
 
@@ -145,16 +157,19 @@ function render(programName, courses, programMeta) {
     const outline = Array.isArray(c.courseOutline) ? c.courseOutline : [];
     const courseClockHours = Number(c.courseClockHours || 0);
     const courseCredits = Number(c.courseCredits || 0);
+
     const instructionalType = c.instructionalType || "";
     const statewideAlignment = c.statewideAlignment || "";
+
     const description = c.courseDescription || "";
     const objectives = Array.isArray(c.courseObjectives) ? c.courseObjectives : [];
 
     const hoursPill = `<span class="pill">${courseClockHours} hrs</span>`;
     const creditPill = `<span class="pill pill-credits">${courseCredits} cr</span>`;
+
     const metaBadges = [statewideAlignment, instructionalType]
       .filter(Boolean)
-      .map(v => `<span class="badge">${htmlEscape(v)}</span>`)
+      .map((v) => `<span class="badge">${htmlEscape(v)}</span>`)
       .join(" ");
 
     const descrBlock = description
@@ -167,36 +182,44 @@ function render(programName, courses, programMeta) {
     const objBlock = objectives.length
       ? `<div class="objectives">
            <div class="section-title">Course Objectives</div>
-           <ul class="objective-list">${objectives.map(o => `<li>${htmlEscape(o)}</li>`).join("")}</ul>
+           <ul class="objective-list">
+             ${objectives.map((o) => `<li>${htmlEscape(o)}</li>`).join("")}
+           </ul>
          </div>`
       : "";
 
     const outlineBlock = outline.length
       ? `<div class="outline-block">
            <div class="section-title">Course Outline</div>
-           <ol class="outline">${outline.map(i => `
-             <li><span class="title">${htmlEscape(i.title || "Untitled")}</span>
-                 <span class="hours">${Number(i.hours || 0)} hrs</span></li>
-           `).join("")}</ol>
+           <ol class="outline">
+             ${outline
+               .map(
+                 (i) => `
+                 <li>
+                   <span class="title">${htmlEscape(i.title || "Untitled")}</span>
+                   <span class="hours">${Number(i.hours || 0)} hrs</span>
+                 </li>`
+               )
+               .join("")}
+           </ol>
          </div>`
       : `<div class="hint small">No outline available.</div>`;
 
-parts.push(`
-  <article class="course-card">
-    <header class="course-head">
-      <h3 class="course-title">${htmlEscape(number)} — ${htmlEscape(name)}</h3>
-      <div class="meta-right">
-        ${creditPill}
-        ${hoursPill}
-        ${metaBadges}
-      </div>
-    </header>
-    ${descrBlock}
-    ${objBlock}
-    ${outlineBlock}
-  </article>
-`);
-
+    parts.push(`
+      <article class="course-card">
+        <header class="course-head">
+          <h3 class="course-title">${htmlEscape(number)} — ${htmlEscape(name)}</h3>
+          <div class="meta-right">
+            ${hoursPill}
+            ${creditPill}
+            ${metaBadges}
+          </div>
+        </header>
+        ${descrBlock}
+        ${objBlock}
+        ${outlineBlock}
+      </article>
+    `);
   });
 
   els.courseList.innerHTML = parts.join("");
@@ -204,7 +227,10 @@ parts.push(`
 
 function initProgramsDropdown() {
   const programs = listPrograms();
-  els.programSelect.innerHTML = programs.map(p => `<option value="${p}">${p}</option>`).join("");
+  els.programSelect.innerHTML = programs
+    .map((p) => `<option value="${p}">${p}</option>`)
+    .join("");
+
   if (programs.length) {
     els.programSelect.value = programs[0];
     onProgramChange();
@@ -215,16 +241,35 @@ async function onProgramChange() {
   const programName = els.programSelect.value || "";
   els.programTitle.textContent = programName || "Select a program…";
   els.courseList.innerHTML = `<div class="hint">Loading…</div>`;
+
   const [courses, programMeta] = await Promise.all([
     loadProgramCourses(programName),
-    loadProgramMeta(programName)
+    loadProgramMeta(programName),
   ]);
+
   render(programName, courses, programMeta);
 }
 
 function wire() {
-  els.programSelect.addEventListener("change", onProgramChange);
-  els.printBtn?.addEventListener("click", () => window.print());
+  els.programSelect?.addEventListener("change", onProgramChange);
+
+  // Print button
+  els.printBtn?.addEventListener("click", () => {
+    const programName = els.programSelect?.value || "Program";
+    setPrintTitle(programName);
+    window.print();
+  });
+
+  // Ctrl+P / browser print
+  window.addEventListener("beforeprint", () => {
+    const programName = els.programSelect?.value || "Program";
+    setPrintTitle(programName);
+  });
+
+  // Restore tab title after printing
+  window.addEventListener("afterprint", () => {
+    document.title = ORIGINAL_TITLE;
+  });
 }
 
 // Boot
