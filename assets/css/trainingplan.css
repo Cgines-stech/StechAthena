@@ -53,6 +53,8 @@ body {
   margin: 14px 0 10px;
   font-weight: 800;
   letter-spacing: -0.01em;
+  margin: 0;           /* removes the big 14px/10px margins */
+  line-height: 1.15;
 }
 
 /* Totals bar */
@@ -65,6 +67,7 @@ body {
   border-radius: 14px;
   padding: 12px 14px;
   margin: 8px 0 18px;
+  margin-top: 4px;
 }
 .totals .label { color: var(--muted); margin-right: 6px; font-weight: 600; }
 .totals .value { font-weight: 800; }
@@ -202,6 +205,7 @@ body {
   display: flex;
   align-items: baseline;
   gap: 12px;
+  margin: 0 0 4px;
 }
 
 .print-brand {
@@ -256,9 +260,10 @@ body {
     border: none;
     border-bottom: 1px solid #ddd;
     border-radius: 0;
-    margin-top: 0px;
-    padding-top: 0px;
     background: transparent;
+    margin: 0 0 6px !important;     /* no top margin */
+    padding: 0 0 4px !important;    /* minimal space around the divider */
+    border-bottom: 1px solid #ddd;
   }
   .totals .outline-total { display: none !important; }
 
@@ -374,4 +379,7 @@ body {
     font-size: 11px;
     color: #111827;
   }
+
+  .program-title-wrap { margin: 0 0 2px !important; }
+  .program-title { margin: 0 !important; }
 }
