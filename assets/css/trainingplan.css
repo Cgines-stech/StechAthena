@@ -256,8 +256,8 @@ body {
     border: none;
     border-bottom: 1px solid #ddd;
     border-radius: 0;
-    padding: 6px 0 8px;
-    margin: 0 0 10px;
+    margin-top: 2px;
+    padding-top: 4px;
     background: transparent;
   }
   .totals .outline-total { display: none !important; }
@@ -360,7 +360,7 @@ body {
 
   /* Keep title + brand on same line */
   .program-title-wrap {
-    margin-bottom: 6px;
+    margin-bottom: 1px;
     break-after: avoid;
     page-break-after: avoid;
   }
