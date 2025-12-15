@@ -1,4 +1,4 @@
-// Advanced Emergency Medical Technician/program.js
+// data/programs/Advanced Emergency Medical Technician/program.js
 // (10000–10999)
 
 const advancedEmergencyMedicalTechnicianProgram = [

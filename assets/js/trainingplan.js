@@ -15,6 +15,7 @@ const withBust = (url) => url + (url.includes("?") ? "&" : "?") + "v=" + BUST;
 const els = {
   programSelect: document.getElementById("programSelect"),
   programTitle: document.getElementById("programTitle"),
+  programMetaInline: document.getElementById("programMetaInline"),
   courseList: document.getElementById("courseList"),
   printBtn: document.getElementById("printBtn"),
   programHoursTotal: document.getElementById("programHoursTotal"),
@@ -108,6 +109,15 @@ function sumNonElectiveCreditsAndClock(courses) {
 
 function render(programName, courses, programMeta) {
   els.programTitle.textContent = programName || "Select a program…";
+
+  const credit = Number(programMeta?.programCreditHours || 0);
+  const clock  = Number(programMeta?.programClockHours || 0);
+  const cip    = programMeta?.programCIP;
+
+  els.programMetaInline.textContent =
+    credit || clock || cip
+      ? `(Credit Hours Required: ${credit}, Clock Hours Required: ${clock}${cip ? `, CIP: ${cip}` : ""})`
+      : "";
 
   const programHours = Number(programMeta?.programClockHours || 0) || 0;
   const includedClockHours = computeIncludedCourseClockHours(courses || []);

@@ -212,6 +212,25 @@ body {
   display: none; /* screen-hidden */
 }
 
+.program-title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.program-title {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.program-meta-inline {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 /* Print styles */
 @media print {
   @page { size: landscape; margin: 0.5in; }
@@ -349,5 +368,10 @@ body {
   /* Hide the brand after the first page */
   .course-card ~ .print-brand {
     display: none;
+  }
+
+  .program-meta-inline {
+    font-size: 11px;
+    color: #111827;
   }
 }
