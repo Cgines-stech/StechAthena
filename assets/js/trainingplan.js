@@ -217,8 +217,8 @@ els.programMetaInline.textContent =
         <header class="course-head">
           <h3 class="course-title">${htmlEscape(number)} — ${htmlEscape(name)}</h3>
           <div class="meta-right">
-            ${hoursPill}
             ${creditPill}
+            ${hoursPill}
             ${metaBadges}
           </div>
         </header>
