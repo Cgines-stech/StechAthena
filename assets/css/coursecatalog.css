@@ -298,6 +298,19 @@ h3 {
   margin: 0.3rem 0;
 }
 
+/* Cover logo (outside card) */
+.cover-logo {
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+.cover-logo img {
+  display: block;
+  max-height: 70px;
+  width: auto;
+  margin: 0 auto;
+}
+
 /* Print overrides */
 @media print {
   body {

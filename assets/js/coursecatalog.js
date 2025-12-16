@@ -30,6 +30,7 @@ const programObjectives  = document.getElementById("programObjectives");
 
 const coursesContainer   = document.getElementById("coursesContainer");
 const coverCredLine = document.getElementById("coverCredLine");
+const coverLogo = document.getElementById("coverLogo");
 
 /* ---- Populate program select ---- */
 function populatePrograms() {
@@ -57,6 +58,8 @@ function clearAll() {
   coursesContainer.innerHTML = "";
 
   [coverPage, programPage, coursesPage].forEach(s => s.hidden = true);
+
+  if (coverLogo) coverLogo.hidden = true;
 }
 
 /* ---- Renderers ---- */
