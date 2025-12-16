@@ -15,7 +15,7 @@ const TEMA1910 = [
     courseClockHours: 90,
     courseTuition: 190.00,
     courseFee: 0.00,
-    instructionalType: "SUP",
+    instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
 

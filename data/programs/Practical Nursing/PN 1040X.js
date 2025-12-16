@@ -17,7 +17,7 @@ const PN1040X = [
     courseClockHours: 90,
     courseTuition: 190.00,
     courseFee: 10.00,
-    instructionalType: "SUP",
+    instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
 

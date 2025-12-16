@@ -15,7 +15,7 @@ const TEFF1200 = [
     courseClockHours: 330,
     courseTuition: 1045.00,
     courseFee: 325.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

@@ -15,7 +15,7 @@ const TENA1900 = [
     courseClockHours: 24,
     courseTuition: 47.50,
     courseFee: 5.00,
-    instructionalType: "SUP",
+    instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
 

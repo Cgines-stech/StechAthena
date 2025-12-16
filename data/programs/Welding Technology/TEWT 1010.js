@@ -15,7 +15,7 @@ const TEWT1010 = [
     courseClockHours: 30,
     courseTuition: 95.00,
     courseFee: 10.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

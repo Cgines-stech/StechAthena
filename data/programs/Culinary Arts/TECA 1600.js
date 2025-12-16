@@ -15,7 +15,7 @@ const TECA1600 = [
     courseClockHours: 60,
     courseTuition: 190.00,
     courseFee: 150.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

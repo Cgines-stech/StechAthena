@@ -15,7 +15,7 @@ const TEFF1100 = [
     courseClockHours: 30,
     courseTuition: 95.00,
     courseFee: 225.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

@@ -15,7 +15,7 @@ const TENA1110 = [
     courseClockHours: 90,
     courseTuition: 285.00,
     courseFee: 63.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

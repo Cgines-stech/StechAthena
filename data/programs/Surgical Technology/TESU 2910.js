@@ -17,7 +17,7 @@ const TESU2910 = [
     courseClockHours: 180,
     courseTuition: 380.00,
     courseFee: 0.00,
-    instructionalType: "SUP",
+    instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
 

@@ -15,7 +15,7 @@ const TEPT1522 = [
     courseClockHours: 60,
     courseTuition: 190.00,
     courseFee: 40.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

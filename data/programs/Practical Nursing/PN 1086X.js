@@ -17,7 +17,7 @@ const PN1086X = [
     courseClockHours: 120,
     courseTuition: 190.00,
     courseFee: 10.00,
-    instructionalType: "SUP",
+    instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
 

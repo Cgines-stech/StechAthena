@@ -15,7 +15,7 @@ const TEAM1640 = [
     courseClockHours: 30,
     courseTuition: 95.00,
     courseFee: 55.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

@@ -17,7 +17,7 @@ const TEEM1904 = [
     courseClockHours: 48,
     courseTuition: 95.00,
     courseFee: 0.00,
-    instructionalType: "SUP",
+    instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
 

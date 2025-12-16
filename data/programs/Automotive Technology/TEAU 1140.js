@@ -15,7 +15,7 @@ const TEAU1140 = [
     courseClockHours: 150,
     courseTuition: 475.00,
     courseFee: 150.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

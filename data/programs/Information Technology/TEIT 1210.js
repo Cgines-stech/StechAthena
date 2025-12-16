@@ -15,7 +15,7 @@ const TEIT1210 = [
     courseClockHours: 90,
     courseTuition: 285.00,
     courseFee: 0.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

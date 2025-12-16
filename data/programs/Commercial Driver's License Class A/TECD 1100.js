@@ -15,7 +15,7 @@ const TECD1100 = [
     courseClockHours: 180,
     courseTuition: 1770.00,
     courseFee: 850.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

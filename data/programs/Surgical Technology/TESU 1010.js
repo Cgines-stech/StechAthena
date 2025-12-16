@@ -15,7 +15,7 @@ const TESU1010 = [
     courseClockHours: 90,
     courseTuition: 285.00,
     courseFee: 300.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

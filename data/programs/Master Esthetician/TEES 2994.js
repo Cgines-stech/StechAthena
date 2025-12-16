@@ -15,7 +15,7 @@ const TEES2994 = [
     courseClockHours: 135,
     courseTuition: 285.00,
     courseFee: 300.00,
-    instructionalType: "SUP",
+    instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
 

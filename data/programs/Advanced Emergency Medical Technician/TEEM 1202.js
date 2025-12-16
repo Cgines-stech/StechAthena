@@ -15,7 +15,7 @@ const TEEM1202 = [
     courseClockHours: 180,
     courseTuition: 570.00,
     courseFee: 412.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 

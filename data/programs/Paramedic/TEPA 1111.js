@@ -15,7 +15,7 @@ const TEPA1111 = [
     courseClockHours: 120,
     courseTuition: 380.00,
     courseFee: 500.00,
-    instructionalType: "LEL",
+    instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
 
