@@ -201,6 +201,12 @@ h3 {
   text-align: left;
 }
 
+/* Force Credit Hours column to be centered (header + cells) */
+.catalog-table th.col-cred,
+.catalog-table td.col-cred {
+  text-align: center !important;
+}
+
 /* Lists */
 .bullets {
   margin: 0.25rem 0;
