@@ -1,8 +1,9 @@
 /* coursecatalog.css */
+
 /* Google font */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700&display=swap");
 
-/* Page setup */
+/* Print page setup */
 @page {
   size: Letter portrait;
   margin: 0.5in;
@@ -13,6 +14,7 @@
   --text: #222;
   --muted: #666;
   --border: #ccc;
+  --bg: #f7f8fa;
 }
 
 /* Base */
@@ -22,38 +24,34 @@
 
 body {
   margin: 0;
-  padding: 0;
-  background: #fff;
+  padding: 1rem;
+  background: var(--bg);
   color: var(--text);
   font-family: "Roboto Condensed", Arial, sans-serif;
-  font-size: 9.5pt;
+  font-size: 0.9rem;
   line-height: 1.4;
 }
 
-/* Hide screen-only UI */
-.no-print,
-.page-header,
-.back-btn {
-  display: none !important;
-}
-
-/* Page cards */
+/* Cards / pages */
 .card {
+  background: #fff;
   border: 1px solid var(--border);
   padding: 0.75rem 0.9rem;
   margin-bottom: 0.9rem;
-  box-shadow: none;
 }
 
 .page {
   page-break-after: always;
 }
-
 .page:last-of-type {
   page-break-after: auto;
 }
 
-/* Cover header */
+/* Header */
+.page-header {
+  margin-bottom: 0.9rem;
+}
+
 .cover-header {
   display: flex;
   justify-content: space-between;
@@ -63,26 +61,25 @@ body {
 
 .cover-header h2 {
   margin: 0;
-  font-size: 12pt;
+  font-size: 1.1rem;
   font-weight: 700;
 }
 
 .catalog-tagline {
-  font-size: 8.5pt;
-  font-weight: 600;
+  font-size: 0.85rem;
   color: var(--muted);
+  font-weight: 600;
 }
 
-/* ===== TABLE (FIXED WIDTHS) ===== */
+/* ===== TABLE ===== */
 
 .catalog-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  font-size: 9pt;
+  font-size: 0.9rem;
 }
 
-/* Borders + spacing */
 .catalog-table th,
 .catalog-table td {
   border: 1px solid var(--border);
@@ -90,32 +87,31 @@ body {
   vertical-align: middle;
 }
 
-/* Header styling */
 .catalog-table thead th {
   font-weight: 700;
   background: #f5f5f5;
   white-space: nowrap;
 }
 
-/* Certificate header row */
+/* Certificate header */
 .catalog-table thead th[colspan] {
   text-align: left;
 }
 
-/* COLUMN WIDTHS (KEY FIX) */
+/* Column widths (KEY FIX) */
 .catalog-table .col-num {
-  width: 7ch;              /* VERY narrow */
+  width: 6ch;       /* very narrow */
   text-align: left;
 }
 
 .catalog-table .col-name {
-  width: auto;             /* absorbs remaining space */
+  width: auto;      /* absorbs extra space */
   text-align: center;
 }
 
 .catalog-table .col-cred {
   width: 12ch;
-  text-align: center;      /* credit hours centered */
+  text-align: center; /* credit hours centered */
 }
 
 .catalog-table .col-align {
@@ -135,20 +131,8 @@ body {
   margin-top: 0.6rem;
   padding-top: 0.4rem;
   border-top: 1px solid var(--border);
-  font-size: 8.5pt;
+  font-size: 0.85rem;
   line-height: 1.35;
-
-  page-break-inside: avoid;
-}
-
-.alignment-disclaimer h3 {
-  margin: 0 0 0.25rem;
-  font-size: 9pt;
-  font-weight: 700;
-}
-
-.alignment-disclaimer p {
-  margin: 0.25rem 0;
 }
 
 /* ===== COURSE BLOCKS ===== */
@@ -157,34 +141,29 @@ body {
   margin-top: 0.6rem;
   padding-top: 0.6rem;
   border-top: 1px solid var(--border);
-
   page-break-inside: avoid;
 }
 
-.course-title {
-  margin: 0 0 0.15rem;
-  font-size: 9.5pt;
-  font-weight: 700;
-}
+/* ===== PRINT ONLY ===== */
+@media print {
+  body {
+    padding: 0;
+    background: #fff;
+    font-size: 9.5pt;
+  }
 
-.course-meta {
-  margin: 0 0 0.3rem;
-  color: var(--muted);
-  font-size: 8.5pt;
-}
+  .no-print,
+  .page-header,
+  .back-btn {
+    display: none !important;
+  }
 
-/* Lists */
-.bullets {
-  margin: 0.2rem 0;
-  padding-left: 1rem;
-}
+  .card {
+    box-shadow: none;
+  }
 
-.bullets li {
-  margin: 0.1rem 0;
-  font-size: 8.8pt;
-}
-
-/* Prevent orphaned section headers */
-#coursesPage h2 {
-  page-break-after: avoid;
+  .catalog-table th,
+  .catalog-table td {
+    border-color: #999;
+  }
 }
