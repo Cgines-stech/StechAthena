@@ -168,8 +168,9 @@ h3 {
 
 /* Column sizing + alignment */
 .catalog-table .col-num {
-  width: 10ch;
-  text-align: left; /* header + cells left-aligned */
+  width: 6ch;          /* aggressively narrow Course # */
+  min-width: 6ch;
+  text-align: left;
 }
 
 .catalog-table .col-name {
