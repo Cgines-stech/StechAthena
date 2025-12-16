@@ -168,17 +168,20 @@ h3 {
 
 /* Column sizing + alignment */
 .catalog-table .col-num {
-  width: 14ch;
+  width: 10ch;
   text-align: left; /* header + cells left-aligned */
 }
 
 .catalog-table .col-name {
   text-align: center;
+  width: auto;        /* allow it to absorb extra space */
 }
 
+/* Credit Hours column — center aligned */
 .catalog-table .col-cred {
-  width: 14ch;
-  text-align: center; /* credit hours centered */
+  width: 12ch;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .catalog-table .col-align {
@@ -190,6 +193,11 @@ h3 {
 .catalog-table th:not(.col-num),
 .catalog-table td:not(.col-num) {
   text-align: center;
+}
+
+/* Certificate / program info header (spans columns) */
+.catalog-table thead th[colspan] {
+  text-align: left;
 }
 
 /* Lists */
