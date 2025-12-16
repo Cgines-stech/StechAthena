@@ -1,139 +1,206 @@
 /* coursecatalog.css */
-/* Paper setup: portrait + modest margins */
-@page { size: Letter portrait; margin: 0.5in; }
 
-:root{
-  --bg:#f7f8fa; --text:#222; --muted:#666; --primary:rgb(22, 188, 238);
-  --card:#fff; --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.08); --border:#e6e6e6;
+/* Google font */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700&display=swap");
+
+/* Print page setup */
+@page {
+  size: Letter portrait;
+  margin: 0.5in;
 }
 
-/* Import Roboto Condensed from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700&display=swap');
+/* Theme */
+:root {
+  --bg: #f7f8fa;
+  --card: #fff;
+  --text: #222;
+  --muted: #666;
+  --primary: rgb(22, 188, 238);
 
-*{ box-sizing:border-box; }
-html,body{ height:100%; }
+  --border: #e6e6e6;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family: 'Roboto Condensed', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  font-size:0.88rem;         /* slightly smaller */
-  line-height:1.45;
-  padding:1rem;
+  --control-radius: 6px;
+  --control-font: 0.85rem;
 }
 
-.page-header{
-  display:grid;
-  gap:.4rem;
-  margin-bottom:.9rem;
+/* Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-.page-header h1{
-  color:var(--primary);
-  margin:0;
-  font-weight:700;
-  letter-spacing:-.2px;
-}
-.controls{
-  display:flex;
-  gap:.45rem;
-  align-items:center;
-  flex-wrap:wrap;
-}
-#programSelect,button{
-  padding:.4rem .6rem;
-  border:1px solid var(--border);
-  border-radius:6px;
-  background:#fff;
-  font-family:inherit;
-  font-size:.85rem;
-}
-button{ cursor:pointer; transition:filter .2s; }
-button:hover{ filter:brightness(.96); }
-.muted{ color:var(--muted); }
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:.9rem 1rem;
-  margin:0 auto .9rem;
-  max-width:100%;
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Roboto Condensed", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Layout blocks */
+.card {
+  max-width: 100%;
+  margin: 0 auto 0.9rem;
+  padding: 0.9rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 /* Each "page" prints on its own sheet */
-.page{ page-break-after: always; }
-.page:last-of-type{ page-break-after:auto; }
+.page {
+  page-break-after: always;
+}
+.page:last-of-type {
+  page-break-after: auto;
+}
 
-h2{
-  margin:.2rem 0 .65rem;
-  font-size:1.1rem;
-  font-weight:700;
+/* Header (screen only) */
+.page-header {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
 }
-h3{
-  margin:.9rem 0 .3rem;
-  font-size:.98rem;
-  font-weight:600;
-}
-h2 + p.muted{ margin-top:-.4rem; }
 
-/* Cover table — borderless look */
-.catalog-table{
-  width:100%;
-  border-collapse:collapse;
-  table-layout:fixed;
-  margin-top:.4rem;
-  font-size:.85rem;
+.page-header h1 {
+  margin: 0;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: -0.2px;
 }
-.catalog-table th, .catalog-table td{
-  padding:.4rem .3rem;
-  vertical-align:top;
-}
-.catalog-table.borderless th, .catalog-table.borderless td{ border:0; }
-.catalog-table .col-num{ width:16ch; }
-.catalog-table .col-cred{ width:10ch; text-align:right; }
-.catalog-table .col-align{ width:14ch; }
 
-/* Bulleted lists */
-.bullets{ padding-left:1.1rem; margin:.25rem 0; }
-.bullets li{ margin:.1rem 0; font-size:.85rem; }
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* Form controls */
+#programSelect,
+button {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--control-radius);
+  background: #fff;
+  font: inherit;
+  font-size: var(--control-font);
+}
+
+button {
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+button:hover {
+  filter: brightness(0.96);
+}
+
+/* Headings */
+h2 {
+  margin: 0.2rem 0 0.65rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+h3 {
+  margin: 0.9rem 0 0.3rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+/* Tighten cover meta line under H2 */
+h2 + p.muted {
+  margin-top: -0.4rem;
+}
+
+/* Tables */
+.catalog-table {
+  width: 100%;
+  margin-top: 0.4rem;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.85rem;
+}
+
+.catalog-table th,
+.catalog-table td {
+  padding: 0.4rem 0.3rem;
+  vertical-align: top;
+}
+
+.catalog-table.borderless th,
+.catalog-table.borderless td {
+  border: 0;
+}
+
+.catalog-table .col-num {
+  width: 16ch;
+}
+.catalog-table .col-cred {
+  width: 10ch;
+  text-align: right;
+}
+.catalog-table .col-align {
+  width: 14ch;
+}
+
+/* Lists */
+.bullets {
+  margin: 0.25rem 0;
+  padding-left: 1.1rem;
+}
+
+.bullets li {
+  margin: 0.1rem 0;
+  font-size: 0.85rem;
+}
 
 /* Course blocks */
-/* Prevent course blocks from breaking across pages */
 .course-block {
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
   border-top: 1px solid var(--border);
-  padding-top: .7rem;
-  margin-top: .7rem;
 
-  /* Key rule for print-friendly layout */
+  /* Print-friendly: keep each block together */
   page-break-inside: avoid;
   break-inside: avoid;
 }
 
-.course-block:first-child{ border-top:0; padding-top:0; margin-top:0; }
-.course-title{
-  margin:0 0 .2rem;
-  font-weight:700;
-  font-size:.95rem;
-}
-.course-meta{
-  margin:0 0 .4rem;
-  color:var(--muted);
-  font-size:.82rem;
+.course-block:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
-/* Print tweaks */
-@media print{
-  body{
-    background:#fff;
-    padding:0;
-    font-size:9.5pt;   /* slightly smaller on paper */
-  }
-  .no-print{ display:none !important; }
-  .card{ box-shadow:none; border:1px solid #ccc; }
-  .course-block{ border-top-color:#ccc; }
+.course-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
+
+.course-meta {
+  margin: 0 0 0.4rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+/* Prevent the Course Descriptions title from orphaning */
 #coursesPage h2 {
   page-break-after: avoid;
 }
@@ -141,6 +208,7 @@ h2 + p.muted{ margin-top:-.4rem; }
 /* Back button */
 .back-btn {
   display: inline-block;
+  margin-left: 0.5rem;
   padding: 0.45rem 0.7rem;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -148,18 +216,59 @@ h2 + p.muted{ margin-top:-.4rem; }
   color: var(--primary);
   font-weight: 600;
   text-decoration: none;
-  margin-left: 0.5rem;
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .back-btn:hover {
   background: #f0faff;
   transform: translateY(-1px);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
+
 .back-btn:focus-visible {
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(22,188,238,0.4);
+  box-shadow: 0 0 0 3px rgba(22, 188, 238, 0.4);
 }
+
+/* Alignment disclaimer */
+.alignment-disclaimer {
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.alignment-disclaimer h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.alignment-disclaimer p {
+  margin: 0.3rem 0;
+}
+
+/* Print overrides */
 @media print {
-  .back-btn { display: none !important; }
+  body {
+    padding: 0;
+    background: #fff;
+    font-size: 9.5pt;
+  }
+
+  .no-print,
+  .back-btn {
+    display: none !important;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .course-block,
+  .alignment-disclaimer {
+    border-top-color: #ccc;
+  }
 }
