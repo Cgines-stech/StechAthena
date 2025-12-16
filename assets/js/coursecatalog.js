@@ -68,11 +68,6 @@ function renderCover(programName, programInfo, courses) {
   const cert = programInfo?.certificate || programInfo?.credential || "Certificate";
 
   programNameEl.textContent = programName;
-  programMetaEl.textContent = [
-    credits !== "N/A" ? `Credit Hours Required: ${credits}` : "",
-    cip !== "N/A" ? `CIP: ${cip}` : "",
-    cert ? `Credential: ${cert}` : ""
-  ].filter(Boolean).join(" • ");
 
   // NEW: header line inside the table (spans 2 columns)
   if (coverCredLine) {
