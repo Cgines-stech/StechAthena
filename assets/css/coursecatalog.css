@@ -283,6 +283,49 @@ h2 + p.muted {
   color: var(--text);
 }
 
+/* Cover table column sizing & alignment */
+.catalog-table .col-num {
+  width: 14ch;
+  text-align: left;   /* first column stays left-aligned */
+}
+
+.catalog-table .col-name {
+  text-align: center;
+}
+
+.catalog-table .col-cred {
+  width: 14ch;        /* wider so "Credit Hours" fits */
+  text-align: center;
+  white-space: nowrap;
+}
+
+.catalog-table .col-align {
+  width: 18ch;        /* wider so "Statewide Alignment" fits */
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Center all table cells except first column */
+.catalog-table th:not(.col-num),
+.catalog-table td:not(.col-num) {
+  text-align: center;
+}
+
+/* Subtle table grid */
+.catalog-table {
+  border-collapse: collapse;
+}
+
+.catalog-table th,
+.catalog-table td {
+  border: 1px solid var(--border);
+}
+
+.catalog-table thead th {
+  font-weight: 700;
+  background: #fafafa;
+}
+
 /* Print overrides */
 @media print {
   .catalog-table thead th {
@@ -313,5 +356,14 @@ h2 + p.muted {
   .catalog-tagline {
     font-size: 0.8rem;
     letter-spacing: 0.2px;
+  }
+
+  .catalog-table th,
+  .catalog-table td {
+    border-color: #ccc;
+  }
+
+  .catalog-table thead th {
+    background: #f5f5f5;
   }
 }
