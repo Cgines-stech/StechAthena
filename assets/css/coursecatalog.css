@@ -334,4 +334,26 @@ h3 {
   .catalog-table thead th {
     background: #f5f5f5;
   }
+
+  /* Force the first two columns to be visibly different widths in print */
+  .catalog-table {
+    table-layout: fixed;
+  }
+
+  .catalog-table .col-num {
+    width: 0.85in !important;   /* much narrower than before */
+  }
+
+  .catalog-table .col-name {
+    width: 62% !important;      /* absorbs the freed space */
+  }
+
+  .catalog-table .col-cred {
+    width: 12% !important;
+    text-align: center !important; /* ensure Credit Hours centered */
+  }
+
+  .catalog-table .col-align {
+    width: 26% !important;
+  }
 }
