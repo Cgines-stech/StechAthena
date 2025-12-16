@@ -124,6 +124,26 @@ h3 {
   font-weight: 600;
 }
 
+/* Cover header (program title + institution/year) */
+.cover-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cover-header h2 {
+  margin: 0;
+}
+
+.catalog-tagline {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  text-align: right;
+}
+
 /* Tighten cover meta line under H2 */
 h2 + p.muted {
   margin-top: -0.4rem;
@@ -270,5 +290,10 @@ h2 + p.muted {
   .course-block,
   .alignment-disclaimer {
     border-top-color: #ccc;
+  }
+
+  .catalog-tagline {
+    font-size: 0.8rem;
+    letter-spacing: 0.2px;
   }
 }
