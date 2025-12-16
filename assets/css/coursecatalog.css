@@ -11,15 +11,30 @@
 
 /* Theme */
 :root {
+  --bg: #f7f8fa;
+  --card: #fff;
   --text: #222;
   --muted: #666;
-  --border: #ccc;
-  --bg: #f7f8fa;
+  --primary: rgb(22, 188, 238);
+
+  --border: #e6e6e6;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  --control-radius: 6px;
+  --control-font: 0.85rem;
 }
 
 /* Base */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -27,19 +42,28 @@ body {
   padding: 1rem;
   background: var(--bg);
   color: var(--text);
-  font-family: "Roboto Condensed", Arial, sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-family: "Roboto Condensed", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
 }
 
-/* Cards / pages */
+.muted {
+  color: var(--muted);
+}
+
+/* Cards / page blocks */
 .card {
-  background: #fff;
+  max-width: 100%;
+  margin: 0 auto 0.9rem;
+  padding: 0.9rem 1rem;
+  background: var(--card);
   border: 1px solid var(--border);
-  padding: 0.75rem 0.9rem;
-  margin-bottom: 0.9rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
+/* Each "page" prints on its own sheet */
 .page {
   page-break-after: always;
 }
@@ -47,71 +71,117 @@ body {
   page-break-after: auto;
 }
 
-/* Header */
+/* Header (screen only) */
 .page-header {
+  display: grid;
+  gap: 0.4rem;
   margin-bottom: 0.9rem;
 }
 
-.cover-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 0.4rem;
+.page-header h1 {
+  margin: 0;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: -0.2px;
 }
 
-.cover-header h2 {
-  margin: 0;
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* Form controls */
+#programSelect,
+button {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--control-radius);
+  background: #fff;
+  font: inherit;
+  font-size: var(--control-font);
+}
+
+button {
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+button:hover {
+  filter: brightness(0.96);
+}
+
+/* Headings */
+h2 {
+  margin: 0.2rem 0 0.65rem;
   font-size: 1.1rem;
   font-weight: 700;
 }
 
-.catalog-tagline {
-  font-size: 0.85rem;
-  color: var(--muted);
+h3 {
+  margin: 0.9rem 0 0.3rem;
+  font-size: 0.98rem;
   font-weight: 600;
 }
 
-/* ===== TABLE ===== */
+/* Cover header (program title + institution/year) */
+.cover-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
 
+.cover-header h2 {
+  margin: 0;
+}
+
+.catalog-tagline {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* Tables */
 .catalog-table {
   width: 100%;
+  margin-top: 0.4rem;
   border-collapse: collapse;
   table-layout: fixed;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .catalog-table th,
 .catalog-table td {
+  padding: 0.4rem 0.35rem;
   border: 1px solid var(--border);
-  padding: 0.3rem 0.35rem;
   vertical-align: middle;
 }
 
 .catalog-table thead th {
   font-weight: 700;
-  background: #f5f5f5;
+  background: #fafafa;
   white-space: nowrap;
 }
 
-/* Certificate header */
-.catalog-table thead th[colspan] {
-  text-align: left;
-}
-
-/* Column widths (KEY FIX) */
+/* Column sizing + alignment */
 .catalog-table .col-num {
-  width: 6ch;       /* very narrow */
-  text-align: left;
+  width: 10ch;
+  text-align: left; /* header + cells left-aligned */
 }
 
 .catalog-table .col-name {
-  width: auto;      /* absorbs extra space */
   text-align: center;
+  width: auto;        /* allow it to absorb extra space */
 }
 
+/* Credit Hours column — center aligned */
 .catalog-table .col-cred {
   width: 12ch;
-  text-align: center; /* credit hours centered */
+  text-align: center;
+  vertical-align: middle;
 }
 
 .catalog-table .col-align {
@@ -125,26 +195,103 @@ body {
   text-align: center;
 }
 
-/* ===== DISCLAIMER ===== */
-
-.alignment-disclaimer {
-  margin-top: 0.6rem;
-  padding-top: 0.4rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.85rem;
-  line-height: 1.35;
+/* Certificate / program info header (spans columns) */
+.catalog-table thead th[colspan] {
+  text-align: left;
 }
 
-/* ===== COURSE BLOCKS ===== */
+/* Lists */
+.bullets {
+  margin: 0.25rem 0;
+  padding-left: 1.1rem;
+}
 
+.bullets li {
+  margin: 0.1rem 0;
+  font-size: 0.85rem;
+}
+
+/* Course blocks */
 .course-block {
-  margin-top: 0.6rem;
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border);
+
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.course-block:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.course-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.course-meta {
+  margin: 0 0 0.4rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+/* Prevent the Course Descriptions title from orphaning */
+#coursesPage h2 {
+  page-break-after: avoid;
+}
+
+/* Back button */
+.back-btn {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #f0faff;
+  transform: translateY(-1px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(22, 188, 238, 0.4);
+}
+
+/* Alignment disclaimer */
+.alignment-disclaimer {
+  margin-top: 0.8rem;
   padding-top: 0.6rem;
   border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  line-height: 1.4;
+
+  break-inside: avoid;
   page-break-inside: avoid;
 }
 
-/* ===== PRINT ONLY ===== */
+.alignment-disclaimer h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.alignment-disclaimer p {
+  margin: 0.3rem 0;
+}
+
+/* Print overrides */
 @media print {
   body {
     padding: 0;
@@ -153,17 +300,31 @@ body {
   }
 
   .no-print,
-  .page-header,
   .back-btn {
     display: none !important;
   }
 
   .card {
     box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .course-block,
+  .alignment-disclaimer {
+    border-top-color: #ccc;
+  }
+
+  .catalog-tagline {
+    font-size: 0.8rem;
+    letter-spacing: 0.2px;
   }
 
   .catalog-table th,
   .catalog-table td {
-    border-color: #999;
+    border-color: #ccc;
+  }
+
+  .catalog-table thead th {
+    background: #f5f5f5;
   }
 }
