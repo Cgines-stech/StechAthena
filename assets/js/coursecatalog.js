@@ -29,6 +29,7 @@ const programDescription = document.getElementById("programDescription");
 const programObjectives  = document.getElementById("programObjectives");
 
 const coursesContainer   = document.getElementById("coursesContainer");
+const coverCredLine = document.getElementById("coverCredLine");
 
 /* ---- Populate program select ---- */
 function populatePrograms() {
@@ -64,7 +65,7 @@ function renderCover(programName, programInfo, courses) {
 
   const cip = programInfo?.programCIP ?? programInfo?.CIP ?? "N/A";
   const credits = programInfo?.programCreditHours ?? programInfo?.program_credit_hours ?? "N/A";
-  const cert = programInfo?.certificate || programInfo?.credential || "";
+  const cert = programInfo?.certificate || programInfo?.credential || "Certificate";
 
   programNameEl.textContent = programName;
   programMetaEl.textContent = [
@@ -73,6 +74,13 @@ function renderCover(programName, programInfo, courses) {
     cert ? `Credential: ${cert}` : ""
   ].filter(Boolean).join(" • ");
 
+  // NEW: header line inside the table (spans 2 columns)
+  if (coverCredLine) {
+    const creditLabel = credits === "N/A" ? "N/A" : `${credits} Credit Hour${Number(credits) === 1 ? "" : "s"}`;
+    coverCredLine.textContent = `${cert} of Program Completion (${creditLabel}, CIP: ${cip})`;
+  }
+
+  coverTableBody.innerHTML = "";
   courses.forEach(c => {
     const tr = document.createElement("tr");
     tr.innerHTML = `

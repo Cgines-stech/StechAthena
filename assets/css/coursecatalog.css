@@ -271,8 +271,24 @@ h2 + p.muted {
   margin: 0.3rem 0;
 }
 
+/* Cover table header line (certificate / hours / CIP) */
+.catalog-table thead th {
+  font-weight: 700;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.col-credline {
+  text-align: left;
+  color: var(--text);
+}
+
 /* Print overrides */
 @media print {
+  .catalog-table thead th {
+    border-bottom-color: #ccc;
+  }
+
   body {
     padding: 0;
     background: #fff;
