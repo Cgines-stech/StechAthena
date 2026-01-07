@@ -1,4 +1,5 @@
-const LOGBOOK_URL = "assets/data/logbook.json";
+// assets/js/notes.js
+const LOGBOOK_URL = "assets/js/logbook.json";
 
 function escapeHtml(s) {
   return String(s)
