@@ -1,0 +1,24 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "StechAthena\\data\\programs\\Medical Assistant\\TEMA 1098.js\\",
+            "color": "foldercolorizer.color_ffff66"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Medical Assistant\\TEMA 1225.js\\",
+            "color": "foldercolorizer.color_ffff66"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Medical Assistant\\TEMA 1230.js\\",
+            "color": "foldercolorizer.color_ff0000"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Medical Assistant\\TEMA 1241.js\\",
+            "color": "foldercolorizer.color_ff0000"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Welding Technology\\TEWT 1312.js\\",
+            "color": "foldercolorizer.color_ffff66"
+        }
+    ]
+}

@@ -155,10 +155,15 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Medical Assistant/TEMA 1060.js",
     "../../data/programs/Medical Assistant/TEMA 1065.js",
     "../../data/programs/Medical Assistant/TEMA 1040.js",
+    // remove 1230 for FY27
     "../../data/programs/Medical Assistant/TEMA 1230.js",
     "../../data/programs/Medical Assistant/TEMA 1020.js",
+    // remove 1241 for FY27
     "../../data/programs/Medical Assistant/TEMA 1241.js",
     "../../data/programs/Medical Assistant/TEMA 1030.js",
+    // add 1098 and 1225 for FY27
+    // "../../data/programs/Medical Assistant/TEMA 1098.js",
+    // "../../data/programs/Medical Assistant/TEMA 1225.js",
     "../../data/programs/Medical Assistant/TEMA 1250.js",
     "../../data/programs/Medical Assistant/TEMA 1050.js",
     "../../data/programs/Medical Assistant/TEMA 1900.js",
@@ -166,8 +171,8 @@ export const PROGRAM_COURSE_REGISTRY = {
   ],
   "Medical Office Receptionist": [
     "../../data/programs/Medical Office Receptionist/TEMA 1000.js",
-    "../../data/programs/Medical Office Receptionist/TEMA 1040.js",
     "../../data/programs/Medical Office Receptionist/TEMA 1080.js",
+    "../../data/programs/Medical Office Receptionist/TEMA 1040.js",
     "../../data/programs/Medical Office Receptionist/TEMA 1020.js",
     "../../data/programs/Medical Office Receptionist/TEMA 1030.js",
   ],
