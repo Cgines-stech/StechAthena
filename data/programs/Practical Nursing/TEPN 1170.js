@@ -1,4 +1,4 @@
-// PN 1038
+// TEPN 1170
 
 // imports
 import gradeScale from "../../gradescale.js";
@@ -6,11 +6,11 @@ import { courseTotals, sum, money } from "../../utils/helpers.js";
 
 const GS = Array.isArray(gradeScale) ? gradeScale[0] : gradeScale;
 
-const PN1038 = [
+const TEPN1170 = [
   {
-    id: 80005,
+    id: 80016,
     programId: 1,
-    courseNumber: "PN 1038",
+    courseNumber: "TEPN 1170",
     courseName: "Skills and Simulation Lab I",
     courseCredits: 3,
     statewideAlignment: "Non-Aligned",
@@ -25,15 +25,15 @@ const PN1038 = [
       'Practical Nursing Skills and Simulation Lab I is designed to enhance your academic learning of nursing intervention concepts by helping nursing students gain an  understanding of their role in patient safety and utilize the opportunities to apply the knowledge, skill, and attitudes learned in the didactic courses through simulated  scenarios. With emphasis on the valuable opportunity of practicing skills on adult-sized “clients", this student-centric learning model allows “hands on” practice time with  sophisticated learning technology that emulates the medical environment. Throughout this course, you will traverse the bridge between classroom learning and real-world  nursing practice. By the end of this course you will have applied some of the most commonly performed fundamental skills within a simulated medical setting.',
 
     courseObjectives: [
-      "Demonstrate basic clinical competence through performance of fundamental nursing skills (EPSLO # 1, 2, 3, 4, 5).",
-      "Apply the aspects of NPSG to client care (EPSLO # 1, 2, 3, 4, 5).",
-      "Utilize proper body mechanics while caring for the inactive client (EPSLO # 1, 2, 3, 4, 5).",
-      'Identify use of "the Six Rights" when simulating medication administration (EPSLO # 1, 2, 3, 4, 5).',
-      "Organize client information to successfully complete SBAR communication (EPSLO # 1, 2, 3, 4, 5).",
-      "Apply fundamental nursing skills to client care in emergent situations (EPSLO # 1, 2, 3, 4, 5).",
-      "Identify AACN Essentials while simulating care for clients (EPSLO # 1, 2, 3, 4, 5).",
-      "Utilize the Nursing Process while simulating care for the terminally ill client (EPSLO # 1, 2, 3, 4, 5).",
-      "Make use of electronic medical record technology to document client care (EPSLO # 1, 2, 3, 4, 5).",
+      `Demonstrate basic clinical competence through performance of fundamental nursing skills.`,
+      `Apply the aspects of NPSG to client care.`,
+      `Utilize proper body mechanics while caring for the inactive client.`,
+      `Identify use of "the Five Rights" when simulating medication administration.`,
+      `Organize client information to successfully complete SBAR communication.`,
+      `Apply fundamental nursing skills to client care in emergency situations.`,
+      `Identify QSEN competencies while simulating care for clients.`,
+      `Utilize the Nursing Process while simulating care for the terminally ill client.`,
+      `Make use of electronic medical record technology to document client care`,
     ],
 
     courseOutline: [
@@ -324,4 +324,4 @@ const PN1038 = [
   }
 ]
 
-export default PN1038;
+export default TEPN1170;

@@ -1,4 +1,4 @@
-// PN 1040X
+// TEPN 2970
 
 // imports
 import gradeScale from "../../gradescale.js";
@@ -6,11 +6,11 @@ import { courseTotals, sum, money } from "../../utils/helpers.js";
 
 const GS = Array.isArray(gradeScale) ? gradeScale[0] : gradeScale;
 
-const PN1040X = [
+const TEPN2970 = [
   {
-    id: 80006,
+    id: 80017,
     programId: 1,
-    courseNumber: "PN 1040X",
+    courseNumber: "TEPN 2970",
     courseName: "Clinical Learning I",
     courseCredits: 2,
     statewideAlignment: "Non-Aligned",
@@ -25,12 +25,13 @@ const PN1040X = [
       "Clinical Learning I provides safe off-campus practice-learning environments where students will transfer and apply the knowledge, skills, and behaviors acquired in the  classroom and skills lab. With supervision and prompting, you will begin providing care for adults with commonly occurring problems as well as with the elderly. With a focus  on health assessment and wellness, you will begin applying the fundamental skills and concepts of nursing. The professional standards of QSEN provide the context for this  course to guide your learning and provide meaningful purpose.",
 
     courseObjectives: [
-      "Define and provide compassionate, coordinated patient care by respecting patient preferences, values, and needs (EPSLO # 1, 3, 4, 5).",
-      "Extend effective communication and collaboration with patients, families, and other healthcare team members in providing patient-centered care (EPSLO # 1, 2, 3, 4, 5, )",
-      "Relate and include the nursing process to plan nursing care that promotes the health and well-being of individuals (EPSLO # 1, 2, 3, 4, 5, ).",
-      "Show adherence to NPSG in providing patient-centered care (EPSLO # 1,2, 3, 4, 5, )",
-      "Choose professional accountability by following the legal and ethical standards set forth by the Utah Nurse Practice Act for the Licensed Practical Nurse (EPSLO #1, 2, 3, 4, 5,).",
-      "Demonstrate competency in performing fundamental nursing skills for selected clients (EPSLO# 1, 2, 3, 4, 5,).",
+      "Demonstrate basic communication and collaboration skills when involving clients in developing nursing care plans.",
+      "Demonstrate basic nursing skills while providing safe client care.",
+      "Utilize basic techniques of effective and efficient communication with clients, families, and team members.",
+      "Demonstrate use of evidence-based practice in providing care to assigned clients.",
+      "Explain quality improvement activities clinical sites have developed for nursing staff.",
+      "Show basic use of informatics to gather data in assessment of clients.",
+      "Make use of the nursing process to develop a nursing care plan.",
     ],
 
     courseOutline: [
@@ -191,4 +192,4 @@ const PN1040X = [
   }
 ]
 
-export default PN1040X;
+export default TEPN2970;
