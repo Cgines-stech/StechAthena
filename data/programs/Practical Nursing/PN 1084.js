@@ -11,7 +11,7 @@ const PN1084 = [
     id: 80009,
     programId: 1,
     courseNumber: "PN 1084",
-    courseName: "Introductory Mental Health Nursing",
+    courseName: "Skills and Simulation Lab II",
     courseCredits: 2,
     statewideAlignment: "Non-Aligned",
     courseClockHours: 60,
