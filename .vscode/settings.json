@@ -19,6 +19,18 @@
         {
             "folderPath": "StechAthena\\data\\programs\\Welding Technology\\TEWT 1312.js\\",
             "color": "foldercolorizer.color_ffff66"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Information Technology\\TEIT 2900.js\\",
+            "color": "foldercolorizer.color_ffff66"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Culinary Arts\\TECA 1625.js\\",
+            "color": "foldercolorizer.color_ffff66"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Culinary Arts\\TECA 1725.js\\",
+            "color": "foldercolorizer.color_ffff66"
         }
     ]
 }

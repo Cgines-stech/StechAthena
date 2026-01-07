@@ -14,6 +14,7 @@ const medicalAssistantProgram = [
       "Demonstrate competencies and skills in preparation for taking a medical assistant national certification examination.",
     ],
 
+    // Update program credit hours and clock hours. Medical Assistant (Credit Hours Required: 30, Clock Hours Required: 960, CIP: 51.0801)
     programCIP: 51.0801,
     programCreditHours: 31,
     programClockHours: 990,

@@ -15,6 +15,7 @@ const culinaryArtsProgram = [
       "Preparing classic dishes using appropriate cooking principles.",
     ],
 
+    // Update program credit hours and clock hours. Culinary Arts (Credit Hours Required: 34, Clock Hours Required: 1050, CIP: 12.0503)
     programCIP: 12.0503,
     programCreditHours: 30,
     programClockHours: 930,

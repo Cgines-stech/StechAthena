@@ -102,6 +102,9 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Culinary Arts/TECA 1500.js",
     "../../data/programs/Culinary Arts/TECA 1600.js",
     "../../data/programs/Culinary Arts/TECA 1630.js",
+    // add 1625 and 1725 for FY27
+    // "../../data/programs/Culinary Arts/TECA 1625.js",
+    // "../../data/programs/Culinary Arts/TECA 1725.js",
     "../../data/programs/Culinary Arts/TECA 1800.js",
     "../../data/programs/Culinary Arts/TECA 1830.js",
     "../../data/programs/Culinary Arts/TECA 1920.js",
@@ -135,6 +138,8 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Information Technology/TEIT 2920.js",
     "../../data/programs/Information Technology/TEIT 1800.js",
     "../../data/programs/Information Technology/TEIT 1810.js",
+    // add 2900 for FY27
+    // "../../data/programs/Information Technology/TEIT 2900.js",
   ],
   "Master Esthetician": [
     "../../data/programs/Master Esthetician/TEES 1010.js",
