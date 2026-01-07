@@ -11,7 +11,7 @@ const PN1086X = [
     id: 80010,
     programId: 1,
     courseNumber: "PN 1086X",
-    courseName: "Introductory Mental Health Nursing",
+    courseName: "Clinical Learning II",
     courseCredits: 2,
     statewideAlignment: "Non-Aligned",
     courseClockHours: 120,
