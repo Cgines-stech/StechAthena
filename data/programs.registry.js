@@ -231,6 +231,18 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Practical Nursing/PN 1084.js",
     "../../data/programs/Practical Nursing/PN 1086X.js",
     "../../data/programs/Practical Nursing/PN 1090.js",
+    // For FY27 - Remove all PN courses, add all TEPN courses.
+    // "../../data/programs/Practical Nursing/TEPN 1010.js",
+    // "../../data/programs/Practical Nursing/TEPN 1100.js",
+    // "../../data/programs/Practical Nursing/TEPN 1200.js",
+    // "../../data/programs/Practical Nursing/TEPN 1270.js",
+    // "../../data/programs/Practical Nursing/TEPN 1170.js",
+    // "../../data/programs/Practical Nursing/TEPN 2970.js",
+    // "../../data/programs/Practical Nursing/TEPN 1470.js",
+    // "../../data/programs/Practical Nursing/TEPN 1300.js",
+    // "../../data/programs/Practical Nursing/TEPN 2170.js",
+    // "../../data/programs/Practical Nursing/TEPN 2971.js",
+    // "../../data/programs/Practical Nursing/TEPN 2570.js",
   ],
   "Software Development": [
     "../../data/programs/Software Development/TESD 1400.js",
