@@ -8,27 +8,33 @@ function escapeHtml(s) {
     .replaceAll(">", "&gt;");
 }
 
-function renderLogbook(listEl, entries) {
+function renderLogbook(listEl, days) {
   listEl.innerHTML = "";
 
-  if (!entries.length) {
+  if (!days.length) {
     listEl.innerHTML =
       `<li class="log-entry muted">No log entries available.</li>`;
     return;
   }
 
-  // Sort newest first
-  entries
+  days
     .slice()
     .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .forEach(entry => {
+    .forEach(day => {
       const li = document.createElement("li");
-      li.className = "log-entry";
+      li.className = "log-day";
+
+      const items = day.entries
+        .map(e => `<li>${escapeHtml(e)}</li>`)
+        .join("");
+
       li.innerHTML = `
-        <span class="log-date">Date: ${escapeHtml(entry.date)}</span>
-        <span class="log-separator"> — </span>
-        <span class="log-text">${escapeHtml(entry.note)}</span>
+        <div class="log-date">Date: ${escapeHtml(day.date)}</div>
+        <ul class="log-items">
+          ${items}
+        </ul>
       `;
+
       listEl.appendChild(li);
     });
 }
