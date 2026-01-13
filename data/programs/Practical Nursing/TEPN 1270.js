@@ -11,7 +11,7 @@ const TEPN1270 = [
     id: 80015,
     programId: 1,
     courseNumber: "TEPN 1270",
-    courseName: "Introductory Clinical Pharmacology",
+    courseName: "Nursing Pharmacology",
     courseCredits: 2,
     statewideAlignment: "Aligned",
     courseClockHours: 60,
