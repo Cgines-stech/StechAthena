@@ -355,11 +355,6 @@ const TEES2993 = [
       "Underarm Wax 6",
       "Underarm Wax 7",
       "Underarm Wax 8",
-      "Clinical I",
-      "Clinical II",
-      "Clinical Ill",
-      "Hydrinity Resources",
-      "Jane Iredale Pro Site and elearning",
     ]
   }
 ]

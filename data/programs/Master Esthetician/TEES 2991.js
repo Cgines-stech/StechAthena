@@ -337,9 +337,9 @@ const TEES2991 = [
       "Browwax4",
       "BrowWaxS",
       "Browwax6",
-      "Brow wax 7",
-      "Brow wax a",
-      "Ea r/ Nose/Lip Wax",
+      "Browwax 7",
+      "Browwax 8",
+      "Ear/ Nose/Lip Wax",
       "Ear, Nose, or Lip Wax 1",
       "Ear, Nose, or Lip Wax 2",
       "Ear, Nose, or Lip Wax 3",
@@ -357,11 +357,6 @@ const TEES2991 = [
       "Underarm Wax 6",
       "Underarm Wax 7",
       "Underarm Wax 8",
-      "Clinical I",
-      "Clinical II",
-      "Clinical Ill",
-      "Hydrinity Resources",
-      "Jane Iredale Pro Site and elearning",
     ]
   }
 ]
