@@ -95,6 +95,7 @@ const TESU1221 = [
       "Resume",
       "What makes a good scrub tech?",
       "End of Course Survey",
+      "Surgical Technology Seminar",
     ]
   }
 ]
