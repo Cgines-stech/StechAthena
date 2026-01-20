@@ -2,7 +2,10 @@
   {
     "date": "2026-01-20",
     "entries": [
-      "Minor fixes to Course Catalog PDFs."
+      "Minor fixes to Course Catalog PDFs.",
+      "— Adjusted width of headers.",
+      "— Adjusted height of rows.",
+      "— Added 'Core' and 'Elective' rows to programs with electives"
     ]
   },
   {
