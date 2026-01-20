@@ -82,6 +82,18 @@ function renderCover(programName, programInfo, courses) {
 
   const hasElectives = courses.some(c => c.isElective === true);
 
+  const coreCreditsTotal = hasElectives
+    ? courses
+        .filter(c => c.isElective !== true)
+        .reduce((sum, c) => sum + (Number(c.courseCredits) || 0), 0)
+    : 0;
+
+  const electiveCreditsTotal = hasElectives
+    ? courses
+        .filter(c => c.isElective === true && c.includeInProgramTotals !== false)
+        .reduce((sum, c) => sum + (Number(c.courseCredits) || 0), 0)
+    : 0;
+
   let coreHeaderInserted = false;
   let electiveHeaderInserted = false;
 
@@ -92,7 +104,11 @@ function renderCover(programName, programInfo, courses) {
     if (hasElectives && !isElective && !coreHeaderInserted) {
       const coreRow = document.createElement("tr");
       coreRow.className = "section-row";
-      coreRow.innerHTML = `<td colspan="4">Core Courses</td>`;
+      coreRow.innerHTML = `
+        <td colspan="4">
+          Core Courses — ${coreCreditsTotal} Credit${coreCreditsTotal === 1 ? "" : "s"} Required
+        </td>
+      `;
       coverTableBody.appendChild(coreRow);
       coreHeaderInserted = true;
     }
@@ -101,7 +117,11 @@ function renderCover(programName, programInfo, courses) {
     if (hasElectives && isElective && !electiveHeaderInserted) {
       const electiveRow = document.createElement("tr");
       electiveRow.className = "section-row";
-      electiveRow.innerHTML = `<td colspan="4">Elective Courses</td>`;
+      electiveRow.innerHTML = `
+        <td colspan="4">
+          Elective Courses — ${electiveCreditsTotal} Credit${electiveCreditsTotal === 1 ? "" : "s"} Required
+        </td>
+      `;
       coverTableBody.appendChild(electiveRow);
       electiveHeaderInserted = true;
     }
