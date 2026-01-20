@@ -17,7 +17,8 @@ const weldingTechnologyProgram = [
     programCIP: 48.0508,
     programCreditHours: 24,
     programClockHours: 720,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

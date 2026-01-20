@@ -19,7 +19,8 @@ const surgicalTechnologyProgram = [
     programCIP: 51.0909,
     programCreditHours: 26,
     programClockHours: 900,
-    certificate: 'Certificate of Completion - C1Y'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate of Completion - C1Y'
   }
 ];
 

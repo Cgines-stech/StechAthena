@@ -16,7 +16,8 @@ const firefighterProgram = [
     programCIP: 43.0203,
     programCreditHours: 12,
     programClockHours: 360,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

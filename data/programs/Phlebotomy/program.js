@@ -35,7 +35,8 @@ const phlebotomyProgram = [
     programCIP: 51.1009,
     programCreditHours: 3,
     programClockHours: 90,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

@@ -17,7 +17,8 @@ const cdlClassAProgram = [
     programCIP: 49.0205,
     programCreditHours: 6,
     programClockHours: 180,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

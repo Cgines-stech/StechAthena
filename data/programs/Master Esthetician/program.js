@@ -19,7 +19,8 @@ const masterEstheticianProgram = [
     programCIP: 12.0409,
     programCreditHours: 32,
     programClockHours: 1200,
-    certificate: 'Certificate of Completion - C1Y'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate of Completion - C1Y'
   }
 ];
 

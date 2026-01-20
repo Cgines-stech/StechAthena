@@ -19,7 +19,8 @@ const plumbingApprenticeshipProgram = [
     programCIP: 46.0503,
     programCreditHours: 24,
     programClockHours: 720,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

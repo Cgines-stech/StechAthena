@@ -16,7 +16,8 @@ const nursingAssistantProgram = [
     programCIP: 51.3902,
     programCreditHours: 3,
     programClockHours: 114,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

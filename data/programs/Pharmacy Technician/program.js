@@ -17,7 +17,8 @@ const pharmacyTechnicianProgram = [
     programCIP: 51.0805,
     programCreditHours: 17,
     programClockHours: 600,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

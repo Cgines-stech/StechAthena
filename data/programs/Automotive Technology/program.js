@@ -15,7 +15,8 @@ const automotiveTechnologyProgram = [
     programCIP: 47.0604,
     programCreditHours: 46,
     programClockHours: 1380,
-    certificate: 'Certificate of Completion - C1Y'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate of Completion - C1Y'
   }
 ]; 
 

@@ -16,7 +16,8 @@ const medicalOfficeReceptionistProgram = [
     programCIP: 51.0712,
     programCreditHours: 12,
     programClockHours: 360,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

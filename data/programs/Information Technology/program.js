@@ -17,7 +17,8 @@ const informationTechnologyProgram = [
     programCIP: 11.0901,
     programCreditHours: 20,
     programClockHours: 600,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 

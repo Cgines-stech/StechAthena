@@ -191,10 +191,13 @@ h3 {
 }
 
 /* Center everything except first column */
-.catalog-table th:not(.col-num),
-.catalog-table td:not(.col-num) {
+.catalog-table th.col-cred,
+.catalog-table td.col-cred,
+.catalog-table th.col-align,
+.catalog-table td.col-align {
   text-align: center;
 }
+
 
 /* Certificate / program info header (spans columns) */
 .catalog-table thead th[colspan] {
@@ -376,5 +379,10 @@ h3 {
   .catalog-table td {
     word-wrap: break-word;
     overflow-wrap: break-word;
+  }
+  
+  .catalog-table td.col-name,
+  .catalog-table th.col-name {
+    text-align: left !important;
   }
 }

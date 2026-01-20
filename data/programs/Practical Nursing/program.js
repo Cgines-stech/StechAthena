@@ -17,7 +17,8 @@ const practicalNursingProgram = [
     programCIP: 51.3901,
     programCreditHours: 27,
     programClockHours: 900,
-    certificate: 'Certificate of Completion - C1Y'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate of Completion - C1Y'
   }
 ];
 

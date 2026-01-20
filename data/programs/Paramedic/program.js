@@ -19,7 +19,8 @@ const paramedicProgram = [
     programCIP: 51.0904,
     programCreditHours: 34,
     programClockHours: 1200,
-    certificate: 'Certificate of Completion - C1Y'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate of Completion - C1Y'
   }
 ];
 

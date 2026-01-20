@@ -17,7 +17,8 @@ const softwareDevelopmentProgram = [
     programCIP: 15.1204,
     programCreditHours: 30,
     programClockHours: 900,
-    certificate: 'Certificate of Completion - C1Y'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate of Completion - C1Y'
   }
 ];
 

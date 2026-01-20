@@ -19,7 +19,8 @@ const culinaryArtsProgram = [
     programCIP: 12.0503,
     programCreditHours: 30,
     programClockHours: 930,
-    certificate: 'Certificate of Completion - C1Y'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate of Completion - C1Y'
   }
 ];
 

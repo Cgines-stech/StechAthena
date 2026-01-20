@@ -25,7 +25,8 @@ const emergencyMedicalTechnicianProgram = [
     programCIP: 51.0904,
     programCreditHours: 6,
     programClockHours: 180,
-    certificate: 'Certificate'
+    certificate: 'Certificate',
+    certificateNorthstar: 'Certificate'
   }
 ];
 
