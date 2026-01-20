@@ -31,7 +31,6 @@ const programObjectives  = document.getElementById("programObjectives");
 const coursesContainer   = document.getElementById("coursesContainer");
 const coverCredLine = document.getElementById("coverCredLine");
 const coverLogo = document.getElementById("coverLogo");
-const hasElectives = courses.some(c => c.isElective === true);
 
 /* ---- Populate program select ---- */
 function populatePrograms() {
