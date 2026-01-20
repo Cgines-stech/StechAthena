@@ -31,6 +31,7 @@ const programObjectives  = document.getElementById("programObjectives");
 const coursesContainer   = document.getElementById("coursesContainer");
 const coverCredLine = document.getElementById("coverCredLine");
 const coverLogo = document.getElementById("coverLogo");
+const hasElectives = courses.some(c => c.isElective === true);
 
 /* ---- Populate program select ---- */
 function populatePrograms() {
@@ -79,13 +80,42 @@ function renderCover(programName, programInfo, courses) {
   }
 
   coverTableBody.innerHTML = "";
+
+  const hasElectives = courses.some(c => c.isElective === true);
+
+  let coreHeaderInserted = false;
+  let electiveHeaderInserted = false;
+
   courses.forEach(c => {
+    const isElective = c.isElective === true;
+
+    // Insert CORE header only if electives exist
+    if (hasElectives && !isElective && !coreHeaderInserted) {
+      const coreRow = document.createElement("tr");
+      coreRow.className = "section-row";
+      coreRow.innerHTML = `<td colspan="4">Core Courses</td>`;
+      coverTableBody.appendChild(coreRow);
+      coreHeaderInserted = true;
+    }
+
+    // Insert ELECTIVES header only if electives exist
+    if (hasElectives && isElective && !electiveHeaderInserted) {
+      const electiveRow = document.createElement("tr");
+      electiveRow.className = "section-row";
+      electiveRow.innerHTML = `<td colspan="4">Elective Courses</td>`;
+      coverTableBody.appendChild(electiveRow);
+      electiveHeaderInserted = true;
+    }
+
+    // Normal course row
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td class="col-num">${c.courseNumber || "-"}</td>
       <td class="col-name">${c.courseName || "-"}</td>
-      <td class="col-cred" style="text-align:right;">${c.courseCredits ?? ""}</td>
-      <td class="col-align">${c.statewideAlignment || (c.aligned ? "Aligned" : "Non-Aligned") || ""}</td>
+      <td class="col-cred">${c.courseCredits ?? ""}</td>
+      <td class="col-align">
+        ${c.statewideAlignment || (c.aligned ? "Aligned" : "Non-Aligned") || ""}
+      </td>
     `;
     coverTableBody.appendChild(tr);
   });

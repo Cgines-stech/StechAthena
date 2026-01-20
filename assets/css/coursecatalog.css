@@ -380,6 +380,16 @@ h3 {
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
+
+  .catalog-table .section-row td {
+  background: #f0f0f0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  text-align: left;
+  border-top: 2px solid #ccc;
+  background: #eaeaea;
+}
   
   .catalog-table td.col-name,
   .catalog-table th.col-name {
