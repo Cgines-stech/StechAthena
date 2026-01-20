@@ -354,13 +354,13 @@ h3 {
   }
 
   .catalog-table .col-num {
-    width: 12% !important;
+    width: 11% !important;
     text-align: left;
   }
 
   .catalog-table .col-name {
-    width: 62% !important;
-    text-align: center;
+    width: 57% !important;
+    text-align: left;
   }
 
   .catalog-table .col-cred {
@@ -369,10 +369,10 @@ h3 {
   }
 
   .catalog-table .col-align {
-    width: 14% !important;
+    width: 20% !important;
     text-align: center;
   }
-  
+
   .catalog-table td {
     word-wrap: break-word;
     overflow-wrap: break-word;
