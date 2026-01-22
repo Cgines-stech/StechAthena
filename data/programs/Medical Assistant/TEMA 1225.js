@@ -29,7 +29,11 @@ const TEMA1225 = [
     ],
 
     courseOutline: [
-      { title: "Module 1", hours: 90},
+      { title: "Specialty Exams and Procedures", hours: 20},
+      { title: "OB/GYN and Pediatric Exams", hours: 20},
+      { title: "Geriatrics and Mental Health", hours: 10},
+      { title: "Cardiology and Radiology", hours: 20},
+      { title: "Surgical Procedures", hours: 20},
     ],
 
     courseBooks: [

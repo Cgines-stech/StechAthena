@@ -29,7 +29,9 @@ const TEMA1098 = [
     ],
 
     courseOutline: [
-      { title: "Module 1", hours: 30},
+      { title: "Medical Emergencies and CPR", hours: 10},
+      { title: "First Aid for Accidents and Injuries", hours: 10},
+      { title: "Rehabilitation and Healthy Living", hours: 10},
     ],
 
     courseBooks: [
