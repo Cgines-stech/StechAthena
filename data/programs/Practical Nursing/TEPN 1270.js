@@ -22,7 +22,7 @@ const TEPN1270 = [
     includeInProgramTotals: true,
 
     courseDescription:
-      "Nursing Pharmacology provides you with basic pharmacology. In this course, you will explore the major drug classifications along with general drug actions, common adverse reactions, contraindications, precautions, and interactions. You will discuss how the nursing process is used as a framework for presenting care of the patient as it relates to the drug and the drug regimen. You will identify ways to promote an optimal response to therapy, how to monitor and manage adverse reactions, and important points to keep in mind when educating patients about the use of these drugs. When you have completed this course, you will be able to demonstrate the basic methods used in the administration of drugs in the context of safety and patient-centered care.",
+      "Nursing Pharmacology provides students with basic pharmacology. In this course, they will explore the major drug classifications along with general drug actions, common adverse reactions, contraindications, precautions, and interactions. Students will discuss how the nursing process is used as a framework for presenting care of the patient as it relates to the drug and the drug regimen. Students will identify ways to promote an optimal response to therapy, how to monitor and manage adverse reactions, and important points to keep in mind when educating patients about the use of these drugs.",
 
     courseObjectives: [
       "Categorize common medications into classifications.",
@@ -75,8 +75,8 @@ const TEPN1270 = [
     courseClassroomHours: [
       {
         termLabel: "Fall",
-        startDate: "08-14-2025",
-        endDate: "12-11-2025",
+        startDate: "10-08-2026",
+        endDate: "12-10-2026",
         Monday: "",
         Tuesday: "",
         Wednesday: "",
@@ -86,8 +86,8 @@ const TEPN1270 = [
       },
       {
         termLabel: "Spring",
-        startDate: "01-08-2026",
-        endDate: "05-07-2026",
+        startDate: "03-04-2027",
+        endDate: "05-06-2027",
         Monday: "",
         Tuesday: "",
         Wednesday: "",

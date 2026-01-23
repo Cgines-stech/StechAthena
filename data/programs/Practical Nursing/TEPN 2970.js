@@ -22,7 +22,7 @@ const TEPN2970 = [
     includeInProgramTotals: true,
 
     courseDescription:
-      "Clinical Learning I provides safe off-campus practice-learning environments where students will transfer and apply the knowledge, skills, and behaviors acquired in the  classroom and skills lab. With supervision and prompting, you will begin providing care for adults with commonly occurring problems as well as with the elderly. With a focus  on health assessment and wellness, you will begin applying the fundamental skills and concepts of nursing. The professional standards of QSEN provide the context for this  course to guide your learning and provide meaningful purpose.",
+      "Clinical Learning I provides safe off-campus practice-learning environments where students will transfer and apply the knowledge, skills, and behaviors acquired in the classroom and skills lab. With supervision and prompting, students will begin providing care for adults with commonly occurring problems as well as with the elderly. With a focus on health assessment and wellness, students will begin applying the fundamental skills and concepts of nursing. The professional standards of AACN provide the context for this course to guide student learning and provide meaningful purpose.",
 
     courseObjectives: [
       "Demonstrate basic communication and collaboration skills when involving clients in developing nursing care plans.",
@@ -69,8 +69,8 @@ const TEPN2970 = [
     courseClassroomHours: [
       {
         termLabel: "Fall",
-        startDate: "10-28-2025",
-        endDate: "12-08-2025",
+        startDate: "10-26-2026",
+        endDate: "12-11-2026",
         Monday: "",
         Tuesday: "",
         Wednesday: "",
@@ -80,8 +80,8 @@ const TEPN2970 = [
       },
       {
         termLabel: "Spring",
-        startDate: "03-24-2026",
-        endDate: "05-12-2026",
+        startDate: "03-23-2027",
+        endDate: "05-14-2027",
         Monday: "",
         Tuesday: "",
         Wednesday: "",

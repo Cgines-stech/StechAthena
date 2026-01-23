@@ -22,7 +22,7 @@ const TEPN1470 = [
     includeInProgramTotals: true,
 
     courseDescription:
-      'Introductory Maternity and Pediatric Nursing builds on the concepts of previous nursing courses with emphasis on utilizing the nursing process in dealing with maternity,  newborn, and child health. During the course you will explore the concepts of health promotion, disease prevention and alterations in health related to women and children.  Emphasis is on whole person care of child bearing families. Management and planning of the Nursing Process will include concepts from a variety of culturally diverse  settings to include nursing in the community. AACN Essentials for Professional Nursing Education provide the context for this course to guide your learning and provide  meaningful purpose. When you have completed this course, you will be able to demonstrate competence in performing the fundamental nursing skills for maternity and  pediatric nursing in the context of Patient Centered Care.',
+      'Introductory Maternity and Pediatric Nursing builds on the concepts of previous nursing courses with emphasis on utilizing the nursing process in dealing with maternity, newborn, and child health. During the course students will explore the concepts of health promotion, disease prevention and alterations in health related to women and children. Emphasis is on whole person care of childbearing families. Management and planning of the Nursing Process will include concepts from a variety of culturally diverse settings to include nursing in the community. AACN Essentials for Professional Nursing Education provides the context for this course to guide student learning and provide meaningful purpose.',
 
     courseObjectives: [
       "Demonstrate the following: physical assessment (data collection), psychosocial assessment, and developmental assessment; and incorporate the findings in the management of nursing care for the maternal or child client.",
@@ -79,9 +79,9 @@ const TEPN1470 = [
 
     courseClassroomHours: [
       {
-        termLabel: "Fall",
-        startDate: "08-15-2025",
-        endDate: "12-05-2025",
+        termLabel: "Fall (PN 1051)",
+        startDate: "08-14-2026",
+        endDate: "12-04-2026",
         Monday: "",
         Tuesday: "",
         Wednesday: "",
@@ -91,8 +91,8 @@ const TEPN1470 = [
       },
       {
         termLabel: "Spring",
-        startDate: "01-09-2026",
-        endDate: "05-01-2026",
+        startDate: "01-08-2027",
+        endDate: "04-30-2027",
         Monday: "",
         Tuesday: "",
         Wednesday: "",

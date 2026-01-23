@@ -22,7 +22,7 @@ const TEPN2170 = [
     includeInProgramTotals: true,
 
     courseDescription:
-      'Skills and Simulation Lab II provides you an on-campus practice environment where you will transfer and apply the knowledge, skills, and attitudes acquired in the  classroom and skills lab setting. The professional standards of QSEN provide the context for this course to guide your learning and provide meaningful purpose. You will  perform fundamental nursing skills in the simulated setting, with opportunity to review performance and discuss opportunities for growth within your own and other  students’ experiences. When you have completed this course, you will be able to use the nursing process to provide patient-centered care to clients in a variety of settings.',
+      'Skills and Simulation Lab II provides students an on-campus practice environment where they will transfer and apply the knowledge, skills, and attitudes acquired in the classroom and skills lab setting. The professional standards of AACN provide the context for this course to guide student learning and provide meaningful purpose. Students will perform fundamental nursing skills in the simulated setting, with opportunity to review performance and discuss opportunities for growth within their own and other students’ experiences.',
 
     courseObjectives: [
       `Demonstrate basic clinical competence through performance of fundamental nursing skills.`,
@@ -83,9 +83,9 @@ const TEPN2170 = [
 
     courseClassroomHours: [
       {
-        termLabel: "Fall",
-        startDate: "08-13-2025",
-        endDate: "11-19-2025",
+        termLabel: "Fall (PN 1084)",
+        startDate: "08-12-2026",
+        endDate: "11-18-2026",
         Monday: "",
         Tuesday: "",
         Wednesday: "9:00 AM - 1:00 PM",
@@ -95,8 +95,8 @@ const TEPN2170 = [
       },
       {
         termLabel: "Spring",
-        startDate: "01-07-2026",
-        endDate: "04-22-2026",
+        startDate: "01-06-2027",
+        endDate: "04-21-2027",
         Monday: "",
         Tuesday: "",
         Wednesday: "9:00 AM - 1:00 PM",

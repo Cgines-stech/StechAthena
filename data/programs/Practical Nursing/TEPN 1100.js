@@ -72,9 +72,9 @@ const TEPN1100 = [
 
     courseClassroomHours: [
       {
-        termLabel: "Fall",
-        startDate: "08-14-2025",
-        endDate: "12-11-2025",
+        termLabel: "Fall (PN 1063)",
+        startDate: "08-13-2026",
+        endDate: "12-10-2026",
         Monday: "",
         Tuesday: "",
         Wednesday: "",
@@ -84,8 +84,8 @@ const TEPN1100 = [
       },
       {
         termLabel: "Spring",
-        startDate: "01-08-2026",
-        endDate: "05-07-2026",
+        startDate: "01-07-2027",
+        endDate: "05-06-2027",
         Monday: "",
         Tuesday: "",
         Wednesday: "",

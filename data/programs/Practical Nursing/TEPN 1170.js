@@ -22,7 +22,7 @@ const TEPN1170 = [
     includeInProgramTotals: true,
 
     courseDescription:
-      'Practical Nursing Skills and Simulation Lab I is designed to enhance your academic learning of nursing intervention concepts by helping nursing students gain an  understanding of their role in patient safety and utilize the opportunities to apply the knowledge, skill, and attitudes learned in the didactic courses through simulated  scenarios. With emphasis on the valuable opportunity of practicing skills on adult-sized “clients", this student-centric learning model allows “hands on” practice time with  sophisticated learning technology that emulates the medical environment. Throughout this course, you will traverse the bridge between classroom learning and real-world  nursing practice. By the end of this course you will have applied some of the most commonly performed fundamental skills within a simulated medical setting.',
+      'Practical Nursing Skills and Simulation Lab I is designed to enhance students’ academic learning of nursing intervention concepts by helping nursing students gain an understanding of their role in patient safety and utilize the opportunities to apply the knowledge, skill, and attitudes learned in the didactic courses through simulated scenarios. With emphasis on the valuable opportunity of practicing skills on adult-sized “clients", this student-centric learning model allows “hands on” practice time with sophisticated learning technology that emulates the medical environment. Throughout this course, students will traverse the bridge between classroom learning and real-world nursing practice.',
 
     courseObjectives: [
       `Demonstrate basic clinical competence through performance of fundamental nursing skills.`,
@@ -120,8 +120,8 @@ const TEPN1170 = [
     courseClassroomHours: [
       {
         termLabel: "Fall",
-        startDate: "08-13-2025",
-        endDate: "11-12-2025",
+        startDate: "08-12-2026",
+        endDate: "11-11-2026",
         Monday: "",
         Tuesday: "",
         Wednesday: "9:00 AM - 3:30 PM",
@@ -131,8 +131,8 @@ const TEPN1170 = [
       },
       {
         termLabel: "Spring",
-        startDate: "01-07-2026",
-        endDate: "04-15-2026",
+        startDate: "01-06-2027",
+        endDate: "04-14-2027",
         Monday: "",
         Tuesday: "",
         Wednesday: "9:00 AM - 3:30 PM",

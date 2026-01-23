@@ -22,7 +22,7 @@ const TEPN2971 = [
     includeInProgramTotals: true,
 
     courseDescription:
-      'Clinical Learning II provides you off-campus environment where you will transfer and apply the knowledge, skills and attitudes acquired in the classroom, skills lab, and  simulation settings. The professional standards of QSEN provide the context for this course to guide your learning and provide meaningful purpose. With supervision and  prompting, you will begin providing care for clients with commonly occurring problems, as well as for the elderly and mentally ill client. In the context of patient-centered  care, in a variety of settings, and with a focus on health assessment and wellness, you will begin applying the fundamental skills and concepts of nursing. When you have  completed this course, you will be able to use the nursing process to provide patient-centered care in the clinical setting.',
+      'Clinical Learning II provides safe off-campus environments where students will transfer and apply the knowledge, skills and attitudes acquired in the classroom, skills lab, and simulation settings. The professional standards of AACN provide the context for this course to guide student learning and provide meaningful purpose. With supervision and prompting, students will begin providing care for clients with commonly occurring problems, as well as for the elderly and mentally ill clients. In the context of patient-centered care, in a variety of settings, and with a focus on health assessment and wellness, students will begin applying the fundamental skills and concepts of nursing.',
 
     courseObjectives: [
       "Provide compassionate, coordinated patient care by respecting patient preferences, values and needs.",
@@ -67,9 +67,9 @@ const TEPN2971 = [
 
     courseClassroomHours: [
       {
-        termLabel: "Fall",
-        startDate: "08-11-2025",
-        endDate: "10-21-2025",
+        termLabel: "Fall (PN 1086X)",
+        startDate: "08-10-2026",
+        endDate: "10-23-2026",
         Monday: "",
         Tuesday: "",
         Wednesday: "",
@@ -79,8 +79,8 @@ const TEPN2971 = [
       },
       {
         termLabel: "Spring",
-        startDate: "01-05-2026",
-        endDate: "03-17-2026",
+        startDate: "01-05-2027",
+        endDate: "03-19-2027",
         Monday: "",
         Tuesday: "",
         Wednesday: "",

@@ -101,8 +101,8 @@ const TEPN1010 = [
     courseClassroomHours: [
       {
         termLabel: "Fall",
-        startDate: "08-11-2025",
-        endDate: "10-28-2025",
+        startDate: "08-10-2026",
+        endDate: "10-27-2026",
         Monday: "9:00 AM - 2:30 PM",
         Tuesday: "9:00 AM - 2:30 PM",
         Wednesday: "",
@@ -112,10 +112,10 @@ const TEPN1010 = [
       },
       {
         termLabel: "Spring",
-        startDate: "01-05-2026",
-        endDate: "03-24-2026",
-        Monday: "9:00 AM - 2:30 PM",
-        Tuesday: "9:00 AM - 2:30 PM",
+        startDate: "01-05-2027",
+        endDate: "03-22-2027",
+        Monday: "9:00 AM - 3:00 PM",
+        Tuesday: "9:00 AM - 3:00 PM",
         Wednesday: "",
         Thursday: "",
         Friday: "",
