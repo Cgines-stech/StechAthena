@@ -45,7 +45,7 @@ const TEWT1620 = [
     ],
     
     courseTools: [
-      { name: "Welding Tape Measure", price: 24.5, note: "" },
+      { name: "Welding Tape Measure", price: 24.0, note: "" },
     ],
 
     courseCertifications: [

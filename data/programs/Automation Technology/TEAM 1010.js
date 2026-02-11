@@ -43,6 +43,13 @@ const TEAM1010 = [
         price: 150.0,
         isbn: "Syllabus",
         note: "Cengage Unlimited Subscription"
+      },
+      {
+        name:
+          "Amatrol E-Learning",
+        price: 375.0,
+        isbn: "N/A",
+        note: "E-Learning Software Subscription"
       }
     ],
 

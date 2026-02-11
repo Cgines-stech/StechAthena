@@ -47,12 +47,12 @@ const TEWT1004 = [
     
     courseTools: [
       { name: "Welding Jacket", price: 132.0, note: "" },
-      { name: "Welding Chaps", price: 71.5, note: "" },
-      { name: "Welding Hat", price: 16.5, note: "" },
+      { name: "Welding Chaps", price: 72.0, note: "" },
+      { name: "Welding Hat", price: 17.0, note: "" },
       { name: "Welding Wire Brush", price: 7.0, note: "" },
-      { name: "Welding Chipping Hammer", price: 11.0, note: "" },
-      { name: "Welding Helmet", price: 360.0, note: "" },
-      { name: "Welding Pliers", price: 13.5, note: "" },
+      { name: "Welding Chipping Hammer", price: 21.0, note: "" },
+      { name: "Welding Helmet", price: 135.0, note: "" },
+      { name: "Welding Pliers", price: 14.0, note: "" },
       { name: "Welding Welpers", price: 19.0, note: "" },
       { name: "Welding Goggles", price: 20.0, note: "" },
     ],

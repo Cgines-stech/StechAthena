@@ -48,7 +48,7 @@ const TEWT1411 = [
     ],
     
     courseTools: [
-      { name: "Welding Respirator", price: 27.50, note: "" },
+      { name: "Welding Respirator", price: 27.0, note: "" },
     ],
 
     courseCertifications: [
