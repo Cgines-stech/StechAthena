@@ -47,7 +47,11 @@ const TEMA1098 = [
     ],
 
     courseCertifications: [
-      {},
+      {
+         name: "BLS",
+         price: 45.0,
+         note: ""
+      },
     ],
 
     otherAssociatedCosts: [
