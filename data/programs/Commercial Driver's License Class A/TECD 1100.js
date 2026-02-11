@@ -104,7 +104,7 @@ const TECD1100 = [
 
     courseClassroomHours: [
         {
-          termLabel: "Classroom Times",
+          termLabel: "Classroom Times (Dates Vary)",
           startDate: "",
           endDate: "",
           Monday: "8:00 AM - 5:00 PM",
@@ -115,7 +115,7 @@ const TECD1100 = [
           Saturday: "",
         },
         {
-          termLabel: "Driving Hours",
+          termLabel: "Driving Hours (Dates Vary)",
           startDate: "",
           endDate: "",
           Monday: "7:00 AM - 6:00 PM",
