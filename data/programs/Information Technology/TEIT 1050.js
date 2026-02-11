@@ -36,21 +36,11 @@ const TEIT1050 = [
     ],
 
     courseBooks: [
-      {
-        name: "The Compassionate Geek", 
-        price: 26.0,
-        isbn: "9780983660736",
-        note: "Customer Support"
-      },
+      {},
     ],
 
     syllabiBooks: [
-      {
-        name: "The Compassionate Geek", 
-        price: 26.0,
-        isbn: "9780983660736",
-        note: "Customer Support"
-      },
+      {},
     ],
     
     courseTools: [

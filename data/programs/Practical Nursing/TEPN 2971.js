@@ -16,7 +16,7 @@ const TEPN2971 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 120,
     courseTuition: 190.00,
-    courseFee: 10.00,
+    courseFee: 0.00,
     instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,

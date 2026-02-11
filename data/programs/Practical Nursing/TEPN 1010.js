@@ -81,7 +81,7 @@ const TEPN1010 = [
     ],
     
     courseTools: [
-      { name: "Chrome Book", price: 302.5, note: "Chromebook or similar device", optional: true },
+      { name: "Chrome Book", price: 302.5, note: "Chromebook or similar device", optional: false },
       { name: "Stethoscope/BP Cuff Combo Kit", price: 33.0, note: "" },
       { name: "Shears", price: 16.5, note: "" },
       { name: "Pen light", price: 4.5, note: "" },
