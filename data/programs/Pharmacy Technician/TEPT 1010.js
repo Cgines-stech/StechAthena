@@ -42,13 +42,7 @@ const TEPT1010 = [
         price: 150.0,
         isbn: "Syllabus",
         note: "Cengage Unlimited Subscription"
-      },
-      {
-        name: "SFI Prescription Drug Flashcards", 
-        price: 72.0,
-        isbn: "188057988X",
-        note: ""
-      },
+      }
     ],
 
     syllabiBooks: [
@@ -57,13 +51,7 @@ const TEPT1010 = [
         price: 150.0,
         isbn: "Syllabus",
         note: "Cengage Unlimited Subscription"
-      },
-      {
-        name: "SFI Prescription Drug Flashcards", 
-        price: 72.0,
-        isbn: "188057988X",
-        note: ""
-      },
+      }
     ],
     
     courseTools: [
@@ -73,8 +61,13 @@ const TEPT1010 = [
     courseCertifications: [
       {
         name: "Utah Trainee Pharmacy Technician License", 
-        price: 65.00, 
-        note: "" 
+        price: 50.00,
+        note: "Paid to Department of Professional Licensure" 
+      },
+      {
+        name: "Utah Trainee Pharmacy Technician License", 
+        price: 20.00,
+        note: "Paid to Utah Bureau of Criminal Identification" 
       },
     ],
 

@@ -45,12 +45,7 @@ const TEPN1270 = [
     ],
 
     courseBooks: [
-      {
-        name: "vSim for Pharmacology", 
-        price: 75.0,
-        isbn: "9781469894362",
-        note: "Exclusive to the two Pharmacology courses"
-      },
+      {},
     ],
 
     syllabiBooks: [

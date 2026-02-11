@@ -48,18 +48,7 @@ const TEPN1300 = [
     ],
 
     courseBooks: [
-      {
-        name: "Lippincott course Point for Nursing Concepts-LPN/LVN", 
-        price: 600.0,
-        isbn: "9781496362995",
-        note: "Course Text Books and Multple Learning resources are bundled in this product"
-      },
-      {
-        name: "Docucare", 
-        price: 105.0,
-        isbn: "9781451185171",
-        note: "This learning resource will be used in all courses throughout both semesters"
-      },
+      {},
     ],
 
     syllabiBooks: [
@@ -74,11 +63,7 @@ const TEPN1300 = [
     ],
     
     courseTools: [
-      { name: "Chrome Book", price: 302.5, note: "Chromebook or similar device", optional: true },
-      { name: "Stethoscope/BP Cuff Combo Kit", price: 33.0, note: "" },
-      { name: "Shears", price: 16.5, note: "" },
-      { name: "Pen light", price: 4.5, note: "" },
-      { name: "Hemostat", price: 8.5, note: "" },
+      {},
     ],
 
     courseCertifications: [
@@ -86,11 +71,7 @@ const TEPN1300 = [
     ],
 
     otherAssociatedCosts: [
-      {
-        name: "NCLEX-PN", 
-        price: 200.0, 
-        note: "Payable to Pearson Vue" 
-      }
+      {}
     ],
 
     courseClassroomHours: [

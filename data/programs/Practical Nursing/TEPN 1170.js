@@ -51,15 +51,21 @@ const TEPN1170 = [
 
     courseBooks: [
       {
-        name: "vSim for Medical Surgical", 
+        name: "vSim for Fundamentals", 
         price: 75.0,
-        isbn: "9781469857312",
-        note: ""
+        isbn: "9781469894188",
+        note: "Exclusive to this course"
       },
       {
-        name: "Simulation Learning System for LPN", 
-        price: 120.0,
-        isbn: "9781455700127",
+        name: "NCLEX-Passpoint", 
+        price: 160.0,
+        isbn: "9781496309327",
+        note: "This learning resource will be used in all courses throughout both semesters"
+      },
+      {
+        name: "CoursePoint for Henke's Med-Math, 10e", 
+        price: 110.0,
+        isbn: "9781975200206",
         note: ""
       },
       {
