@@ -10,7 +10,7 @@
   --bg:#f7f8fa;
   --text:#000;
   --muted:#666;
-  --primary:#007cbc;
+  --primary:#047BC1;
   --card:#fff;
   --radius:12px;
   --shadow:0 1px 3px rgba(0,0,0,.08);
@@ -160,12 +160,12 @@ button:hover{ filter:brightness(.96); }
   height: 45px;
   background: linear-gradient(
     to bottom,
-    #007cbc 0%,
-    #007cbc 47.5%,
+    #047BC1 0%,
+    #047BC1 47.5%,
     #ffffff 47.5%,
     #ffffff 52.5%,
-    #007cbc 52.5%,
-    #007cbc 100%
+    #047BC1 52.5%,
+    #047BC1 100%
   ) !important;
   display: flex;
   justify-content: center;
@@ -322,19 +322,19 @@ button:hover{ filter:brightness(.96); }
   /* Titles */
   h1{
     font-family: "Roboto Condensed", sans-serif !important;
-    color:#007cbc !important;
+    color:#047BC1 !important;
     font-size:18px !important;
     margin:0 0 8px 0;
   }
   h2{
     font-family: "Roboto Condensed", sans-serif !important;
-    color:#007cbc !important;
+    color:#047BC1 !important;
     font-size:16px !important;
     margin:0 0 8px 0;
   }
   h3{
     font-family: "Roboto Condensed", sans-serif !important;
-    color:#007cbc !important;
+    color:#047BC1 !important;
     font-size:18px !important;
     margin:10px 0 6px 0;
     page-break-after: avoid;
@@ -484,15 +484,15 @@ button:hover{ filter:brightness(.96); }
 
   /* Ensure header bar keeps its color in print too */
   .full-width-container {
-    background-color: #007cbc !important;
+    background-color: #047BC1 !important;
     background-image: linear-gradient(
       to bottom,
-      #007cbc 0%,
-      #007cbc 47.5%,
+      #047BC1 0%,
+      #047BC1 47.5%,
       #ffffff 47.5%,
       #ffffff 52.5%,
-      #007cbc 52.5%,
-      #007cbc 100%
+      #047BC1 52.5%,
+      #047BC1 100%
     ) !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
