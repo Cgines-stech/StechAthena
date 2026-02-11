@@ -103,8 +103,8 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Culinary Arts/TECA 1600.js",
     "../../data/programs/Culinary Arts/TECA 1630.js",
     // add 1625 and 1725 for FY27
-    // "../../data/programs/Culinary Arts/TECA 1625.js",
-    // "../../data/programs/Culinary Arts/TECA 1725.js",
+    "../../data/programs/Culinary Arts/TECA 1625.js",
+    "../../data/programs/Culinary Arts/TECA 1725.js",
     "../../data/programs/Culinary Arts/TECA 1800.js",
     "../../data/programs/Culinary Arts/TECA 1830.js",
     "../../data/programs/Culinary Arts/TECA 1920.js",
@@ -139,7 +139,7 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Information Technology/TEIT 1800.js",
     "../../data/programs/Information Technology/TEIT 1810.js",
     // add 2900 for FY27
-    // "../../data/programs/Information Technology/TEIT 2900.js",
+    "../../data/programs/Information Technology/TEIT 2900.js",
   ],
   "Master Esthetician": [
     "../../data/programs/Master Esthetician/TEES 1010.js",
@@ -161,14 +161,14 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Medical Assistant/TEMA 1065.js",
     "../../data/programs/Medical Assistant/TEMA 1040.js",
     // remove 1230 for FY27
-    "../../data/programs/Medical Assistant/TEMA 1230.js",
+    // "../../data/programs/Medical Assistant/TEMA 1230.js",
     "../../data/programs/Medical Assistant/TEMA 1020.js",
     // remove 1241 for FY27
-    "../../data/programs/Medical Assistant/TEMA 1241.js",
+    // "../../data/programs/Medical Assistant/TEMA 1241.js",
     "../../data/programs/Medical Assistant/TEMA 1030.js",
     // add 1098 and 1225 for FY27
-    // "../../data/programs/Medical Assistant/TEMA 1098.js",
-    // "../../data/programs/Medical Assistant/TEMA 1225.js",
+    "../../data/programs/Medical Assistant/TEMA 1098.js",
+    "../../data/programs/Medical Assistant/TEMA 1225.js",
     "../../data/programs/Medical Assistant/TEMA 1250.js",
     "../../data/programs/Medical Assistant/TEMA 1050.js",
     "../../data/programs/Medical Assistant/TEMA 1900.js",

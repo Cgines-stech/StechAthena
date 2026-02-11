@@ -78,13 +78,18 @@ const TEEM1011 = [
 
     courseCertifications: [
       {
-        name: "EMT License/Processing Fees", 
-        price: 110.25, 
-        note: " Paid to Office of Emergency Medical Services" 
+        name: "BLS/CPR", 
+        price: 45.00, 
+        note: "" 
       },
     ],
 
     otherAssociatedCosts: [
+      {
+        name: "EMT License/Processing Fees", 
+        price: 110.25, 
+        note: "Paid to Office of Emergency Medical Services" 
+      },
       {
         name: "EMT Written Fees", 
         price: 98.0, 
