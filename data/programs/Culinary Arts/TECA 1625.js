@@ -13,8 +13,8 @@ const TECA1625 = [
     courseCredits: 2,
     statewideAlignment: "Non-Aligned",
     courseClockHours: 60,
-    courseTuition: 180.00,
-    courseFee: 0.00,
+    courseTuition: 190.00,
+    courseFee: 150.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
@@ -41,7 +41,12 @@ const TECA1625 = [
     ],
 
     courseBooks: [
-      {},
+      {
+        name: "Flour, Water, Salt, Yeast", 
+        price: 15.0,
+        isbn: "9780866127400",
+        note: ""
+      },
     ],
 
     syllabiBooks: [

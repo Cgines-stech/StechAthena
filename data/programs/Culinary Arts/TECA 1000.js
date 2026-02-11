@@ -50,7 +50,7 @@ const TECA1000 = [
       },
       {
         name: "Culinary Math 4th ed", 
-        price: 35.0,
+        price: 50.0,
         isbn: "9781118972724",
         note: ""
       },
