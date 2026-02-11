@@ -94,7 +94,7 @@ const TEEL1120 = [
     ],
 
     instructorContactInformation: [
-        { name: "Cody Post",        email: "cpost@stech.edu",       title: "Instructor" },
+        { name: "Cody Post", email: "cpost@stech.edu", title: "" },
     ],
 
     course_Policies: [

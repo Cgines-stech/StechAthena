@@ -104,7 +104,18 @@ const TECD1100 = [
 
     courseClassroomHours: [
         {
-          termLabel: "",
+          termLabel: "Classroom Times",
+          startDate: "",
+          endDate: "",
+          Monday: "8:00 AM - 5:00 PM",
+          Tuesday: "8:00 AM - 5:00 PM",
+          Wednesday: "8:00 AM - 5:00 PM",
+          Thursday: "8:00 AM - 5:00 PM",
+          Friday: "8:00 AM - 5:00 PM",
+          Saturday: "",
+        },
+        {
+          termLabel: "Driving Hours",
           startDate: "",
           endDate: "",
           Monday: "7:00 AM - 6:00 PM",
@@ -113,7 +124,7 @@ const TECD1100 = [
           Thursday: "7:00 AM - 6:00 PM",
           Friday: "7:00 AM - 6:00 PM",
           Saturday: "",
-        }
+        },
     ],
 
     instructorContactInformation: [

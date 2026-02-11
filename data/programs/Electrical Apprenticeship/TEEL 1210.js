@@ -107,7 +107,7 @@ const TEEL1210 = [
     ],
 
     instructorContactInformation: [
-        { name: "Jeremy Leavitt",        email: "jleavitt@stech.edu",       title: "Instructor" },
+        { name: "Jeremy Leavitt", email: "jleavitt@stech.edu", title: "" },
     ],
 
     course_Policies: [

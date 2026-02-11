@@ -6,8 +6,8 @@ export const instructorNote = `
 `;
 
 const emergencyMedicalTechnicianInstructors = [
-  { name: "Adam Scott",          email: "ascott@stech.edu",     title: "Instructor" },
-  { name: "Christopher Crispin", email: "ccrispin@stech.edu",   title: "Instructor" },
+  { name: "Adam Scott",          email: "ascott@stech.edu",     title: "" },
+  { name: "Christopher Crispin", email: "ccrispin@stech.edu",   title: "" },
 ];
 
 export default emergencyMedicalTechnicianInstructors;

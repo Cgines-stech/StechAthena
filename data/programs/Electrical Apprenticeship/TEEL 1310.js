@@ -126,7 +126,7 @@ const TEEL1310 = [
     ],
 
     instructorContactInformation: [
-        { name: "Luke Mitchell",        email: "lmitchell@stech.edu",       title: "Instructor" },
+        { name: "Luke Mitchell", email: "lmitchell@stech.edu", title: "" },
     ],
 
     course_Policies: [

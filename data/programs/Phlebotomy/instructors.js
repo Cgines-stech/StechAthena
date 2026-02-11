@@ -3,8 +3,8 @@
 export const instructorNote = ``;
 
 const phlebotomyInstructors = [
-  { name: "Karalee Wells",          email: "kwells@stech.edu",     title: "Instructor" },
-  { name: "Dusty Hunter", email: "dhunter@stech.edu",   title: "Instructor" },
+  { name: "Karalee Wells", email: "kwells@stech.edu", title: "" },
+  { name: "Dusty Hunter", email: "dhunter@stech.edu", title: "" },
 ];
 
 export default phlebotomyInstructors;
