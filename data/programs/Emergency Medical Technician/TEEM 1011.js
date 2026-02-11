@@ -99,16 +99,27 @@ const TEEM1011 = [
 
     courseClassroomHours: [
       {
-        termLabel: "",
-        startDate: "08-27-2025",
-        endDate: "12-11-2025",
-        Monday: "",
-        Tuesday: "5:00 PM - 9:00 PM",
-        Wednesday: "5:00 PM - 9:00 PM",
-        Thursday: "5:00 PM - 9:00 PM",
-        Friday: "",
-        Saturday: "",
-      }
+          termLabel: "Fall",
+          startDate: "08-26-2026",
+          endDate: "12-10-2026",
+          Monday: "",
+          Tuesday: "5:00 PM - 9:00 PM",
+          Wednesday: "5:00 PM - 9:00 PM",
+          Thursday: "5:00 PM - 9:00 PM",
+          Friday: "",
+          Saturday: "",
+        },
+        {
+          termLabel: "Spring",
+          startDate: "01-10-2027",
+          endDate: "05-16-2027",
+          Monday: "",
+          Tuesday: "5:00 PM - 9:00 PM",
+          Wednesday: "5:00 PM - 9:00 PM",
+          Thursday: "5:00 PM - 9:00 PM",
+          Friday: "",
+          Saturday: "9:00 AM - 7:00 PM",
+        },
     ],
 
     instructorContactInformation: [
