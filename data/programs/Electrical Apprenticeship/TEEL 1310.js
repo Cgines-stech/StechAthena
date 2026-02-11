@@ -62,6 +62,18 @@ const TEEL1310 = [
 
     syllabiBooks: [
       {
+        name: "NFPA 70: NEC National Electrical Code 2023", 
+        price: 90.0,
+        isbn: "9781455929320",
+        note: ""
+      },
+      {
+        name: "Ugly's Electrical References, 2023 Edition", 
+        price: 20.0,
+        isbn: "9781284275914",
+        note: ""
+      },
+      {
         name: "Electrical Grounding and Bonding 7th Edition", 
         price: 150.0,
         isbn: "9780357766835",

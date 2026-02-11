@@ -54,7 +54,20 @@ const TEAM1010 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name:
+          "Cengage Unlimited Subscription",
+        price: 150.0,
+        isbn: "Syllabus",
+        note: "Cengage Unlimited Subscription"
+      },
+      {
+        name:
+          "Amatrol E-Learning",
+        price: 375.0,
+        isbn: "",
+        note: ""
+      }
     ],
     
     courseTools: [

@@ -45,7 +45,12 @@ const TEWT1311 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Cengage Unlimited Subscription", 
+        price: 150.0,
+        isbn: "Syllabus",
+        note: "Cengage Unlimited Subscription"
+      },
     ],
     
     courseTools: [

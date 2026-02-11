@@ -45,7 +45,12 @@ const TESD1420 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Introduction to Java Programming and Data Structures, 13th Ed (Lifetime access)", 
+        price: 100.0,
+        isbn: "9780138123352",
+        note: "Access Code"
+      },
     ],
     
     courseTools: [

@@ -51,6 +51,24 @@ const TEEL1410 = [
 
     syllabiBooks: [
       {
+        name: "NFPA 70: NEC National Electrical Code 2023", 
+        price: 90.0,
+        isbn: "9781455929320",
+        note: ""
+      },
+      {
+        name: "Ugly's Electrical References, 2023 Edition", 
+        price: 20.0,
+        isbn: "9781284275914",
+        note: ""
+      },
+      {
+        name: "Understanding the NEC Vol. 2", 
+        price: 60.0,
+        isbn: "9781950431786",
+        note: ""
+      },
+      {
         name: "2023 Electrical Exam Preparation", 
         price: 71.0,
         isbn: "9781950431717",

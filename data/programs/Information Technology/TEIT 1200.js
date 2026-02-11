@@ -42,19 +42,19 @@ const TEIT1200 = [
 
     courseBooks: [
       {
-        name: "TestOut PC Pro", 
+        name: "CompTIA A+ Core 1 and Core 2 CertMaster Learn", 
         price: 129.0,
-        isbn: "9781935080428",
-        note: "A+ Essentials, A+ Essentials Practical"
+        isbn: "978-1-64274-603-7",
+        note: "A+ Core I and II"
       },
     ],
 
     syllabiBooks: [
       {
-        name: "TestOut PC Pro", 
+        name: "CompTIA A+ Core 1 and Core 2 CertMaster Learn", 
         price: 129.0,
-        isbn: "9781935080428",
-        note: "A+ Essentials, A+ Essentials Practical"
+        isbn: "978-1-64274-603-7",
+        note: "A+ Core I and II"
       },
     ],
     

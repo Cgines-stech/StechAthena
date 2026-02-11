@@ -45,8 +45,8 @@ const TEIT2200 = [
       {
         name: "TestOut Security Pro", 
         price: 149.0,
-        isbn: "9781935080442",
-        note: "Security Professional"
+        isbn: "978-1-935080-44-2",
+        note: "Security+"
       },
     ],
 
@@ -54,8 +54,8 @@ const TEIT2200 = [
       {
         name: "TestOut Security Pro", 
         price: 149.0,
-        isbn: "9781935080442",
-        note: "Security Professional"
+        isbn: "978-1-935080-44-2",
+        note: "Security+"
       },
     ],
     

@@ -37,19 +37,19 @@ const TEIT1100 = [
 
     courseBooks: [
       {
-        name: "CompTIA CertMaster Learn Network+", 
+        name: "CompTIA Network+ CertMaster Learn", 
         price: 121.0,
-        isbn: "9781642745245",
-        note: "Networking Technology"
+        isbn: "978-1-642745-24-5",
+        note: "Introduction to Networking and Computer Networks I and II"
       },
     ],
 
     syllabiBooks: [
       {
-        name: "CompTIA CertMaster Learn Network+", 
+        name: "CompTIA Network+ CertMaster Learn", 
         price: 121.0,
-        isbn: "9781642745245",
-        note: "Networking Technology"
+        isbn: "978-1-642745-24-5",
+        note: "Introduction to Networking and Computer Networks I and II"
       },
     ],
     

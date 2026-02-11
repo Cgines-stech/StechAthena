@@ -43,7 +43,12 @@ const TEES2991 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Basic Work Book (Fundamental and Foundations Workbook)", 
+        price: 175.0,
+        isbn: "9780357482841",
+        note: ""
+      },
     ],
     
     courseTools: [

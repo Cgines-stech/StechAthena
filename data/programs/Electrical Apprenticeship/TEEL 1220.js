@@ -39,7 +39,36 @@ const TEEL1220 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "NFPA 70: NEC National Electrical Code 2023", 
+        price: 90.0,
+        isbn: "9781455929320",
+        note: ""
+      },
+      {
+        name: "Ugly's Electrical References, 2023 Edition", 
+        price: 20.0,
+        isbn: "9781284275914",
+        note: ""
+      },
+      {
+        name: "Electrical Safety: A Practical Guide to OSHA and NFPA 70E", 
+        price: 128.0,
+        isbn: "9780826935977",
+        note: ""
+      },
+      {
+        name: "Delmar's Standard Book of Electricity", 
+        price: 150.0,
+        isbn: "9781337900348",
+        note: "Cengage Unlimited yearly fee"
+      },
+      {
+        name: "Electrical Systems Based on the 2023 NEC", 
+        price: 135.0,
+        isbn: "9780826920638",
+        note: ""
+      },
     ],
     
     courseTools: [

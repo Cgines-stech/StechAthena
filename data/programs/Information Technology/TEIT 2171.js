@@ -44,7 +44,12 @@ const TEIT2171 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "CompTIA Network+ CertMaster Learn", 
+        price: 121.0,
+        isbn: "978-1-642745-24-5",
+        note: "Introduction to Networking and Computer Networks I and II"
+      },
     ],
     
     courseTools: [

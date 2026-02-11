@@ -43,7 +43,30 @@ const TECA1240 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Culinary Artistry", 
+        price: 20.0,
+        isbn: "9780471287858",
+        note: ""
+      },
+      {
+        name: "Professional Baking 8th Edition", 
+        price: 90.0,
+        isbn: "9781119744993",
+        note: ""
+      },
+      {
+        name: "Culinary Math 4th ed", 
+        price: 35.0,
+        isbn: "9781118972724",
+        note: ""
+      },
+      {
+        name: "On Cooking 6th ed", 
+        price: 147.0,
+        isbn: "9780134441900",
+        note: ""
+      },
     ],
     
     courseTools: [

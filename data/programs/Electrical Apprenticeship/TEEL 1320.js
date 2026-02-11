@@ -39,7 +39,42 @@ const TEEL1320 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "NFPA 70: NEC National Electrical Code 2023", 
+        price: 90.0,
+        isbn: "9781455929320",
+        note: ""
+      },
+      {
+        name: "Ugly's Electrical References, 2023 Edition", 
+        price: 20.0,
+        isbn: "9781284275914",
+        note: ""
+      },
+      {
+        name: "Electrical Grounding and Bonding 7th Edition", 
+        price: 150.0,
+        isbn: "9780357766835",
+        note: "Cengage Unlimited yearly fee"
+      },
+      {
+        name: "Understand Motor Controls 4th Edition", 
+        price: 0.0,
+        isbn: "9781337798761",
+        note: "Included with Cengage Unlimited"
+      },
+      {
+        name: "Understanding the NEC Vol. 2", 
+        price: 60.0,
+        isbn: "9781950431786",
+        note: ""
+      },
+      {
+        name: "Electrical Wiring Commercial 18th edition", 
+        price: 0.0,
+        isbn: "9780357767108",
+        note: "Included with Cengage Unlimited"
+      },
     ],
     
     courseTools: [

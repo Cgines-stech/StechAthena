@@ -41,7 +41,30 @@ const TEEL1120 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Illustrated Guide to the National Electrical Code 2020", 
+        price: 150.0,
+        isbn: "9780357766712",
+        note: "Cengage Unlimited yearly fee"
+      },
+      {
+        name: "Electrical Wiring Residental 21st Edition", 
+        price: 0.0,
+        isbn: "9798214122823",
+        note: "Included with Cengage Unlimited"
+      },
+      {
+        name: "NFPA 70: NEC National Electrical Code 2023", 
+        price: 90.0,
+        isbn: "9781455929320",
+        note: ""
+      },
+      {
+        name: "Ugly's Electrical References, 2023 Edition", 
+        price: 20.0,
+        isbn: "9781284275914",
+        note: ""
+      },
     ],
     
     courseTools: [

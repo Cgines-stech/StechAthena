@@ -41,7 +41,13 @@ const TEAM2210 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name:
+          "Amatrol E-Learning",
+        price: 375.0,
+        isbn: "",
+        note: ""
+      }
     ],
     
     courseTools: [

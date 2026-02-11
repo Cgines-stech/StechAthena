@@ -47,6 +47,36 @@ const TECA1830 = [
 
     syllabiBooks: [
       {
+        name: "Culinary Artistry", 
+        price: 20.0,
+        isbn: "9780471287858",
+        note: ""
+      },
+      {
+        name: "Professional Baking 8th Edition", 
+        price: 90.0,
+        isbn: "9781119744993",
+        note: ""
+      },
+      {
+        name: "Culinary Math 4th ed", 
+        price: 35.0,
+        isbn: "9781118972724",
+        note: ""
+      },
+      {
+        name: "On Cooking 6th ed", 
+        price: 147.0,
+        isbn: "9780134441900",
+        note: ""
+      },
+      {
+        name: "Flour, Water, Salt, Yeast", 
+        price: 15.0,
+        isbn: "9780866127400",
+        note: ""
+      },
+      {
         name: "ServSafe Manager Book, 8th ed", 
         price: 105.0,
         isbn: "9780866127400",
