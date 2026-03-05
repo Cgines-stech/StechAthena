@@ -31,10 +31,10 @@ const TESU1051 = [
     ],
 
     courseOutline: [
-      { title: "The Digestive System and General Surgery", hours: 18},
-      { title: "The Respiratory System and Otorhinolaryngologic Surgery", hours: 18},
-      { title: "The Muscular System, Maxillofacial Surgery, and Reconstructive Surgery", hours: 18},
-      { title: "Final Exams", hours: 6},
+      { title: "The Digestive System and General Surgery", hours: 20},
+      { title: "The Respiratory System and Otorhinolaryngologic Surgery", hours: 16},
+      { title: "The Muscular System, Maxillofacial Surgery, and Reconstructive Surgery", hours: 16},
+      { title: "Final Exams", hours: 8},
     ],
 
     courseBooks: [
