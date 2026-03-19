@@ -48,18 +48,7 @@ const TEES2020 = [
     ],
 
     syllabiBooks: [
-      {
-        name: "Master Textbook (Advanced Esthetics Textbook)", 
-        price: 210.0,
-        isbn: "9780357873069",
-        note: ""
-      },
-      {
-        name: "Master Workbook (Advanced Esthetics Workbook)", 
-        price: 135.0,
-        isbn: "9798214049571",
-        note: ""
-      },
+      {},
     ],
     
     courseTools: [

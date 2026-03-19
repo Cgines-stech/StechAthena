@@ -35,30 +35,18 @@ const TEES1010 = [
 
     courseBooks: [
       {
-        name: "Basic Textbook (Fundamental and Foundations Textbook Bundle)", 
-        price: 210.0,
-        isbn: "9780357263792",
-        note: ""
-      },
-      {
-        name: "Basic Work Book (Fundamental and Foundations Workbook)", 
-        price: 175.0,
-        isbn: "9780357482841",
+        name: "12th Edition Milady Standard Fundamental Esthetics CIMA Access Code", 
+        price: 269.0,
+        isbn: "9798214098654",
         note: ""
       },
     ],
 
     syllabiBooks: [
       {
-        name: "Basic Textbook (Fundamental and Foundations Textbook Bundle)", 
-        price: 210.0,
-        isbn: "9780357263792",
-        note: ""
-      },
-      {
-        name: "Basic Work Book (Fundamental and Foundations Workbook)", 
-        price: 175.0,
-        isbn: "9780357482841",
+        name: "12th Edition Milady Standard Fundamental Esthetics CIMA Access Code", 
+        price: 269.0,
+        isbn: "9798214098654",
         note: ""
       },
     ],

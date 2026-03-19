@@ -42,12 +42,7 @@ const TEES2994 = [
     ],
 
     syllabiBooks: [
-      {
-        name: "Master Workbook (Advanced Esthetics Workbook)", 
-        price: 135.0,
-        isbn: "9798214049571",
-        note: ""
-      },
+      {},
     ],
     
     courseTools: [

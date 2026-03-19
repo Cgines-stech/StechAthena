@@ -44,22 +44,11 @@ const TEES1030 = [
     ],
 
     syllabiBooks: [
-      {
-        name: "Basic Textbook (Fundamental and Foundations Textbook Bundle)", 
-        price: 210.0,
-        isbn: "9780357263792",
-        note: ""
-      },
-      {
-        name: "Basic Work Book (Fundamental and Foundations Workbook)", 
-        price: 175.0,
-        isbn: "9780357482841",
-        note: ""
-      },
+      {},
     ],
     
     courseTools: [
-      { name: "Jane Iredale Make Up Kit", price: 200.0, note: "" },
+      {},
     ],
 
     courseCertifications: [

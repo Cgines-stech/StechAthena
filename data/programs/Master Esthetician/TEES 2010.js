@@ -40,37 +40,36 @@ const TEES2010 = [
 
     courseBooks: [
       {
-        name: "Master Textbook (Advanced Esthetics Textbook)", 
-        price: 210.0,
-        isbn: "9780357873069",
+        name: "3rd edition Milady Advanced Esthetics CIMA Access Code", 
+        price: 269.0,
+        isbn: "9798214049618",
         note: ""
       },
       {
-        name: "Master Workbook (Advanced Esthetics Workbook)", 
-        price: 135.0,
-        isbn: "9798214049571",
+        name: "CIMA Exam Prep Printed Access Code", 
+        price: 44.0,
+        isbn: "9798214049632",
         note: ""
       },
     ],
 
     syllabiBooks: [
       {
-        name: "Master Textbook (Advanced Esthetics Textbook)", 
-        price: 210.0,
-        isbn: "9780357873069",
+        name: "3rd edition Milady Advanced Esthetics CIMA Access Code", 
+        price: 269.0,
+        isbn: "9798214049618",
         note: ""
       },
       {
-        name: "Master Workbook (Advanced Esthetics Workbook)", 
-        price: 135.0,
-        isbn: "9798214049571",
+        name: "CIMA Exam Prep Printed Access Code", 
+        price: 44.0,
+        isbn: "9798214049632",
         note: ""
       },
     ],
     
     courseTools: [
-      { name: "Hydrinity Kit", price: 159.0, note: "" },
-      { name: "Hydrafacial Kit", price: 390.0, note: "" },
+      { name: "Master Esthetician Kit", price: 549.0, note: "" },
     ],
 
     courseCertifications: [

@@ -46,23 +46,11 @@ const TEES1020 = [
     ],
 
     syllabiBooks: [
-      {
-        name: "Basic Textbook (Fundamental and Foundations Textbook Bundle)", 
-        price: 210.0,
-        isbn: "9780357263792",
-        note: ""
-      },
-      {
-        name: "Basic Work Book (Fundamental and Foundations Workbook)", 
-        price: 175.0,
-        isbn: "9780357482841",
-        note: ""
-      },
+      {},
     ],
     
     courseTools: [
-      { name: "Lisa Mannequin Head", price: 95.0, note: "" },
-      { name: "Glymed+ Kit", price: 180.0, note: "" },
+      { name: "Basic Esthetician Kit", price: 475.0, note: "" },
     ],
 
     courseCertifications: [

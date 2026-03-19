@@ -84,7 +84,7 @@ const TEWT1000 = [
     ],
     
     courseTools: [
-      { name: "Earbuds", price: 13.0, note: "" },
+      {},
     ],
 
     courseCertifications: [
