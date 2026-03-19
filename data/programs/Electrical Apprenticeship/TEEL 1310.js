@@ -47,12 +47,6 @@ const TEEL1310 = [
         note: "Included with Cengage Unlimited"
       },
       {
-        name: "Understanding the NEC Vol. 2", 
-        price: 60.0,
-        isbn: "9781950431786",
-        note: ""
-      },
-      {
         name: "Electrical Wiring Commercial 18th edition", 
         price: 0.0,
         isbn: "9780357767108",

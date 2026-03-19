@@ -37,43 +37,43 @@ const TEPL1110 = [
     courseBooks: [
       {
         name: "Mathematics for Plumbers and Pipefitters", 
-        price: 187.0,
+        price: 258.0,
         isbn: "9781111642600",
         note: "Used in all courses"
       },
       {
         name: "International Fuel Gas Code 2021", 
-        price: 107.0,
+        price: 109.0,
         isbn: "9781609839666",
         note: "Used in all courses"
       },
       {
         name: "International Fuel Gas Code 2021 Study Companion", 
-        price: 83.0,
+        price: 75.0,
         isbn: "9781955052320",
         note: "Used in all courses"
       },
       {
         name: "International Plumbing Code 2021", 
-        price: 114.0,
+        price: 112.0,
         isbn: "9781609839628",
         note: "Used in all courses"
       },
       {
         name: "International Plumbing Code 2021 Study Companion", 
-        price: 84.0,
+        price: 75.0,
         isbn: "9781955052283",
         note: "Used in all courses"
       },
       {
         name: "Modern Plumbing Textbook", 
-        price: 126.0,
+        price: 253.0,
         isbn: "9781619608634",
         note: "Used in all courses"
       },
       {
         name: "Modern Plumbing Lab Workbook", 
-        price: 45.0,
+        price: 46.0,
         isbn: "9781645646709",
         note: "Used in all courses"
       },
@@ -82,43 +82,43 @@ const TEPL1110 = [
     syllabiBooks: [
       {
         name: "Mathematics for Plumbers and Pipefitters", 
-        price: 187.0,
+        price: 258.0,
         isbn: "9781111642600",
         note: "Used in all courses"
       },
       {
         name: "International Fuel Gas Code 2021", 
-        price: 107.0,
+        price: 109.0,
         isbn: "9781609839666",
         note: "Used in all courses"
       },
       {
         name: "International Fuel Gas Code 2021 Study Companion", 
-        price: 83.0,
+        price: 75.0,
         isbn: "9781955052320",
         note: "Used in all courses"
       },
       {
         name: "International Plumbing Code 2021", 
-        price: 114.0,
+        price: 112.0,
         isbn: "9781609839628",
         note: "Used in all courses"
       },
       {
         name: "International Plumbing Code 2021 Study Companion", 
-        price: 84.0,
+        price: 75.0,
         isbn: "9781955052283",
         note: "Used in all courses"
       },
       {
         name: "Modern Plumbing Textbook", 
-        price: 126.0,
+        price: 253.0,
         isbn: "9781619608634",
         note: "Used in all courses"
       },
       {
         name: "Modern Plumbing Lab Workbook", 
-        price: 45.0,
+        price: 46.0,
         isbn: "9781645646709",
         note: "Used in all courses"
       },

@@ -41,7 +41,7 @@ const TEEL1210 = [
       },
       {
         name: "Electrical Systems Based on the 2023 NEC", 
-        price: 135.0,
+        price: 140.0,
         isbn: "9780826920638",
         note: ""
       },

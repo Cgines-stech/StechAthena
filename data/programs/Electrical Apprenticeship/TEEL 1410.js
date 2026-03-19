@@ -35,18 +35,7 @@ const TEEL1410 = [
     ],
 
     courseBooks: [
-      {
-        name: "2023 Electrical Exam Preparation", 
-        price: 71.0,
-        isbn: "9781950431717",
-        note: ""
-      },
-      {
-        name: "Understanding the NEC Vol. 1", 
-        price: 69.0,
-        isbn: "9781950431779",
-        note: ""
-      },
+      {},
     ],
 
     syllabiBooks: [
