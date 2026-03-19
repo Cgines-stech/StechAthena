@@ -14,7 +14,7 @@ const TEPT1900 = [
     statewideAlignment: "Aligned",
     courseClockHours: 210,
     courseTuition: 380.00,
-    courseFee: 0.00,
+    courseFee: 63.00,
     instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,

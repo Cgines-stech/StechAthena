@@ -65,7 +65,7 @@ const TEPT1010 = [
         note: "Paid to Department of Professional Licensure" 
       },
       {
-        name: "Utah Trainee Pharmacy Technician License", 
+        name: "Criminal History Report", 
         price: 20.00,
         note: "Paid to Utah Bureau of Criminal Identification" 
       },

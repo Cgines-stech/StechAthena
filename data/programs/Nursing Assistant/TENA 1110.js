@@ -85,12 +85,17 @@ const TENA1110 = [
       {
         name: "State Knowledge Exam", 
         price: 35.0, 
-        note: "" 
+        note: "Paid to UNAR" 
       },
       {
         name: "State Skills Exam", 
         price: 55.0, 
-        note: "" 
+        note: "Paid to UNAR"
+      },
+      {
+        name: "Background Check & Drug Screen", 
+        price: 94.8, 
+        note: "Paid to Verified Credentials"
       },
     ],
 

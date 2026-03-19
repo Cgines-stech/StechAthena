@@ -16,7 +16,7 @@ const TEPN2170 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 60,
     courseTuition: 190.00,
-    courseFee: 10.00,
+    courseFee: 240.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,

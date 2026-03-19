@@ -16,7 +16,7 @@ const TEPN1270 = [
     statewideAlignment: "Aligned",
     courseClockHours: 60,
     courseTuition: 190.00,
-    courseFee: 386.00,
+    courseFee: 20.00,
     instructionalType: "LEC",
     isElective: false,
     includeInProgramTotals: true,
