@@ -39,8 +39,8 @@ const TEIT1300 = [
     courseBooks: [
       {
         name: "CompTIA Linux+ CertMaster Learn", 
-        price: 139.0,
-        isbn: "978-1-64274-571-9",
+        price: 120.0,
+        isbn: "9781642745719",
         note: "Linux Foundations"
       },
     ],
@@ -48,8 +48,8 @@ const TEIT1300 = [
     syllabiBooks: [
       {
         name: "CompTIA Linux+ CertMaster Learn", 
-        price: 139.0,
-        isbn: "978-1-64274-571-9",
+        price: 120.0,
+        isbn: "9781642745719",
         note: "Linux Foundations"
       },
     ],

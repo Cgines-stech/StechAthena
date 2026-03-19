@@ -14,7 +14,7 @@ const TECA1725 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 60,
     courseTuition: 190.00,
-    courseFee: 150.00,
+    courseFee: 80.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,

@@ -14,7 +14,7 @@ const TECA1920 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 90,
     courseTuition: 190.00,
-    courseFee: 0.00,
+    courseFee: 40.00,
     instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,

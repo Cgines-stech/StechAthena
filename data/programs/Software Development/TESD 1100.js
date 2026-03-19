@@ -44,7 +44,7 @@ const TESD1100 = [
     courseBooks: [
       {
         name: "New Perspectives on HTML 5 and CSS: Comprehensive Version, 8th Ed (Lifetime Access)", 
-        price: 110.0,
+        price: 123.0,
         isbn: "9780357107270",
         note: "Access Code"
       },
@@ -53,7 +53,7 @@ const TESD1100 = [
     syllabiBooks: [
       {
         name: "New Perspectives on HTML 5 and CSS: Comprehensive Version, 8th Ed (Lifetime Access)", 
-        price: 110.0,
+        price: 123.0,
         isbn: "9780357107270",
         note: "Access Code"
       },

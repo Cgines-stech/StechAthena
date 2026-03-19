@@ -48,8 +48,8 @@ const TEIT1800 = [
 
     courseCertifications: [
       {
-        name: "220-1101 & 220-1102", 
-        price: 240.0, 
+        name: "A+ Core I & Core II Certification", 
+        price: 244.0, 
         note: "" 
       },
     ],

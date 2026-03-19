@@ -43,8 +43,8 @@ const TEIT1200 = [
     courseBooks: [
       {
         name: "CompTIA A+ Core 1 and Core 2 CertMaster Learn", 
-        price: 129.0,
-        isbn: "978-1-64274-603-7",
+        price: 155.0,
+        isbn: "9781642746037",
         note: "A+ Core I and II"
       },
     ],
@@ -52,8 +52,8 @@ const TEIT1200 = [
     syllabiBooks: [
       {
         name: "CompTIA A+ Core 1 and Core 2 CertMaster Learn", 
-        price: 129.0,
-        isbn: "978-1-64274-603-7",
+        price: 155.0,
+        isbn: "9781642746037",
         note: "A+ Core I and II"
       },
     ],
@@ -69,12 +69,12 @@ const TEIT1200 = [
     otherAssociatedCosts: [
       {
         name: "CompTIA Linux+ Certification", 
-        price: 188.0, 
+        price: 189.0, 
         note: "Optional Certification payable to Pearson Vue" 
       },
       {
         name: "CompTIA Security+ Certification", 
-        price: 272.0, 
+        price: 276.0, 
         note: "Optional Certification payable to Pearson Vue" 
       },
     ],

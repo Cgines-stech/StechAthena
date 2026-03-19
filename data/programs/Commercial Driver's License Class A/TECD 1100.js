@@ -47,13 +47,13 @@ const TECD1100 = [
     courseBooks: [
       {
         name: "Entry Level Driver Training Obtaining a CDL", 
-        price: 57.0,
+        price: 65.0,
         isbn: "9781680084931",
         note: ""
       },
       {
         name: "Log Book Holder, Log Book, Ruler", 
-        price: 32.0,
+        price: 37.0,
         isbn: "B083P53B8T",
         note: ""
       },
@@ -68,13 +68,13 @@ const TECD1100 = [
     syllabiBooks: [
       {
         name: "Entry Level Driver Training Obtaining a CDL", 
-        price: 57.0,
+        price: 65.0,
         isbn: "9781680084931",
         note: ""
       },
       {
         name: "Log Book Holder, Log Book, Ruler", 
-        price: 32.0,
+        price: 37.0,
         isbn: "B083P53B8T",
         note: ""
       },

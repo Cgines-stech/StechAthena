@@ -43,8 +43,8 @@ const TECA1625 = [
     courseBooks: [
       {
         name: "Flour, Water, Salt, Yeast", 
-        price: 15.0,
-        isbn: "9780866127400",
+        price: 30.0,
+        isbn: "9781607742739",
         note: ""
       },
     ],
