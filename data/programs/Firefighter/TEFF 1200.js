@@ -56,42 +56,18 @@ const TEFF1200 = [
 
     courseBooks: [
       {
-        name: "Essentials of Fire Fighting Textbook, 7th Edition & Student Workbook", 
-        price: 76.0,
-        isbn: "9780879396626",
-        note: ""
-      },
-      {
-        name: "Essentials of Fire Fighting, 7th Edition Exam Prep Print", 
-        price: 39.0,
-        isbn: "9780879396589",
-        note: ""
-      },
-      {
-        name: "Hazardous Materials for First Responders, 5th Edition", 
-        price: 111.0,
-        isbn: "9780879396138",
+        name: "Hazardous Materials for First Responders, 6th Edition & Workbook", 
+        price: 115.0,
+        isbn: "9780879397579",
         note: ""
       },
     ],
 
     syllabiBooks: [
       {
-        name: "Essentials of Fire Fighting Textbook, 7th Edition & Student Workbook", 
-        price: 76.0,
-        isbn: "9780879396626",
-        note: ""
-      },
-      {
-        name: "Essentials of Fire Fighting, 7th Edition Exam Prep Print", 
-        price: 39.0,
-        isbn: "9780879396589",
-        note: ""
-      },
-      {
-        name: "Hazardous Materials for First Responders, 5th Edition", 
-        price: 111.0,
-        isbn: "9780879396138",
+        name: "Hazardous Materials for First Responders, 6th Edition & Workbook", 
+        price: 115.0,
+        isbn: "9780879397579",
         note: ""
       },
     ],

@@ -36,18 +36,18 @@ const TEFF1100 = [
 
     courseBooks: [
       {
-        name: "Introduction to Fire Protection and Emergency Services, 6th Edition", 
-        price: 113.0,
-        isbn: "9781284180152",
+        name: "Essentials of Fire Fighting Textbook, 7th Edition & Student Workbook", 
+        price: 116.0,
+        isbn: "9780879396626",
         note: ""
       },
     ],
 
     syllabiBooks: [
       {
-        name: "Introduction to Fire Protection and Emergency Services, 6th Edition", 
-        price: 113.0,
-        isbn: "9781284180152",
+        name: "Essentials of Fire Fighting Textbook, 7th Edition & Student Workbook", 
+        price: 116.0,
+        isbn: "9780879396626",
         note: ""
       },
     ],
