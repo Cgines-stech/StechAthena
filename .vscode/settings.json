@@ -119,6 +119,14 @@
         {
             "folderPath": "StechAthena\\data\\programs\\Practical Nursing\\PN 1090.js\\",
             "color": "foldercolorizer.color_ff0000"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Phlebotomy\\TEPH 1010.js\\",
+            "color": "foldercolorizer.color_ff0000"
+        },
+        {
+            "folderPath": "StechAthena\\data\\programs\\Phlebotomy\\TEPH 1020.js\\",
+            "color": "foldercolorizer.color_ff0000"
         }
     ]
 }

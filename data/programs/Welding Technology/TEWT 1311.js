@@ -14,7 +14,7 @@ const TEWT1311 = [
     statewideAlignment: "Aligned",
     courseClockHours: 60,
     courseTuition: 190.00,
-    courseFee: 175.00,
+    courseFee: 180.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,

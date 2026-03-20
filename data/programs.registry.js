@@ -89,6 +89,7 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Commercial Driver's License Class A/TECD 1100.js",
   ],
   "Culinary Arts": [
+    // added 1625 and 1725 for FY27
     "../../data/programs/Culinary Arts/TECA 1000.js",
     "../../data/programs/Culinary Arts/TECA 1010.js",
     "../../data/programs/Culinary Arts/TECA 1020.js",
@@ -98,13 +99,12 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Culinary Arts/TECA 1220.js",
     "../../data/programs/Culinary Arts/TECA 1240.js",
     "../../data/programs/Culinary Arts/TECA 1400.js",
+    "../../data/programs/Culinary Arts/TECA 1725.js",
     "../../data/programs/Culinary Arts/TECA 1210.js",
     "../../data/programs/Culinary Arts/TECA 1500.js",
     "../../data/programs/Culinary Arts/TECA 1600.js",
-    "../../data/programs/Culinary Arts/TECA 1630.js",
-    // add 1625 and 1725 for FY27
     "../../data/programs/Culinary Arts/TECA 1625.js",
-    "../../data/programs/Culinary Arts/TECA 1725.js",
+    "../../data/programs/Culinary Arts/TECA 1630.js",
     "../../data/programs/Culinary Arts/TECA 1800.js",
     "../../data/programs/Culinary Arts/TECA 1830.js",
     "../../data/programs/Culinary Arts/TECA 1920.js",
@@ -206,8 +206,11 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Pharmacy Technician/TEPT 1900.js",
   ],
   "Phlebotomy": [
-    "../../data/programs/Phlebotomy/TEPH 1010.js",
-    "../../data/programs/Phlebotomy/TEPH 1020.js",
+    // These courses were last used for FY26.
+    // "../../data/programs/Phlebotomy/TEPH 1010.js",
+    // "../../data/programs/Phlebotomy/TEPH 1020.js",
+    // For FY27
+    "../../data/programs/Phlebotomy/TEPH 1015.js",
   ],
   "Plumbing Apprenticeship": [
     "../../data/programs/Plumbing Apprenticeship/TEPL 1110.js",
