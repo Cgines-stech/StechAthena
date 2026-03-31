@@ -101,9 +101,9 @@ const TEPN1300 = [
 
     instructorContactInformation: [
       { 
-        name: "Preston Dye",   
+        name: "Patricia Weller",   
         title: "",        
-        email: "pdye@stech.edu",
+        email: "pweller@stech.edu",
         phone: "",
         office: "",
         instructorNote: ``, 

@@ -108,16 +108,13 @@ const TEPN1100 = [
 
     instructorContactInformation: [
       { 
-        name: "Preston Dye",
+        name: "Marie Smack",
         title: "",
-        email: "pdye@stech.edu",
+        email: "msmack@stech.edu",
         phone: "(435) 865-6703",
         office: "",
-        instructorNote: `
-        Office Location: Health Professions and Trades Building, 211L<br>
-        Office Hours: Monday, Tuesday, Thursday, and Friday by appointment while the program is in session.<br>
-        <em>Email is the preferred method of communication; you will receive a response within 72 hours during regular business hours.</em>
-      `},
+        instructorNote: ``,
+      },
     ],
 
     course_Policies: [

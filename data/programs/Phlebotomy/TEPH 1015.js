@@ -37,8 +37,8 @@ const TEPH1015 = [
       { title: "Introduction, Infection Control, and Safety", hours: 15},
       { title: "Anatomy and Physiology", hours: 5},
       { title: "Phlebotomy Equipment & Technique", hours: 40},
-      { title: "Phlebotomy Equipment & Technique", hours: 15},
-      { title: "Phlebotomy Equipment & Technique", hours: 10},
+      { title: "Patient Reactions, Complication, Capillary & Blood Collections", hours: 15},
+      { title: "Non Blood Collection, Sample Preparation and Handling", hours: 10},
       { title: "Customer Service, Compliance, and Competency", hours: 5},
     ],
 

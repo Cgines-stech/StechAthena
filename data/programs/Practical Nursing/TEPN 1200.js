@@ -96,9 +96,9 @@ const TEPN1200 = [
 
     instructorContactInformation: [
       { 
-        name: "Marie Smack",
+        name: "Vicki Swasey",
         title: "",
-        email: "msmack@stech.edu",
+        email: "vswasey@stech.edu",
         phone: "",
         office: "",
         instructorNote: ``},
