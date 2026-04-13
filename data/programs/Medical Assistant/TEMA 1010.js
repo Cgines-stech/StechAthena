@@ -14,7 +14,7 @@ const TEMA1010 = [
     statewideAlignment: "Aligned",
     courseClockHours: 60,
     courseTuition: 190.00,
-    courseFee: 150.00,
+    courseFee: 50.00,
     instructionalType: "LEC",
     isElective: false,
     includeInProgramTotals: true,
@@ -54,7 +54,7 @@ const TEMA1010 = [
     ],
     
     courseTools: [
-      { name: "Digital Device (Chromebook)", price: 302.5, note: "Chromebook or comparable device - Available at STECH Bookstore, can be purchased elsewhere" },
+      { name: "1 Set of Embroidered Scrubs, 1 Embroidered Jacket", price: 150.00, note: " Provided in class. Do not purchase separately.", optional: false },
     ],
 
     courseCertifications: [
@@ -62,7 +62,11 @@ const TEMA1010 = [
     ],
 
     otherAssociatedCosts: [
-      {}
+      {
+        name: "Digital Device (Chromebook)", 
+        price: 302.5, 
+        note: "Chromebook or comparable device - Available at STECH Bookstore, can be purchased elsewhere" 
+      }
     ],
 
     courseClassroomHours: [

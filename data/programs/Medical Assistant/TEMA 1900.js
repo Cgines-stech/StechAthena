@@ -38,7 +38,7 @@ const TEMA1900 = [
     courseBooks: [
       {
         name: "Medical Assistant (CCMA) Online Study Guide 2.0 + Online Practice Test 2.0", 
-        price: 94.0,
+        price: 100.0,
         isbn: "",
         note: "",
       },
@@ -47,7 +47,7 @@ const TEMA1900 = [
     syllabiBooks: [
       {
         name: "Medical Assistant (CCMA) Online Study Guide 2.0 + Online Practice Test 2.0", 
-        price: 94.0,
+        price: 100.0,
         isbn: "",
         note: "",
       },
@@ -60,7 +60,7 @@ const TEMA1900 = [
     courseCertifications: [
       {
          name: "NHA CCMA Exam",
-         price: 165.0,
+         price: 170.0,
          note: ""
       },
     ],
