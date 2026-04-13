@@ -86,7 +86,7 @@ const TEEL1410 = [
     ],
 
     instructorContactInformation: [
-        { name: "Wade Esplin", email: "wesplin@stech.edu", title: "" },
+        { name: "Brandon Jonsson", email: "bjonsson@stech.edu", title: "" },
     ],
 
     course_Policies: [
