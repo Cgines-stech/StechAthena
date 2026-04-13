@@ -40,15 +40,21 @@ const TEEL1320 = [
 
     syllabiBooks: [
       {
-        name: "NFPA 70: NEC National Electrical Code 2023", 
-        price: 90.0,
-        isbn: "9781455929320",
+        name: "NFPA 70: NEC National Electrical Code 2026", 
+        price: 186.0,
+        isbn: "9781455932207",
         note: ""
       },
       {
-        name: "Ugly's Electrical References, 2023 Edition", 
-        price: 20.0,
-        isbn: "9781284275914",
+        name: "NEC 2026 Colored Fast Tabs", 
+        price: 22.0,
+        isbn: "9781622707249",
+        note: ""
+      },
+      {
+        name: "Ugly's Electrical References, 2026 Edition", 
+        price: 22.0,
+        isbn: "9781284315752",
         note: ""
       },
       {
@@ -62,12 +68,6 @@ const TEEL1320 = [
         price: 0.0,
         isbn: "9781337798761",
         note: "Included with Cengage Unlimited"
-      },
-      {
-        name: "Understanding the NEC Vol. 2", 
-        price: 60.0,
-        isbn: "9781950431786",
-        note: ""
       },
       {
         name: "Electrical Wiring Commercial 18th edition", 
