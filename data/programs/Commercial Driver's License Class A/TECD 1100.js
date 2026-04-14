@@ -103,28 +103,51 @@ const TECD1100 = [
     ],
 
     courseClassroomHours: [
-        {
-          termLabel: "Classroom Times (Dates Vary)",
-          startDate: "",
-          endDate: "",
-          Monday: "8:00 AM - 5:00 PM",
-          Tuesday: "8:00 AM - 5:00 PM",
-          Wednesday: "8:00 AM - 5:00 PM",
-          Thursday: "8:00 AM - 5:00 PM",
-          Friday: "8:00 AM - 5:00 PM",
-          Saturday: "",
-        },
-        {
-          termLabel: "Driving Hours (Dates Vary)",
-          startDate: "",
-          endDate: "",
-          Monday: "7:00 AM - 6:00 PM",
-          Tuesday: "7:00 AM - 6:00 PM",
-          Wednesday: "7:00 AM - 6:00 PM",
-          Thursday: "7:00 AM - 6:00 PM",
-          Friday: "7:00 AM - 6:00 PM",
-          Saturday: "",
-        },
+      {
+        termLabel: "Classroom Times (Dates Vary)",
+        startDate: `Cohort Start Dates:
+    07-01-2026
+    07-13-2026
+    07-30-2026
+    08-12-2026
+    08-28-2026
+    09-09-2026
+    09-25-2026
+    10-06-2026
+    10-23-2026
+    11-03-2026
+    11-19-2026
+    12-03-2026
+    01-05-2027
+    01-14-2027
+    02-02-2027
+    02-11-2027
+    03-02-2027
+    03-11-2027
+    04-06-2027
+    04-15-2027
+    05-03-2027
+    05-12-2027
+    06-01-2027`,
+        endDate: "",
+        Monday: "8:00 AM - 5:00 PM",
+        Tuesday: "8:00 AM - 5:00 PM",
+        Wednesday: "8:00 AM - 5:00 PM",
+        Thursday: "8:00 AM - 5:00 PM",
+        Friday: "8:00 AM - 5:00 PM",
+        Saturday: "",
+      },
+      {
+        termLabel: "Driving Hours (Dates Vary)",
+        startDate: "",
+        endDate: "",
+        Monday: "7:00 AM - 6:00 PM",
+        Tuesday: "7:00 AM - 6:00 PM",
+        Wednesday: "7:00 AM - 6:00 PM",
+        Thursday: "7:00 AM - 6:00 PM",
+        Friday: "7:00 AM - 6:00 PM",
+        Saturday: "",
+      },
     ],
 
     instructorContactInformation: [
