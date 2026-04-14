@@ -37,90 +37,54 @@ const TEPL1110 = [
     courseBooks: [
       {
         name: "Mathematics for Plumbers and Pipefitters", 
-        price: 258.0,
+        price: 150.0,
         isbn: "9781111642600",
-        note: "Used in all courses"
+        note: "Cengage Unlimited Yearly Subscription. Also used in TEPL 1120"
       },
       {
-        name: "International Fuel Gas Code 2021", 
-        price: 109.0,
-        isbn: "9781609839666",
-        note: "Used in all courses"
-      },
-      {
-        name: "International Fuel Gas Code 2021 Study Companion", 
-        price: 75.0,
-        isbn: "9781955052320",
-        note: "Used in all courses"
+        name: "Modern Plumbing eBook Bundle w/2yr access code", 
+        price: 175.0,
+        isbn: "9781637768303",
+        note: ""
       },
       {
         name: "International Plumbing Code 2021", 
-        price: 112.0,
+        price: 114.0,
         isbn: "9781609839628",
-        note: "Used in all courses"
+        note: ""
       },
       {
         name: "International Plumbing Code 2021 Study Companion", 
-        price: 75.0,
+        price: 84.0,
         isbn: "9781955052283",
-        note: "Used in all courses"
-      },
-      {
-        name: "Modern Plumbing Textbook", 
-        price: 253.0,
-        isbn: "9781619608634",
-        note: "Used in all courses"
-      },
-      {
-        name: "Modern Plumbing Lab Workbook", 
-        price: 46.0,
-        isbn: "9781645646709",
-        note: "Used in all courses"
+        note: ""
       },
     ],
 
     syllabiBooks: [
       {
         name: "Mathematics for Plumbers and Pipefitters", 
-        price: 258.0,
+        price: 150.0,
         isbn: "9781111642600",
-        note: "Used in all courses"
+        note: "Cengage Unlimited Yearly Subscription. Also used in TEPL 1120"
       },
       {
-        name: "International Fuel Gas Code 2021", 
-        price: 109.0,
-        isbn: "9781609839666",
-        note: "Used in all courses"
-      },
-      {
-        name: "International Fuel Gas Code 2021 Study Companion", 
-        price: 75.0,
-        isbn: "9781955052320",
-        note: "Used in all courses"
+        name: "Modern Plumbing eBook Bundle w/2yr access code", 
+        price: 175.0,
+        isbn: "9781637768303",
+        note: ""
       },
       {
         name: "International Plumbing Code 2021", 
-        price: 112.0,
+        price: 114.0,
         isbn: "9781609839628",
-        note: "Used in all courses"
+        note: ""
       },
       {
         name: "International Plumbing Code 2021 Study Companion", 
-        price: 75.0,
+        price: 84.0,
         isbn: "9781955052283",
-        note: "Used in all courses"
-      },
-      {
-        name: "Modern Plumbing Textbook", 
-        price: 253.0,
-        isbn: "9781619608634",
-        note: "Used in all courses"
-      },
-      {
-        name: "Modern Plumbing Lab Workbook", 
-        price: 46.0,
-        isbn: "9781645646709",
-        note: "Used in all courses"
+        note: ""
       },
     ],
     
