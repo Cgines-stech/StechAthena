@@ -5,7 +5,7 @@ export const instructorNote = ``;
 const softwareDevelopmentInstructors = [
   { name: "Jason Adams", email: "jadams@stech.edu", title: "" },
   { name: "Dallin Savage", email: "dsavage@stech.edu",   title: "" },
-  { name: "Elie Wamana", email: "ewamana@stech.edu",   title: "" },
+  { name: "Nathan Merrill", email: "nmerrill@stech.edu",   title: "" },
 ];
 
 export default softwareDevelopmentInstructors;

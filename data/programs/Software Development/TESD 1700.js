@@ -49,7 +49,7 @@ const TESD1700 = [
     syllabiBooks: [
       {
         name: "PHP and MySQL Web Development, 5th Edition (Lifetime access)", 
-        price: 61.0,
+        price: 64.0,
         isbn: "9780133038637",
         note: "Access Code"
       },
