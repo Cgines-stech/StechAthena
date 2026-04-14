@@ -128,7 +128,8 @@ const TEEL1310 = [
     ],
 
     courseAssignmentsandAsssessments: [
-      
+      "TEEL 1310 Midterm Exam",
+      "TEEL 1310 Final Exam",
     ]
   }
 ]

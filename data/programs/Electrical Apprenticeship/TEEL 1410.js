@@ -94,7 +94,10 @@ const TEEL1410 = [
     ],
 
     courseAssignmentsandAsssessments: [
-      
+      "Attendance Percentage",
+      "Mid Term Exam",
+      "Final Exam",
+      "Final Exam Extra Credit",
     ]
   }
 ]
