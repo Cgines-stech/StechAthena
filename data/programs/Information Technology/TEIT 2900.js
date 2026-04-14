@@ -68,7 +68,9 @@ const TEIT2900 = [
     ],
 
     courseAssignmentsandAsssessments: [
-      {}
+      "Shift 1",
+      "Shift 2",
+      "Shift 3",
     ]
   }
 ]
