@@ -45,8 +45,8 @@ const TEIT1170 = [
     syllabiBooks: [
       {
         name: "CompTIA Network+ CertMaster Learn", 
-        price: 121.0,
-        isbn: "978-1-642745-24-5",
+        price: 120.0,
+        isbn: "9781642745245",
         note: "Introduction to Networking and Computer Networks I and II"
       },
     ],

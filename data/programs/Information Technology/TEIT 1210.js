@@ -46,8 +46,8 @@ const TEIT1210 = [
     syllabiBooks: [
       {
         name: "CompTIA A+ Core 1 and Core 2 CertMaster Learn", 
-        price: 129.0,
-        isbn: "978-1-64274-603-7",
+        price: 155.0,
+        isbn: "9781642746037",
         note: "A+ Core I and II"
       },
     ],
