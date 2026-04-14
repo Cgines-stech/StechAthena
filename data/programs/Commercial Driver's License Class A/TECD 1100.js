@@ -104,30 +104,7 @@ const TECD1100 = [
 
     courseClassroomHours: [
       {
-        termLabel: "Cohort Start and End Dates:",
-        startDate: `\n
-    Classroom: 07-01-2026 thru 07-10-2026 and Driving Hours: 07-13-2026	thru 07-30-2026\n
-    Classroom: 07-30-2026 thru 08-11-2026 and Driving Hours: 08-12-2026	thru 08-28-2026\n
-    Classroom: 08-28-2026 thru 09-08-2026 and Driving Hours: 09-09-2026	thru 09-25-2026\n
-    Classroom: 09-25-2026 thru 10-05-2026 and Driving Hours: 10-06-2026	thru 10-26-2026\n
-    Classroom: 10-23-2026 thru 11-02-2026 and Driving Hours: 11-03-2026	thru 11-19-2026\n
-    Classroom: 11-19-2026 thru 12-02-2026 and Driving Hours: 12-03-2026	thru 12-21-2026\n
-    Classroom: 01-05-2027 thru 01-13-2027 and Driving Hours: 01-14-2027	thru 02-02-2027\n
-    Classroom: 02-02-2027 thru 02-10-2027 and Driving Hours: 02-11-2027	thru 03-02-2027\n
-    Classroom: 03-02-2027 thru 03-10-2027 and Driving Hours: 03-11-2027	thru 04-06-2027\n
-    Classroom: 04-06-2027 thru 04-14-2027 and Driving Hours: 04-15-2027	thru 05-03-2027\n
-    Classroom: 05-03-2027 thru 05-11-2027 and Driving Hours: 05-12-2027	thru 05-28-2027\n
-    Classroom: 06-01-2027 thru 06-09-2027 and Driving Hours: 06-10-2027	thru 06-29-2027`,
-        endDate: "",
-        Monday: "",
-        Tuesday: "",
-        Wednesday: "",
-        Thursday: "",
-        Friday: "",
-        Saturday: "",
-      },
-      {
-        termLabel: "Classroom (Dates Vary - See Above for Cohort Dates)",
+        termLabel: "Classroom (Dates Vary)",
         startDate: "",
         endDate: "",
         Monday: "8:00 AM - 5:00 PM",
@@ -138,7 +115,7 @@ const TECD1100 = [
         Saturday: "",
       },
       {
-        termLabel: "Driving Hours (Dates Vary - See Above for Cohort Dates)",
+        termLabel: "Driving Hours (Dates Vary)",
         startDate: "",
         endDate: "",
         Monday: "7:00 AM - 6:00 PM",
