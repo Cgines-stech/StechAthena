@@ -14,7 +14,7 @@ const TEPH1015 = [
     statewideAlignment: "Aligned",
     courseClockHours: 90,
     courseTuition: 285.00,
-    courseFee: 200.00,
+    courseFee: 250.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
