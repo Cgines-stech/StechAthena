@@ -94,7 +94,9 @@ const TECA1725 = [
     ],
 
     courseAssignmentsandAsssessments: [
-      {}
+      "Introduction to Catering",
+      "Introduction to Front of House Service",
+      "Introduction to Barista Training",
     ]
   }
 ]

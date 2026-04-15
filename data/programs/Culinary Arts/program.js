@@ -17,8 +17,8 @@ const culinaryArtsProgram = [
 
     // Update program credit hours and clock hours. Culinary Arts (Credit Hours Required: 34, Clock Hours Required: 1050, CIP: 12.0503)
     programCIP: 12.0503,
-    programCreditHours: 30,
-    programClockHours: 930,
+    programCreditHours: 34,
+    programClockHours: 1050,
     certificate: 'Certificate',
     certificateNorthstar: 'Certificate of Completion - C1Y'
   }
