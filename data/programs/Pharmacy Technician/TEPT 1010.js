@@ -14,7 +14,7 @@ const TEPT1010 = [
     statewideAlignment: "Aligned",
     courseClockHours: 90,
     courseTuition: 285.00,
-    courseFee: 76.00,
+    courseFee: 70.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
