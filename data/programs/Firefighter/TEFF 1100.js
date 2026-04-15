@@ -14,7 +14,7 @@ const TEFF1100 = [
     statewideAlignment: "Aligned",
     courseClockHours: 30,
     courseTuition: 95.00,
-    courseFee: 225.00,
+    courseFee: 100.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
@@ -53,7 +53,8 @@ const TEFF1100 = [
     ],
     
     courseTools: [
-      { name: "Station boots", price: 45.0, note: " Purchased on your own" },
+      { name: "Firefighter Uniform (Button down shirt, Pants, Belt), T-Shirt x 2", price: 150.0, note: "Provided in class. Do not purchase separately." },
+      { name: "Station boots", price: 55.0, note: " Purchased on your own" },
     ],
 
     courseCertifications: [

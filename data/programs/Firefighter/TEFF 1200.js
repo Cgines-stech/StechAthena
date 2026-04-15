@@ -65,6 +65,12 @@ const TEFF1200 = [
 
     syllabiBooks: [
       {
+        name: "Essentials of Fire Fighting Textbook, 7th Edition & Student Workbook", 
+        price: 116.0,
+        isbn: "9780879396626",
+        note: ""
+      },
+      {
         name: "Hazardous Materials for First Responders, 6th Edition & Workbook", 
         price: 115.0,
         isbn: "9780879397579",
