@@ -46,14 +46,16 @@ const TEPN1200 = [
         name: "vSim for Pharmacology", 
         price: 75.0,
         isbn: "9781469894362",
-        note: "Exclusive to the two Pharmacology courses"
+        note: "Provided in class. Do not purchase separately."
       },
     ],
 
     syllabiBooks: [
       {
-        name: "Introductory Clinical Pharmacology, Twelfth Edition", 
-        isbn: "9781975163730",
+        name: "vSim for Pharmacology", 
+        price: 75.0,
+        isbn: "9781469894362",
+        note: "Provided in class. Do not purchase separately."
       },
     ],
     

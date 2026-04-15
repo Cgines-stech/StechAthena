@@ -51,37 +51,33 @@ const TEPN1010 = [
         name: "Lippincott course Point for Nursing Concepts-LPN/LVN", 
         price: 600.0,
         isbn: "9781496362995",
-        note: "Course Text Books and Multple Learning resources are bundled in this product"
+        note: "Provided in class. Do not purchase separately."
       },
       {
         name: "Docucare", 
         price: 105.0,
         isbn: "9781451185171",
-        note: "This learning resource will be used in all courses throughout both semesters"
+        note: "Provided in class. Do not purchase separately."
       },
     ],
 
     syllabiBooks: [
       {
-        name: "vSim for Fundamentals", 
-        isbn: "9781469894188",
-      },
-      {
-        name: "NCLEX-Passpoint", 
-        isbn: "9781496309327",
-      },
-      {
-        name: "CoursePoint for Henke's Med-Math, 10e", 
-        isbn: "9781975200206",
-      },
-      {
         name: "Lippincott course Point for Nursing Concepts-LPN/LVN", 
+        price: 600.0,
         isbn: "9781496362995",
+        note: "Provided in class. Do not purchase separately."
+      },
+      {
+        name: "Docucare", 
+        price: 105.0,
+        isbn: "9781451185171",
+        note: "Provided in class. Do not purchase separately."
       },
     ],
     
     courseTools: [
-      { name: "Chrome Book", price: 302.5, note: "Chromebook or similar device", optional: false },
+      { name: "Practical Nursing Student Uniform", price: 120.0, note: "Provided in class. Do not purchase separately." },
       { name: "Stethoscope/BP Cuff Combo Kit", price: 33.0, note: "" },
       { name: "Shears", price: 16.5, note: "" },
       { name: "Pen light", price: 4.5, note: "" },
@@ -89,7 +85,11 @@ const TEPN1010 = [
     ],
 
     courseCertifications: [
-      {},
+      {
+         name: "BLS/CPR E-Card",
+         price: 8.0,
+         note: "Provided in class. Do not purchase separately."
+      }
     ],
 
     otherAssociatedCosts: [
@@ -97,7 +97,17 @@ const TEPN1010 = [
         name: "NCLEX-PN", 
         price: 200.0, 
         note: "Payable to Pearson Vue" 
-      }
+      },
+      {
+        name: "Digital Device (Chromebook)", 
+        price: 302.5, 
+        note: "Chromebook or comparable device - Available at STECH Bookstore, can be purchased elsewhere" 
+      },
+      {
+        name: "Background Check & Drug Screen", 
+        price: 94.8, 
+        note: "Paid to Verified Credentials"
+      },
     ],
 
     courseClassroomHours: [

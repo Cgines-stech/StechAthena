@@ -37,11 +37,21 @@ const TEPN2570 = [
     ],
 
     courseBooks: [
-      {},
+      {
+        name: "U-World NCLEX Prep", 
+        price: 279.0,
+        isbn: "N/A",
+        note: "Provided in class. Do not purchase separately."
+      },
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "U-World NCLEX Prep", 
+        price: 279.0,
+        isbn: "N/A",
+        note: "Provided in class. Do not purchase separately."
+      },
     ],
     
     courseTools: [

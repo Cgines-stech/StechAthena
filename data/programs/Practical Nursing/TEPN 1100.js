@@ -52,20 +52,28 @@ const TEPN1100 = [
         name: "vSim for Medical Surgical", 
         price: 75.0,
         isbn: "9781469857312",
-        note: ""
+        note: "Provided in class. Do not purchase separately."
       },
       {
         name: "Simulation Learning System for LPN", 
         price: 120.0,
         isbn: "9781455700127",
-        note: ""
+        note: "Provided in class. Do not purchase separately."
       },
     ],
 
     syllabiBooks: [
       {
-        name: "Introductory Medical-Surgical Nursing, 13th Edition", 
-        isbn: "9781975172237",
+        name: "vSim for Medical Surgical", 
+        price: 75.0,
+        isbn: "9781469857312",
+        note: "Provided in class. Do not purchase separately."
+      },
+      {
+        name: "Simulation Learning System for LPN", 
+        price: 120.0,
+        isbn: "9781455700127",
+        note: "Provided in class. Do not purchase separately."
       },
     ],
     

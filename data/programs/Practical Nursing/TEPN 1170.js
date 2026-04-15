@@ -54,25 +54,25 @@ const TEPN1170 = [
         name: "vSim for Fundamentals", 
         price: 75.0,
         isbn: "9781469894188",
-        note: "Exclusive to this course"
+        note: "Provided in class. Do not purchase separately."
       },
       {
         name: "NCLEX-Passpoint", 
         price: 160.0,
         isbn: "9781496309327",
-        note: "This learning resource will be used in all courses throughout both semesters"
+        note: "Provided in class. Do not purchase separately."
       },
       {
         name: "CoursePoint for Henke's Med-Math, 10e", 
         price: 110.0,
         isbn: "9781975200206",
-        note: ""
+        note: "Provided in class. Do not purchase separately."
       },
       {
         name: "Lippincott Skills ", 
         price: 140.0,
         isbn: "9781975182519",
-        note: ""
+        note: "Provided in class. Do not purchase separately."
       },
     ],
 

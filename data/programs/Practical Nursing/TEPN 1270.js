@@ -49,10 +49,7 @@ const TEPN1270 = [
     ],
 
     syllabiBooks: [
-      {
-        name: "Introductory Clinical Pharmacology, Twelfth Edition", 
-        isbn: "9781975163730",
-      },
+      {},
     ],
     
     courseTools: [
