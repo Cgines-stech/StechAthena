@@ -43,7 +43,18 @@ const TEES2995 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "3rd edition Milady Advanced Esthetics CIMA Access Code", 
+        price: 269.0,
+        isbn: "9798214049618",
+        note: ""
+      },
+      {
+        name: "CIMA Exam Prep Printed Access Code", 
+        price: 44.0,
+        isbn: "9798214049632",
+        note: ""
+      },
     ],
     
     courseTools: [

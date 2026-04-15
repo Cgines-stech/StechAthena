@@ -14,7 +14,7 @@ const TEES1010 = [
     statewideAlignment: "Aligned",
     courseClockHours: 30,
     courseTuition: 95.00,
-    courseFee: 80.00,
+    courseFee: 0.00,
     instructionalType: "LEC",
     isElective: false,
     includeInProgramTotals: true,
@@ -52,7 +52,7 @@ const TEES1010 = [
     ],
     
     courseTools: [
-      {}
+      { name: "Master Esthetician Scrubs x 2 Sets", price: 80.0, note: "Provided in class. Do not purchase separately." },
     ],
 
     courseCertifications: [

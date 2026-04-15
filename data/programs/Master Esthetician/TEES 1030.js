@@ -44,7 +44,12 @@ const TEES1030 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "12th Edition Milady Standard Fundamental Esthetics CIMA Access Code", 
+        price: 269.0,
+        isbn: "9798214098654",
+        note: ""
+      },
     ],
     
     courseTools: [
