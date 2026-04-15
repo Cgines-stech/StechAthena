@@ -63,7 +63,7 @@ const TEEM1202 = [
     ],
     
     courseTools: [
-      { name: "BP cuff/stethoscope", price: 33.0, note: "Provided in class. Do not purchase separately." },
+      { name: "Advanced Emergency Medical Technician Class T-Shirt x 2", price: 25.0, note: "Provided in class. Do not purchase separately." },
       { name: "BP cuff/stethoscope", price: 33.0, note: "Available in Stech Bookstore" },
       { name: "Shears", price: 16.5, note: "Available in Stech Bookstore" },
       { name: "Pen light", price: 4.5, note: "Available in Stech Bookstore" },
