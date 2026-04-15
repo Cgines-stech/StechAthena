@@ -14,7 +14,7 @@ const TEAU1600 = [
     statewideAlignment: "Aligned",
     courseClockHours: 120,
     courseTuition: 380.00,
-    courseFee: 320.00,
+    courseFee: 40.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
@@ -50,7 +50,7 @@ const TEAU1600 = [
     ],
     
     courseTools: [
-      {}
+      { name: "Digital Fluke Meter", price: 280.0, note: "Provided in class. Do not purchase separately." },
     ],
 
     courseCertifications: [

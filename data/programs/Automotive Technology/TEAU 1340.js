@@ -14,7 +14,7 @@ const TEAU1340 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 90,
     courseTuition: 285.00,
-    courseFee: 126.00,
+    courseFee: 80.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
@@ -53,7 +53,11 @@ const TEAU1340 = [
     ],
 
     courseCertifications: [
-      {}
+      {
+         name: "ASE Exam Fee 2",
+         price: 46.0,
+         note: "Provided in class. Do not purchase separately."
+      }
     ],
 
     otherAssociatedCosts: [

@@ -14,7 +14,7 @@ const TEAU1050 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 30,
     courseTuition: 95.00,
-    courseFee: 297.00,
+    courseFee: 25.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
@@ -39,8 +39,7 @@ const TEAU1050 = [
 
     courseBooks: [
       {
-        name:
-          "Cengage Unlimited Subscription",
+        name: "Cengage Unlimited Subscription",
         price: 150.0,
         isbn: "Syllabus",
         note: "Cengage Unlimited Subscription"
@@ -52,11 +51,15 @@ const TEAU1050 = [
     ],
     
     courseTools: [
-      {}
+      { name: "Automotive Uniform", price: 225.0, note: "Provided in class. Do not purchase separately." },
     ],
 
     courseCertifications: [
-      {}
+      {
+         name: "ASE Exam Fee 1",
+         price: 46.0,
+         note: "Provided in class. Do not purchase separately."
+      }
     ],
 
     otherAssociatedCosts: [
