@@ -14,7 +14,7 @@ const TEPT1610 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 30,
     courseTuition: 95.00,
-    courseFee: 65.00,
+    courseFee: 0.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
@@ -34,11 +34,21 @@ const TEPT1610 = [
     ],
 
     courseBooks: [
-      {},
+      {
+        name: "PTCB Practice Test Bank", 
+        price: 65.0,
+        isbn: "N/A",
+        note: "Provided in class. Do not purchase separately."
+      }
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "PTCB Practice Test Bank", 
+        price: 65.0,
+        isbn: "N/A",
+        note: "Provided in class. Do not purchase separately."
+      },
     ],
     
     courseTools: [

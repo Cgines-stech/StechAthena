@@ -14,7 +14,7 @@ const TEPT1900 = [
     statewideAlignment: "Aligned",
     courseClockHours: 210,
     courseTuition: 380.00,
-    courseFee: 63.00,
+    courseFee: 0.00,
     instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
@@ -37,11 +37,21 @@ const TEPT1900 = [
     ],
 
     courseBooks: [
-      {},
+      {
+        name: "Platinum Planner", 
+        price: 63.0,
+        isbn: "N/A",
+        note: "Provided in class. Do not purchase separately."
+      }
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Platinum Planner", 
+        price: 63.0,
+        isbn: "N/A",
+        note: "Provided in class. Do not purchase separately."
+      },
     ],
     
     courseTools: [

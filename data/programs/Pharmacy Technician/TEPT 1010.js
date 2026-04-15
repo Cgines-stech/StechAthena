@@ -55,7 +55,7 @@ const TEPT1010 = [
     ],
     
     courseTools: [
-      { name: "Chrome Book", price: 302.5, note: "Optional", optional: true },
+      { name: "Scrubs x 2 Sets", price: 120.0, note: "Not available in the bookstore. Purchase on your own.", optional: false },
     ],
 
     courseCertifications: [
@@ -72,7 +72,16 @@ const TEPT1010 = [
     ],
 
     otherAssociatedCosts: [
-      {}
+      {
+         name: "Digital Device (Chromebook)",
+         price: 302.5,
+         note: "Chromebook or comparable device - Available at STECH Bookstore, can be purchased elsewhere"
+      },
+      {
+         name: "Background Check & Drug Screen",
+         price: 94.8,
+         note: "Paid to Verified Credentials"
+      },
     ],
 
     courseClassroomHours: [
