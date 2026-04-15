@@ -14,7 +14,7 @@ const TEEM1202 = [
     statewideAlignment: "Aligned",
     courseClockHours: 180,
     courseTuition: 570.00,
-    courseFee: 412.00,
+    courseFee: 387.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
@@ -45,8 +45,7 @@ const TEEM1202 = [
 
     courseBooks: [
       {
-        name:
-          "AEMT: Advanced Emergency Care and Transportation of the Sick and Injured Advantage Package Fourth Edition",
+        name: "AEMT: Advanced Emergency Care and Transportation of the Sick and Injured Advantage Package Fourth Edition",
         price: 390.0,
         isbn: "9781284228144",
         note: ""
@@ -55,8 +54,7 @@ const TEEM1202 = [
 
     syllabiBooks: [
       {
-        title:
-          "AEMT: Advanced Emergency Care and Transportation of the Sick and Injured Advantage Package Fourth Edition",
+        title: "AEMT: Advanced Emergency Care and Transportation of the Sick and Injured Advantage Package Fourth Edition",
         author: "American Academy of Orthopaedic Surgeons (AAOS)",
         price: 390.0,
         isbn: "9781284228144",
@@ -65,12 +63,13 @@ const TEEM1202 = [
     ],
     
     courseTools: [
+      { name: "BP cuff/stethoscope", price: 33.0, note: "Provided in class. Do not purchase separately." },
       { name: "BP cuff/stethoscope", price: 33.0, note: "Available in Stech Bookstore" },
       { name: "Shears", price: 16.5, note: "Available in Stech Bookstore" },
       { name: "Pen light", price: 4.5, note: "Available in Stech Bookstore" },
-      { name: "EMT Pants", price: 30.0, note: "Purchased on your own" },
-      { name: "EMT Boots", price: 30.0, note: "Purchased on your own" },
-      { name: "Watch", price: 10.0, note: "Purchased on your own" }
+      { name: "EMT Pants", price: 30.0, note: "" },
+      { name: "EMT Boots", price: 30.0, note: "" },
+      { name: "Watch", price: 10.0, note: "" }
     ],
 
     courseCertifications: [
