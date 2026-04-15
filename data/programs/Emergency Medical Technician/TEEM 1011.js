@@ -14,7 +14,7 @@ const TEEM1011 = [
     statewideAlignment: "Aligned",
     courseClockHours: 180,
     courseTuition: 570.00,
-    courseFee: 225.00,
+    courseFee: 200.00,
     instructionalType: "LAB",
     isElective: false,
     includeInProgramTotals: true,
@@ -68,12 +68,13 @@ const TEEM1011 = [
     ],
     
     courseTools: [
+      { name: "Emergency Medical Technician Class T-Shirt x 2", price: 25.0, note: "Available in Stech Bookstore" },
       { name: "BP cuff/stethoscope", price: 33.0, note: "Available in Stech Bookstore" },
       { name: "Shears", price: 16.5, note: "Available in Stech Bookstore" },
       { name: "Pen light", price: 4.5, note: "Available in Stech Bookstore" },
-      { name: "EMT Pants", price: 30.0, note: "Purchased on your own" },
-      { name: "EMT Boots", price: 30.0, note: "Purchased on your own" },
-      { name: "Watch", price: 10.0, note: "Purchased on your own" }
+      { name: "EMT Pants", price: 30.0, note: "" },
+      { name: "EMT Boots", price: 30.0, note: "" },
+      { name: "Watch", price: 10.0, note: "" }
     ],
 
     courseCertifications: [
