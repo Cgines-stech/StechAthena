@@ -14,7 +14,7 @@ const TECA1920 = [
     statewideAlignment: "Non-Aligned",
     courseClockHours: 90,
     courseTuition: 190.00,
-    courseFee: 40.00,
+    courseFee: 0.00,
     instructionalType: "WBL",
     isElective: false,
     includeInProgramTotals: true,
@@ -43,32 +43,32 @@ const TECA1920 = [
     syllabiBooks: [
       {
         name: "Culinary Artistry", 
-        price: 20.0,
+        price: 25.0,
         isbn: "9780471287858",
         note: ""
       },
       {
         name: "Professional Baking 8th Edition", 
-        price: 90.0,
+        price: 109.0,
         isbn: "9781119744993",
         note: ""
       },
       {
-        name: "Culinary Math 4th ed", 
-        price: 35.0,
-        isbn: "9781118972724",
+        name: "Culinary Math 5th ed", 
+        price: 43.0,
+        isbn: "9781394265862",
         note: ""
       },
       {
         name: "On Cooking 6th ed", 
-        price: 147.0,
+        price: 165.0,
         isbn: "9780134441900",
         note: ""
       },
     ],
     
     courseTools: [
-      {},
+      { name: "Chef Coat", price: 40.0, note: "Provided in class. Do not purchase separately." },
     ],
 
     courseCertifications: [
