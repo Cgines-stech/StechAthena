@@ -96,14 +96,14 @@ const TEEM1202 = [
     courseClassroomHours: [
         {
           termLabel: "Fall",
-          startDate: "08-09-2026",
-          endDate: "12-20-2026",
+          startDate: "08-08-2026",
+          endDate: "12-12-2026",
           Monday: "",
           Tuesday: "",
           Wednesday: "",
           Thursday: "",
           Friday: "",
-          Saturday: "9:00 AM - 7:00 PM",
+          Saturday: "9:00 AM - 5:00 PM",
         },
         {
           termLabel: "Spring",
