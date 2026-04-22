@@ -99,7 +99,8 @@ const TEEM1011 = [
     ],
 
     courseClassroomHours: [
-      {
+/*
+        {
           termLabel: "Summer",
           startDate: "TBD",
           endDate: "TBD",
@@ -110,6 +111,7 @@ const TEEM1011 = [
           Friday: "",
           Saturday: "",
         },
+*/
         {
           termLabel: "Fall",
           startDate: "08-26-2026",
