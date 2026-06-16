@@ -72,9 +72,9 @@ const TEFF1100 = [
     courseClassroomHours: [
         {
           termLabel: "Fall",
-          startDate: "07-14-2026",
-          endDate: "07-29-2026",
-          Monday: "",
+          startDate: "07-06-2026",
+          endDate: "07-16-2026",
+          Monday: "5:00 PM - 9:00 PM",
           Tuesday: "5:00 PM - 9:00 PM",
           Wednesday: "5:00 PM - 9:00 PM",
           Thursday: "5:00 PM - 9:00 PM",
