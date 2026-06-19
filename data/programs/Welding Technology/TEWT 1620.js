@@ -76,7 +76,6 @@ const TEWT1620 = [
     courseAssignmentsandAsssessments: [
       "READ Chapter 23: Fabricating Techniques and Practices",
       "Chapter 23: Review Questions",
-      "LEARN IT: Chapter 23: Overview",
       "Clamps",
       "Combination Square",
       "Hammers",

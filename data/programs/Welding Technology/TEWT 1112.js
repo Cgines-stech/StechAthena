@@ -84,7 +84,7 @@ const TEWT1112 = [
       "Lap Joint 4F E6010",
       "Tee joints 4F E6010",
       "Lab Time",
-      "4G Square Groove Butt Joint Root E,6010",
+      "4G Square Groove Butt Joint Root E6010",
       "Cover passes E7018 4G",
       "Lab Time",
       "Work Ethic Assessment",
