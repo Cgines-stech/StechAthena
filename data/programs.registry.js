@@ -202,8 +202,8 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Pharmacy Technician/TEPT 1100.js",
     "../../data/programs/Pharmacy Technician/TEPT 1110.js",
     "../../data/programs/Pharmacy Technician/TEPT 1220.js",
-    "../../data/programs/Pharmacy Technician/TEPT 1610.js",
     "../../data/programs/Pharmacy Technician/TEPT 1900.js",
+    "../../data/programs/Pharmacy Technician/TEPT 1610.js",
   ],
   "Phlebotomy": [
     // These courses were last used for FY26.
