@@ -46,7 +46,12 @@ const TEAU1055 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "MindTap Applied Math, 2 terms (12 months) Instant Access for Peterson/deKryger's Math for the Automotive Trade, 6th ed.",
+        price: 150.0,
+        isbn: "9781337621854",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

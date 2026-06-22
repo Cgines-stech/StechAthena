@@ -46,7 +46,12 @@ const TEAU2640 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "MindTap® Automotive, 4 terms (24 months) Instant Access for Hollembeak's Today’s Technician: Advanced Automotive Electronic Systems",
+        price: 150.0,
+        isbn: "9781305971585",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

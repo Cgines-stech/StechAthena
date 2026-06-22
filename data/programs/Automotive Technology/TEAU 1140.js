@@ -45,7 +45,12 @@ const TEAU1140 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "MindTap® Automotive, 4 terms (24 months) Instant Access for Hadfield/Nussler's Today’s Technician: Automotive Engine Repair & Rebuilding, Classroom Manual and Shop Manual, 6th ed.",
+        price: 150.0,
+        isbn: "9781305958203",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

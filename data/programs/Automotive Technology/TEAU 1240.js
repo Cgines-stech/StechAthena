@@ -45,7 +45,12 @@ const TEAU1240 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "Today's Technician: Automatic Transmissions and Transaxles Classroom Manual and Shop Manual, 7th ed.",
+        price: 150.0,
+        isbn: "9781337792158",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

@@ -46,7 +46,12 @@ const TEAU1500 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "MindTap Automotive, 4 terms (24 months) Instant Access for Pickeril's Today's Technician: Automotive Brake Systems, 7th ed.",
+        price: 150.0,
+        isbn: "9781337564601",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

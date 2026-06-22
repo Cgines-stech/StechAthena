@@ -48,7 +48,12 @@ const TEAU1740 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "Today's Technician: Automotive Heating & Air Conditioning Classroom Manual and Shop Manual, 6th ed.",
+        price: 150.0,
+        isbn: "9781305497627",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

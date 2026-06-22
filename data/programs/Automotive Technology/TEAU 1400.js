@@ -45,7 +45,12 @@ const TEAU1400 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "MindTap for Schnubel's Today's Technician: Automotive Suspension & Steering Classroom Manual and Shop Manual, 4 terms Instant Access, 7th ed.",
+        price: 150.0,
+        isbn: "9781337567411",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

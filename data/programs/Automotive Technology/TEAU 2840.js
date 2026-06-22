@@ -45,7 +45,12 @@ const TEAU2840 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "MindTap for Schnubel's Today's Technician: Advanced Engine Performance, 4 terms Instant Access, 2nd ed.",
+        price: 150.0,
+        isbn: "9781305967373",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

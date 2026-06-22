@@ -48,7 +48,7 @@ const TEAU1050 = [
 
     syllabiBooks: [
       {
-        name: "Today's Technician: Automotive Electricity and Electronics, Classroom and Shop Manual Pack, 8th ed. ",
+        name: "Today's Technician: Automotive Electricity and Electronics, Classroom and Shop Manual Pack, 8th ed.",
         price: 150.0,
         isbn: "9780357766385",
         note: "Cengage Unlimited Subscription"
