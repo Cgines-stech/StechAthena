@@ -52,6 +52,18 @@ const TEPT1900 = [
         isbn: "N/A",
         note: "Provided in class. Do not purchase separately."
       },
+      {
+        name: "The Pharmacy Technician: A Comprehensive Approach, 5th ed.", 
+        price: 150.0,
+        isbn: "9798214113739",
+        note: "Cengage Unlimited Subscription"
+      },
+      {
+        name: "eBook: Fundamental Pharmacology for Pharmacy Technicians, 2nd ed.", 
+        price: 150.0,
+        isbn: "9781305979079",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

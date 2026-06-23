@@ -41,7 +41,12 @@ const TEPT1522 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "eTextbook: Pharmaceutical Calculations for Pharmacy Technicians: A Worktext, 3rd ed.", 
+        price: 150.0,
+        isbn: "9780357766019",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

@@ -53,9 +53,9 @@ const TEPH1015 = [
 
     syllabiBooks: [
       {
-        name: "Cengage Unlimited Subscription", 
+        name: "MindTap® Medical Assisting, 2 terms (12 months) Instant Access for Hoeltke's The Complete Textbook of Phlebotomy", 
         price: 150.0,
-        isbn: "Syllabus",
+        isbn: "9781337284295",
         note: ""
       },
     ],

@@ -48,10 +48,10 @@ const TEMA1000 = [
 
     syllabiBooks: [
       {
-        name: "Cengage Unlimited Subscription", 
+        name: "Medical Assisting: Administrative & Clinical Competencies, 10th ed.", 
         price: 150.0,
-        isbn: "Syllabus",
-        note: "Cengage Unlimited Subscription 1 year"
+        isbn: "9798214113586",
+        note: "Cengage Unlimited Subscription 1 year                        					"
       },
     ],
     

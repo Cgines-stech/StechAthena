@@ -45,7 +45,12 @@ const TEMA1080 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Comprehensive Medical Terminology for Health Professions, 1st ed.", 
+        price: 150.0,
+        isbn: "9780357512630",
+        note: "Cengage Unlimited Subscription 1 year                        					"
+      },
     ],
     
     courseTools: [

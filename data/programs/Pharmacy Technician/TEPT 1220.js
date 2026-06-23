@@ -39,7 +39,18 @@ const TEPT1220 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "eTextbook: Sterile Compounding, 1st ed.", 
+        price: 150.0,
+        isbn: "9780357766088",
+        note: "Cengage Unlimited Subscription"
+      },
+      {
+        name: "MindTap Moss 4.0, 2 terms Instant Access", 
+        price: 150.0,
+        isbn: "9780357933084",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

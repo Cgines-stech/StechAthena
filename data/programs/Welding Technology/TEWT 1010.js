@@ -43,11 +43,17 @@ const TEWT1010 = [
 
     syllabiBooks: [
       {
-        name: "Cengage Unlimited Subscription", 
+        name: "Welding: Principles and Applications, 9th ed.", 
         price: 150.0,
-        isbn: "Syllabus",
+        isbn: "9780357377659",
         note: "Cengage Unlimited Subscription"
       },
+      {
+        name: "eBook: Practical Problems in Mathematics for Welders, 6th ed.", 
+        price: 150.0,
+        isbn: "9781133482253",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [

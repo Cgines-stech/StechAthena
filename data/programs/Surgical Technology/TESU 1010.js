@@ -51,9 +51,15 @@ const TESU1010 = [
 
     syllabiBooks: [
       {
-        name: "Cengage Unlimited Subscription", 
+        name: "Surgical Technology for the Surgical Technologist: A Positive Care Approach, 6th ed.", 
         price: 150.0,
-        isbn: "",
+        isbn: "9780357625736",
+        note: "Cengage Unlimited Subscription 1 year"
+      },
+      {
+        name: "Comprehensive Medical Terminology for Health Professions, 1st ed.", 
+        price: 150.0,
+        isbn: "9780357512630",
         note: "Cengage Unlimited Subscription 1 year"
       },
     ],

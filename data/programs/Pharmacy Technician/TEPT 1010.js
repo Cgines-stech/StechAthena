@@ -47,9 +47,9 @@ const TEPT1010 = [
 
     syllabiBooks: [
       {
-        name: "Cengage Unlimited Subscription", 
+        name: "The Pharmacy Technician: A Comprehensive Approach, 5th ed.", 
         price: 150.0,
-        isbn: "Syllabus",
+        isbn: "9798214113739",
         note: "Cengage Unlimited Subscription"
       }
     ],

@@ -39,7 +39,12 @@ const TEMA1098 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "Medical Assisting: Administrative & Clinical Competencies, 10th ed.", 
+        price: 150.0,
+        isbn: "9798214113586",
+        note: "Cengage Unlimited Subscription 1 year                        					"
+      },
     ],
     
     courseTools: [

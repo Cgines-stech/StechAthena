@@ -80,9 +80,9 @@ const TEEL1310 = [
         note: "Cengage Unlimited yearly fee"
       },
       {
-        name: "Understand Motor Controls 4th Edition", 
+        name: "Understanding Motor Controls, 5th ed.", 
         price: 0.0,
-        isbn: "9781337798761",
+        isbn: "9798214114132",
         note: "Included with Cengage Unlimited"
       },
       {

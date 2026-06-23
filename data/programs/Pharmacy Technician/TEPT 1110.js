@@ -42,7 +42,12 @@ const TEPT1110 = [
     ],
 
     syllabiBooks: [
-      {},
+      {
+        name: "The Pharmacy Technician: A Comprehensive Approach, 5th ed.", 
+        price: 150.0,
+        isbn: "9798214113739",
+        note: "Cengage Unlimited Subscription"
+      }
     ],
     
     courseTools: [
