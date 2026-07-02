@@ -44,7 +44,12 @@ const TEAV1130 = [
     ],
 
     syllabiBooks: [
-      {}
+      {
+        name: "Cengage Unlimited Subscription 1 year", 
+        price: 150.0,
+        isbn: "Cengage",
+        note: "Cengage Unlimited Subscription 1 year"
+      }
     ],
     
     courseTools: [
