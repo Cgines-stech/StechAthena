@@ -275,6 +275,13 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Surgical Technology/TESU 2910.js",
     "../../data/programs/Surgical Technology/TESU 1221.js",
   ],
+  "Unmanned Aircraft Systems": [
+    "../../data/programs/Surgical Technology/TEAV 1130.js",
+    "../../data/programs/Surgical Technology/TEAV 1011.js",
+    "../../data/programs/Surgical Technology/TEAV 1021.js",
+    "../../data/programs/Surgical Technology/TEAV 1201.js",
+    "../../data/programs/Surgical Technology/TEAV 1301.js",
+  ],
   "Welding Technology": [
     "../../data/programs/Welding Technology/TEWT 1000.js",
     "../../data/programs/Welding Technology/TEWT 1045.js",
