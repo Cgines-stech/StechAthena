@@ -49,9 +49,9 @@ const TEUA1301 = [
 
     syllabiBooks: [
       {
-        name: "Cengage Unlimited Subscription 1 year", 
+        name: "Cengage Unlimited Subscription", 
         price: 150.0,
-        isbn: "Cengage",
+        isbn: "",
         note: "Cengage Unlimited Subscription 1 year"
       }
     ],
