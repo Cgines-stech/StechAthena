@@ -1,5 +1,5 @@
 // data/programs/Unmanned Aircraft Systems/program.js
-// (10000–10999)
+// (92000–92999)
 
 const unmannedAircraftSystemsProgram = [
   {
@@ -7,13 +7,13 @@ const unmannedAircraftSystemsProgram = [
       "The Unmanned Aircraft Systems program will prepare students to become FAA certificated as a remote pilot and gain introductory experience in flying and programming both fixed-wing and multirotor drones. Students will also gain introductory experience in maintaining and repairing aircraft, as well as collecting, analyzing, and reporting data and deliverables.",
 
     programObjectives: [
-      "Perform aviation engine maintenance in alignment with FAA Standards.",
-      "Prepare for FAA Licensing by fulfilling all prerequisites to sit for the Federal Aviation Administration General and Airframe licensing exams, qualifying for certification and practice in the field.",
-      "Interpret diagnostic material for aviation maintenance and repair.",
-      "Record maintenance logs and certify the airworthiness of aircraft.",
+      "Apply factual knowledge of FAA requirements, regulations, and expectations in industry as well as for the Part 107 exam.",
+      "Identify sUAS components, uses, designs, and applications related to industry.",
+      "Perform basic skills in flight, repair, and construction techniques in both fixed-wing and multirotor drones.",
+      "Utilize soft skills in documentation styles, reflection, in-class and online discussion, and analysis related to drone deliverables.",
     ],
 
-    programCIP: 490109,
+    programCIP: 49.0109,
     programCreditHours: 31,
     programClockHours: 930,
     certificate: 'Certificate',

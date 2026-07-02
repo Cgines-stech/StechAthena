@@ -1,4 +1,4 @@
-// TEAV 1011
+// TEUA 1011
 
 // imports
 import gradeScale from "../../gradescale.js";
@@ -6,11 +6,11 @@ import { courseTotals, sum, money } from "../../utils/helpers.js";
 
 const GS = Array.isArray(gradeScale) ? gradeScale[0] : gradeScale;
 
-const TEAV1011 = [
+const TEUA1011 = [
   {
     id: 92002,
     programId: 1,
-    courseNumber: "TEAV 1011",
+    courseNumber: "TEUA 1011",
     courseName: "Unmanned Aircraft Systems Remote Pilot",
     courseCredits: 3,
     statewideAlignment: "Aligned",
@@ -135,4 +135,4 @@ const TEAV1011 = [
   }
 ]
 
-export default TEAV1011;
+export default TEUA1011;

@@ -279,10 +279,10 @@ export const PROGRAM_COURSE_REGISTRY = {
   ],
   "Unmanned Aircraft Systems": [
     "../../data/programs/Unmanned Aircraft Systems/TEAV 1130.js",
-    "../../data/programs/Unmanned Aircraft Systems/TEAV 1011.js",
-    "../../data/programs/Unmanned Aircraft Systems/TEAV 1021.js",
-    "../../data/programs/Unmanned Aircraft Systems/TEAV 1201.js",
-    "../../data/programs/Unmanned Aircraft Systems/TEAV 1301.js",
+    "../../data/programs/Unmanned Aircraft Systems/TEUA 1011.js",
+    "../../data/programs/Unmanned Aircraft Systems/TEUA 1021.js",
+    "../../data/programs/Unmanned Aircraft Systems/TEUA 1201.js",
+    "../../data/programs/Unmanned Aircraft Systems/TEUA 1301.js",
   ],
   "Welding Technology": [
     "../../data/programs/Welding Technology/TEWT 1000.js",
