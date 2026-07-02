@@ -4,7 +4,7 @@
 const unmannedAircraftSystemsProgram = [
   {
     programDescription:
-      "This program equips students with the necessary skills for a career in aviation maintenance. After completing this certificate, students will meet the Federal Aviation Administration requirements to take the General and Airframe tests required to earn their FAA Airframe license.",
+      "The Unmanned Aircraft Systems program will prepare students to become FAA certificated as a remote pilot and gain introductory experience in flying and programming both fixed-wing and multirotor drones. Students will also gain introductory experience in maintaining and repairing aircraft, as well as collecting, analyzing, and reporting data and deliverables.",
 
     programObjectives: [
       "Perform aviation engine maintenance in alignment with FAA Standards.",
@@ -13,9 +13,9 @@ const unmannedAircraftSystemsProgram = [
       "Record maintenance logs and certify the airworthiness of aircraft.",
     ],
 
-    programCIP: 47.0608,
-    programCreditHours: 38,
-    programClockHours: 1140,
+    programCIP: 490109,
+    programCreditHours: 31,
+    programClockHours: 930,
     certificate: 'Certificate',
     certificateNorthstar: 'Certificate of Completion - C1Y'
   }

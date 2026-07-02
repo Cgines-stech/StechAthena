@@ -24,6 +24,6 @@ export const PROGRAMS = [
   { id: 800, department_id: 7, name: 'Practical Nursing', program_credit_hours: 27, CIP: 51.3901},
   { id: 900, department_id: 8, name: 'Software Development', program_credit_hours: 30, CIP: 15.1204},
   { id: 190, department_id: 1, name: 'Surgical Technology', program_credit_hours: 26, CIP: 51.0909},
-  { id: 920, department_id: 2, name: 'Unmanned Aircraft Systems', program_credit_hours: 31, CIP: 47.0608},
+  { id: 920, department_id: 2, name: 'Unmanned Aircraft Systems', program_credit_hours: 31, CIP: 49.0109},
   { id: 950, department_id: 9, name: 'Welding Technology', program_credit_hours: 24, CIP: 48.0508},
 ];
