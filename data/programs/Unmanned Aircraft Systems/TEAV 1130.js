@@ -60,28 +60,7 @@ const TEAV1130 = [
     ],
 
     courseClassroomHours: [
-        {
-          termLabel: "A Days",
-          startDate: "08-08-2026",
-          endDate: "12-12-2026",
-          Monday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Tuesday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Wednesday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Thursday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Friday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Saturday: "",
-        },
-        {
-          termLabel: "B Days",
-          startDate: "01-26-2027",
-          endDate: "05-13-2027",
-          Monday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Tuesday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Wednesday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Thursday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Friday: "7:50 AM - 10:20 AM or 12:10 PM - 2:45 PM",
-          Saturday: "",
-        },
+        {},
     ],
 
     instructorContactInformation: [
