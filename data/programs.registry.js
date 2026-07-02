@@ -42,6 +42,8 @@ export const PROGRAM_FILE_REGISTRY = {
     "../../data/programs/Software Development/program.js",
   "Surgical Technology":
     "../../data/programs/Surgical Technology/program.js",
+  "Unmanned Aircraft Systems":
+    "../../data/programs/Unmanned Aircraft Systems/program.js",
   "Welding Technology":
     "../../data/programs/Welding Technology/program.js",
 };
