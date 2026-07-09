@@ -31,7 +31,7 @@ const TECA1020 = [
     ],
 
     courseOutline: [
-      { title: "Culinary Math Basics", hours: 10},
+      { title: "Culinary Math Basics and Measurement Conversions", hours: 10},
       { title: "Recipes and Yield Percentages", hours: 10},
       { title: "Recipe Conversions and Food Costing", hours: 10},
     ],

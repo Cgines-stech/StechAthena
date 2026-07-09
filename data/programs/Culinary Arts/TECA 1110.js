@@ -31,7 +31,7 @@ const TECA1110 = [
     ],
 
     courseOutline: [
-      { title: "Introduction to Cooking Methods", hours: 10},
+      { title: "Introduction to Cooking Methods and Chicken Fabrication", hours: 10},
       { title: "Dry Heat Method - Grilling & Broiling", hours: 20},
       { title: "Dryheat Method - Saute & Pan Fry", hours: 20},
       { title: "Dry Heat Method - Deep Frying & Roasting", hours: 20},

@@ -31,12 +31,13 @@ const TECA1100 = [
     ],
 
     courseOutline: [
-      { title: "Equipment Idetification", hours: 20},
+      { title: "Equipment Identification", hours: 10},
+      { title: "Basic Nutrition", hours: 20},
       { title: "Understanding Mise en Place", hours: 10},
       { title: "Introduction to Knives", hours: 10},
       { title: "Introduction to Knife Skills", hours: 20},
       { title: "Egg Cookery", hours: 10},
-      { title: "Introduction to Breakfast Cooking", hours: 20},
+      { title: "Introduction to Breakfast Cooking", hours: 10},
     ],
 
     courseBooks: [
