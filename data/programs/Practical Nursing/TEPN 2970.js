@@ -68,27 +68,16 @@ const TEPN2970 = [
 
     courseClassroomHours: [
       {
-        termLabel: "Fall",
-        startDate: "10-26-2026",
-        endDate: "12-11-2026",
+        termLabel: "",
+        startDate: "",
+        endDate: "",
         Monday: "",
         Tuesday: "",
         Wednesday: "",
         Thursday: "",
         Friday: "",
         Saturday: "",
-      },
-      {
-        termLabel: "Spring",
-        startDate: "03-23-2027",
-        endDate: "05-14-2027",
-        Monday: "",
-        Tuesday: "",
-        Wednesday: "",
-        Thursday: "",
-        Friday: "",
-        Saturday: "",
-      },
+      }
     ],
 
     instructorContactInformation: [
