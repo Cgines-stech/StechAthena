@@ -122,7 +122,7 @@ const TEPN2971 = [
       "Clinical Judgment Plan of Care Exemplar.docx",
       "NANDA.pdf",
       "Medication Error Reflection",
-      "lniurv Reflection",
+      "Reflection",
       "Clinical Paperwork - Head to Toe Assessment.docx",
       "Focused Assessment_Dialysis_Clinical_Rotation (1).docx",
       "Condensed_Early lntervention_Assessment_ Guide.docx",
