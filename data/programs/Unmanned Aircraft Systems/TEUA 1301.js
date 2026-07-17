@@ -32,15 +32,15 @@ const TEUA1301 = [
     ],
 
     courseOutline: [
-      { title: "Course Introduction", hours: 9},
-      { title: "Quadcopter Theory & Beginning the Build", hours: 9},
-      { title: "Physical Construction Complete", hours: 9},
-      { title: "Electronic (Soldering) Construction Complete", hours: 9},
-      { title: "Software Configuration Complete", hours: 9},
-      { title: "Maiden/Test Flight!", hours: 9},
-      { title: "Flight Based Initial Setup", hours: 9},
-      { title: "PID Tuning & Advanced Flight Modes", hours: 9},
-      { title: "Checklists and Final", hours: 9},
+      { title: "Course Introduction", hours: 6},
+      { title: "Quadcopter Theory & Beginning the Build", hours: 10},
+      { title: "Physical Construction Complete", hours: 12},
+      { title: "Electronic (Soldering) Construction Complete", hours: 14},
+      { title: "Software Configuration Complete", hours: 12},
+      { title: "Maiden/Test Flight!", hours: 8},
+      { title: "Flight Based Initial Setup", hours: 10},
+      { title: "PID Tuning & Advanced Flight Modes", hours: 10},
+      { title: "Checklists and Final", hours: 8},
     ],
 
     courseBooks: [

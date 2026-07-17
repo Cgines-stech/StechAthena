@@ -30,12 +30,12 @@ const TEUA1201 = [
     ],
 
     courseOutline: [
-      { title: "Introduction to Fixed-Wing Drones 2 Weeks", hours: 15},
-      { title: "Introduction to Systems and Components 2 Weeks", hours: 15},
-      { title: "Introduction to Building Fixed-Wing Drones 4 Weeks", hours: 15},
-      { title: "Introduction to Fixed-Wing Repair 2 Weeks", hours: 15},
-      { title: "Introduction to Fixed-Wing Modification 3 Weeks", hours: 15},
-      { title: "UAS Fixed-Wing Reflection 1 Week", hours: 15},
+      { title: "Introduction to Fixed-Wing Drones", hours: 12},
+      { title: "Introduction to Systems and Components", hours: 12},
+      { title: "Introduction to Building Fixed-Wing Drones", hours: 30},
+      { title: "Introduction to Fixed-Wing Repair", hours: 12},
+      { title: "Introduction to Fixed-Wing Modification", hours: 18},
+      { title: "UAS Fixed-Wing Reflection", hours: 6},
     ],
 
     courseBooks: [

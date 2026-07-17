@@ -32,16 +32,16 @@ const TEUA1011 = [
     ],
 
     courseOutline: [
-      { title: "Course and UAS Introduction 2 Weeks", hours: 9},
-      { title: "Realflight Sim", hours: 9},
-      { title: "Weather and Drones 2 Weeks", hours: 9},
-      { title: "Airspace and Sectionals 2 Weeks", hours: 9},
-      { title: "Rules and Regulations 2 Weeks", hours: 9},
-      { title: "Airport Operations and Radio Communications and Midterm 1 Week", hours: 9},
-      { title: "Drone Maintenance and Emergencies 1 Week", hours: 9},
-      { title: "Aeronautical Decision Making, Crew Resource Management, and Physiology 1 Week", hours: 9},
-      { title: "Load Factors & Performance 1 Week", hours: 9},
-      { title: "The Part 107 Test and Finals", hours: 9},
+      { title: "Course and UAS Introduction", hours: 8},
+      { title: "RealFlight Sim", hours: 8},
+      { title: "Weather and Drones", hours: 12},
+      { title: "Airspace and Sectionals", hours: 14},
+      { title: "Rules and Regulations", hours: 13},
+      { title: "Airport Operations, Radio Communications and Midterm", hours: 10},
+      { title: "Drone Maintenance and Emergencies", hours: 6},
+      { title: "Aeronautical Decision Making, Crew Resource Management, and Physiology", hours: 6},
+      { title: "Load Factors & Performance", hours: 6},
+      { title: "The Part 107 Test and Finals", hours: 7},
     ],
 
     courseBooks: [
