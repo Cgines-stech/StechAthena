@@ -32,13 +32,13 @@ const TEAU2640 = [
 
     courseOutline: [
       { title: "Intro to Electronic Systems and Practical Theories", hours: 15 },
-      { title: "Computer Systems and Diagnosis I", hours: 15 },
-      { title: "Computer Systems and Diagnosis II", hours: 15 },
-      { title: "Vehicle Communication and Networks", hours: 15 },
-      { title: "Supplemental Air Bag Systems and Diagnosis", hours: 15 },
-      { title: "Driver and Passenger Comfort Systems", hours: 15 },
-      { title: "Electronic Stability, Rollover Mitigation, and Driver Systems", hours: 15 },
-      { title: "Hybrid and Electronic Vehicle Systems", hours: 15 },
+      { title: "Wiring Diagrams and Diagnosis I", hours: 15 },
+      { title: "Batteries and Starting Systems", hours: 15 },
+      { title: "Charging Systems and Network Introductions", hours: 15 },
+      { title: "Computer Inputs and Communication Networks", hours: 15 },
+      { title: "Lighting and Warning Devices", hours: 15 },
+      { title: "Accessories, Radios, and Passive Restraints", hours: 15 },
+      { title: "Advanced Driver Assistance Systems and Hybrid/EV Power Sources", hours: 15 },
     ],
 
     courseBooks: [
