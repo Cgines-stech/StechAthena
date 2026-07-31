@@ -36,9 +36,9 @@ const TEWT1312 = [
       { title: "Fillets GMAW-S Overhead", hours: 10},
       { title: "Grooves GMAW-S Overhead", hours: 10},
       { title: "Pulse Spray Fillets", hours: 10},
-      // added Laser applications for 2027 CR, removed Bend Test
-      // { title: "Bend Test", hours: 10},
-      { title: "Laser Applications", hours: 10},
+      { title: "Bend Test", hours: 10},
+      // removed Laser applications (temporary)
+      // { title: "Laser Applications", hours: 10},
     ],
 
     courseBooks: [
