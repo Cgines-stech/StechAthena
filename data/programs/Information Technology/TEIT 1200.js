@@ -80,7 +80,28 @@ const TEIT1200 = [
     ],
 
     courseClassroomHours: [
-      {}
+      {
+          termLabel: "Open-entry",
+          startDate: "",
+          endDate: "",
+          Monday: ["8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM"],
+          Tuesday: ["8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM"],
+          Wednesday: ["8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM"],
+          Thursday: ["8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM"],
+          Friday: ["8:00 AM - 11:00 AM\n12:00 PM - 3:00 PM"],
+          Saturday: "",
+        },
+        {
+          termLabel: "Cohort",
+          startDate: "09-03-2026",
+          endDate: "10-15-2026",
+          Monday: "12:00 PM - 3:00 PM",
+          Tuesday: "12:00 PM - 3:00 PM",
+          Wednesday: "12:00 PM - 3:00 PM",
+          Thursday: "12:00 PM - 3:00 PM",
+          Friday: "12:00 PM - 3:00 PM",
+          Saturday: "",
+        },
     ],
 
     instructorContactInformation: [
