@@ -93,8 +93,8 @@ const TEIT1200 = [
         },
         {
           termLabel: "Cohort",
-          startDate: "09-03-2026",
-          endDate: "10-15-2026",
+          startDate: "09-02-2026",
+          endDate: "10-14-2026",
           Monday: "12:00 PM - 3:00 PM",
           Tuesday: "12:00 PM - 3:00 PM",
           Wednesday: "12:00 PM - 3:00 PM",
