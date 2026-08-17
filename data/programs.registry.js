@@ -278,11 +278,16 @@ export const PROGRAM_COURSE_REGISTRY = {
     "../../data/programs/Surgical Technology/TESU 1221.js",
   ],
   "Unmanned Aircraft Systems": [
-    "../../data/programs/Unmanned Aircraft Systems/TEAV 1130.js",
+    // Order rearranged on 8/17.
     "../../data/programs/Unmanned Aircraft Systems/TEUA 1011.js",
+    "../../data/programs/Unmanned Aircraft Systems/TEAV 1130.js",
+    "../../data/programs/Unmanned Aircraft Systems/TEUA 1501.js",
+    // Courses 2101 and 1021 added on 8/17.
+    "../../data/programs/Unmanned Aircraft Systems/TEUA 2101.js",
     "../../data/programs/Unmanned Aircraft Systems/TEUA 1021.js",
-    "../../data/programs/Unmanned Aircraft Systems/TEUA 1201.js",
-    "../../data/programs/Unmanned Aircraft Systems/TEUA 1301.js",
+    // Courses 1201 and 1301 removed on 8/17.
+    // "../../data/programs/Unmanned Aircraft Systems/TEUA 1201.js",
+    // "../../data/programs/Unmanned Aircraft Systems/TEUA 1301.js",
   ],
   "Welding Technology": [
     "../../data/programs/Welding Technology/TEWT 1000.js",
