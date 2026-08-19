@@ -31,14 +31,14 @@ const TEUA2101 = [
     ],
 
     courseOutline: [
-      { title: "Fixed-Wing Basics and Introduction", hours: 12},
-      { title: "Manual Flight and Checklists", hours: 12},
-      { title: "Traffic Patterns and Maintenance", hours: 12},
-      { title: "Fixed-Wing Pattern Practice", hours: 12},
-      { title: "Multirotor Pattern Skills and Checklists", hours: 12},
-      { title: "SAR & Maintenance", hours: 12},
-      { title: "Final Patterns", hours: 12},
-      { title: "Autonomous Platforms", hours: 12},
+      { title: "Fixed-Wing Basics and Introduction", hours: 2},
+      { title: "Manual Flight and Checklists", hours: 15},
+      { title: "Traffic Patterns and Maintenance", hours: 15},
+      { title: "Fixed-Wing Pattern Practice", hours: 15},
+      { title: "Multirotor Pattern Skills and Checklists", hours: 15},
+      { title: "SAR & Maintenance", hours: 8},
+      { title: "Final Patterns", hours: 10},
+      { title: "Autonomous Platforms", hours: 10},
     ],
 
     courseBooks: [

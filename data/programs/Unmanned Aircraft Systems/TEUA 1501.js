@@ -32,13 +32,13 @@ const TEUA1501 = [
     ],
 
     courseOutline: [
-      { title: "Introduction to Tools", hours: 12},
-      { title: "Introduction to Building Techniques", hours: 18},
-      { title: "Introduction to Drone Basics and Systems", hours: 18},
-      { title: "UAS Regulation and Documentation", hours: 12},
-      { title: "Introduction to Flight Controller Basics and Aircraft Setup", hours: 12},
-      { title: "Introduction to Tuning and Flight Testing", hours: 12},
-      { title: "Checklists and Final", hours: 6},
+      { title: "Introduction to Tools", hours: 6},
+      { title: "Introduction to Building Techniques", hours: 12},
+      { title: "Introduction to Drone Basics and Systems", hours: 10},
+      { title: "UAS Regulation and Documentation", hours: 10},
+      { title: "Introduction to Flight Controller Basics and Aircraft Setup", hours: 20},
+      { title: "Introduction to Tuning and Flight Testing", hours: 20},
+      { title: "Checklists and Final", hours: 12},
     ],
 
     courseBooks: [
