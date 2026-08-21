@@ -26,7 +26,7 @@ const TESU1221 = [
 
     courseObjectives: [
       "Review for the national certifying exam",
-      "Prepare students for employment",
+      "Prepare students for employment", 
     ],
 
     courseOutline: [

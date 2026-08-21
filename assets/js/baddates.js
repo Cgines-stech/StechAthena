@@ -78,4 +78,10 @@ export const campusClosedDates = [
   { date: "04-02-2027" },
   { date: "05-31-2027" },
   { date: "06-21-2027" },
+  // (best guesses for FY28 as there is no official calendar)
+  { date: "07-05-2027" },
+  { date: "07-23-2027" },
+  { date: "08-05-2027" },
+  { date: "08-06-2027" },
+  { date: "09-06-2027" },
 ];
