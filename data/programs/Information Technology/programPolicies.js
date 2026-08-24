@@ -34,9 +34,11 @@ export default [
       "Mobile phones and other electronic devices must remain in silent mode throughout the duration of the lectures. Please do not disrupt the class by receiving calls or leaving inappropriately. Excessive text messaging/social media during class will not be tolerated. Use of the technologies, as mentioned above, during class, will result in students being asked to leave for the remainder of the class with an absence recorded on their attendance record. Should any specific issues arise, students should discuss them with the instructor.",
       "<strong>Punctuality:</strong> Cohort Class Arriving late, leaving early, or frequently exiting the classroom during class disrupts the instructor and classmates. In order to mirror professional workplace standards, punctuality will be tracked. Tardiness is defined as missing 1 to 14 minutes of class time after the class has started. The determination of tardiness will be made at the discretion of the faculty.",
       "Habitual tardiness in the cohort setting will prompt the implementation of an academic intervention plan, which will be structured according to the following scale:",
-      "2 tardies/course = verbal warning",
-      "3 tardies/course = academic intervention plan",
-      "5 tardies/course = dismissal from program ",
+      <ul class="bullets">
+        <li>2 tardies/course = verbal warning</li>
+        <li>3 tardies/course = academic intervention plan</li>
+        <li>5 tardies/course = dismissal from program</li>
+      </ul>
     ]
   }
 ];
