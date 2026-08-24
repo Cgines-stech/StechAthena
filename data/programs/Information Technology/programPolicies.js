@@ -28,7 +28,7 @@ export default [
   },
 
   {
-    title: "Cohort Courses Policies",
+    title: "Cohort Course Policies",
     content: [
       "<strong>Attendance:</strong> Cohort Class: The IT cohort curriculum will be covered over 10 months. Students who are not in class will be unable to learn and miss needed information; therefore, attendance is mandatory. If an absence is unavoidable, the student must notify the instructor prior to the absence when possible. An absence is defined as more than 15 minutes of missed class time, regardless of whether missed time occurs at the beginning, middle, or end of a scheduled class. Breaks will be provided at specified intervals throughout the class sessions to attend to personal needs.", 
       "Mobile phones and other electronic devices must remain in silent mode throughout the duration of the lectures. Please do not disrupt the class by receiving calls or leaving inappropriately. Excessive text messaging/social media during class will not be tolerated. Use of the technologies, as mentioned above, during class, will result in students being asked to leave for the remainder of the class with an absence recorded on their attendance record. Should any specific issues arise, students should discuss them with the instructor.",
