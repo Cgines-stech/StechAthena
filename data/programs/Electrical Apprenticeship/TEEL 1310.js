@@ -108,10 +108,10 @@ const TEEL1310 = [
     courseClassroomHours: [
         {
           termLabel: "",
-          startDate: "08-24-2026",
-          endDate: "12-14-2026",
-          Monday: "6:00 PM - 9:00 PM",
-          Tuesday: "",
+          startDate: "08-25-2026",
+          endDate: "12-10-2026",
+          Monday: "",
+          Tuesday: "6:00 PM - 9:00 PM",
           Wednesday: "",
           Thursday: "6:00 PM - 9:00 PM",
           Friday: "",

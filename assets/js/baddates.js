@@ -50,6 +50,8 @@ export const campusClosedDates = [
   { date: "10-17-2026" },
   { date: "10-18-2026" },
   { date: "10-19-2026" },
+  // October 20 added on 8/28/2026 to align with HS
+  { date: "10-20-2026" },
   { date: "11-25-2026" },
   { date: "11-26-2026" },
   { date: "11-27-2026" },
@@ -84,4 +86,11 @@ export const campusClosedDates = [
   { date: "08-05-2027" },
   { date: "08-06-2027" },
   { date: "09-06-2027" },
+  { date: "10-15-2027" },
+  { date: "10-16-2027" },
+  { date: "10-17-2027" },
+  { date: "10-18-2027" },
+  { date: "11-24-2027" },
+  { date: "11-25-2027" },
+  { date: "11-26-2027" },
 ];
