@@ -65,13 +65,13 @@ const TESU1221 = [
     courseClassroomHours: [
       {
         termLabel: "",
-        startDate: "11/16/2026",
-        endDate: "11/20/2026",
+        startDate: "10/06/2027",
+        endDate: "10/13/2027",
         Monday: "8:00 AM - 3:00 PM",
         Tuesday: "8:00 AM - 3:00 PM",
         Wednesday: "8:00 AM - 3:00 PM",
         Thursday: "8:00 AM - 3:00 PM",
-        Friday: "8:00 AM - 10:00 AM",
+        Friday: "",
         Saturday: "",
       }
     ],
