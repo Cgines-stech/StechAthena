@@ -56,7 +56,7 @@ const TEPH1015 = [
         name: "MindTap® Medical Assisting, 2 terms (12 months) Instant Access for Hoeltke's The Complete Textbook of Phlebotomy", 
         price: 150.0,
         isbn: "9781337284295",
-        note: ""
+        note: "Cengage Unlimited Subscription"
       },
     ],
     
