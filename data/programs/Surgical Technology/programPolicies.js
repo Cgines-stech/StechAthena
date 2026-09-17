@@ -7,7 +7,7 @@ export default [
   {
     title: "Course Grading",
     content: [
-      "Each assignment is awarded points according to how well the submission follows the requirement of the assignment. Students must maintain a minimum of 80% in the course. The assignment groups weight will be as follows: assignments 40%, module quizzes 25%, lab pass-offs and participation 15%, and the final exam 20%. If a student scores less than 80% on a final exam, he/she will have the opportunity to retake the exam for a second attempt. If a student fails to pass the final exam or the course with a minimum of 80%, the student will be dismissed from the program.",
+      "Each assignment is awarded points according to how well the submission follows the requirement of the assignment. Assignments will be accepted after the due date with a deduction of 10%. Students must maintain a minimum of 80% in the course. The assignment groups weight will be as follows: assignments 40%, module quizzes 25%, lab pass-offs and participation 15%, and the final exam 20%. If a student scores less than 80% on a final exam, he/she will have the opportunity to retake the exam for a second attempt. If a student fails to pass the final exam or the course with a minimum of 80%, the student will be dismissed from the program.",
     ]
   },
 
